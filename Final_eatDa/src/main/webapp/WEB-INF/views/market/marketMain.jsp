@@ -5,17 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Index</title>
+<title>marketMain</title>
 </head>
 <body>
 	<div id="header">
-		<%@ include file="WEB-INF/views/common/header.jsp"%>
+		<%@ include file="../common/header.jsp"%>
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	
-	<a href="test.do">go</a>
 	<div id="footer">
-		<%@ include file="WEB-INF/views/common/footer.jsp"%>
+		<%@ include file="../common/footer.jsp"%>
 	</div>
 </body>
 </html>
