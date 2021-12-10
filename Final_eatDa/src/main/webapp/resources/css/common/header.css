@@ -1,10 +1,23 @@
-@charset "UTF-8";
+@import "../variables.css";
 
 body{
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color:#2e363e;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+ 	color:#2e363e;
 }
-
+html,body,div,h1,a,img,ul, li{
+  margin:0;
+  padding:0;
+  font-size:100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+ul{
+  list-style: none;
+}
+a{
+	color:inherit;
+	text-decoration: none;
+}
 .nav{
   background-color:var(--theme-color);
   position:fixed;
@@ -22,11 +35,11 @@ body{
 .nav__list{
   display: flex;
   font-weight:600;
-  font-size: 20px;
+  font-size: 25px;
 }
 .nav__list li{
   position: relative;
-  padding: 20px 30px;
+  padding: 20px 35px;
 }
 
 
@@ -44,10 +57,11 @@ body{
   top:30px;
   left:0;
   opacity: 0;
+  font-size:20px; 
 }
 
 .nav__list li a:hover{
-  color:#fff;
+  color:#ffffff;
   transition: all 0.2s;
 }
 
@@ -67,6 +81,13 @@ body{
   border-top: 5px solid #E39279;
   background-color: #ffe084;
   transition: height 0.5s;
+}
+
+.nav-sub li{
+	margin-top:5px;
+	margin-bottom:5px;
+	padding-top:0;
+	padding-bottom:0;
 }
 
 .nav__list li a{

@@ -11,7 +11,6 @@
 	<div id="header">
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>
-	<h1>test -noa</h1>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
