@@ -27,7 +27,7 @@
             </div>
             <div class="right-section">
                 <div class="right-info">
-                    <h3>EatDa</h3>
+                    <h2>EatDa</h2>
                     &nbsp;&nbsp;<span>대표: 먹고살아야조</span><br>
                     &nbsp;&nbsp;<span>주소: 서울시 강남구 테헤란로 11  ||  사업자 등록번호: 101-19-122211</span><br>
                     &nbsp;&nbsp;<span>통신판매업 신고: 제1234-44222111호   [사업자 확인하기]</span><br>
