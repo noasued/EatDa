@@ -7,8 +7,7 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 
-<link rel="stylesheet" href="resources/css/styles.css">
-
+<link rel="stylesheet" href="resources/css/common/header.css">
 
 </head>
 <body>
