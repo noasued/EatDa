@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.blog-article__paging{
+  margin-top: 35px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.blog-article__paging li{
+  display: inline;
+  margin: 0px 10px;
+  color:#666666;
+  transition: 0.25s;
+}
+
+.blog-article__paging li:hover{
+  color: rgb(255, 157, 29);
+  text-decoration: underline;
+  transform: translateY(2px);
+}
