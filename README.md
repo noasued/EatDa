@@ -7,4 +7,6 @@
   <li><h4>최신본 끌어오기 : pull -> master(에서)</h4></li>
   <li><h4>작업 커밋&push : commit -> Staged Changes에 자신이 작업한 파일 (src 산하 파일들)만 있나 체크, 커밋메세지, Commit and Push</h4></li>
   <li><h4>-> 반드시 자기 브랜치에 Commit & Push</h4></li>
+  <li><h4>img,css,js 파일은 반드시 main - webapp - resources 폴더에 넣어주세요.</h4></li>
+  <li><h4> ex) 경로설정 : resources/css/styles.css </h4></li>
 </ul>

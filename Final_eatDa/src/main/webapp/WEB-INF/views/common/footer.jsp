@@ -6,10 +6,8 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 <link rel="stylesheet" href="resources/css/common/footer.css">
-
 </head>
 <body style="margin:0px">
-	<footer>
     <div class="footer">
         <div class="footer-section">
             <div class="left-section">
@@ -20,7 +18,7 @@
                     <li>맴버십 프로그램&nbsp;&nbsp;</li>
                 </ul>
                 <div class="left-info">
-                    <h5 style="font-weight: bolder;">고객센터</h5>
+                    <h2 style="font-weight: bolder; font-size:larger;">고객센터</h2>
                     <h4 style="color: olive;"> 1888-1234</h4>
                     <span>운영시간 : 평일 09 ~ 16시</span><br>
                     <span>운영시간 : 공휴일 휴무 (이메일 상담 가능)</span><br>
@@ -39,6 +37,5 @@
             </div>
         </div>
     </div>
-    </footer>
 </body>
 </html>
