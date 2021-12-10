@@ -24,6 +24,12 @@
           </li>
           <li class="nav__subscription"><a href="#">구독신청</a></li>
           <li class="nav__market"><a href="#">마켓</a></li>
+          <li class="nav__mypage"><a href="#">마이페이지</a>
+	          <ul class="nav-sub">
+	             <li class="nav-sub__mypage"><a href="#">마이페이지</a></li>
+	             <li class="nav-sub__subscription"><a href="#">구독 내역</a></li>
+	          </ul>
+          </li>
           <li class="nav__login">
             <input class="nav__login-btn" type="button" value="로그인" onclick="">
           </li>
