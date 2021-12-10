@@ -7,15 +7,55 @@
 
 /* RECIPE */
 
+
+.nav__recipe, .nav__blog, .nav__subscription, .nav__market, .nav__mypage{
+  margin-top: 40px;
+}
+
 /* BLOG */
+
 
 /* SUBSCRIPTION */
 
+
+.nav__mypage .nav-sub{
+  display:none;
+  position: absolute;
+  top:30px;
+  left:0;
+  opacity: 0;
+}
+
+.nav__list li a:hover{
+  color:#fff;
+  transition: all 0.2s;
+}
+
 /* MARKET */
+
 
 /* MY PAGE */
 
 /* ADMIN */
+
+
+.nav__mypage:hover .nav-sub{
+  display: block;
+  opacity: 1;
+}
+
+.nav__mypage:hover .nav-sub li{
+  height: 30px;
+  line-height: 30px;
+  
+}
+
+.nav-sub{
+  margin-top: 25px;
+  border-top: 5px solid #E39279;
+  background-color: #ffe084;
+  transition: height 0.5s;
+}
 
 
 

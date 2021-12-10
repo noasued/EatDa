@@ -47,7 +47,7 @@ a{
   cursor: pointer;
 }
 
-.nav__recipe, .nav__blog, .nav__subscription, .nav__market{
+.nav__recipe, .nav__blog, .nav__subscription, .nav__market, .nav__mypage{
   margin-top: 40px;
 }
 
@@ -58,6 +58,14 @@ a{
   left:0;
   opacity: 0;
   font-size:20px; 
+}
+
+.nva__mypage .nav-sub{
+  display:none;
+  position: absolute;
+  top:30px;
+  left:0;
+  opacity: 0;
 }
 
 .nav__list li a:hover{
@@ -71,6 +79,17 @@ a{
 }
 
 .nav__blog:hover .nav-sub li{
+  height: 30px;
+  line-height: 30px;
+  
+}
+
+.nav__mypage:hover .nav-sub{
+  display: block;
+  opacity: 1;
+}
+
+.nav__mypage:hover .nav-sub li{
   height: 30px;
   line-height: 30px;
   
