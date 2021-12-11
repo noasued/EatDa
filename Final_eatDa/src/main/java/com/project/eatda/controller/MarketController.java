@@ -11,6 +11,7 @@ public class MarketController {
 	
 	@RequestMapping("/test.do")
 	public String test() {
+		System.out.println("test");
 		return "/market/marketMain";
 	}
 
