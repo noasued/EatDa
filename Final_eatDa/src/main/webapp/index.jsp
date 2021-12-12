@@ -15,6 +15,8 @@
 	<br><br><br><br><br><br><br>
   <a href="test.do">go</a>
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <a href="page.do">go</a>
+  <br><br><br><br><br><br><br>
 
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
