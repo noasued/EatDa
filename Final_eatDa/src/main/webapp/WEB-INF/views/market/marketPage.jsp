@@ -204,7 +204,7 @@
             width:20%; height:90px; float:left; padding-top:30px; font-weight:bold; font-size:larger;
         }
         .modal-info-price {
-            width:20%; height:90px; float:left; padding-top:30px; font-weight:bold; font-size:large;
+            width:20%; height:90px; float:left; padding-top:30px; font-weight:bold; font-size:large; 
         }
     </style>
 </head>
