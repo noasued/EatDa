@@ -11,7 +11,16 @@ public class BlogController {
 	
 	@RequestMapping("/blog.do")
 	public String test() {
+		System.out.println("test");
 		return "/blog/blog-main";
 	}
+	
+	@RequestMapping("/blog-detail.do")
+	public String test2() {
+		System.out.println("test2");
+		return "/blog/blog-detail";
+	}
+	
+
 
 }
