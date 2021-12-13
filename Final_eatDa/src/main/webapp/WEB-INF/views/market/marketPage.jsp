@@ -16,7 +16,7 @@
             height: 1500px;
         }
         .top-section {
-            width: 65%;
+            width: 55%;
             height: 550px;
             margin: 0 auto;
         }
@@ -39,7 +39,7 @@
     </style>
     <style type="text/css">
         .tap-section {
-            width: 55%;
+            width: 50%;
             height:auto;
             margin: 0 auto;
             text-align: center;
@@ -54,7 +54,7 @@
     </style>
     <style type="text/css">
         .bottom-section {
-            width: 55%;
+            width: 50%;
             height:auto;
             margin: 0 auto;
             /*
@@ -204,11 +204,11 @@
             width:20%; height:90px; float:left; padding-top:30px; font-weight:bold; font-size:larger;
         }
         .modal-info-price {
-            width:20%; height:90px; float:left; padding-top:30px; font-weight:bold; font-size:large;
+            width:20%; height:90px; float:left; padding-top:30px; font-weight:bold; font-size:large; 
         }
     </style>
 </head>
-<body style="margin: 0;">
+<body style="margin: 0; min-width:1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
@@ -254,9 +254,9 @@
     </div>
   </div>
   	<!-- paging navi -->
-  	<div style="width:70%; height:40px;  margin:0 auto; padding:10px; margin-top:15px;">
+  	<div style="width:55%; height:40px;  margin:0 auto; padding:10px; margin-top:15px;">
   		<span style="color:rgb(148, 148, 32); font-size:larger;">
-  			HOME > MARKET
+  			HOME > MARKET > PRODUCT
   		</span>
   	</div>
   	
