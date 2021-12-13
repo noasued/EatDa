@@ -39,7 +39,7 @@
     <!-- blog list -->
     <div class="blog-article__listbox">
       <ul class="blog-article__list">
-        <li><a href="#">
+        <li><a href="blog-detail.jsp">
           <div class="blog-article__list-title">
             <h3>블로그 제목 들어감</h3>
             <i class="fas fa-heart"></i>
@@ -51,10 +51,10 @@
               블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
           </div>
           <div class="blog-article__list-img">
-            <img src="../img/blog-thumbnail.png">
+            <img src="resources/images/blog-thumbnail.png">
           </div>
         </a></li>
-        <li><a href="#">
+        <li><a href="blog-detail.jsp">
           <div class="blog-article__list-title">
             <h3>블로그 제목 들어감</h3>
             <i class="fas fa-heart"></i>
@@ -66,10 +66,10 @@
               블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
           </div>
           <div class="blog-article__list-img">
-            <img src="../img/blog-thumbnail.png">
+            <img src="resources/images/blog-thumbnail.png">
           </div>
         </a></li>
-        <li><a href="#">
+        <li><a href="blog-detail.jsp">
           <div class="blog-article__list-title">
             <h3>블로그 제목 들어감</h3>
             <i class="fas fa-heart"></i>
@@ -81,7 +81,7 @@
               블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
           </div>
           <div class="blog-article__list-img">
-            <img src="../img/blog-thumbnail.png">
+            <img src="resources/images/blog-thumbnail.png">
           </div>
         </a></li>
       </ul>
