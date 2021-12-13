@@ -29,7 +29,9 @@
 </style>
 </head>
 <body>
-
+<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
 	<main class="blog-main">
     <!-- main img -->
     <div class="blog-main__top">
@@ -118,6 +120,8 @@
 
     </div>
   </main>
-
+<div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
 </body>
 </html>

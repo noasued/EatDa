@@ -53,6 +53,9 @@
 </script>
 </head>
 <body>
+<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
   <main class="blog-detail">
     <!-- main img -->
     <div class="blog-detail__top blog__top">
@@ -186,5 +189,8 @@
     </div>
 
   </main>
+  <div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
 </body>
 </html>
