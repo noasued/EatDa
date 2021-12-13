@@ -7,6 +7,26 @@
 <title>Welcome to EatDa</title>
 <link href="resources/css/blog/blog-main.css" rel="stylesheet">
 <script defer src="https://kit.fontawesome.com/bdbb0da9f4.js" crossorigin="anonymous"></script>
+<style>
+	.blog-main__top{
+  width:100%;
+  height:300px;
+  background-image: url(resources/images/blog-main.png);
+  background-repeat:no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: table;
+  border: none;
+}
+
+.blog-main__top-txt{
+  color:white;
+  opacity: 0.6;
+  display: table-cell;
+  vertical-align: bottom;
+}
+	
+</style>
 </head>
 <body>
 

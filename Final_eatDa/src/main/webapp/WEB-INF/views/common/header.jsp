@@ -17,9 +17,9 @@
         <ul class="nav__list">
           <li class="nav__logo"><a href="#"><img src="resources/images/logo.png"></a></li>
           <li class="nav__recipe"><a href="#">레시피</a></li>
-          <li class="nav__blog"><a href="WEB-INF/views/blog/blog-main.jsp">블로그</a>
+          <li class="nav__blog"><a href="blog.do">블로그</a>
             <ul class="nav-sub">
-              <li class="nav-sub__blog"><a href="WEB-INF/views/blog/blog-main.jsp">블로그</a></li>
+              <li class="nav-sub__blog"><a href="blog.do">블로그</a></li>
               <li class="nav-sub__event"><a href="#">이벤트</a></li>
             </ul>
           </li>
