@@ -9,9 +9,8 @@
 	<style type="text/css">
         .body {
             height: fit-content;
-            width: 70%;
+            width: 50%;
             margin: 0 auto;
-        	margin-top:50px;
         }
 
         .top-section {
@@ -57,7 +56,8 @@
         }
 
         .product-row {
-            margin-top: 30px;
+            margin-top: 10%;
+            margin-bottom: 10%;
             height: 450px;
         }
 
@@ -105,12 +105,10 @@
             width: 40%;
             height: auto;
             margin: 0 auto;
-            margin-top: 30px;
-            margin-bottom: 50px;
+            margin-top: 10%;
+            margin-bottom: 10%;
         }
-        .pagination {
-            display: inline-block;
-        }
+       
         .pagination a {
             color: black;
             float: left;
@@ -128,15 +126,14 @@
         .banner {
             width: 100%;
             background-image: url(resources/images/market/banner.png);
-            background-repeat: no-repeat;
             height: 250px;
             margin-bottom: 30px;
             padding-top: 100px;
         }
         .banner-content {
-            margin-left: 70px;
-            width: 260px;
-            height: 50px;
+            margin-left: 30%;
+            width: 30%;
+            height: 10%;
         }
         .banner-content span {
             font-size: 23px;
@@ -146,12 +143,18 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 </head>
-<body>
+<body style="min-width:1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
 	
     <div class="body">
+    	<div style="width:100%; height:20%;  margin:0 auto; margin-top:3%; margin-bottom:3%">
+	  		<span style="color:rgb(148, 148, 32); font-size:larger;">
+	  			HOME > MARKET
+	  		</span>
+  		</div>
+    
     	<!-- 베너 -->
     	<div class="banner">   
             <div class="banner-content">
@@ -202,7 +205,116 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="product-card">
+                    <div class="product-img" align="center">
+                  	  	<img src="resources/images/market/shot.png" alt="img" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-margin">
+                            <span class="short-desc">short-desc</span><br>
+                        </div>
+                        <div class="product-margin">
+                            <span class="product-title">title</span><br>
+                        </div>
+                        <div class="product-margin" style="margin-top: 20px; margin-bottom:15px;">
+                            <span class="product-price">price</span>
+                            <img src="resources/images/market/shop.png" alt="장바구니" class="shop-cart">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" style="margin-right:21px;">
+                    <div class="product-img" align="center">
+                    	<img src="resources/images/market/shot.png" alt="img" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-margin">
+                            <span class="short-desc">short-desc</span><br>
+                        </div>
+                        <div class="product-margin">
+                            <span class="product-title">title</span><br>
+                        </div>
+                        <div class="product-margin" style="margin-top: 20px; margin-bottom:15px;">
+                            <span class="product-price">price</span>
+                            <img src="resources/images/market/shop.png" alt="장바구니" class="shop-cart">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-row">
+                <!--상품 카드-->
+                <div class="product-card" style="margin-left:21px;">
+                    <div class="product-img" align="center">
+                        <img src="resources/images/market/shot.png" alt="img" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-margin">
+                            <span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
+                        </div>
+                        <div class="product-margin">
+                            <span class="product-title">소갈비찜~1인분입니다~</span><br>
+                        </div>
+                        <div class="product-margin" style="margin-top: 20px; margin-bottom:15px;">
+                            <span class="product-price">9999999999원</span>
+                            <img src="resources/images/market/shop.png" alt="장바구니" class="shop-cart">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img" align="center">
+                  	  	<img src="resources/images/market/shot.png" alt="img" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-margin">
+                            <span class="short-desc">short-desc</span><br>
+                        </div>
+                        <div class="product-margin">
+                            <span class="product-title">title</span><br>
+                        </div>
+                        <div class="product-margin" style="margin-top: 20px; margin-bottom:15px;">
+                            <span class="product-price">price</span>
+                            <img src="resources/images/market/shop.png" alt="장바구니" class="shop-cart">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" style="margin-right:21px;">
+                    <div class="product-img" align="center">
+                    	<img src="resources/images/market/shot.png" alt="img" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-margin">
+                            <span class="short-desc">short-desc</span><br>
+                        </div>
+                        <div class="product-margin">
+                            <span class="product-title">title</span><br>
+                        </div>
+                        <div class="product-margin" style="margin-top: 20px; margin-bottom:15px;">
+                            <span class="product-price">price</span>
+                            <img src="resources/images/market/shop.png" alt="장바구니" class="shop-cart">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-row">
+                <!--상품 카드-->
+                <div class="product-card" style="margin-left:21px;">
+                    <div class="product-img" align="center">
+                        <img src="resources/images/market/shot.png" alt="img" class="p-img">
+                    </div>
+                    <div class="product-desc">
+                        <div class="product-margin">
+                            <span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
+                        </div>
+                        <div class="product-margin">
+                            <span class="product-title">소갈비찜~1인분입니다~</span><br>
+                        </div>
+                        <div class="product-margin" style="margin-top: 20px; margin-bottom:15px;">
+                            <span class="product-price">9999999999원</span>
+                            <img src="resources/images/market/shop.png" alt="장바구니" class="shop-cart">
+                        </div>
+                    </div>
+                </div>
                 <div class="product-card">
                     <div class="product-img" align="center">
                   	  	<img src="resources/images/market/shot.png" alt="img" class="p-img">

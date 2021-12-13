@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Index</title>
 </head>
-<body>
+<body style="min-width:1400px;">
 	<div id="header">
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>

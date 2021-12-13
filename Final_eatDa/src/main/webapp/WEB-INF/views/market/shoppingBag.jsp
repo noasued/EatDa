@@ -194,7 +194,7 @@
     }
 
     .desc-order {
-        padding-top: 10px; text-align: right;
+        padding-top: 10px; text-align: right; font-size:small;
     }
 
     .order-total-desc {
@@ -206,7 +206,7 @@
 </style>
 
 </head>
-<body style="margin:0;">
+<body style="margin:0; min-width:1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
