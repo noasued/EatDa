@@ -10,7 +10,7 @@
     
     <style type="text/css">
         #wrap {
-        	margin-top:50px;
+        	margin-top:25px;
         	margin-bottom:100px;
             width: 100%;
             height: 1500px;
@@ -21,7 +21,7 @@
             margin: 0 auto;
         }
         .top-left-section {
-            width: 50%;
+            width: 47%;
             height: 90%;
             float:left;
             padding:2px;
@@ -29,10 +29,9 @@
         #img {
             width:100%;
             height:100%;
-            border-radius: 10px;
         }
         .top-right-section {
-            width: 50%;
+            width: 48%;
             height: 90%;
             float:right;
             padding:2px;
@@ -40,26 +39,28 @@
     </style>
     <style type="text/css">
         .tap-section {
-            width: 70%;
+            width: 55%;
             height:auto;
             margin: 0 auto;
             text-align: center;
             margin-top: 40px;
         }
         .tap-button {
-            width: 250px;
+        	margin-left:-5px;
+        	margin-right:-5px;
+        	width:24%;
             height:55px;
-            margin-left: 5px;
-            margin-right: 5px;
         }
     </style>
     <style type="text/css">
         .bottom-section {
-            width: 60%;
+            width: 55%;
             height:auto;
             margin: 0 auto;
-            border-radius: 10px;
+            /*
             background-color: rgb(247, 244, 239);
+            box-shadow:3px 3px 3px 3px rgb(247, 244, 239);
+            */
         }
 
         .detail-wrap {
@@ -252,7 +253,14 @@
       </div>
     </div>
   </div>
-	
+  	<!-- paging navi -->
+  	<div style="width:70%; height:40px;  margin:0 auto; padding:10px; margin-top:15px;">
+  		<span style="color:rgb(148, 148, 32); font-size:larger;">
+  			HOME > MARKET
+  		</span>
+  	</div>
+  	
+	<!-- 상품 페이지 시작 -->
 	<div id="wrap">
         <div class="top-section">
             <div class="top-left-section">
@@ -300,11 +308,15 @@
                 </div>
             </div>
         </div>
+        
+       	<hr style="box-shadow:0px 0px 3px 0px gray">
 
         <div class="tap-section">
             <!-- 버튼 2개 active 일 때 색상 다르게 -->
             <!-- 탭 2개 : 상품정보, 리뷰 -->
             <button class="btn btn-lg btn-primary tap-button">상품 상세정보</button>
+            <button class="btn btn-lg btn-secondary tap-button">상품 문의하기</button>
+            <button class="btn btn-lg btn-secondary tap-button">상품 관리하기</button>
             <button class="btn btn-lg btn-secondary tap-button">리뷰</button>
         </div>
 

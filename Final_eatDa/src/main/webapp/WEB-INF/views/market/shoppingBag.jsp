@@ -1,0 +1,375 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<style type="text/css">
+    .wrap {
+        height: 100%;
+        margin-top: 50px;
+        margin-bottom: 100px;
+    }
+
+    .rows-width {
+        width:80%;
+    }
+    .rows-margin {
+    	margin:0 auto;
+    }
+
+    .order-title {
+        height: 15%;
+    }
+
+    .order-middle,
+    .order-middle-second,
+    .order-total {
+        height: 8%;
+        border-bottom: 2px solid black;
+    }
+
+    /*
+        나중에 fit-content
+        한 줄 높이 100px 적당
+    */
+    .order-product {
+        height: fit-content;
+        border-bottom: 1px solid black;
+    }
+
+    .order-total {
+        height: 15%;
+        padding-bottom:30px;
+    }
+
+    .order-button {
+        text-align: center;
+        height: 30%;
+    }
+
+    .bottom-btn {
+        width: 30%;
+        height: 100%;
+    }
+
+    .order-middle {
+        margin-top: 5%;
+    }
+
+    .order-middle-second {
+        height: 13%;
+    }
+
+    .order-middle-second-col {
+        padding-top: 20px;
+        padding-bottom: 10px;
+        font-size: larger;
+    }
+
+    .order-table-column {
+        width: 30%;
+        height: 70%;
+        float: left;
+        text-align: center;
+        font-size: x-large;
+    }
+
+    #m-check {
+        width: 20px;
+        height: 20px;
+    }
+    .check-img {
+    	width: 20px;
+    	height:20px;
+    }
+
+    #m-check:hover {
+        cursor: pointer;
+    }
+
+    #choice-delete:hover {
+        cursor: pointer;
+    }
+</style>
+
+<style type="text/css">
+    /*
+        product row css
+    */
+    .product-img {
+        width: 90px;
+        height: 90px;
+    }
+
+    #left-Button:hover {
+        cursor: pointer;
+    }
+
+    #right-Button:hover {
+        cursor: pointer;
+    }
+
+    .start-row {
+        width: 100%;
+        height: 100px;
+        border-bottom: 1px solid black;
+    }
+
+    .left-col {
+        height: 100%;
+        float: left;
+    }
+
+    .left-col-check {
+        padding-top: 34px;
+        float: left;
+    }
+
+    .left-col-img {
+        float: left;
+        margin-left: 25px;
+        padding-top: 4px;
+    }
+
+    .left-col-title {
+        color: rgb(135, 130, 130);
+        padding-top: 35px;
+        padding-left: 40px;
+        float: left;
+    }
+
+    .right-col {
+        height: 100%;
+        float: left;
+        padding-left: 40px
+    }
+
+    .right-col-quantity {
+        padding-top: 33px;
+        padding-left: 30px;
+        font-size: larger;
+        float: left;
+    }
+
+    .right-col-price {
+        padding-top: 33px;
+        margin-left: 30%;
+        font-size: larger;
+        float: left
+    }
+</style>
+<style type="text/css">
+    .title {
+        padding-top: 30px;
+        padding-bottom: 10px;
+        padding-left: 30px;
+    }
+
+    .title-process {
+        padding-top: 50px;
+        padding-bottom: 10px;
+        text-align: right;
+    }
+
+    .title-process-span {
+        font-size: large;
+        letter-spacing: 1px;
+    }
+
+    .title-process-span-bold {
+        color: rgb(142, 142, 82);
+    }
+
+    .division-col {
+        border-right: 1px solid;
+    }
+
+    .now-tab {
+        font-weight: bold;
+    }
+
+    .desc-order {
+        padding-top: 10px; text-align: right;
+    }
+
+    .order-total-desc {
+        font-size:large; font-weight:bold; text-align:center; padding-top:10px;
+    }
+    .order-total-price {
+        font-size:xx-large; font-weight:bold; text-align:center; padding-top:10px;
+    }
+</style>
+
+</head>
+<body style="margin:0;">
+	<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
+
+	<div class="container wrap">
+
+        <div class="row rows-width order-title" style="margin: 0 auto; margin-bottom:60px;">
+            <div class="col-lg-6 title">
+                <div class="display-6">
+                    <b>장바구니</b>
+                </div>
+            </div>
+            <div class="col-lg-6 title-process">
+                <span class="title-process-span">
+                    <span class="title-process-span-bold">01 장바구니</span> > 02 주문 및 결제 > 03 주문완료
+                </span>
+            </div>
+        </div>
+
+        <div class="row rows-width order-middle" style="margin: 0 auto; padding-bottom:10px;">
+            <div class="col-lg-6 order-table">
+                <div class="order-table-column now-tab division-col">일반배송</div>
+                <div class="order-table-column">구독배송</div>
+            </div>
+            <div class="col-lg-6 order-table desc-order">
+                장바구니에 담긴 상품은 14일간 보관되며, 이후 좋아요 목록으로 이동됩니다.
+            </div>
+        </div>
+
+        <div class="row rows-width order-middle-second" style="margin: 0 auto;">
+            <div class="col-lg-6 order-middle-second-col">
+                <img src="resources/images/market/check.png" alt="check" id="m-check">
+                <label style="margin-left:10px; margin-bottom:5px;">전체선택</label>
+            </div>
+            <div class="col-lg-6 order-middle-second-col" align="right">
+                <span id="choice-delete" onclick="">선택삭제</span>
+            </div>
+        </div>
+
+        <!-- row틀을 만들고 jstl로 추가하는 식으로 만들자. -->
+        <div class="row rows-width order-product" style="margin: 0 auto;">
+
+            <!-- 줄 시작 -->
+            <div class="start-row">
+                <div class="col-lg-8 left-col">
+                    <div class="left-col-check">
+                        <img src="resources/images/market/check.png" alt="check" class="check-img">
+                    </div>
+                    <div class="left-col-img">
+                        <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
+                    </div>
+                    <div class="left-col-title">
+                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
+                    </div>
+                </div>
+                <div class="col-lg-4 right-col">
+                    <!-- 수량선택 -->
+                    <div class="right-col-quantity">
+                        <span id="left-Button" onclick="">&laquo;</span>&nbsp;
+                        <span style="font-weight:bold;">1</span>&nbsp;
+                        <span id="right-Button" onclick="">&raquo;</span>
+                    </div>
+
+                    <!-- 가격 -->
+                    <div class="right-col-price">
+                        <span>14000</span>
+                        <span>원</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 줄 종료 -->
+
+
+            <!-- 줄 시작 -->
+            <div class="start-row">
+                <div class="col-lg-8 left-col">
+                    <div class="left-col-check">
+                        <img src="resources/images/market/check.png" alt="check" class="check-img">
+                    </div>
+                    <div class="left-col-img">
+                        <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
+                    </div>
+                    <div class="left-col-title">
+                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
+                    </div>
+                </div>
+                <div class="col-lg-4 right-col">
+                    <!-- 수량선택 -->
+                    <div class="right-col-quantity">
+                        <span id="left-Button" onclick="">&laquo;</span>&nbsp;
+                        <span style="font-weight:bold;">1</span>&nbsp;
+                        <span id="right-Button" onclick="">&raquo;</span>
+                    </div>
+
+                    <!-- 가격 -->
+                    <div class="right-col-price">
+                        <span>14000</span>
+                        <span>원</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 줄 종료 -->
+
+
+            <!-- 줄 시작 -->
+            <div class="start-row">
+                <div class="col-lg-8 left-col">
+                    <div class="left-col-check">
+                        <img src="resources/images/market/check.png" alt="check" class="check-img">
+                    </div>
+                    <div class="left-col-img">
+                        <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
+                    </div>
+                    <div class="left-col-title">
+                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
+                    </div>
+                </div>
+                <div class="col-lg-4 right-col">
+                    <!-- 수량선택 -->
+                    <div class="right-col-quantity">
+                        <span id="left-Button" onclick="">&laquo;</span>&nbsp;
+                        <span style="font-weight:bold;">1</span>&nbsp;
+                        <span id="right-Button" onclick="">&raquo;</span>
+                    </div>
+
+                    <!-- 가격 -->
+                    <div class="right-col-price">
+                        <span>14000</span>
+                        <span>원</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 줄 종료 -->
+
+
+
+
+        </div>
+
+        <!-- 총 가격 -->
+        <div class="row rows-width order-total" style="margin: 0 auto; margin-top:30px;">
+            <div class="order-total-desc">
+                총 결제 금액
+            </div>
+            <div class="order-total-price">
+                <span>42000</span>
+                <span>원</span>
+            </div>
+        </div>
+
+        <!-- 하단 버튼 2개 -->
+        <div class="row rows-width order-button" style="margin: 0 auto; margin-top:5%;">
+            <div class="col-lg-12">
+                <button class="btn btn-primary bottom-btn">주문하기</button>
+                <button class="btn btn-primary bottom-btn">쇼핑 계속하기</button>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
+
+</body>
+</html>

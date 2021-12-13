@@ -20,5 +20,11 @@ public class MarketController {
 		System.out.println("test2");
 		return "/market/marketPage";
 	}
+	
+	@RequestMapping("/shoppingbag.do")
+	public String test3() {
+		System.out.println("test3");
+		return "/market/shoppingBag";
+	}
 
 }

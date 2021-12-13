@@ -20,10 +20,22 @@
 
         .search-box {
             margin-top: 10px;
+            position:relative;
+        }
+        .search-box i {
+        	position:absolute; top:12px; color:gray;
+        	right:28%;
+        }
+        .search-box i:hover {
+        	cursor:pointer;
         }
 
         #search-bar {
-            width: 400px;
+            width: 500px;
+            padding-left:20px;
+            height: 40px;
+            border: 1px solid lightblue;
+            border-radius:25px;
         }
 
         .tag-box {
@@ -117,14 +129,14 @@
             width: 100%;
             background-image: url(resources/images/market/banner.png);
             background-repeat: no-repeat;
-            height: 100px;
+            height: 250px;
             margin-bottom: 30px;
-            padding-top: 200px;
+            padding-top: 100px;
         }
         .banner-content {
             margin-left: 70px;
             width: 260px;
-            height: 100px;
+            height: 50px;
         }
         .banner-content span {
             font-size: 23px;
@@ -132,7 +144,7 @@
             font-weight: bolder;
         }
     </style>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 </head>
 <body>
 	<div id="header">
@@ -153,7 +165,7 @@
         <div class="top-section" align="center">
             <div class="search-box">
                 <input type="text" name="" id="search-bar">
-                <button class="" id="" onclick="">검색</button>
+                <i class="fas fa-search"></i>
             </div>
             <div class="tag-box">
                 <button class="tag">양식</button>
