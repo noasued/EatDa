@@ -111,3 +111,10 @@
   box-shadow: 3px 3px 0px rgba(176, 179, 32, 0.7);
 }
 
+.reply-list__btns input[name="reply-update-btn"]:hover,[name="reply-del-btn"]:hover,[name="reply-report-btn"]:hover{
+  cursor: pointer;
+  transform: translateY(3px);
+	color: rgb(114, 155, 0);
+	background-color: #fae57f;
+  box-shadow: inset 3px 3px 0px rgba(165, 167, 56, 0.7);
+}

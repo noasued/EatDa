@@ -7,7 +7,7 @@
 <title>Welcome to EatDa</title>
 <link href="resources/css/blog/blog-main.css" rel="stylesheet">
 <script defer src="https://kit.fontawesome.com/bdbb0da9f4.js" crossorigin="anonymous"></script>
-<style>
+<style type="text/css">
 	.blog-main__top{
   width:100%;
   height:300px;
@@ -42,7 +42,7 @@
     <div class="blog-article">
       <!-- search box -->
       <div class="blog-article__searchbox">
-        <form action="blog-main.html" method="POST">
+        <form action="blog-detail.do" method="POST">
           <input type="hidden" name="command" value="searchBlog">
           <select class="blog-article__select" name="searchSelect">
             <option disabled selected>선택</option>
@@ -59,7 +59,7 @@
     <!-- blog list -->
     <div class="blog-article__listbox">
       <ul class="blog-article__list">
-        <li><a href="blog-detail.jsp">
+        <li><a href="blog-detail.do">
           <div class="blog-article__list-title">
             <h3>블로그 제목 들어감</h3>
             <i class="fas fa-heart"></i>
@@ -74,7 +74,7 @@
             <img src="resources/images/blog-thumbnail.png">
           </div>
         </a></li>
-        <li><a href="blog-detail.jsp">
+        <li><a href="blog-detail.do">
           <div class="blog-article__list-title">
             <h3>블로그 제목 들어감</h3>
             <i class="fas fa-heart"></i>
