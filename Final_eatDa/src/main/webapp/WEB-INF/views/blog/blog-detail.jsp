@@ -93,7 +93,7 @@
         <!-- buttons -->
         <div class="detail-article__btn">
           <input type="button" value="목록" onclick="location.href='blog.do'">
-          <input type="button" value="수정">
+          <input type="button" value="수정" onclick="location.href='blog-update.do'">
           <input type="button" value="삭제">
         </div>
       </div>

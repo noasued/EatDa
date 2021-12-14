@@ -36,19 +36,26 @@
 }
 
 .blog-write__content-article input[name="write-submit-btn"]{
+  margin-left: 70%;
+}
+
+.blog-write__content-article input[name="write-cancel-btn"]{
+  margin-left: 10px;
+}
+
+.blog-write__content-article input[name="write-submit-btn"],input[name="write-cancel-btn"]{
   width: 90px;
 	height: 42px;
   font-size: 15px;
 	font-weight: bold;
 	transition: 0.25s;
-	margin-left: 80%;
   border-radius: 2px;
   border:0.5px solid rgb(245, 203, 66);
   background-color: #fae57f;
   box-shadow: 3px 3px 0px rgba(255, 153, 0, 0.6);
 }
 
-.blog-write__content-article input[name="write-submit-btn"]:hover{
+.blog-write__content-article input[name="write-submit-btn"]:hover, input[name="write-cancel-btn"]:hover{
   cursor: pointer;
   transform: translateY(3px);
 	color: rgb(233, 133, 2);

@@ -74,12 +74,12 @@
   	.blog-write__top{
 		  width:100%;
 		  height:300px;
-		  background: url('resources/images/blog-write01.png') no-repeat;
+		  background: url('resources/images/blog-cooking02.png') no-repeat;
 		  background-size: cover;
 		  overflow: hidden;
 		  display: table;
 		  border: none;
-		  background-position: 5% 10%;
+		  background-position: 0 90%;
 		}
 		
 		.blog-write__top-txt{
@@ -88,18 +88,18 @@
 		  display: table-cell;
 		  vertical-align: bottom;
 		}
-  	h1,h2{
+  	.blog-write__top h1, .blog-write__top h2{
 		  display: inline;
 		}
 		
-		h1{
+		.blog-write__top-txt h1{
 		  font-weight: 700;
 		  font-size:120px;
 		  height:100px;
 		  line-height: 109px;
 		}
 		
-		h2{
+		.blog-write__top-txt h2{
 		  margin-left: 350px;
 		  font-size: 15px;
 		}
@@ -131,6 +131,7 @@
           <input type="text" name="title" placeholder="제목을 입력하세요.">
 					<textarea class="summernote" id="summernote" name="editordata"></textarea>
 					<input type="submit" name="write-submit-btn" value="작성 완료">
+					<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='blog.do'">
         </form>
 
       </div>
