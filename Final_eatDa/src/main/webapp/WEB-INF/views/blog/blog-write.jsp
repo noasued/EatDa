@@ -29,7 +29,17 @@
         <h2>새 글 작성</h2>
       </div>
 
+			<!-- article -->
+      <div class="blog-write__content-article">
+        <form action="" method="post">
+          <input type="text" name="write-title" placeholder="제목을 입력하세요.">
 
+        </form>
+
+
+
+
+      </div>
 
 
 

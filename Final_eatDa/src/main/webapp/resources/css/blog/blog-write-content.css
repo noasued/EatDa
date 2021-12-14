@@ -16,3 +16,20 @@
   margin-left: -50px;
   color:#444444;
 }
+
+.blog-write__content-article{
+  margin-top: 30px;
+  
+}
+
+.blog-write__content-article input[name="write-title"]{
+  width:60%;
+  height:40px;
+  border:0.5px solid gainsboro;
+  padding-left:3px;
+  font-size: 16px;
+}
+
+.blog-write__content-article input[name="write-title"]:focus{
+  outline:0.5px solid rgb(213, 214, 118);
+}
