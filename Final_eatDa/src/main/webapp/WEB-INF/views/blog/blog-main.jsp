@@ -11,8 +11,7 @@
 	.blog-main__top{
   width:100%;
   height:300px;
-  background-image: url(resources/images/blog-main.png);
-  background-repeat:no-repeat;
+  background: url('resources/images/blog-main.png') no-repeat;
   background-size: cover;
   overflow: hidden;
   display: table;
@@ -25,7 +24,22 @@
   display: table-cell;
   vertical-align: bottom;
 }
-	
+
+.blog-main__top-txt h1, .blog-main__top-txt h2{
+  display: inline;
+}
+
+.blog-main__top-txt h1{
+  font-weight: 700;
+  font-size:120px;
+  height:100px;
+  line-height: 90px;
+}
+
+.blog-main__top-txt h2{
+  margin-left: 350px;
+  font-size: 15px;
+}
 </style>
 </head>
 <body>
@@ -53,7 +67,7 @@
           </select>
           <input type="text" name="keyword">
           <input type="submit" value="검색">
-          <input type="button" value="글쓰기">
+          <input type="button" value="글쓰기" onclick="location.href='blog-write.do'">
         </form>
       </div>
     </div>
@@ -120,8 +134,6 @@
 
     </div>
   </main>
-<div id="footer">
-		<%@ include file="../common/footer.jsp"%>
-	</div>
+
 </body>
 </html>

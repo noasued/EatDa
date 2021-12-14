@@ -6,26 +6,7 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 <link href="resources/css/blog/blog-detail.css" rel="stylesheet">
-<style type="text/css">
-.blog-detail__top{
-  width:100%;
-  height:300px;
-  background: url('resources/images/blog-detail.png') no-repeat;
-  background-size: cover;
-  overflow: hidden;
-  display: table;
-  border: none;
-  background-position: 20% 30%;
-}
 
-.blog-detail__top-txt{
-  color:white;
-  opacity: 0.6;
-  display: table-cell;
-  vertical-align: bottom;
-}
-
-</style>
 <script defer src="https://kit.fontawesome.com/bdbb0da9f4.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -51,6 +32,43 @@
 
   });
 </script>
+
+<style type="text/css">
+.blog-detail__top{
+  width:100%;
+  height:300px;
+  background: url('resources/images/blog-detail.png') no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: table;
+  border: none;
+  background-position: 20% 30%;
+}
+
+.blog-detail__top-txt{
+  color:white;
+  opacity: 0.6;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.blog-detail__top-txt h1, .blog-detail__top-txt h2{
+  display: inline;
+}
+
+.blog-detail__top-txt h1{
+  font-weight: 700;
+  font-size:120px;
+  height:100px;
+  line-height: 90px;
+}
+
+.blog-detail__top-txt h2{
+  margin-left: 350px;
+  font-size: 15px;
+}
+
+</style>
 </head>
 <body>
 <div id="header">
@@ -74,7 +92,7 @@
 
         <!-- buttons -->
         <div class="detail-article__btn">
-          <input type="button" value="목록">
+          <input type="button" value="목록" onclick="location.href='blog.do'">
           <input type="button" value="수정">
           <input type="button" value="삭제">
         </div>

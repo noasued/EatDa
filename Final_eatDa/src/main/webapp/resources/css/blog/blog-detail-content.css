@@ -57,15 +57,15 @@ input{
 /* content */
 .detail-article__content{
   margin: 50px 40px;
-  padding-bottom: 30px;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 /* likes */
 .detail-article__content-likes{
   text-align: justify;
-  margin-bottom: -40px;
   margin-left: 20px;
+  margin-top:70px;
   position: relative;
 }
 
@@ -82,7 +82,7 @@ input{
 
 .detail-article__content-likes>i{
   position: absolute;
-  top:30px;
+
   color:rgb(255, 119, 95);
   margin-right: 10px;
 }

@@ -1,8 +1,5 @@
 @charset "UTF-8";
 
-@import "blog-write-top.css";
-@import "blog-top.css";
-
 @import "blog-write-content.css";
 
 body{

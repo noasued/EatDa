@@ -21,6 +21,12 @@ public class BlogController {
 		return "/blog/blog-detail";
 	}
 	
+	@RequestMapping("/blog-write.do")
+	public String test3() {
+		System.out.println("test3");
+		return "/blog/blog-write";
+	}
+	
 
 
 }
