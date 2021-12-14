@@ -9,7 +9,7 @@
 	<style type="text/css">
         .body {
             height: fit-content;
-            width: 50%;
+            width: 60%;
             margin: 0 auto;
         }
 
