@@ -10,9 +10,15 @@ public class EventController {
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	
 	@RequestMapping("/event.do")
-	public String test() {
-		System.out.println("test");
+	public String eventMain() {
+		System.out.println("event-main page");
 		return "/event/event-main";
+	}
+	
+	@RequestMapping("/event-detail.do")
+	public String eventDetail() {
+		System.out.println("event-detail page");
+		return "/event/event-detail";
 	}
 	
 
