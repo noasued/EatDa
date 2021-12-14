@@ -26,5 +26,11 @@ public class MarketController {
 		System.out.println("test3");
 		return "/market/shoppingBag";
 	}
+	
+	@RequestMapping("/orderSuccess.do")
+	public String test4() {
+		System.out.println("test4");
+		return "/market/orderSuccess";
+	}
 
 }

@@ -16,7 +16,7 @@
             height: 1500px;
         }
         .top-section {
-            width: 55%;
+            width: 65%;
             height: 550px;
             margin: 0 auto;
         }
@@ -254,7 +254,7 @@
     </div>
   </div>
   	<!-- paging navi -->
-  	<div style="width:55%; height:40px;  margin:0 auto; padding:10px; margin-top:15px;">
+  	<div style="width:67%; height:40px;  margin:0 auto; padding:10px; margin-top:15px;">
   		<span style="color:rgb(148, 148, 32); font-size:larger;">
   			HOME > MARKET > PRODUCT
   		</span>

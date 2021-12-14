@@ -13,12 +13,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style type="text/css">
+
 </style>
 
 
 </head>
 <body>
-    <div class="nav">
+    <div class="nav" style="box-shadow: 0px 4px 6px -4px gray;">
     	<div style="width:80%; margin:0 auto; margin-bottom:20px;">
 	        <ul class="nav__list">
 	          <li class="nav__logo"><a href="#"><img src="resources/images/logo.png"></a></li>
@@ -46,7 +47,6 @@
 	          </li>
 	        </ul>
         </div>
-        <div style="width:100%; height:1px; box-shadow:0px 0px 10px 0px black;"></div>
       </div>
 </body>
 </html>
