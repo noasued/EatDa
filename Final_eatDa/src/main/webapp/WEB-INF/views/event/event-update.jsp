@@ -109,7 +109,9 @@
 </script>
 </head>
 <body>
-
+	<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
   <main class="event-update">
     <!-- main img -->
     <div class="event-update__top">
@@ -141,5 +143,8 @@
     </div>
 
   </main>
+  <div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
 </body>
 </html>

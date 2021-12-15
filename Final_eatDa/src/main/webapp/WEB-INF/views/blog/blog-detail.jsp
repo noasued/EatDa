@@ -70,7 +70,7 @@
 </style>
 </head>
 <body>
-<div id="header">
+	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
   <main class="blog-detail">

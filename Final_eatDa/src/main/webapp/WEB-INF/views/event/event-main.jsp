@@ -51,7 +51,9 @@ body{
 <link href="resources/css/event/event-main.css" rel="stylesheet">
 </head>
 <body>
-  
+  <div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
   <main class="event-main">
     <!-- main img -->
     <div class="event-main__top blog__top">
@@ -201,6 +203,8 @@ body{
       </div>
     </div>
   </main>
-  
+  <div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
 </body>
 </html>
