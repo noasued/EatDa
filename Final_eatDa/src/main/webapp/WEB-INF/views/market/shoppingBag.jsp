@@ -210,7 +210,6 @@
 	function leftButton(object) {
 		let quantity = $(object).siblings('#quantity').text();
 		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
-		totalPrice = price + $(object).parents()
 		
 		if (quantity == 1) {
 			alert('한 개 이상을 선택해주세요.');
@@ -242,8 +241,8 @@
 		let length = $('.start-row').length;
 		
 		for (var i = 0; i < length; i++) {
-			let temp = Number($('.start-row').eq(i).children('.right-col').children('.right-col-price').children().eq(0).text());
-			totalPrice += temp;
+			let temp = $('.start-row').eq(i).children('.right-col').children('.right-col-price').children().eq(0).text();
+			totalPrice += Number(temp);
 		}
 		
 		$('#totalPrice').text('');
