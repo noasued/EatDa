@@ -17,7 +17,7 @@
 	display: flex;
 	position: absolute;
 	flex-direction: column;
-	width: 800px;
+	width: 800px; 
 	margin-top: 20px;
     padding-top: 0;
 }

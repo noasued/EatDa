@@ -16,7 +16,7 @@
 .mypage_update{
 	flex-direction: column;
 	width: 800px;
-    margin-top: 40px;
+    margin-top: 40px; 
 }
 
 .update_form{
