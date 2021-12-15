@@ -5,8 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
-
 	<bean name="logAop" class="com.project.eatda.common.aop.LogAop"/>
+
 	
 	<aop:config>
 		<aop:pointcut expression="execution(public * com.project.eatda.dao.*Dao*.*(..))" id="daoPoint"/>

@@ -1,62 +1,10 @@
 
 @import "variables.css";
+/* 
+	import 하지 마시고 아래의 bdoy 설정만 가져가시면 됩니다.
+	위의 variable.css임포트는 본인이 "네비게이션의 테마컬러 및 푸터의 컬러를 사용할 경우"에만 가져가시면 됩니다.
 
-/*  !!!! 위와 같이 임포트 해주세요 !!!! */
-
-/* MAIN */ 
-
-/* RECIPE */
-
-
-.nav__recipe, .nav__blog, .nav__subscription, .nav__market, .nav__mypage{
-  margin-top: 40px;
-}
-
-/* BLOG */
-
-
-/* SUBSCRIPTION */
-
-
-.nav__mypage .nav-sub{
-  display:none;
-  position: absolute;
-  top:30px;
-  left:0;
-  opacity: 0;
-}
-
-.nav__list li a:hover{
-  color:#fff;
-  transition: all 0.2s;
-}
-
-/* MARKET */
-
-
-/* MY PAGE */
-
-/* ADMIN */
-
-
-.nav__mypage:hover .nav-sub{
-  display: block;
-  opacity: 1;
-}
-
-.nav__mypage:hover .nav-sub li{
-  height: 30px;
-  line-height: 30px;
-  
-}
-
-.nav-sub{
-  margin-top: 25px;
-  border-top: 5px solid #E39279;
-  background-color: #ffe084;
-  transition: height 0.5s;
-}
-
+ */
 
 
 body{

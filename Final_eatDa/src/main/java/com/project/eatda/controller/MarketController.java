@@ -11,7 +11,32 @@ public class MarketController {
 	
 	@RequestMapping("/test.do")
 	public String test() {
+		System.out.println("test");
 		return "/market/marketMain";
+	}
+	
+	@RequestMapping("/page.do")
+	public String test2() {
+		System.out.println("test2");
+		return "/market/marketPage";
+	}
+	
+	@RequestMapping("/shoppingbag.do")
+	public String test3() {
+		System.out.println("test3");
+		return "/market/shoppingBag";
+	}
+	
+	@RequestMapping("/orderSuccess.do")
+	public String test4() {
+		System.out.println("test4");
+		return "/market/orderSuccess";
+	}
+	
+	@RequestMapping("/payment.do")
+	public String test5() {
+		System.out.println("test5");
+		return "/market/payment";
 	}
 
 }
