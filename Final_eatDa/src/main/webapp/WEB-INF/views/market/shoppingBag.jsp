@@ -310,7 +310,7 @@
                         <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
                     </div>
                     <div class="left-col-title">
-                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
+                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~~~
                     </div>
                 </div>
                 <div class="col-lg-4 right-col">
