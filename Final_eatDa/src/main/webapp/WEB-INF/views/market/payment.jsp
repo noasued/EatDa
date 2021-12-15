@@ -25,7 +25,6 @@
             margin-bottom: 4%;
         }
 
-        
         .rows-info {
             height:auto; width:80%;
         }
@@ -147,8 +146,8 @@
     
         .fixed-Banner {
             position:fixed; width:300px; margin:1%; height:400px;
-                padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-                border: 1px gray solid;
+            padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
+			border: 1px gray solid;
         }
         #agreePay {
             margin-left: 10px;

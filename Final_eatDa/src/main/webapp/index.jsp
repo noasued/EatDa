@@ -12,8 +12,7 @@
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>
 
-	<br><br><br><br><br><br><br>
-  <a href="test.do">go</a>
+	
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <a href="page.do">go</a>
   <br><br><br><br><br><br><br>

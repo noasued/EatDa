@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MarketController {
 	private static final Logger logger = LoggerFactory.getLogger(MarketController.class);
 	
-	@RequestMapping("/test.do")
-	public String test() {
-		System.out.println("test");
+	@RequestMapping("/marketMain.do")
+	public String goMarketMain() {
+		logger.info("Market Main Page");
 		return "/market/marketMain";
 	}
 	
-	@RequestMapping("/page.do")
-	public String test2() {
-		System.out.println("test2");
+	@RequestMapping("/page.do") 
+	public String goMarketPage() {
+		logger.info("Market Each Page");
 		return "/market/marketPage";
 	}
 	
