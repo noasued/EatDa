@@ -19,23 +19,18 @@
             z-index: 1; 
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
             overflow: auto; 
             background-color: rgb(0,0,0); 
             background-color: rgba(0,0,0,0.4); 
         }
 
-        /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
+            margin: 20% auto;
+            padding: 10%;
             border: 1px solid #888;
-            width: 40%;
         }
 
-        /* Close Button */
         .close {
             color: #aaa;
             float: right;
@@ -59,7 +54,8 @@
     }
 
     .input-form {
-      max-width: 680px;
+      width: 1200px;
+      height : 1000px;
 
       margin-top: 80px;
       padding: 32px;
@@ -78,17 +74,19 @@
       color:rgb(28, 118, 179);
       font-size: 10pt; 
       margin-left: 15%;
-      margin-top: 3%;
+      margin-top: 2%;
+    }
+    #modal_btn{
+    	padding-left:20%;
     }
     .modal_wrap{
         display: none;
         width: 100%;
         height: 500px;
         position: absolute;
-        top:50%;
-        left: 50%;
+        top:100%;
+        left: 100%;
         margin: -250px 0 0 -250px;
-        background:#eee;
         z-index: 2;
     }
     .black_bg{
@@ -117,102 +115,123 @@
         text-indent: -9999px;
     }
     #m_title{
-      font-size: 20pt;
-      font-weight: bold;
-      text-align: center;
+    	font-size:15pt;
+    	font-weight: bold;
     }
-    #m_cont{
-      text-align: center;
+    #modal_btn{
+    	font-size:15pt;
     }
+	button{
+		font-size:30pt;
+	}
+	#chk_nm{
+		font-size:18pt;
+		font-weight: bold;
+	}
+	#label_btn{
+		font-weight : bold;
+		font-size: 19pt;
+		vertical-align:-1px;
+		cursor : pointer;
+	}
+	.s_form_btn{
+		margin-left: 10%;
+		font-size:19px; 
+		width:25px;
+		height:25px; 
+		vertical-align:text-top;
+	}
+
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" style="padding-left:5%;">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h2 class="mb-5">구독 신청서</h2>
-        <form class="validation-form" novalidate>
+        <h2 class="mb-5" style="margin-top:3%; font-size:35pt; font-weight:bold; text-align:center;">구독 신청서</h2><br>
+        <form class="validation-form" style="padding-left:2%;" novalidate>
             <div class="col-md-6 mb-5">
-              <label for="sub_type" style="font-weight: bold; font-size: 15pt;">구독 유형</label>
-              <br>
-              <input type="radio" value="chk_normal" name="chk_btn" checked style="margin-top: 3%; margin-left: 10%;"> 일반 구독<br>
-              <button type='button' id="modal_btn">> 일반 구독이란?</button>
-              <div class="black_bg"></div>
-              <div class="modal_wrap">
-                <div class="modal_close"><a href="#">close</a></div>
-                  <div>
-                      <p id="m_title">일반 구독이란?</p>
-                      <br>
-                      <p id="m_cont">일반 구독이란 블라블라 어쩌고 저쩌고 입니다.<br>
-                        일반 구독이란 블라블라 어쩌고 저쩌고 입니다.<br>
-                        일반 구독이란 블라블라 어쩌고 저쩌고 입니다.<br>
-                        일반 구독이란 블라블라 어쩌고 저쩌고 입니다.<br>
-                        일반 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                      </p>
-                  </div>
-              <div>
-              </div> 
-              </div>
+              <label for="sub_type" style="font-weight: bold; font-size: 25pt; color:rgb(70, 70, 70);">구독 유형</label><br>  
+                        
+              <div class="sub_form_select">  
+              
+	              	<div class="sub_form_button">           
+	              		<input type="radio" id="chk1" name="chk" class="s_form_btn" checked><label for="chk1" id="label_btn">&nbsp;일반 구독</label><br>
+	              
+	              		<button type='button' id="modal_btn" class="btn">> 일반 구독이란?</button>
+	              		<div class="black_bg"></div>
+	              			<div class="modal_wrap">
+	              				<div class="modal-content">
+					                <div class="modal_close"><a href="#">close</a></div>
+					                   <p><span id="m_title">일반 구독이란?</span><br>일반 구독이란 ~ 입니다.<br>일반 구독이란 ~ 입니다.<br>일반 구독이란 ~ 입니다.<br>일반 구독이란 ~ 입니다.<br>일반 구독이란 ~ 입니다.</p>
+	              				</div>
+	              			</div>
+	              	</div>
+				<br>
+		              <div class="sub_form_button">   
+		              	<input type="radio" id="chk2" name="chk" class="s_form_btn"><label for="chk2" id="label_btn">&nbsp;제철 식재료 구독</label> 
 
-                <br>
-                
-              <input type="radio" value="chk_seasonal" name="chk_btn" style="margin-left:10%;"> 제철 식재료 구독
-              <button type="button" id="modal_btn" >> 제철 식재료 구독이란?</button>
-              <div class="black_bg"></div>
-              <div class="modal_wrap"> 
-                <div class="modal_close"><a href="#">close</a></div>
-                  <div>
-                    <p id="m_title">제철 식재료 구독이란?<br>
-                      제철 식재료 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                      제철 식재료 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                      제철 식재료 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                      제철 식재료 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                      제철 식재료 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                      제철 식재료 구독이란 블라블라 어쩌고 저쩌고 입니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="invalid-feedback">
-                구독 유형을 선택해주세요.
-              </div>
-
-
-          <br>
+		              		<button type="button" id="modal_btn" class="btn">> 제철 식재료 구독이란?</button><br>
+				            <div class="black_bg"></div>
+					          <div class="modal_wrap"> 
+					            <div class="modal-content">
+						          <div class="modal_close"><a href="#">close</a></div>
+						             <p><span id="m_title">제철 식재료 구독이란?</span><br>제철 식재료 구독이란 ~ 입니다.<br>제철 식재료 구독이란 ~ 입니다.<br>제철 식재료 구독이란 ~ 입니다.<br>제철 식재료 구독이란 ~ 입니다.<br>제철 식재료 구독이란 ~ 입니다.<br>제철 식재료 구독이란 ~ 입니다.</p>
+						          </div>
+					          </div>
+		              </div>
+			</div>
+		  </div>
+        <br>
           
           <div class="col-md-6 mb-5">
-            <label for="address2"><span style="font-weight: bold; font-size: 15pt;">남기는 메세지</span><span class="text-muted">&nbsp;(선택 입력)</span></label>
+            <label for="address2"><span style="font-weight: bold; font-size: 25pt; color:rgb(70, 70, 70);">남기는 메세지</span><span class="text-muted" style="font-size:20pt;">&nbsp;(선택 입력)</span></label>
             <br>
-            <textarea rows="3" cols="80" id="vertical" style="white-space: pre-line; margin-top: 3%;" 
+            <textarea rows="5" cols="120" id="vertical" style="white-space: pre-line; margin-top: 3%;" 
             placeholder="못먹는 음식 또는 음식 알러지 등에 대해 작성해주세요.
             예시) 저는 오이를 싫어합니다. 오이가 들어가있지 않은 밀키트로 배송해주세요."></textarea>
           </div>
-
           <div class="mb-4"></div>
-          <button class="btn btn-warning btn-lg btn-block" type="submit" onclick="">구독 신청</button>
-          <button class="btn btn-secondary btn-md btn-block" type="button" onclick="history.back();">취 소</button>
+          <button class="btn btn-warning btn-lg btn-block" type="submit" onclick="" style="font-size:30pt;">구독 신청</button>
+          <button class="btn btn-secondary btn-md btn-block" type="button" onclick="history.back();" style="font-size:25pt;">취 소</button>
         </form>
       </div>
     </div>
   </div>
   <script>
-    window.onload = function() {
- 
-    function onClick() {
-        document.querySelector('.modal_wrap').style.display ='block';
-        document.querySelector('.black_bg').style.display ='block';
-    }   
-    function offClick() {
-        document.querySelector('.modal_wrap').style.display ='none';
-        document.querySelector('.black_bg').style.display ='none';
-    }
- 
-    document.getElementById('modal_btn').addEventListener('click', onClick);
-    document.querySelector('.modal_close').addEventListener('click', offClick);
- 
-};
+  var modals = document.getElementsByClassName("modal_wrap");
+  var btns = document.getElementsByClassName("btn");
+
+  var divs = document.getElementsByClassName("modal_close");
+  var funcs = [];
+  
+  function Modal(num) {
+      return function() {
+          btns[num].onclick =  function() {
+              modals[num].style.display = "block";
+              console.log(num);
+          };
+      
+          divs[num].onclick = function() {
+              modals[num].style.display = "none";
+          };
+      };
+  }
+
+  for(var i = 0; i < btns.length; i++) {
+      funcs[i] = Modal(i);
+  }
+  
+  for(var j = 0; j < btns.length; j++) {
+      funcs[j]();
+  }
+  
+  window.onclick = function(event) {
+      if (event.target.className == "modal_wrap") {
+          event.target.style.display = "none";
+      }
+  };
 </script>
 </body>
 
