@@ -18,7 +18,7 @@
 	width: 800px;
     margin-top: 40px;
 }
- 
+  
 
 .info_update_form{
     display: flex;
