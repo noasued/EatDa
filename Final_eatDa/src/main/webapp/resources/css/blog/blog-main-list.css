@@ -11,7 +11,7 @@ a{
 .blog-article__listbox{
   align-items: center;
   width: 80%;
-  margin: 40px 8%;
+  margin: 40px 10%;
 }
 
 .blog-article__list li{
@@ -31,6 +31,8 @@ a{
 .blog-article__list a{
   display: flex;
   justify-content: space-between;
+ 	text-decoration:none;
+ 	color:#2e363e;
 }
 
 .blog-article__list div{
@@ -41,7 +43,7 @@ a{
   width:230px;
   text-align: center;
   align-items: center;
-  font-size: 15px;
+  font-size: 13px;
   color: rgb(95, 95, 95);
   border-right: 0.5px solid gainsboro;
 }

@@ -148,13 +148,17 @@ hr{
 
 
 
-	<br><br><br><br><br><br><br>
-  <a href="test.do">go</a>
+	
   <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <a href="page.do">go</a>
   <br><br><br><br><br><br><br>
   <a href="shoppingbag.do">go</a>
   <br><br><br><br><br><br>
+  <a href="orderSuccess.do">go</a>
+  <br><br><br><br><br><br>
+  <a href="payment.do">go</a>
+  <br><br><br><br><br><br>
+
 
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
