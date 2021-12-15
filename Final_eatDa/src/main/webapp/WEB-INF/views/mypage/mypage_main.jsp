@@ -22,7 +22,7 @@
 
 .info_update_form{
     display: flex;
-	position: absolute;
+	position: absolute; 
 	flex-direction: column;
     width: 800px;
     align-items: center;

@@ -24,7 +24,7 @@
 .subscription_info{
     display: flex;
 	position: absolute;
-	flex-direction: column;
+	flex-direction: column; 
     width: 800px;
     align-items: center;
 }

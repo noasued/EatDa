@@ -22,7 +22,7 @@
     padding-top: 0;
 }
 
-.blog_like_wrap{
+.blog_like_wrap{ 
     display: flex;
     position: absolute;
 	flex-direction: column;

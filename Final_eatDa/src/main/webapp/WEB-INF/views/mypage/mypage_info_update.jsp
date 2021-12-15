@@ -23,7 +23,7 @@
     display: flex;
 	position: absolute;
 	flex-direction: column;
-    width: 800px;
+    width: 800px; 
     align-items: center;
 }
 

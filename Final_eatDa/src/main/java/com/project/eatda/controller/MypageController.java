@@ -14,7 +14,7 @@ public class MypageController {
 		System.out.println("mypage_main page");
 		return "/mypage/mypage_main";
 	}	
-	
+	 
 	@RequestMapping("/mypage_like.do")
 	public String mypageLike() {
 		System.out.println("mypage_like page");
