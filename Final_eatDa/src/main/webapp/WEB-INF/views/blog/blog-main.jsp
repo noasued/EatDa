@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 <link href="resources/css/blog/blog-main.css" rel="stylesheet">
-<script defer src="https://kit.fontawesome.com/bdbb0da9f4.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <style type="text/css">
 	.blog-main__top{
   width:100%;

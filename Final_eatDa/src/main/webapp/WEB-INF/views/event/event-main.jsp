@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 
-
-<script defer src="https://kit.fontawesome.com/bdbb0da9f4.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <style type="text/css">
 body{
   margin:0;
@@ -17,17 +16,17 @@ body{
 .event-main__top{
   width:100%;
   height:300px;
-  background: url('resources/images/event-wine01.png') no-repeat;
+  background: url('resources/images/wine02.png') no-repeat;
   background-size: cover;
   overflow: hidden;
   display: table;
   border: none;
-  background-position: 5% 10%;
+  background-position: 5% 90%;
 }
 
 .event-main__top-txt{
   color:white;
-  opacity: 0.6;
+  opacity: 0.35;
   display: table-cell;
   vertical-align: bottom;
 }
