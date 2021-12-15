@@ -21,5 +21,17 @@ public class EventController {
 		return "/event/event-detail";
 	}
 	
+	@RequestMapping("/event-update.do")
+	public String eventUpdate() {
+		System.out.println("event-update page");
+		return "/event/event-update";
+	}
+	
+	@RequestMapping("/event-write.do")
+	public String eventWrite() {
+		System.out.println("event-write page");
+		return "/event/event-write";
+	}
+	
 
 }
