@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 <link href="resources/css/blog/blog-detail.css" rel="stylesheet">
-
-<script defer src="https://kit.fontawesome.com/bdbb0da9f4.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
   $(function(){
@@ -71,7 +70,7 @@
 </style>
 </head>
 <body>
-<div id="header">
+	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
   <main class="blog-detail">

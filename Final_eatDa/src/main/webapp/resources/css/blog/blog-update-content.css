@@ -20,6 +20,7 @@
 .blog-update__content-article{
   margin-top: 30px;
   text-align: justify;
+  margin-left: 10%;
 }
 
 .blog-update__content-article input[name="title"]{

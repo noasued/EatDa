@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style type="text/css">
     .wrap {
@@ -205,11 +203,63 @@
     }
 </style>
 
+<script type="text/javascript">
+	let price = 0;
+	let totalPrice = 0;
+	
+	function leftButton(object) {
+		let quantity = $(object).siblings('#quantity').text();
+		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
+		
+		if (quantity == 1) {
+			alert('한 개 이상을 선택해주세요.');
+			return;
+		} else {
+			$(object).siblings('#quantity').text('');
+			$(object).siblings('#quantity').text(quantity-1);
+			$(object).parent().siblings('.right-col-price').children().eq(0).text(price-(price/quantity));
+			calcTotal();
+		}
+	}
+	
+	function rightButton(object) {
+		let quantity = $(object).siblings('#quantity').text();
+		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
+		
+		if (quantity == 9) {
+			alert('한 상품은 한번에 10개 이하 주문 가능합니다.');
+			return;
+		} else {
+			$(object).siblings('#quantity').text('');
+			$(object).siblings('#quantity').text(Number(quantity)+1);
+			$(object).parent().siblings('.right-col-price').children().eq(0).text(price+price/quantity);
+			calcTotal();
+		}
+	}
+	
+	function calcTotal() {
+		let length = $('.start-row').length;
+		
+		for (var i = 0; i < length; i++) {
+			let temp = $('.start-row').eq(i).children('.right-col').children('.right-col-price').children().eq(0).text();
+			totalPrice += Number(temp);
+		}
+		
+		$('#totalPrice').text('');
+		$('#totalPrice').text(totalPrice);
+		totalPrice = 0;
+	}
+	
+	
+</script>
+
 </head>
+
 <body style="margin:0; min-width:1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
+	
 
 	<div class="container wrap">
 
@@ -259,15 +309,15 @@
                         <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
                     </div>
                     <div class="left-col-title">
-                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
+                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~~~
                     </div>
                 </div>
                 <div class="col-lg-4 right-col">
                     <!-- 수량선택 -->
                     <div class="right-col-quantity">
-                        <span id="left-Button" onclick="">&laquo;</span>&nbsp;
-                        <span style="font-weight:bold;">1</span>&nbsp;
-                        <span id="right-Button" onclick="">&raquo;</span>
+                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
+                        <span id="quantity" style="font-weight:bold;">1</span>&nbsp;
+                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
                     </div>
 
                     <!-- 가격 -->
@@ -296,9 +346,9 @@
                 <div class="col-lg-4 right-col">
                     <!-- 수량선택 -->
                     <div class="right-col-quantity">
-                        <span id="left-Button" onclick="">&laquo;</span>&nbsp;
-                        <span style="font-weight:bold;">1</span>&nbsp;
-                        <span id="right-Button" onclick="">&raquo;</span>
+                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
+                        <span id="quantity" style="font-weight:bold;">1</span>&nbsp;
+                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
                     </div>
 
                     <!-- 가격 -->
@@ -327,9 +377,9 @@
                 <div class="col-lg-4 right-col">
                     <!-- 수량선택 -->
                     <div class="right-col-quantity">
-                        <span id="left-Button" onclick="">&laquo;</span>&nbsp;
-                        <span style="font-weight:bold;">1</span>&nbsp;
-                        <span id="right-Button" onclick="">&raquo;</span>
+                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
+                        <span id="quantity" style="font-weight:bold;">1</span>&nbsp;
+                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
                     </div>
 
                     <!-- 가격 -->
@@ -352,7 +402,7 @@
                 총 결제 금액
             </div>
             <div class="order-total-price">
-                <span>42000</span>
+                <span id="totalPrice">42000</span>
                 <span>원</span>
             </div>
         </div>
