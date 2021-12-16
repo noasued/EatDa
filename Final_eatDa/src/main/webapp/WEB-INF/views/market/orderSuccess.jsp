@@ -96,6 +96,11 @@
     </style>
 
 <title>Insert title here</title>
+<script type="text/javascript">
+	function goMain() {
+		location.href='index.do';
+	}
+</script>
 </head>
 <body>
 	<div id="header">
@@ -232,7 +237,7 @@
         <div class="row rows-width btn-part" style="margin:30px auto 100px;">
             <div class="col-md-2"></div>
             <div class="col-md-8" align="center">
-                <button class="btn btn-primary btn-lg bottm-btn">홈으로</button>
+                <button class="btn btn-primary btn-lg bottm-btn" onclick="goMain()">홈으로</button>
                 <button class="btn btn-primary btn-lg bottm-btn">배송 확인하기</button>
             </div>
             <div class="col-md-2"></div>
