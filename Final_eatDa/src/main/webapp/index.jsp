@@ -12,6 +12,7 @@
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<a href="admin.do">go</a>
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
 	</div>
