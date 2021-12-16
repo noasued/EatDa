@@ -33,10 +33,8 @@ hr{
 	<div id="header">
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>
-<<<<<<< HEAD
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-=======
-	    <div class="body"><!---container-fluid : 여백없애기-->
+
+	<div class="body"><!---container-fluid : 여백없애기-->
         <div class="row">
             <h4>최신레시피</h4>
             <div class="col-md-2 b">
@@ -158,12 +156,6 @@ hr{
   <br><br><br><br><br><br>
 
 
-
-
-
-	
-
->>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
 	</div>
