@@ -11,10 +11,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
-	@RequestMapping("/admin.do")
-    public String test2() {
-        System.out.println("test2");
-        return "/subscription/subscriptionMain";
-    }
 
 }
