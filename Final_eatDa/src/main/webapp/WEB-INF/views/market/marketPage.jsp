@@ -298,7 +298,41 @@ em {
 	width: 60px;
 	height: 60px;
 }
+.like-img:hover {
+	cursor:pointer;
+}
 </style>
+<script type="text/javascript">
+
+	function leftButton(object) {
+		let quantity = Number($(object).siblings('#quantity').text());
+		console.log(quantity);
+		console.log(typeof quantity);
+		
+		if (quantity == 1) {
+			alert('한 개 이상을 선택해주세요.');
+			return;
+		} else {
+			$(object).siblings('#quantity').text('');
+			$(object).siblings('#quantity').text(quantity-1);
+		}
+	}
+	
+	function rightButton(object) {
+		let quantity = Number($(object).siblings('#quantity').text());
+		console.log(quantity);
+		console.log(typeof quantity);
+		
+		if (quantity == 9) {
+			alert('한 상품은 한번에 10개 이하 주문 가능합니다.');
+			return;
+		} else {
+			$(object).siblings('#quantity').text('');
+			$(object).siblings('#quantity').text(quantity+1);
+		}
+	}
+
+</script>
 </head>
 <body style="margin: 0; min-width: 1400px;">
 	<div id="header">
@@ -309,11 +343,11 @@ em {
 		<div class="like-title">내가 찜한 상품</div>
 		<!-- 이미지만 리스트로 -->
 		<div class="like-img-div">
-			<img class="like-img" src="resources/images/market/shot.png">
+			<img class="like-img" src="resources/images/market/shot.png" onclick="">
 		</div>
 
 		<div class="like-img-div">
-			<img class="like-img" src="resources/images/market/list.png">
+			<img class="like-img" src="resources/images/market/list.png" onclick="">
 		</div>
 	</div>
 
@@ -342,9 +376,9 @@ em {
 							<div class="modal-info-quantity" align="center">
 								<div>
 									<!-- 숫자 늘리거나 줄이면 가격에도 반영하도록 구현 -->
-									<span id="left-Button" onclick="">&laquo;</span>&nbsp; <span
-										style="font-weight: lighter;">1</span>&nbsp; <span
-										id="right-Button" onclick="">&raquo;</span>
+									<span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
+									<span id="quantity" style="font-weight: lighter;">1</span>&nbsp;
+									<span id="right-Button" onclick="rightButton(this)">&raquo;</span>
 								</div>
 							</div>
 							<div class="modal-info-price" align="center">
@@ -478,7 +512,7 @@ em {
 				"<span class='desc-info'>맛있게 먹으면 0 칼로리</span>" +
 				"</div>" +
 				"<div class='product-desc'>" +
-				"<span class='desc-title'>원산</span>" +
+				"<span class='desc-title'>원산지</span>" +
 				"<span class='desc-info'>우리집</span>" +
 				"</div></div>" +
 				"<div class='detail-wrap>'"+
