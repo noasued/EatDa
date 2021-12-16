@@ -4,64 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-    .footer {
-    	margin:0px;
-        background-color: #FAEED2 ;
-        height: 250px;
-		position: absolute;
-    	left: 0;
-	    bottom: 0;
-    	width: 100%;
-    }
-    .footer-section {
-        margin:0 auto;
-        padding:0;
-        width: 70%;
-        height:100%;
-    }
-    .left-section {
-        width:40%; 
-        height:100%; 
-        margin:0;
-        float:left;
-    }
-    .left-section>ul {
-        margin-top: 40px;
-        list-style: none;
-    }
-    ul>li {
-        float: left;
-        font-size:smaller;
-        margin-right: 10px;
-    }
-    .left-info {
-        margin-top: 90px;
-        margin-left: 20px;
-    }
-    .right-info {
-        margin-top: 70px;
-        margin-left: 20px;
-    }
-    .left-info>span {
-        font-size: small;
-        color: #464646;
-    }
-    .right-section {
-        width:60%; 
-        height:100%;
-        margin:0;
-        float:right;
-    }
-    .right-info {
-        margin-left: 150px;
-    }
-    .right-info>span {
-        font-size: small;
-        color: rgb(155, 154, 154);
-    }
-</style>
+<title>Welcome to EatDa</title>
+<link rel="stylesheet" href="resources/css/common/footer.css">
 </head>
 <body style="margin:0px">
     <div class="footer">
@@ -83,7 +27,7 @@
             </div>
             <div class="right-section">
                 <div class="right-info">
-                    <h3>EatDa</h3>
+                    <h2>EatDa</h2>
                     &nbsp;&nbsp;<span>대표: 먹고살아야조</span><br>
                     &nbsp;&nbsp;<span>주소: 서울시 강남구 테헤란로 11  ||  사업자 등록번호: 101-19-122211</span><br>
                     &nbsp;&nbsp;<span>통신판매업 신고: 제1234-44222111호   [사업자 확인하기]</span><br>
