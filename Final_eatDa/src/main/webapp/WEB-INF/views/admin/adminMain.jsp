@@ -80,7 +80,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">관리자 HOME</h1>
+                        <h1 class="mt-4">HOME</h1>
                         <br><br>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
