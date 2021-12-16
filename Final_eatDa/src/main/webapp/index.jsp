@@ -6,9 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Index</title>
-<<<<<<< HEAD
 
-=======
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 .body{
@@ -31,20 +29,15 @@ hr{
 	height:20px;
 }
 </style>
->>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
+
 </head>
 <body style="min-width:1400px;">
 	<div id="header">
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>
-<<<<<<< HEAD
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<<<<<<< HEAD
-	<h1>test</h1>
+
 	<a href="admin.do">go</a>
-=======
-=======
-	    <div class="body"><!---container-fluid : 여백없애기-->
+	<div class="body"><!---container-fluid : 여백없애기-->
         <div class="row">
             <h4>최신레시피</h4>
             <div class="col-md-2 b">
@@ -170,12 +163,15 @@ hr{
   <br><br><br><br><br><br>
   
 
+<<<<<<< HEAD
 
 
 
 
 
 >>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
+>>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
+=======
 >>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
