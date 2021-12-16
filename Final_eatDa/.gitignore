@@ -10,6 +10,8 @@ tmp/
 *.bak
 *.swp
 *~.nib
+*.properties
+*.MF
 local.properties
 .settings/
 .loadpath

@@ -41,7 +41,7 @@
                             </div>
                             <a class="nav-link" href="adminMain" style="color: rgb(224, 179, 57);">
                                 <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                HOME
+                                HOME2
                             </a>
 
                             <a class="nav-link" href="adminPostReply" style="color: black;">
