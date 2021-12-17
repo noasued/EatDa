@@ -72,68 +72,69 @@
           <input type="button" value="글쓰기" onclick="location.href='blog-write.do'">
         </form>
       </div>
-    </div>
+    
 
-    <!-- blog list -->
-    <div class="blog-article__listbox">
-      <ul class="blog-article__list">
-        <li><a href="blog-detail.do">
-          <div class="blog-article__list-title">
-            <h3>블로그 제목 들어감</h3>
-            <i class="fas fa-heart"></i>
-          </div>
-          <div class="blog-article__list-content">
-            <p>블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
-          </div>
-          <div class="blog-article__list-img">
-            <img src="resources/images/blog-thumbnail.png">
-          </div>
-        </a></li>
-        <li><a href="blog-detail.do">
-          <div class="blog-article__list-title">
-            <h3>블로그 제목 들어감</h3>
-            <i class="fas fa-heart"></i>
-          </div>
-          <div class="blog-article__list-content">
-            <p>블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
-          </div>
-          <div class="blog-article__list-img">
-            <img src="resources/images/blog-thumbnail.png">
-          </div>
-        </a></li>
-        <li><a href="blog-detail.jsp">
-          <div class="blog-article__list-title">
-            <h3>블로그 제목 들어감</h3>
-            <i class="fas fa-heart"></i>
-          </div>
-          <div class="blog-article__list-content">
-            <p>블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
-              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
-          </div>
-          <div class="blog-article__list-img">
-            <img src="resources/images/blog-thumbnail.png">
-          </div>
-        </a></li>
-      </ul>
-
-      <ul class="blog-article__paging" id="paging">
-        <li><a href="#"><i class="fas fa-chevron-left fa-sm"></i></a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right fa-sm"></i></a></li>
-      </ul>
-
+	    <!-- blog list -->
+	    <div class="blog-article__listbox">
+	      <ul class="blog-article__list">
+	        <li><a href="blog-detail.do">
+	          <div class="blog-article__list-title">
+	            <h3>블로그 제목 들어감</h3>
+	            <i class="fas fa-heart"></i>
+	          </div>
+	          <div class="blog-article__list-content">
+	            <p>블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
+	          </div>
+	          <div class="blog-article__list-img">
+	            <img src="resources/images/blog-thumbnail.png">
+	          </div>
+	        </a></li>
+	        <li><a href="blog-detail.do">
+	          <div class="blog-article__list-title">
+	            <h3>블로그 제목 들어감</h3>
+	            <i class="fas fa-heart"></i>
+	          </div>
+	          <div class="blog-article__list-content">
+	            <p>블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
+	          </div>
+	          <div class="blog-article__list-img">
+	            <img src="resources/images/blog-thumbnail.png">
+	          </div>
+	        </a></li>
+	        <li><a href="blog-detail.jsp">
+	          <div class="blog-article__list-title">
+	            <h3>블로그 제목 들어감</h3>
+	            <i class="fas fa-heart"></i>
+	          </div>
+	          <div class="blog-article__list-content">
+	            <p>블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중
+	              블로그 내용 들어가는데 일단 내용이 없으니 아무거나 적어보는 것으로 하는중</p>
+	          </div>
+	          <div class="blog-article__list-img">
+	            <img src="resources/images/blog-thumbnail.png">
+	          </div>
+	        </a></li>
+	      </ul>
+	
+	      <ul class="blog-article__paging" id="paging">
+	        <li><a href="#"><i class="fas fa-chevron-left fa-sm"></i></a></li>
+	        <li><a href="#">1</a></li>
+	        <li><a href="#">2</a></li>
+	        <li><a href="#">3</a></li>
+	        <li><a href="#">4</a></li>
+	        <li><a href="#">5</a></li>
+	        <li><a href="#"><i class="fas fa-chevron-right fa-sm"></i></a></li>
+	      </ul>
+	
+	    </div>
     </div>
   </main>
 	<div id="footer">
