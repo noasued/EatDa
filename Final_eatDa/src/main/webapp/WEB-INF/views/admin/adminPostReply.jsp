@@ -11,13 +11,18 @@
         <meta name="author" content="" />
         <title>Admin_Post_Reply</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="resources/admin/css/styles.css" rel="stylesheet" />
+        <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+		<style>
+			input{
+				float:right;
+			}
+		</style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="index.jsp">eat_Da</a>
 
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             
@@ -36,41 +41,41 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav" style="text-align: center;">
                             <div class="sb-sidenav-menu-heading">
-                                <img src="assets/img/profile_admin.png" style="width: 60%; height: 60%;">
+                                <img src="resources/assets/img/profile_admin.png" style="width: 60%; height: 60%;">
                                 <br>
                                 <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link" href="adminMain.jsp" style="color: rgb(224, 179, 57);">
+                            <a class="nav-link" href="adminMain.do" style="color: black">
                                 <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
                                 HOME
                             </a>
 
-                            <a class="nav-link" href="adminPostReply.jsp" style="color: black;">
+                            <a class="nav-link" href="adminPostReply.do" style="color: rgb(224, 179, 57);">
                                 <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
                                 Post
                             </a>
 
-                            <a class="nav-link" href="adminRecipe.jsp" style="color: black;">
+                            <a class="nav-link" href="adminRecipe.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
                                 Recipe
                             </a>
 
-                            <a class="nav-link" href="adminProduct.jsp" style="color: black;">
+                            <a class="nav-link" href="adminProduct.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 Product
                             </a>
 
-                            <a class="nav-link" href="adminOrder.jsp" style="color: black;">
+                            <a class="nav-link" href="adminOrder.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
                                 Order
                             </a>
 
-                            <a class="nav-link" href="adminUser.jsp" style="color: black;">
+                            <a class="nav-link" href="adminUser.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
                                 User
                             </a>
 
-                            <a class="nav-link" href="adminReport.jsp" style="color: black;">
+                            <a class="nav-link" href="adminReport.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
                                 Report
                             </a>
@@ -82,7 +87,7 @@
                 <main>
                     <br>
                     <div class="container-fluid px-4">
-                        <h1 class="title_tab"><a href="admin_post_reply.html" style="text-decoration: none; color: rgb(224, 179, 57);">댓글</a> | <a href="admin_post_blog.html" style="text-decoration: none; color: black;">블로그</a> | <a href="admin_post_event.html" style="text-decoration: none; color: black;">이벤트</a></h1>
+                        <h1 class="title_tab"><a href="adminPostReply.do" style="text-decoration: none; color: rgb(224, 179, 57);">댓글</a> | <a href="adminPostBlog.do" style="text-decoration: none; color: black;">블로그</a> | <a href="adminPostEvent.do" style="text-decoration: none; color: black;">이벤트</a></h1>
                         <br><br>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -187,9 +192,11 @@
                                             <td>2021.12.03</td>
                                         </tr>
                                     </tbody>
-                                   
-                    
-                                    
+                                    <tr>
+                                        <td colspan="5">
+                                            <input type="button" onclick="" value="삭 제">
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
