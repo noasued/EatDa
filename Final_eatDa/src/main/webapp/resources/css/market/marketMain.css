@@ -188,3 +188,42 @@ border: 1px gray solid;
 .keyword-tag li span:hover {
   cursor: pointer;
 }
+
+
+
+.banner {
+	background-image: url(resources/images/market/market-banner2.png);
+	background-size: cover;
+	width: 100%;
+	margin: 0 auto;
+	height: 400px;
+	margin-bottom: 30px;
+	padding-top: 180px;
+	border-radius: 4px;
+}
+
+.search-wide {
+	width: 55%;
+	padding-left: 5%;
+	height: 40px;
+	border: 1px solid lightblue;
+	border-radius: 25px;
+}
+
+.search-box-wide {
+	padding-left: 31%;
+}
+
+.page-navi {
+  width: 100%;
+  height: 20%;
+  margin: 0 auto;
+  margin-top: 1%;
+  margin-bottom: 1%
+}
+
+.page-navi div span {
+  color: rgb(148, 148, 32);
+  font-size: larger;
+}
+
