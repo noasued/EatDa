@@ -189,7 +189,11 @@
                         </div>
                     </div>
                 </main>
+<<<<<<< HEAD
                 <footer class=""> 
+=======
+                <footer class="">
+>>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
                     
                 </footer>
             </div>

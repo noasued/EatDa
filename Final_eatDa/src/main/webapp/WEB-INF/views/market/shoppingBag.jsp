@@ -82,8 +82,8 @@
         height: 20px;
     }
     .check-img {
-    	width: 20px;
-    	height:20px;
+    	width: 18px;
+    	height:18px;
     }
 
     #m-check:hover {
@@ -207,6 +207,15 @@
 	let price = 0;
 	let totalPrice = 0;
 	
+	window.onload = function() {
+		//멀티버튼 구현
+		$('input:checkbox').on('click', function() {
+			if (!($(this).prop('checked'))) {
+				$('#m-check').attr('src','resources/images/market/check.png');
+			}
+		});
+	}
+	
 	function leftButton(object) {
 		let quantity = $(object).siblings('#quantity').text();
 		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
@@ -250,7 +259,48 @@
 		totalPrice = 0;
 	}
 	
+	//멀티버튼 메서드
+	function pushMulti() {
+		// 1. 이미지를 바꿔줘야함
+		// 2. 전체선택을 클릭하면 밑에 이미지들도 다 체크모양으로 바뀌어야함
+		let src = $('#m-check').attr('src');
+		
+		
+		if (src == 'resources/images/market/check.png') {
+			//미체크 상태
+			$('#m-check').attr('src','resources/images/market/full-check.png');
+			$('input:checkbox[name="checkbox"]').each(function() {
+				this.checked=true;
+			});
+		} else {
+			//체크된 상태
+			$('#m-check').attr('src','resources/images/market/check.png');	
+			$('input:checkbox[name="checkbox"]').each(function() {
+				this.checked=false;
+			});
+		}
+	}
 	
+	//선택삭제 메서드
+	function choiceDelete() {
+		if(confirm('선택하신 상품을 장바구니에서 제거 하시겠습니까?')) {
+			$('input:checkbox[name="checkbox"]').each(function() {
+				if (this.checked==true) {
+					console.log($(this).parents('.start-row'));
+					$(this).parents('.start-row').remove();
+				}
+			});
+		}
+		
+	}
+	
+	
+</script>
+
+<script type="text/javascript">
+	function goMarketMain() {
+		location.href='marketMain.do'
+	}
 </script>
 
 </head>
@@ -288,11 +338,11 @@
 
         <div class="row rows-width order-middle-second" style="margin: 0 auto;">
             <div class="col-lg-6 order-middle-second-col">
-                <img src="resources/images/market/check.png" alt="check" id="m-check">
+                <img src="resources/images/market/check.png" id="m-check" onclick="pushMulti()">
                 <label style="margin-left:10px; margin-bottom:5px;">전체선택</label>
             </div>
             <div class="col-lg-6 order-middle-second-col" align="right">
-                <span id="choice-delete" onclick="">선택삭제</span>
+                <span id="choice-delete" onclick="choiceDelete()">선택삭제</span>
             </div>
         </div>
 
@@ -303,7 +353,7 @@
             <div class="start-row">
                 <div class="col-lg-8 left-col">
                     <div class="left-col-check">
-                        <img src="resources/images/market/check.png" alt="check" class="check-img">
+						<input type="checkbox" class="check-img" name="checkbox">
                     </div>
                     <div class="left-col-img">
                         <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
@@ -334,7 +384,7 @@
             <div class="start-row">
                 <div class="col-lg-8 left-col">
                     <div class="left-col-check">
-                        <img src="resources/images/market/check.png" alt="check" class="check-img">
+                    	<input type="checkbox" class="check-img" name="checkbox">
                     </div>
                     <div class="left-col-img">
                         <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
@@ -365,7 +415,7 @@
             <div class="start-row">
                 <div class="col-lg-8 left-col">
                     <div class="left-col-check">
-                        <img src="resources/images/market/check.png" alt="check" class="check-img">
+                    	<input type="checkbox" class="check-img" name="checkbox">
                     </div>
                     <div class="left-col-img">
                         <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
@@ -410,8 +460,8 @@
         <!-- 하단 버튼 2개 -->
         <div class="row rows-width order-button" style="margin: 0 auto; margin-top:5%;">
             <div class="col-lg-12">
-                <button class="btn btn-primary bottom-btn">주문하기</button>
-                <button class="btn btn-primary bottom-btn">쇼핑 계속하기</button>
+                <button class="btn btn-primary bottom-btn" onclick="">주문하기</button>
+                <button class="btn btn-primary bottom-btn" onclick="goMarketMain()">쇼핑 계속하기</button>
             </div>
         </div>
 
