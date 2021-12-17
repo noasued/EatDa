@@ -11,25 +11,25 @@ public class BlogController {
 	
 	@RequestMapping("/blog.do")
 	public String blogMain() {
-		System.out.println("blog-main page");
+		logger.info("blog-main (list) page");
 		return "/blog/blog-main";
 	}
 	
 	@RequestMapping("/blog-detail.do")
 	public String blogDetail() {
-		System.out.println("blog-detail page");
+		logger.info("blog-detail page");
 		return "/blog/blog-detail";
 	}
 	
 	@RequestMapping("/blog-write.do")
 	public String blogWrite() {
-		System.out.println("blog-write page");
+		logger.info("blog-write page");
 		return "/blog/blog-write";
 	}
 	
 	@RequestMapping("/blog-update.do")
 	public String blogUpdate() {
-		System.out.println("blog-update page");
+		logger.info("blog-update page");
 		return "/blog/blog-update";
 	}
 	
