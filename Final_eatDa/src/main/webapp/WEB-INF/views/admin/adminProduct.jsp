@@ -141,8 +141,8 @@
                                     </tbody>
                                     <tr id="btn_bottom">
                                         <td colspan="5">
-                                            <input type="button" onclick="" value="등 록">
                                             <input type="button" onclick="" value="삭 제">
+                                            <input type="button" onclick="" value="등 록">
                                         </td>
                                     </tr>
                                 </table>
