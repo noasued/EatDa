@@ -157,22 +157,15 @@ hr{
   <br><br><br><br><br><br>
   <a href="payment.do">go</a>
   <br><br><br><br><br><br>
+
    <a href="adminMain.do">admin</a>
   <br><br><br><br><br><br>
   <a href="subMain.do">sub</a>
   <br><br><br><br><br><br>
   
 
-<<<<<<< HEAD
 
 
-
-
-
->>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
->>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
-=======
->>>>>>> branch 'main' of https://github.com/Team-eatDa/EatDa.git
 	<div id="footer">
 		<%@ include file="WEB-INF/views/common/footer.jsp"%>
 	</div>

@@ -306,8 +306,9 @@ em {
 
 	function leftButton(object) {
 		let quantity = Number($(object).siblings('#quantity').text());
-		console.log(quantity);
-		console.log(typeof quantity);
+		let priceSpan = $(object).parents('.modal-info-quantity').siblings('.modal-info-price').children('#price');
+		
+		let price = Number($(priceSpan).text());
 		
 		if (quantity == 1) {
 			alert('한 개 이상을 선택해주세요.');
@@ -315,13 +316,18 @@ em {
 		} else {
 			$(object).siblings('#quantity').text('');
 			$(object).siblings('#quantity').text(quantity-1);
+			
+			$(priceSpan).text('');
+			$(priceSpan).text(price-(price/quantity));
 		}
 	}
 	
 	function rightButton(object) {
 		let quantity = Number($(object).siblings('#quantity').text());
-		console.log(quantity);
-		console.log(typeof quantity);
+		
+		let priceSpan = $(object).parents('.modal-info-quantity').siblings('.modal-info-price').children('#price');
+		
+		let price = Number($(priceSpan).text());
 		
 		if (quantity == 9) {
 			alert('한 상품은 한번에 10개 이하 주문 가능합니다.');
@@ -329,6 +335,9 @@ em {
 		} else {
 			$(object).siblings('#quantity').text('');
 			$(object).siblings('#quantity').text(quantity+1);
+			
+			$(priceSpan).text('');
+			$(priceSpan).text(price+(price/quantity));
 		}
 	}
 
