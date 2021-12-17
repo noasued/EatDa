@@ -39,7 +39,7 @@ body{
   font-weight: 700;
   font-size:120px;
   height:100px;
-  line-height: 105px;
+  line-height: 85px;
 }
 
 .event-main__top-txt h2{
@@ -69,6 +69,7 @@ body{
       </div>
 
       <!-- event list -->
+      
       <div class="event-article__listbox">
         <ul class="event-article__list">
           <li>
@@ -201,6 +202,7 @@ body{
         </ul>
 
       </div>
+      
     </div>
   </main>
   <div id="footer">
