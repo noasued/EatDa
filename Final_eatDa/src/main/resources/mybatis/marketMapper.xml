@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="market">
+	<select id="productList" parameterType="list" resultType="ProductDto">
+		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH FROM PRODUCT 
+		WHERE P_ID BETWEEN
+		<foreach collection="list" index="index" item="p_id" separator="AND">
+			#{p_id}
+		</foreach>
+	</select>
+</mapper>

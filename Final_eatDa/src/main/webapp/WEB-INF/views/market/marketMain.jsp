@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<%@ page import="com.project.eatda.dto.ProductDto" %>
+<%@ page import="java.util.List" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,48 +20,12 @@
 <link rel="stylesheet" href="resources/css/market/marketMain.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<style>
-.banner {
-	background-image: url(resources/images/market/market-banner2.png);
-	background-size: cover;
-	width: 100%;
-	margin: 0 auto;
-	height: 400px;
-	margin-bottom: 30px;
-	padding-top: 180px;
-	border-radius: 4px;
-}
-
-.search-wide {
-	width: 55%;
-	padding-left: 5%;
-	height: 40px;
-	border: 1px solid lightblue;
-	border-radius: 25px;
-}
-
-.search-box-wide {
-	padding-left: 31%;
-}
-
-.page-navi {
-  width: 100%;
-  height: 20%;
-  margin: 0 auto;
-  margin-top: 1%;
-  margin-bottom: 1%
-}
-
-.page-navi div span {
-  color: rgb(148, 148, 32);
-  font-size: larger;
-}
-</style>
-
 <title>Insert title here</title>
 
 <script type="text/javascript">
 $(document).ready(function() {
+	takeProduct(1);
+	
     //검색바 사이즈 조절
     $('#search-bar').click(function() {
         $('.search-box-narrow').css({"padding-left":"31%"});
@@ -69,7 +39,6 @@ $(document).ready(function() {
     //배너 사진 변경
     let index = 2;
     window.setInterval(function() {
-        console.log('왜안돼'+index)
         if (index == 5) {
             index = 1;
         }
@@ -80,9 +49,80 @@ $(document).ready(function() {
         index++;
     }, 7000);
     
-    
 });
+
+function takeProduct(num) {
+	let sNum = String(num);
+	
+	$.ajax({
+		url: "product.do",
+		type: "post",
+		data: sNum,
+		dataType: "json",
+		success:function(list) {
+			let data = list;
+			let idx = 0;
+			let col = 0;
+			
+			$(data).each(function(key, value) {
+				
+				if (idx == 0) {
+					$('.product-container').append(
+							"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
+							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='product-img' align='center'>" +
+							"<img src='"+ value.img_path +"' class='p-img'>" +
+							"</div>" +
+							"<div class='product-desc'>" +
+							"<div class='product-margin'>" +
+							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin'>" +
+							"<span class='product-title'>" + value.p_name + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+							"<span class='product-price'>" + value.p_price + "원</span>" +
+							"<img src='resources/images/market/shop.png' class='shop-cart'>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					);
+					idx++;
+					
+				} else {
+					$('.product-col').eq(col).append(
+							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='product-img' align='center'>" +
+							"<img src='"+ value.img_path +"' class='p-img'>" +
+							"</div>" +
+							"<div class='product-desc'>" +
+							"<div class='product-margin'>" +
+							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin'>" +
+							"<span class='product-title'>" + value.p_name + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+							"<span class='product-price'>" + value.p_price + "원</span>" +
+							"<img src='resources/images/market/shop.png' class='shop-cart'>" +
+							"</div>" +
+							"</div>" +
+							"</div>"	
+					);
+					
+					if (idx != 2) {
+						idx++;
+					} else if (idx == 2) {
+						col++;
+						idx = 0;
+					}
+				} 
+			});
+		}
+	});
+}
 </script>
+
 
 </head>
 <body>
@@ -134,7 +174,7 @@ $(document).ready(function() {
 				<li>
                     <span style="color: red;">#키워드검색</span>
                 </li>
-				<li><span>#양식</span></li>
+				<li><span onclick="takeProduct(1)">#양식</span></li>
 				<li><span>#중식</span></li>
 				<li><span>#일식</span></li>
 				<li><span>#한식</span></li>
@@ -155,211 +195,12 @@ $(document).ready(function() {
 				<span class="info-title">전체 상품</span>
 			</div>
 		</div>
+		
 
+
+		<div class="product-container">
 		<!-- 상품 리스트 -->
-		<div class="row product-section">
-			<!--상품 리스트 한 줄-->
-			<div class="col-md-12">
-				<!--상품 카드-->
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row product-section">
-			<!--상품 리스트 한 줄-->
-			<div class="col-md-12">
-				<!--상품 카드-->
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row product-section">
-			<!--상품 리스트 한 줄-->
-			<div class="col-md-12">
-				<!--상품 카드-->
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-
-				<div class="product-card" style="margin: 0 2%;">
-					<div class="product-img" align="center">
-						<img src="resources/images/market/list.png" alt="img"
-							class="p-img">
-					</div>
-					<div class="product-desc">
-						<div class="product-margin">
-							<span class="short-desc">빠끄~~ 소갈비를 플렉스!</span><br>
-						</div>
-						<div class="product-margin">
-							<span class="product-title">소갈비찜~1인분입니다~</span><br>
-						</div>
-						<div class="product-margin"
-							style="margin-top: 20px; margin-bottom: 15px;">
-							<span class="product-price">9999999999원</span> <img
-								src="resources/images/market/shop.png" alt="장바구니"
-								class="shop-cart">
-						</div>
-					</div>
-				</div>
-			</div>
+		
 		</div>
 
 
