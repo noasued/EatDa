@@ -1,9 +1,6 @@
 package com.project.eatda.dao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +13,6 @@ public class MarketDaoImpl implements MarketDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
-	@Override
-	public List<ProductDto> getProductList() {
-		return null;
-	}
 
 	@Override
 	public List<ProductDto> takeProductList(int num) {
@@ -40,6 +32,46 @@ public class MarketDaoImpl implements MarketDao {
 			e.printStackTrace();
 		}
 		
+		return list;
+	}
+
+	@Override
+	public int paging() {
+		int productCount = 0;
+		
+		
+		try {
+			productCount = sqlSession.selectOne(NAMESPACE_MARKET+"paging");
+		} catch (Exception e) {
+			System.out.println("paging DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return productCount;
+	}
+
+	@Override
+	public List<ProductDto> likeProductList(String user_id) {
+		List<ProductDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"likeProductList", user_id);
+		} catch (Exception e) {
+			System.out.println("likeProductList DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<ProductDto> hashTagSearch(String tagName) {
+		List<ProductDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"hashTagSearch", tagName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 	
