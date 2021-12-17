@@ -4,11 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="market">
-	<select id="productList" parameterType="list" resultType="ProductDto">
+
+	<resultMap id="productMap" type="productDto">
+		<result property="p_id" column="p_id"/>
+		<result property="p_name" column="p_name"/>
+		<result property="p_short_desc" column="p_short_desc"/>
+		<result property="p_price" column="p_price"/>
+		<result property="p_description" column="p_description"/>
+		<result property="p_cal" column="p_cal"/>
+		<result property="p_amount" column="p_amount"/>
+		<result property="p_category" column="p_category"/>
+		<result property="img_path" column="img_path"/>
+		<result property="seller_desc" column="seller_desc"/>
+	</resultMap>
+
+
+	<select id="productList" parameterType="list" resultMap="productMap">
 		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH FROM PRODUCT 
 		WHERE P_ID BETWEEN
 		<foreach collection="list" index="index" item="p_id" separator="AND">
 			#{p_id}
 		</foreach>
 	</select>
+	
+	<select id="paging" resultType="int">
+		SELECT COUNT(*) FROM PRODUCT
+	</select>
+	
+	<select id="likeProductList" parameterType="string" resultMap="productMap">
+		SELECT IMG_PATH, P_ID
+		FROM PRODUCT
+		JOIN PRODUCT_LIKE USING(P_ID)
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<select id="hashTagSearch" parameterType="string" resultMap="productMap">
+		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH
+		FROM PRODUCT
+		JOIN PRODUCT_CATEGORY USING(P_ID)
+		WHERE P_CATEGORY = #{tagName}
+	</select>
+	
+	
 </mapper>

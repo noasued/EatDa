@@ -5,12 +5,7 @@ body {
 	}
 
 /* fixed-banner */
-.fixed-Banner {
-  right:0px;
-  position:fixed; width:100px; margin:5% 5% 1% 1%; height:auto;
-  padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-border: 1px gray solid;
-}
+
 .like-title {
   font-size: small;
   text-align: center;
@@ -27,6 +22,8 @@ border: 1px gray solid;
   width: 60px;
   height: 60px;
 }
+
+
 
 /*  */
 
@@ -225,5 +222,9 @@ border: 1px gray solid;
 .page-navi div span {
   color: rgb(148, 148, 32);
   font-size: larger;
+}
+
+.pagination a {
+	cursor:pointer;
 }
 

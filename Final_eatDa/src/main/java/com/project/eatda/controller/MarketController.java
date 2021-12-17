@@ -1,7 +1,7 @@
 package com.project.eatda.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,12 +34,41 @@ public class MarketController {
 		return list;
 	}
 	
-	@RequestMapping(value="/ajaxtest.do", method=RequestMethod.POST)
+	@RequestMapping(value="/paging.do", method=RequestMethod.POST) 
 	@ResponseBody
-	public String ajaxtest(@RequestBody String num) {
-		logger.info("ajaxtest");
-		return num;
+	public List<Integer> paging() {
+		logger.info("paging");
+		
+		int count = marketBiz.paging();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(count);
+		
+		return list;
 	}
+	
+	@RequestMapping(value="/likeProduct-main.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> likeProductList() {
+		logger.info("likeProductList");
+		
+		//임시 유저 아이디
+		String user_dto = "ADMIN";
+		
+		List<ProductDto> list = marketBiz.likeProductList(user_dto);
+		return list;
+	}
+	
+	@RequestMapping(value="/hashTagSearch.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> hashTagSearch(@RequestBody String tagName) {
+		logger.info("hashTagSearch");
+		String hashTag = tagName.substring(0, tagName.length()-1);
+		
+		List<ProductDto> list = marketBiz.hashTagSearch(hashTag);
+		return list;
+	}
+	
+	
 	
 	
 	@RequestMapping("/marketMain.do")
