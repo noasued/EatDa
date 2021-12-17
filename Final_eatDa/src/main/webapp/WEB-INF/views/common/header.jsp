@@ -49,10 +49,10 @@
 	          <li class="nav__logo"><a href="index.do"><img src="resources/images/logo.png"></a></li>
 	          <li class="nav__recipe"><a href="recipeList.do">레시피</a></li>
 
-	          <li class="nav__blog"><a href="#">블로그</a>
+	          <li class="nav__blog"><a href="blog.do">블로그</a>
 	            <ul class="nav-sub">
-	              <li class="nav-sub__blog"><a href="#">블로그</a></li>
-	              <li class="nav-sub__event"><a href="#">이벤트</a></li>
+	              <li class="nav-sub__blog"><a href="blog.do">블로그</a></li>
+	              <li class="nav-sub__event"><a href="event.do">이벤트</a></li>
 	            </ul>
 	          </li>
 	          <li class="nav__subscription"><a href="#">구독신청</a></li>
