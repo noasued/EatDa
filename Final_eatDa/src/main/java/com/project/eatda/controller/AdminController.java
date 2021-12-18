@@ -57,6 +57,14 @@ public class AdminController {
         System.out.println("adminReport");
         return "/admin/adminReport";
     }
+	@RequestMapping("/adminProductInsert.do")
+    public String adminProductInsert() {
+        System.out.println("adminProductInsert");
+        return "/admin/adminProductInsert";
+    }
+	
+	
+	
 	
 
 }
