@@ -19,11 +19,15 @@ public class MarketDaoImpl implements MarketDao {
 		//1 : 1 - 9
 		//2 : 10- 18
 		//3 : 19- 27
-		ArrayList<String> parameter = new ArrayList<String>();
+		ArrayList<Integer> parameter = new ArrayList<Integer>();
 		List<ProductDto> list = null;
 	
-		parameter.add("P" + (num==1?num:num*9-8));
-		parameter.add("P" + (num==1?num*9:num*9));
+		parameter.add((num==1?num:num*9-8));
+		parameter.add((num==1?num*9:num*9));
+		
+		for (Integer str : parameter) {
+			System.out.println(str);
+		}
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE_MARKET+"productList", parameter);
