@@ -45,8 +45,9 @@
 }
 
 .like-img:hover, .product-title:hover, .product-img:hover, .shop-cart:hover {
-	cursor:pointer;
+  cursor:pointer;
 }
+
 </style>
 
 
@@ -86,7 +87,7 @@ $(document).ready(function() {
 function takeProduct(num) {
 	$('.product-container').html('');
 	let sNum = String(num);
-	
+		
 	$.ajax({
 		url: "product.do",
 		type: "post",
@@ -158,19 +159,35 @@ function takeProduct(num) {
 //페이징 함수
 function pagination() {
 	let paging = 0;
+	$('.pagination').html('');
 	
 	$.ajax({
 		url: "paging.do",
 		type: "post",
 		dataType: "json",
 		success: function(data) {
-			paging = Number(data)/9;
+			paging = Number(data);
+			
+			if (paging%9 == 0) {
+				paging = paging/9;
+			} else {
+				paging = paging/9 + 1;
+			}
+			
+			$('.pagination').append(
+				"<a id='left-paging' onclick='leftPaging()'>&laquo;</a>"
+			);
 			
 			for (var i = 1; i <= paging; i++) {
-				$("#left-paging").after(
-					"<a onclick='movePage(this)' class='active'>"+i+"</a>"
+				$('.pagination').append(
+					"<a id='page" + i + "' onclick='movePage(this)'>"+i+"</a>"
 				);
 			}
+			$('.pagination').children().eq(1).addClass('active');
+			$('.pagination').append(
+				"<a id='right-paging' onclick='rightPaging()''>&raquo;</a>"		
+			);
+			
 		}
 	});
 }
@@ -178,7 +195,13 @@ function pagination() {
 //페이지 이동할 때 함수
 function movePage(object) {
 	let page = Number($(object).text());
+	let pageid = $(object).attr('id');
 	takeProduct(page);
+	
+	console.log($('.active'));
+	$('.active').removeClass('active');
+	document.getElementById(pageid).className += 'active';
+	console.log(document.getElementById(pageid));
 }
 
 let presentPage = Number($('.active').text());
@@ -188,10 +211,9 @@ function leftPaging() {
 	let prevPage = $('.active').prev().text();
 	
 	if (prevPage == '«') {
-		console.log('못감');
 		return;
 	} else {
-		takeProduct(presentPage - 1);
+		takeProduct(prevPage);
 		$('.active').prev().addClass('active');
 		$('.active').eq(1).removeClass('active');
 	}
@@ -201,10 +223,9 @@ function rightPaging() {
 	let nextPage = $('.active').next().text();
 	
 	if (nextPage == '»') {
-		console.log('못감');
 		return;
 	} else {
-		takeProduct(presentPage + 1);
+		takeProduct(nextPage);
 		$('.active').next().addClass('active');
 		$('.active').eq(0).removeClass('active');
 	}
@@ -242,10 +263,7 @@ function goLikeProduct(object) {
 //키워드 검색
 function hashTagSearch(object) {
 	let tagname = $(object).text().substring(1);
-	
-	
 	tagname = tagMatch(tagname);
-	console.log(tagname);
 	
 	$.ajax({
 		url:"hashTagSearch.do",
@@ -253,6 +271,7 @@ function hashTagSearch(object) {
 		data: tagname,
 		success:function(list) {
 			$('.product-container').html('');
+			$('.pagination').html('');
 			let data = list;
 			let idx = 0;
 			let col = 0;
@@ -314,6 +333,11 @@ function hashTagSearch(object) {
 	});
 }
 
+function totalProduct() {
+	takeProduct(1);
+	pagination();
+}
+
 //태그이름 영문이름으로 변경
 function tagMatch(tagName) {
 	switch (tagName) {
@@ -367,7 +391,7 @@ function tagMatch(tagName) {
 		<div class="row">
 			<ul class="keyword-tag" style="margin: 0 auto; width: auto;">
 				<li>
-                    <span onclick="takeProduct(1)" style="color: red;">#키워드검색</span>
+                    <span onclick="totalProduct()" style="color: red;">#키워드검색</span>
                 </li>
 				<li><span onclick="hashTagSearch(this)">#양식</span></li>
 				<li><span onclick="hashTagSearch(this)">#중식</span></li>
@@ -382,14 +406,7 @@ function tagMatch(tagName) {
 
 		<hr id="horizontal">
 
-		<div class="row" style="margin: 5px 0 30px 0">
-			<div class="col-md-3 info-quantity">
-				<span style="margin-left: 30%">총 12개</span>
-			</div>
-			<div class="col-md-6" align="center">
-				<span class="info-title">전체 상품</span>
-			</div>
-		</div>
+		
 
 		<div class="product-container">
 		<!-- 상품 리스트 -->
@@ -400,13 +417,11 @@ function tagMatch(tagName) {
 			<!-- 현재 페이지는 class='active' -->
 			<div class="col-md-12" align="center">
 				<div class="paging-section">
-					<div class="pagination" align="center">
-						<a id="left-paging" onclick="leftPaging()">&laquo;</a> 
-						<a id="right-paging" onclick="rightPaging()">&raquo;</a>
-					</div>
+					<div class="pagination" align="center"></div>
 				</div>
 			</div>
 		</div>
+		
 	</div>
 
 	<div id="footer">

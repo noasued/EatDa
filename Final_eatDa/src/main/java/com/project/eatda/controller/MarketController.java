@@ -31,6 +31,10 @@ public class MarketController {
 		int iNum = Integer.parseInt(num.charAt(0)+"");
 		List<ProductDto> list = marketBiz.takeProductList(iNum);
 		
+		for (ProductDto dto : list) {
+			System.out.println(dto.toString());
+		}
+		
 		return list;
 	}
 	
