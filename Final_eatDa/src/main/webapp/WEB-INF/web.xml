@@ -32,8 +32,6 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
-	<!-- encoding filter -->
-	<!-- filter : 들어오는 요청을 내 입맛에 맞게 가공을 한다. -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

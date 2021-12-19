@@ -147,9 +147,6 @@ hr{
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <a href="page.do">go</a>
   <br><br><br><br><br><br><br>
   <a href="shoppingbag.do">go</a>
   <br><br><br><br><br><br>

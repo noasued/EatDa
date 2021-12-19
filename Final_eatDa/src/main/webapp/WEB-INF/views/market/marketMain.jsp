@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,6 +81,23 @@ $(document).ready(function() {
     
 });
 
+$(function() {
+	$("#search-bar").on("keydown",function(event) {
+		if (event.keyCode == 13) {
+			if (!event.shiftKey) {
+				console.log('keydown');
+				event.preventDefault();
+				searchKeyword();
+			}
+		}
+	});
+});
+
+function searchKeyword() {
+	let keyWord = $('#search-bar').val();
+	hashTagSearch(keyWord);
+}
+
 
 //상품 리스트업 함수
 function takeProduct(num) {
@@ -104,15 +120,16 @@ function takeProduct(num) {
 					$('.product-container').append(
 							"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
 							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
 							"<div class='product-img' align='center'>" +
-							"<img src='"+ value.img_path +"' class='p-img' onclick=''>" +
+							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
 							"</div>" +
 							"<div class='product-desc'>" +
 							"<div class='product-margin'>" +
 							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin'>" +
-							"<span class='product-title' onclick=''>" + value.p_name + "</span><br>" +
+							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
 							"<span class='product-price'>" + value.p_price + "원</span>" +
@@ -126,15 +143,16 @@ function takeProduct(num) {
 				} else {
 					$('.product-col').eq(col).append(
 							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
 							"<div class='product-img' align='center'>" +
-							"<img src='"+ value.img_path +"' class='p-img' onclick=''>" +
+							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
 							"</div>" +
 							"<div class='product-desc'>" +
 							"<div class='product-margin'>" +
 							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin'>" +
-							"<span class='product-title' onclick=''>" + value.p_name + "</span><br>" +
+							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
 							"<span class='product-price'>" + value.p_price + "원</span>" +
@@ -255,20 +273,31 @@ function likeProduct() {
 
 function goLikeProduct(object) {
 	let p_id = $(object).attr('id');
-	//location.href=''+p_id;
+	location.href = 'goProductPage.do?p_id='+p_id;
 }
 </script>
 
 <script type="text/javascript">
 //키워드 검색
 function hashTagSearch(object) {
-	let tagname = $(object).text().substring(1);
-	tagname = tagMatch(tagname);
+	console.log('hashtagSearch');
+	let tagname = '';
+	let href = '';
+	if ($(object).attr('class')=='keyword') {
+		console.log('keyword일 떄 : ' + $(object).attr('class'));
+		tagname = tagMatch($(object).text().substring(1));
+		href = 'hashTagSearch.do';
+	} else {
+		tagname = object;
+		console.log('검색 했을 때 : ' + tagname);
+		href = 'searching.do';
+	}
 	
 	$.ajax({
-		url:"hashTagSearch.do",
+		url: href,
 		type:"post",
-		data: tagname,
+		data: JSON.stringify(tagname),
+		contentType: "application/json; charset=utf-8",
 		success:function(list) {
 			$('.product-container').html('');
 			$('.pagination').html('');
@@ -281,15 +310,16 @@ function hashTagSearch(object) {
 					$('.product-container').append(
 							"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
 							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
 							"<div class='product-img' align='center'>" +
-							"<img src='"+ value.img_path +"' class='p-img' onclick=''>" +
+							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
 							"</div>" +
 							"<div class='product-desc'>" +
 							"<div class='product-margin'>" +
 							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin'>" +
-							"<span class='product-title' onclick=''>" + value.p_name + "</span><br>" +
+							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
 							"<span class='product-price'>" + value.p_price + "원</span>" +
@@ -303,15 +333,16 @@ function hashTagSearch(object) {
 				} else {
 					$('.product-col').eq(col).append(
 							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
 							"<div class='product-img' align='center'>" +
-							"<img src='"+ value.img_path +"' class='p-img' onclick=''>" +
+							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
 							"</div>" +
 							"<div class='product-desc'>" +
 							"<div class='product-margin'>" +
 							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin'>" +
-							"<span class='product-title' onclick=''>" + value.p_name + "</span><br>" +
+							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
 							"<span class='product-price'>" + value.p_price + "원</span>" +
@@ -351,7 +382,20 @@ function tagMatch(tagName) {
 		case '스페인' : return 'spanish';
 	}
 }
+
+function goProductPage(object) {
+	let productId = '';
+	
+	if ($(object).attr('class') == 'p-img') {
+		productId = $(object).parent().siblings('.hidden').text();
+	} else {
+		productId = $(object).parent().parent().siblings('.hidden').text();
+	}
+	location.href = 'goProductPage.do?p_id='+productId;
+}
+
 </script>
+
 
 </head>
 <body>
@@ -393,14 +437,14 @@ function tagMatch(tagName) {
 				<li>
                     <span onclick="totalProduct()" style="color: red;">#키워드검색</span>
                 </li>
-				<li><span onclick="hashTagSearch(this)">#양식</span></li>
-				<li><span onclick="hashTagSearch(this)">#중식</span></li>
-				<li><span onclick="hashTagSearch(this)">#일식</span></li>
-				<li><span onclick="hashTagSearch(this)">#한식</span></li>
-				<li><span onclick="hashTagSearch(this)">#비건</span></li>
-				<li><span onclick="hashTagSearch(this)">#고기만</span></li>
-				<li><span onclick="hashTagSearch(this)">#해산물</span></li>
-				<li><span onclick="hashTagSearch(this)">#스페인</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#양식</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#중식</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#일식</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#한식</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#비건</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#고기만</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#해산물</span></li>
+				<li><span class="keyword" onclick="hashTagSearch(this)">#스페인</span></li>
 			</ul>
 		</div>
 
