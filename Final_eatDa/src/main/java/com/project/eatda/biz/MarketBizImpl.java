@@ -14,7 +14,7 @@ public class MarketBizImpl implements MarketBiz{
 	
 	@Autowired
 	private MarketDao marketDao;
-
+	
 
 	@Override
 	public List<ProductDto> takeProductList(int num) {
@@ -35,5 +35,15 @@ public class MarketBizImpl implements MarketBiz{
 	@Override
 	public List<ProductDto> hashTagSearch(String tagName) {
 		return marketDao.hashTagSearch(tagName);
+	}
+
+	@Override
+	public ProductDto getProduct(String p_id) {
+		return marketDao.getProduct(p_id);
+	}
+
+	@Override
+	public List<ProductDto> searchKeyword(String tagName) {
+		return marketDao.searchKeyword(tagName);
 	}
 }

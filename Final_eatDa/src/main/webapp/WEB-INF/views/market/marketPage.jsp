@@ -367,20 +367,17 @@ em {
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">구매하시는 상품의 수량을
-						선택해주세요.</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+					<h5 class="modal-title" id="exampleModalLabel">구매하시는 상품의 수량을 선택해주세요.</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="product-body">
 						<div class="modal-img-section">
-							<img class="product-img" src="resources/images/market/list.png"
-								alt="상품">
+							<img class="product-img" src="${product.img_path}" alt="상품">
 						</div>
 						<div class="modal-info-section">
 							<div class="modal-info-title">
-								<span>든든한 한우 우거지탕</span>
+								<span>${product.p_name}</span>
 							</div>
 							<div class="modal-info-quantity" align="center">
 								<div>
@@ -391,7 +388,8 @@ em {
 								</div>
 							</div>
 							<div class="modal-info-price" align="center">
-								<span id="price">9000</span> <span>원</span>
+								<span id="price">${product.p_price}</span>
+								<span>원</span>
 							</div>
 						</div>
 					</div>
@@ -399,8 +397,7 @@ em {
 				<div class="modal-footer" align="center">
 					<button type="button" class="btn btn-primary">장바구니에 담기</button>
 					<button type="button" class="btn btn-primary">바로 구매하기</button>
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">쇼핑 계속하기</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">쇼핑 계속하기</button>
 				</div>
 			</div>
 		</div>
@@ -417,20 +414,20 @@ em {
 			<div class="top-left-section">
 				<!-- 이미지 -->
 				<div class="img-wrap" style="height: 100%;">
-					<img id="img" src="resources/images/market/list.png" alt="list">
+					<img id="img" src="${product.img_path}">
 				</div>
 			</div>
 			<div class="top-right-section">
 				<!-- short desc, title -->
 				<div class="div-top-section" style="margin-bottom: 0;">
-					<span class="short-desc">한우 뼈를 그대로 갈아넣었어요~</span><br>
-					<span class="title">소고기 우거지탕</span>
+					<span class="short-desc">${product.p_short_desc}</span><br>
+					<span class="title">${product.p_name}</span>
 				</div>
 
 				<div class="div-top-section" style="margin-top: 10px;">
 					<div class="right-info-title">가격</div>
 					<div class="right-info-desc">
-						<span>14000</span>
+						<span>${product.p_price}원</span>
 					</div>
 				</div>
 
@@ -446,8 +443,7 @@ em {
 				<div class="div-top-section seller-div">
 					<div class="right-info-title">판매자 정보</div>
 					<div class="right-info-desc">
-						<span>판매자 ~~ 입니다. 저희는 항상 아침마다 일찍 일어나서 최상의 재료를 준비해요~ 한우 뼈를
-							그대로 갈아넣어서 그런지 한입 할 때 마다 뼈가 씹히는 기분이 일품이에요 빠끄~</span>
+						<span>${product.seller_desc}</span>
 					</div>
 				</div>
 
@@ -552,20 +548,16 @@ em {
 				<div class="desc-wrap">
 					<!-- 제품 디테일 란 -->
 					<div class="product-desc">
-						<span class="desc-title">종&nbsp;&nbsp;&nbsp;류</span>
-						<span class="desc-info">든든한 국밥</span>
-					</div>
-					<div class="product-desc">
 						<span class="desc-title">용&nbsp;&nbsp;&nbsp;량</span> 
-						<span class="desc-info">600g</span>
+						<span class="desc-info">${product.p_amount}G</span>
 					</div>
 					<div class="product-desc">
 						<span class="desc-title">칼로리</span> 
-						<span class="desc-info">맛있게 먹으면 0칼로리</span>
+						<span class="desc-info">맛있게 먹으면 ${product.p_cal} 칼로리!</span>
 					</div>
 					<div class="product-desc">
 						<span class="desc-title">원산지</span> 
-						<span class="desc-info">우리집</span>
+						<span class="desc-info">국내산</span>
 					</div>
 				</div>
 

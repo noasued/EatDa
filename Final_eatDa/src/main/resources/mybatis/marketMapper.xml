@@ -45,5 +45,14 @@
 		WHERE P_CATEGORY = #{tagName}
 	</select>
 	
+	<select id="getProduct" resultType="productDto" parameterType="string">
+		SELECT * FROM PRODUCT WHERE P_ID = #{p_id}
+	</select>
+	
+	<select id="searchKeyword" resultType="productDto" parameterType="string">
+		SELECT * FROM PRODUCT
+		WHERE P_NAME LIKE #{tagName}
+	</select>
+	
 	
 </mapper>

@@ -64,14 +64,34 @@ public class MarketController {
 	
 	@RequestMapping(value="/hashTagSearch.do", method=RequestMethod.POST)
 	@ResponseBody
-	public List<ProductDto> hashTagSearch(@RequestBody String tagName) {
-		logger.info("hashTagSearch");
-		String hashTag = tagName.substring(0, tagName.length()-1);
+	public List<ProductDto> hashTagSearch(@RequestBody String tagname) {
+		logger.info("hashTagSearch, tagName : " + tagname);
+		String hashTag = tagname.substring(1, tagname.length()-1);
 		
 		List<ProductDto> list = marketBiz.hashTagSearch(hashTag);
 		return list;
 	}
 	
+	@RequestMapping(value="/searching.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> searchKeyword(@RequestBody String tagname) {
+		logger.info("hashTagSearch, tagName : " + tagname);
+		String hashTag = tagname.substring(1, tagname.length()-1);
+		
+		List<ProductDto> list = marketBiz.searchKeyword(hashTag);
+		return list;
+	}
+	
+	
+	
+	@RequestMapping(value="/goProductPage.do", method=RequestMethod.GET)
+	public String goProductPage(Model model, String p_id) {
+		logger.info("goProductPage, p_id : " + p_id);
+		ProductDto dto = marketBiz.getProduct(p_id);
+		model.addAttribute("product",dto);
+		
+		return "/market/marketPage";
+	}
 	
 	
 	

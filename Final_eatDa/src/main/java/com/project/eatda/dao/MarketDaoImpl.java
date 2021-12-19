@@ -74,6 +74,36 @@ public class MarketDaoImpl implements MarketDao {
 		try {
 			list = sqlSession.selectList(NAMESPACE_MARKET+"hashTagSearch", tagName);
 		} catch (Exception e) {
+			System.out.println("hashTagSearch DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public ProductDto getProduct(String p_id) {
+		ProductDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE_MARKET+"getProduct", p_id);
+		} catch (Exception e) {
+			System.out.println("getProduct DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public List<ProductDto> searchKeyword(String tagName) {
+		List<ProductDto> list = null;
+		tagName = "%" + tagName + "%";
+		System.out.println("DAO tagName : " + tagName);
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"searchKeyword", tagName);
+		} catch (Exception e) {
+			System.out.println("searchKeyword DAO ERROR");
 			e.printStackTrace();
 		}
 		return list;
