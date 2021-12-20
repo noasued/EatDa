@@ -302,7 +302,23 @@ em {
 	cursor:pointer;
 }
 </style>
+</head>
+
+<body style="margin: 0; min-width: 1400px;">
+	<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
+	
 <script type="text/javascript">
+	$(document).ready(function() {
+		let originalPrice = $('#price').text();
+		console.log(originalPrice);
+		
+		$('.btn-close').click(function() {
+			$('#quantity').text('1');
+			$('#price').text(originalPrice);
+		});
+	});
 
 	function leftButton(object) {
 		let quantity = Number($(object).siblings('#quantity').text());
@@ -342,11 +358,6 @@ em {
 	}
 
 </script>
-</head>
-<body style="margin: 0; min-width: 1400px;">
-	<div id="header">
-		<%@ include file="../common/header.jsp"%>
-	</div>
 
 	<div class="fixed-Banner">
 		<div class="like-title">내가 찜한 상품</div>
@@ -362,8 +373,7 @@ em {
 
 
 	<!-- modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -402,6 +412,7 @@ em {
 			</div>
 		</div>
 	</div>
+	
 	<!-- paging navi -->
 	<div style="width: 67%; height: 40px; margin: 0 auto; padding: 10px; margin-top: 15px;">
 		<span style="color: rgb(148, 148, 32); font-size: larger;">

@@ -3,6 +3,8 @@ package com.project.eatda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.MarketBiz;
+import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
 
 @Controller
@@ -22,6 +25,9 @@ public class MarketController {
 	
 	@Autowired
 	private MarketBiz marketBiz;
+	
+	//임시 유저 아이디
+	String user_id = "ADMIN";
 	
 	@RequestMapping(value="/product.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -55,10 +61,7 @@ public class MarketController {
 	public List<ProductDto> likeProductList() {
 		logger.info("likeProductList");
 		
-		//임시 유저 아이디
-		String user_dto = "ADMIN";
-		
-		List<ProductDto> list = marketBiz.likeProductList(user_dto);
+		List<ProductDto> list = marketBiz.likeProductList(user_id);
 		return list;
 	}
 	
@@ -69,6 +72,9 @@ public class MarketController {
 		String hashTag = tagname.substring(1, tagname.length()-1);
 		
 		List<ProductDto> list = marketBiz.hashTagSearch(hashTag);
+		System.out.println(list);
+		System.out.println(list == null ? true : false);
+		System.out.println(list.size());
 		return list;
 	}
 	
@@ -79,9 +85,11 @@ public class MarketController {
 		String hashTag = tagname.substring(1, tagname.length()-1);
 		
 		List<ProductDto> list = marketBiz.searchKeyword(hashTag);
+		System.out.println(list);
+		System.out.println(list == null ? true : false);
+		System.out.println(list.size());
 		return list;
 	}
-	
 	
 	
 	@RequestMapping(value="/goProductPage.do", method=RequestMethod.GET)
@@ -93,7 +101,25 @@ public class MarketController {
 		return "/market/marketPage";
 	}
 	
-	
+	@RequestMapping(value="/putShoppingBag.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String putShoppingBag(@RequestBody String data) {
+		//로그인 되어있는 세션에 이미 카트번호가 담겨있음.
+		//장바구니에 해당 상품이 담겨있는지 체크해야함.
+		logger.info("putShoppingBag, data : " + data);
+		String[] sArr = data.split(",");
+		String p_id = sArr[0].substring(9, sArr[0].length()-1);
+		int p_price = Integer.parseInt(sArr[1].substring(11, sArr[1].length()-2));
+		
+		System.out.println("p_id : " + p_id + ", p_price : " + p_price);
+		CartProductDto cpDto = new CartProductDto(user_id,p_id,1,p_price);
+		//세션에서 user_ID 가져와야함 (위 DTO의 첫 번째 파라미터로 넣어줘야 함)
+		
+		int res = marketBiz.putShoppingBag(cpDto);
+		System.out.println("controller.res : "+res); 
+		
+		return res > 0? "true":"false";
+	}
 	
 	@RequestMapping("/marketMain.do")
 	public String goMarketMain(Model model) {

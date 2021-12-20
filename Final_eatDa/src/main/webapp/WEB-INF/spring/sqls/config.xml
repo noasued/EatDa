@@ -8,8 +8,8 @@
   		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
   		<typeAlias type="com.project.eatda.dto.EventDto" alias="eventDto"/>
   		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
+  		<typeAlias type="com.project.eatda.dto.CartProductDto" alias="cartProductDto"/>
   	</typeAliases>
-  	
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>
   		<mapper resource="/mybatis/marketMapper.xml"/>
