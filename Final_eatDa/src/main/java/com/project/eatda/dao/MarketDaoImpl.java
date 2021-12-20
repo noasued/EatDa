@@ -1,11 +1,13 @@
 package com.project.eatda.dao;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
 
 @Repository
@@ -98,7 +100,6 @@ public class MarketDaoImpl implements MarketDao {
 	public List<ProductDto> searchKeyword(String tagName) {
 		List<ProductDto> list = null;
 		tagName = "%" + tagName + "%";
-		System.out.println("DAO tagName : " + tagName);
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE_MARKET+"searchKeyword", tagName);
@@ -108,6 +109,47 @@ public class MarketDaoImpl implements MarketDao {
 		}
 		return list;
 	}
+
+	@Override
+	public int putShoppingBag(CartProductDto cpDto) {
+		int res = 0;
+		
+		try {
+			CartProductDto dto = sqlSession.selectOne(NAMESPACE_MARKET+"isProduct", cpDto);
+			
+			if (dto != null) {
+				res = -1;
+			} else {
+				res = sqlSession.insert(NAMESPACE_MARKET+"putShoppingBag", cpDto);
+			}
+		} catch (Exception e) {
+			System.out.println("putShoppingBag DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }

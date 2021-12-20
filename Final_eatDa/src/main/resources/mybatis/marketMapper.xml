@@ -49,10 +49,19 @@
 		SELECT * FROM PRODUCT WHERE P_ID = #{p_id}
 	</select>
 	
-	<select id="searchKeyword" resultType="productDto" parameterType="string">
+	<select id="searchKeyword" resultType="productDto">
 		SELECT * FROM PRODUCT
 		WHERE P_NAME LIKE #{tagName}
 	</select>
+	
+	<select id="isProduct" parameterType="cartProductDto" resultType="cartProductDto">
+		SELECT * FROM CART_PRODUCT
+		WHERE USER_ID = #{user_id} AND P_ID = #{p_id}
+	</select>
+	
+	<insert id="putShoppingBag" parameterType="cartProductDto">
+		INSERT INTO CART_PRODUCT VALUES(#{user_id},#{p_id},#{cart_count},#{cart_price})
+	</insert>
 	
 	
 </mapper>

@@ -1,8 +1,8 @@
 package com.project.eatda.dao;
 
 import java.util.List;
-import java.util.Map;
 
+import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
 
 public interface MarketDao {
@@ -14,5 +14,6 @@ public interface MarketDao {
 	public List<ProductDto> hashTagSearch(String tagName);
 	public List<ProductDto> searchKeyword(String tagName);
 	public ProductDto getProduct(String p_id);
+	public int putShoppingBag(CartProductDto cpDto);
 
 }
