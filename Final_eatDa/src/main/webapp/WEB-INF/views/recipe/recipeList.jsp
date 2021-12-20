@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,162 +7,254 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
-.container{
-	margin-top : 3%;
-	margin-bottom: 3%;
+.body {
+	margin-left: 19%
 }
-.category, .search, .paging{
+
+.rec_list>img {
+	width: 200px;
+	height: 200px;
+}
+
+.img_wrap {
+	position: absolute;
+}
+
+.rec_title {
+	position: relative;
+	top: 165px;
+	left: 55px;
+}
+
+.rec_title p {
+	font-weight: bolder;
+	color: white;
+}
+
+.bg_img {
+	position: relative;
+	top: 150px;
+	left: 0px;
+}
+
+.bg_img>img {
+	width: 200px;
+	height: 50px;
+}
+
+.container {
+	
+}
+
+.container, .rec_logo {
+	margin: 2% 0;
+}
+
+.rec_button input {
+	background-color: #fdd300;
+	color: black;
+	font-weight: bolder;
+}
+
+.paging, .rec_logo {
 	display: flex;
 	justify-content: center;
 }
-.category{
-	--bs-breadcrumb-divider: '|';
-}
-.search input{
-	width:400px;
-	height: 40px;
-	text-align: right;
-}
-.writeBtn{
-	margin: 2% 0 2% 80%;
-}
-ul, li{
-	list-style: none;
-}
-a{
-	text-decoration: none;
-	color: inherit;
-}
-.list_wrap ul{
-	font-size: 0;
-}
-.list_wrap .item{
-	display: inline-block;
-	width: 25%; 
-	margin-top:40px;
-	margin-left: 5%;
-}
-.list_wrap .item:ntn-child(-n+3){
-	margin-top:0;
-}
-.list_wrap .item:ntn-child(3n-2){
-	margin-left: 0;
-}
-.list_wrap .item .image{
-	width :300px;
-	height: 160px;
-	
-}
-.list_wrap .item1 .image{background: url(resources/images/recipe/eggroll.jpeg);}
-.list_wrap .item2 .image{background: url(resources/images/recipe/eggroll.jpeg);}
-.list_wrap .item3 .image{background: url(resources/images/recipe/eggroll.jpeg);}
-.list_wrap .item4 .image{background: url(resources/images/recipe/kimchirice.jpg);}
-.list_wrap .item5 .image{background: url(resources/images/recipe/kimchirice.jpg);}
-.list_wrap .item6 .image{background: url(resources/images/recipe/kimchirice.jpg);}
-.list_wrap .item7 .image{background: url(resources/images/recipe/ppaseu.jpeg);}
-.list_wrap .item8 .image{background: url(resources/images/recipe/ppaseu.jpeg);}
-.list_wrap .item9 .image{background: url(resources/images/recipe/ppaseu.jpeg);}
 
-.list_wrap .item strong{
-    display: block;
-    margin-top:130px;
-    margin-right:10px;
-    text-align: right;
-    font-size: 16px;
-    letter-spacing: -1px;
-    
+.writeBtn {
+	margin: 2% 0 2% 70%;
 }
-.rec_button input{
-	background-color: #fdd300;
-	color:  black;
-	font-weight: bolder;
-}
-.bottom{
-	margin-top:5%;
-	
-}
-.writeBtn{
+
+.writeBtn {
 	width: 100px;
 }
 </style>
 </head>
 <body>
-    <div id="header">
+	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
-	<div class="container">
-		<div class="search">
-			<input type="text" id="keyword" placeholder="요리명으로 검색해보세요🔎"><br>	
+	<div class="rec_logo">
+		<img src="resources/images/recipe/recipeLogo.png">
+	</div>
+
+	<div class="body">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-3">
+					<a href="recipeDetail.do">
+						<div class="rec_list">
+							<div class="img_wrap">
+								<div class="bg_img">
+									<img src="resources/images/recipe/main_prod_bg.png"></img>
+								</div>
+							</div>
+							<div class="img_wrap">
+								<div class="rec_title">
+									<p>고구마빠스!!!!</p>
+								</div>
+							</div>
+							<img src="resources/images/recipe/ppaseu.png"></img>
+						</div>
+					</a>
+				</div>
+			</div>
+
 		</div>
-		<br>
-		<div class="category" aria-label="breadcrumb">
-	        <ol class="breadcrumb">
-	          <li class="breadcrumb-item b"><a href="#">한식</a></li>
-	          <li class="breadcrumb-item b"><a href="#">일식</a></li>
-	          <li class="breadcrumb-item b"><a href="#">양식</a></li>
-	          <li class="breadcrumb-item b"><a href="#">중식</a></li>
-	          <li class="breadcrumb-item b"><a href="#">브런치</a></li>
-	          <li class="breadcrumb-item b"><a href="#">야식</a></li>
-	        </ol>
-		</div>
-		
-		<div class="list_wrap">
-			<ul>
-				<li class="item item1">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>계란찜</strong></div>
-					</a>
-				</li>
-				<li class="item item2">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>계란찜</strong></div>
-					</a>
-				</li>
-				<li class="item item3">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>계란찜</strong></div>
-					</a>
-				</li>
-				<li class="item item4">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>김치볶음밥</strong></div>
-					</a>
-				</li>
-				<li class="item item5">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>김치볶음밥</strong></div>
-					</a>
-				</li>
-				<li class="item item6">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>김치볶음밥</strong></div>
-					</a>
-				</li>
-				<li class="item item7">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>빠스</strong></div>
-					</a>
-				</li>
-				<li class="item item8">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>빠스</strong></div>
-					</a>
-				</li>
-				<li class="item item9">
-					<a href="recipeDetail.do">
-						<div class="image">사진<strong>빠스</strong></div>
-					</a>
-				</li>
-			</ul>
-		</div>
+	</div>
+	<div class="bottom">
 		<div class="rec_button">
-			<input class="writeBtn" type="button" value="글쓰기" onclick="location.href='recipeWriteForm.do'">
+			<input class="writeBtn" type="button" value="글쓰기"
+				onclick="location.href='recipeWriteForm.do'">
 		</div>
 		<div class="paging">
 			<p>◀ 1 2 3 4 5 ▶</p>
 		</div>
 	</div>
-    <div id="footer">
+
+	<div id="footer">
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 </body>

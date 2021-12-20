@@ -2,22 +2,31 @@ package com.project.eatda.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.project.eatda.biz.EventBiz;
 
 @Controller
 public class EventController {
-	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+	private Logger logger = LoggerFactory.getLogger(EventController.class);
+	
+	@Autowired
+	private EventBiz biz;
 	
 	@RequestMapping("/event.do")
-	public String eventMain() {
-		System.out.println("event-main page");
+	public String list(Model model) {
+		logger.info("Event list page");
+		model.addAttribute("list", biz.eventList());
 		return "/event/event-main";
 	}
 	
 	@RequestMapping("/event-detail.do")
-	public String eventDetail() {
-		System.out.println("event-detail page");
+	public String detail(Model model, int event_no) {
+		logger.info("event-detail page");
+		model.addAttribute("dto", biz.selectOne(event_no));
 		return "/event/event-detail";
 	}
 	

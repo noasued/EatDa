@@ -54,8 +54,8 @@
     }
 
     .input-form {
-      width: 1200px;
-      height : 1000px;
+      width: 400px;
+      height : 800px;
 
       margin-top: 80px;
       padding: 32px;
@@ -68,21 +68,14 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
-    .open_btn{
-      background-color: transparent;
-      border: none;
-      color:rgb(28, 118, 179);
-      font-size: 10pt; 
-      margin-left: 15%;
-      margin-top: 2%;
-    }
     #modal_btn{
     	padding-left:20%;
+    	font-size:10pt;
     }
     .modal_wrap{
         display: none;
         width: 100%;
-        height: 500px;
+        height: 200px;
         position: absolute;
         top:100%;
         left: 100%;
@@ -93,8 +86,8 @@
         display: none;
         position: absolute;
         content: "";
-        width: 100%;
-        height: 100%;
+        width: 80%;
+        height: 50%;
         background-color:rgba(0, 0,0, 0.5);
         top:0;
         left: 0;
@@ -118,25 +111,18 @@
     	font-size:15pt;
     	font-weight: bold;
     }
-    #modal_btn{
-    	font-size:15pt;
-    }
-	button{
-		font-size:30pt;
-	}
 	#chk_nm{
 		font-size:18pt;
 		font-weight: bold;
 	}
 	#label_btn{
-		font-weight : bold;
-		font-size: 19pt;
+		font-size: 15pt;
 		vertical-align:-1px;
 		cursor : pointer;
 	}
 	.s_form_btn{
 		margin-left: 10%;
-		font-size:19px; 
+		font-size:10px; 
 		width:25px;
 		height:25px; 
 		vertical-align:text-top;
@@ -149,10 +135,10 @@
   <div class="container" style="padding-left:5%;">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
-        <h2 class="mb-5" style="margin-top:3%; font-size:35pt; font-weight:bold; text-align:center;">구독 신청서</h2><br>
+        
         <form class="validation-form" style="padding-left:2%;" novalidate>
             <div class="col-md-6 mb-5">
-              <label for="sub_type" style="font-weight: bold; font-size: 25pt; color:rgb(70, 70, 70);">구독 유형</label><br>  
+              <label for="sub_type" style="font-weight: bold; font-size: 20pt; color:rgb(70, 70, 70);">구독 유형</label><br><br>  
                         
               <div class="sub_form_select">  
               
@@ -186,17 +172,18 @@
         <br>
           
           <div class="col-md-6 mb-5">
-            <label for="address2"><span style="font-weight: bold; font-size: 25pt; color:rgb(70, 70, 70);">남기는 메세지</span><span class="text-muted" style="font-size:20pt;">&nbsp;(선택 입력)</span></label>
+            <label for="address2"><span style="font-weight: bold; font-size: 20pt; color:rgb(70, 70, 70);">남기는 메세지</span><span class="text-muted" style="font-size:15pt;">&nbsp;(선택 입력)</span></label>
             <br>
             <textarea rows="5" cols="120" id="vertical" style="white-space: pre-line; margin-top: 3%;" 
             placeholder="못먹는 음식 또는 음식 알러지 등에 대해 작성해주세요.
             예시) 저는 오이를 싫어합니다. 오이가 들어가있지 않은 밀키트로 배송해주세요."></textarea>
           </div>
           <div class="mb-4"></div>
-          <button class="btn btn-warning btn-lg btn-block" type="submit" onclick="" style="font-size:30pt;">구독 신청</button>
-          <button class="btn btn-secondary btn-md btn-block" type="button" onclick="history.back();" style="font-size:25pt;">취 소</button>
+          <button class="btn btn-warning btn-lg btn-block" type="submit" onclick="" style="font-size:20pt;">구독 신청</button>
+          <button class="btn btn-secondary btn-md btn-block" type="button" onclick="history.back();" style="font-size:15pt;">취 소</button>
         </form>
       </div>
+
     </div>
   </div>
   <script>
