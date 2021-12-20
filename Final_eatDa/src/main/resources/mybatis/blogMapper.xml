@@ -20,4 +20,11 @@
 		FROM BLOG 
 		ORDER BY BLOG_NO DESC
 	</select>
+	
+	<select id="blogDetail" resultType="blogDto" parameterType="int">
+		SELECT BLOG_NO, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
+		FROM BLOG
+		WHERE BLOG_NO = #{blog_no}
+	</select>
+	
 </mapper>

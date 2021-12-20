@@ -27,4 +27,17 @@ public class BlogDaoImpl implements BlogDao{
 		return list;
 	}
 	
+	@Override
+	public BlogDto selectOne(int blog_no) {
+		BlogDto dto = null;
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"blogDetail",blog_no);
+		} catch (Exception e) {
+			System.out.println("[error] : select one");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+	
 }

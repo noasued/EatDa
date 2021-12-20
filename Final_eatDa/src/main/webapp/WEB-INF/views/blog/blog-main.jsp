@@ -85,7 +85,7 @@
 	      		</c:when>
 	      		<c:otherwise>
 	      			<c:forEach items="${list}" var="dto">
-				        <li><a href="blog-detail.do">
+				        <li><a href="blog-detail.do?blog_no=${dto.blog_no}">
 				          <div class="blog-article__list-title">
 				            <h3>${dto.blog_title}</h3>
 				            <i class="fas fa-heart"></i>
