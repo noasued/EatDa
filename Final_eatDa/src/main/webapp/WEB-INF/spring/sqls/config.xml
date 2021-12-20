@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
   	<typeAliases>
-  		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   		<typeAlias type="com.project.eatda.dto.UserDto" alias="userDto"/>
   		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
   		<typeAlias type="com.project.eatda.dto.EventDto" alias="eventDto"/>
+  		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   	</typeAliases>
   	
   	<mappers>

@@ -14,17 +14,36 @@ public class MarketBizImpl implements MarketBiz{
 	
 	@Autowired
 	private MarketDao marketDao;
-
-	@Override
-	public List<ProductDto> getProductList() {
-		List<ProductDto> list = marketDao.getProductList();
-		return list;
-	}
+	
 
 	@Override
 	public List<ProductDto> takeProductList(int num) {
-		List<ProductDto> list = marketDao.takeProductList(num);
-		
-		return list;
+		return marketDao.takeProductList(num);
+	}
+
+	@Override
+	public int paging() {
+		return marketDao.paging();
+	}
+
+	@Override
+	public List<ProductDto> likeProductList(String user_id) {
+		return marketDao.likeProductList(user_id);
+	}
+
+
+	@Override
+	public List<ProductDto> hashTagSearch(String tagName) {
+		return marketDao.hashTagSearch(tagName);
+	}
+
+	@Override
+	public ProductDto getProduct(String p_id) {
+		return marketDao.getProduct(p_id);
+	}
+
+	@Override
+	public List<ProductDto> searchKeyword(String tagName) {
+		return marketDao.searchKeyword(tagName);
 	}
 }

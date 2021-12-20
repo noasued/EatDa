@@ -1,7 +1,7 @@
 package com.project.eatda.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,15 +31,68 @@ public class MarketController {
 		int iNum = Integer.parseInt(num.charAt(0)+"");
 		List<ProductDto> list = marketBiz.takeProductList(iNum);
 		
+		for (ProductDto dto : list) {
+			System.out.println(dto.toString());
+		}
+		
 		return list;
 	}
 	
-	@RequestMapping(value="/ajaxtest.do", method=RequestMethod.POST)
+	@RequestMapping(value="/paging.do", method=RequestMethod.POST) 
 	@ResponseBody
-	public String ajaxtest(@RequestBody String num) {
-		logger.info("ajaxtest");
-		return num;
+	public List<Integer> paging() {
+		logger.info("paging");
+		
+		int count = marketBiz.paging();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(count);
+		
+		return list;
 	}
+	
+	@RequestMapping(value="/likeProduct-main.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> likeProductList() {
+		logger.info("likeProductList");
+		
+		//임시 유저 아이디
+		String user_dto = "ADMIN";
+		
+		List<ProductDto> list = marketBiz.likeProductList(user_dto);
+		return list;
+	}
+	
+	@RequestMapping(value="/hashTagSearch.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> hashTagSearch(@RequestBody String tagname) {
+		logger.info("hashTagSearch, tagName : " + tagname);
+		String hashTag = tagname.substring(1, tagname.length()-1);
+		
+		List<ProductDto> list = marketBiz.hashTagSearch(hashTag);
+		return list;
+	}
+	
+	@RequestMapping(value="/searching.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> searchKeyword(@RequestBody String tagname) {
+		logger.info("hashTagSearch, tagName : " + tagname);
+		String hashTag = tagname.substring(1, tagname.length()-1);
+		
+		List<ProductDto> list = marketBiz.searchKeyword(hashTag);
+		return list;
+	}
+	
+	
+	
+	@RequestMapping(value="/goProductPage.do", method=RequestMethod.GET)
+	public String goProductPage(Model model, String p_id) {
+		logger.info("goProductPage, p_id : " + p_id);
+		ProductDto dto = marketBiz.getProduct(p_id);
+		model.addAttribute("product",dto);
+		
+		return "/market/marketPage";
+	}
+	
 	
 	
 	@RequestMapping("/marketMain.do")

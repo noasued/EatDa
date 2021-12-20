@@ -284,6 +284,10 @@
 	//선택삭제 메서드
 	function choiceDelete() {
 		if(confirm('선택하신 상품을 장바구니에서 제거 하시겠습니까?')) {
+			if($('input:checkbox[name="checkbox"]:checked').length == 0) {
+				alert('선택하신 상품이 없습니다.');
+				return;
+			}
 			$('input:checkbox[name="checkbox"]').each(function() {
 				if (this.checked==true) {
 					console.log($(this).parents('.start-row'));
