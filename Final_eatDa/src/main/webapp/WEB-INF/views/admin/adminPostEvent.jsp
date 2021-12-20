@@ -13,33 +13,46 @@
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <style>
-			input{
+			button{
 				float:right;
+				border : none;
+				margin-right:1%;
+				width:80px;
+				height:30px;
+			}
+			.adm_insert{
+				float:right;
+				border : none;
+				margin-right:1%;
+				width:80px;
+				height:30px;
 			}
 		</style>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand ps-3" href="index.jsp">eat_Da</a>
+        <nav class="sb-topnav navbar navbar-expand navbar-dark alert-warning justify-content-between">
+            <a class="navbar-brand ps-3" href="index.jsp"><img src="resources/images/logo.png" style="width: 50%; height:30%; float:left;"></a>
             
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
+            <div>
+	            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars" style="color:black;"></i></button>
+	            
+	            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+	                <li class="nav-item dropdown">
+	                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black;"><i class="fas fa-user fa-fw" style="color:black;"></i></a>
+	                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+	                        <li><a class="dropdown-item" href="#!">LogOut</a></li>
+	                    </ul>
+	                </li>
+	            </ul>
+            </div>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion bg-secondary" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion alert-warning" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav" style="text-align: center;">
                             <div class="sb-sidenav-menu-heading">
-                                <img src="assets/img/profile_admin.png" style="width: 60%; height: 60%;">
+                                <img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;">
                                 <br>
                                 <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
                             </div>
@@ -120,8 +133,9 @@
                                         </tr>
                                     </tbody>
                                     <tr>
-                                        <td colspan="5">
-                                            <input type="button" onclick="" value="삭 제">
+                                        <td colspan="7">	
+                                        	<a class="adm_insert" href="#" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
+	                                        <button type="button" onclick="" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>

@@ -102,7 +102,9 @@
     #modal_btn{
     	font-size:15pt;
     }
-            
+    p{
+    	font-size :10pt;
+    }
             
         </style>
     </head>
@@ -143,40 +145,19 @@
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
-                  
-                    <div class="col-lg-4 mb-5 mb-lg-0">
+			
+					 <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
                         <h2 class="h4 fw-bolder">"구독"이란 무엇인가요?</h2><br>
                         <p>간단하게 끼니를 해결하고 싶으신 분들을 위해 준비했습니다.<br>장보러 가지 않고 집에서 간편하게 받아 드실 수 있도록<br>"eatDa"가 준비했습니다!</p><br>
                         
-                        <div class="sub_main_modal">
-	                        <button type="button" name="modal_btn" class="btn">더 알아보기&nbsp;<i class="bi bi-arrow-right"></i></button>
-	                        <div class="black_bg"></div>
-	                            <div class="modal_wrap">
-	                                <div class="modal-content">
-	                                   <div class="modal_close"><a href="#">close</a></div>
-	                                        <p><span id="m_title">구독이란?</span><br>구독이란,<br>일 주일마다 한 번씩 ~<br> 밀키트가 제공됩니다.</p>
-	                                </div>
-	                            </div>
-						</div>
 	                </div>
-
                     
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-heart-fill"></i></div>
                         <h2 class="h4 fw-bolder">"구독"하면 무엇이 좋은가요?</h2><br>
                         <p>구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.<br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.</p><br>
-                        
-                        <div class="sub_main_modal">
-	                        <button type="button" name="modal_btn" class="btn">더 알아보기&nbsp;<i class="bi bi-arrow-right"></i></button>
-	                        <div class="black_bg"></div>
-	                            <div class="modal_wrap">
-	                                <div class="modal-content">
-	                                   <div class="modal_close"><a href="#">close</a></div>
-	                                        <p><span id="m_title">구독하면 좋은 점</span><br>첫 번째 장점👍<br>구독 신청 시, 밀키트 할인 쿠폰이 제공됩니다.</p>
-	                                </div>
-	                            </div>
-						</div>
+                     
 	                </div>
                    
                     <div class="col-lg-4 mb-5 mb-lg-0">
@@ -184,20 +165,46 @@
                         <h2 class="h4 fw-bolder">F A Q</h2><br>
                         <p>구독에 대해 아직도 잘 모르시겠다면?<br>자주 묻는 질문을 통해 궁금한 점을 해결해보세요 :)<br>구독 신청을 하기 전에 주의할 사항도 함께 확인해주세요.</p><br>
                         
-                        <div class="sub_main_modal"> 
-	                        <button type="button" name="modal_btn" class="btn">더 알아보기&nbsp;<i class="bi bi-arrow-right"></i></button>
-	                        <div class="black_bg"></div>
-	                            <div class="modal_wrap">
-	                                <div class="modal-content">
-	                                   <div class="modal_close"><a href="#">close</a></div>
-	                                        <p><span id="m_title">F A Q</span><br>자주 묻는 질문 1)<br>구독 신청 시, 밀키트 할인 쿠폰이 제공됩니다.</p>
-	                                </div>
-	                            </div>
-						</div>
+					</div>
+					
+					<div class="accordion" id="accordionExample">
+						
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingOne">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">더 알아보기</button>
+						    </h2>
+						    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+						      <div class="accordion-body">
+						        <strong>"구독"이란? </strong><br>이러이런 점이 좋습니다. <code>서비스!!</code>아주 좋아요.
+						      </div>
+						    </div>
+						  </div>
+						  
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingTwo">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">더 알아보기</button>
+						    </h2>
+						    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+						      <div class="accordion-body">
+						        <strong>구독하면 좋은 점</strong><br>첫 번째,~<br>두 번째,~<br>세 번째,<code>이런 장점</code>이 있습니다.
+						      </div>
+						    </div>
+						 </div>
+						 <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingThree">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">더 알아보기</button>
+						    </h2>
+						    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+						      <div class="accordion-body">
+						        <strong>자주 묻는 질문</strong><br>1) ~~<br>2) ~~<br>3)~~
+						    </div>
+						  </div>
+						</div> 
+						 </div> 
+					
                     </div>
-
                 </div>
-            </div>
+
         </section>
         
         <section class="bg-light py-5 border-bottom" id="compare">
@@ -445,8 +452,10 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script>
 		  var modals = document.getElementsByClassName("modal_wrap");
-		  var btns = document.getElementsByClassName("btn");
-		
+		  var btns = document.getElementById("modal_btn");
+		  console.log(btns);
+		  var btnss= document.getElementsByClassName("btn");
+		  console.log(btnss);
 		  var divs = document.getElementsByClassName("modal_close");
 		  var funcs = [];
 		  
