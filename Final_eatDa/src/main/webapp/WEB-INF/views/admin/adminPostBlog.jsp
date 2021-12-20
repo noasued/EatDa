@@ -12,6 +12,19 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        function selectAll(selectAll)  {
+        	  const checkboxes 
+        	       = document.getElementsByName('chkBtn');
+        	  
+        	  checkboxes.forEach((checkbox) => {
+        	    checkbox.checked = selectAll.checked;
+        	  })
+        	}
+        </script>
+        
         <style>
 			button{
 				float:right;
@@ -105,8 +118,9 @@
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="80px"><col width="100px"><col width="40%"><col width="40%">
                                     <thead>
+                                    	<tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th>NO</th>
                                             <th>I D</th>
                                             <th>제 목</th>
@@ -115,16 +129,18 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>13</td>
                                             <td>OksusuS2</td>
-                                            <td>블로그 제목을 입력</td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">블로그 제목을 입력</a></td>
                                             <td>: )</td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="5">
                                             <button type="button" onclick="" value="delete">삭 제</button>
+                                        	<button type="button" onclick="" value="allChk" style="background-color:rgb(150, 150, 150);">전체 선택</button>
                                         </td>
                                     </tr>                                   
                                 </table>

@@ -12,6 +12,19 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        function selectAll(selectAll)  {
+        	  const checkboxes 
+        	       = document.getElementsByName('chkBtn');
+        	  
+        	  checkboxes.forEach((checkbox) => {
+        	    checkbox.checked = selectAll.checked;
+        	  })
+        	}
+        </script>
+        
         <style>
 			button{
 				float:right;
@@ -109,49 +122,51 @@
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="60%"><col width="30%">
                                     <thead>
+                                    <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th>상품 이미지</th>
                                             <th>상품명</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
-                                            <td><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></td>
-                                            <td>즉석 떡볶이(2인분)</td>
+                                            <td valign="middle"><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td><a href="#"><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
+                                            <td valign="middle">즉석 떡볶이(2인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P2.jpg" style="width: 20%; height: 20%;"></a></td>
                                             <td>오뎅식당 X 부대찌개</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P3.jpg" style="width: 20%; height: 20%;"></a></td>
                                             <td>샤브샤브 (2인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P4.jpg" style="width: 20%; height: 20%;"></a></td>
                                             <td>제육볶음(3팩)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P5.jpg" style="width: 20%; height: 20%;"></a></td>
                                             <td>덮밥 (1인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
                                             <td>즉석 떡볶이(2인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
                                             <td>즉석 떡볶이(2인분)</td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="7">
                                             <a class="adm_insert" href="adminProductInsert.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>

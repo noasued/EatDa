@@ -13,6 +13,19 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        function selectAll(selectAll)  {
+        	  const checkboxes 
+        	       = document.getElementsByName('chkBtn');
+        	  
+        	  checkboxes.forEach((checkbox) => {
+        	    checkbox.checked = selectAll.checked;
+        	  })
+        	}
+        </script>
+        
 		<style>
 			button{
 				float:right;
@@ -20,6 +33,9 @@
 				margin-right:1%;
 				width:80px;
 				height:30px;
+			}
+			a{
+				text-decoration:none;
 			}
 		</style>
     </head>
@@ -103,8 +119,9 @@
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="100px"><col width="40%"><col width="40%"><col width="200px">
                                     <thead>
+                                    <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th>I  D</th>
                                             <th>게시글 제목</th>
                                             <th>댓 글</th>
@@ -120,83 +137,84 @@
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 1</a></td>
+                                            <td><a href="">a</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 2</a></td>
+                                            <td><a href="">b</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 3</a></td>
+                                            <td><a href="">c</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 4</a></td>
+                                            <td><a href="">d</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 5</a></td>
+                                            <td><a href="">e</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 6</a></td>
+                                            <td><a href="">f</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 7</a></td>
+                                            <td><a href="">g</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 8</a></td>
+                                            <td><a href="">h</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 9</td>
+                                            <td><a href="">i</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 10</a></td>
+                                            <td><a href="">j</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td><a href="">콘치즈 맛있다</a></td>
-                                            <td><a href="">정말인가요</a></td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 11</a></td>
+                                            <td><a href="">k</a></td>
                                             <td>2021.12.03</td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="5">
                                             <button type="button" onclick="" value="delete">삭 제</button>
