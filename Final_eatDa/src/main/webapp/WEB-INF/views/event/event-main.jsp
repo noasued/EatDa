@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,125 +71,30 @@ body{
       </div>
 
       <!-- event list -->
-      
       <div class="event-article__listbox">
         <ul class="event-article__list">
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>12월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>12월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>11월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>11월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>10월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>10월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>9월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>9월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>8월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>8월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>7월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>7월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>6월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>6월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>5월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>5월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="event-article__list-img">
-              <img src="resources/images/event-list.png">
-              <figcaption>
-                <p>4월 구독 할인 이벤트를 진행합니다.</p>
-                <div class="event-article__list-title">
-                  <h3><span>4월</span> eat다 이벤트</h3>
-                </div>
-              </figcaption>
-              <a href="event-detail.do"></a>
-            </figure>
-          </li>
+        
+        	<c:choose>
+        		<c:when test="${empty list}">
+          		<li>----------- 작성된 글이 없습니다. -----------</li>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto">
+			          <li>
+			            <figure class="event-article__list-img">
+			              <img src="resources/images/event-list.png">
+			              <figcaption>
+			                <p>${dto.event_content}</p>
+			                <div class="event-article__list-title">
+			                  <h3><span>${dto.event_title}</span> eat다 이벤트</h3>
+			                </div>
+			              </figcaption>
+			              <a href="event-detail.do"></a>
+			            </figure>
+			          </li>
+		          </c:forEach>
+	          </c:otherwise>
+					</c:choose>
 
         </ul>
 
