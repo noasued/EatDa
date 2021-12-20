@@ -1,4 +1,4 @@
-package com.project.eatda.biz;
+package com.project.eatda.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +26,16 @@ public class EventDaoImpl implements EventDao{
 		}
 		return list;
 	}
-
+	
+	@Override
+	public EventDto selectOne(int event_no) {
+		EventDto dto = null;
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"eventDetail", event_no);
+		} catch (Exception e) {
+			System.out.println("[error] : event detail");
+			e.printStackTrace();
+		}
+		return dto;
+	}
 }

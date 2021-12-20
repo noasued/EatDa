@@ -89,7 +89,7 @@ body{
 			                  <h3><span>${dto.event_title}</span> eat다 이벤트</h3>
 			                </div>
 			              </figcaption>
-			              <a href="event-detail.do"></a>
+			              <a href="event-detail.do?event_no=${dto.event_no}"></a>
 			            </figure>
 			          </li>
 		          </c:forEach>

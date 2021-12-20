@@ -17,4 +17,10 @@
 		FROM EVENT 
 		ORDER BY EVENT_NO DESC
 	</select>
+	
+	<select id="eventDetail" resultType="eventDto" parameterType="int">
+		SELECT EVENT_TITLE, EVENT_CONTENT, EVENT_IMG, REGDATE
+		FROM EVENT
+		WHERE EVENT_NO = #{event_no}
+	</select>
 </mapper>

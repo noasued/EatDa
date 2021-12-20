@@ -33,7 +33,7 @@ public class BlogDaoImpl implements BlogDao{
 		try {
 			dto = sqlSession.selectOne(NAMESPACE+"blogDetail",blog_no);
 		} catch (Exception e) {
-			System.out.println("[error] : select one");
+			System.out.println("[error] : blog detail");
 			e.printStackTrace();
 		}
 		
