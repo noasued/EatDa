@@ -142,6 +142,7 @@
 
 </head>
 <body>
+<body>
 	<div id="header">
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>

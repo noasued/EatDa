@@ -28,7 +28,7 @@
 		
 		.blog-write__top-txt{
 		  color:white;
-		  opacity: 0.6;
+		  opacity: 0.4;
 		  display: table-cell;
 		  vertical-align: bottom;
 		}
@@ -40,7 +40,7 @@
 		  font-weight: 700;
 		  font-size:120px;
 		  height:100px;
-		  line-height: 109px;
+		  line-height: 90px;
 		}
 		
 		.blog-write__top-txt h2{

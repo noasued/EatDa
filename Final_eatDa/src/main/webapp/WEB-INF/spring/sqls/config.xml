@@ -4,9 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
   	<typeAliases>
+  		<typeAlias type="com.project.eatda.dto.UserDto" alias="userDto"/>
+  		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   	</typeAliases>
   	
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>
+  		<mapper resource="/mybatis/marketMapper.xml"/>
   	</mappers>
   </configuration>

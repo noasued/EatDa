@@ -14,16 +14,98 @@
         <link href="resources/subscription/css/subscription_styles.css" rel="stylesheet" />
         <style>
             .tiledBackground{
-                background-image: url(resources/subscription/assets/image/kitchen2.png);
-                background-size: 1700px 400px;
-                width: 1600px;
-                height: 400px;
+                background-image: url(resources/subscription/assets/image/kitchen1.jpg);
+                background-size: 1200px 600px;
+                width: 100%;
+                height: 490px;
             }
+            
             button{
                 border: none;
                 background-color: transparent;
                 color: blue;
             }
+            
+            
+    .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 50% auto;
+            padding: 5%;
+            border: 1px solid #888;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,.close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }  
+
+    #modal_btn{
+    	font-size:15pt;
+    }
+    .modal_wrap{
+        display: none;
+        width: 50%;
+        height: 100px;
+        position: absolute;
+        top:50%;
+        left: 40%;
+        margin: -250px 0 0 -250px;
+        z-index: 2;
+    }
+    .black_bg{
+        display: none;
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color:rgba(0, 0,0, 0.5);
+        top:100%;
+        left: 100%;
+        z-index: 1;
+    }
+    .modal_close{
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: -30px;
+        right: 0;
+    }
+    .modal_close> a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
+        text-indent: -9999px;
+    }
+    #m_title{
+    	font-size:15pt;
+    	font-weight: bold;
+    }
+    #modal_btn{
+    	font-size:15pt;
+    }
+    p{
+    	font-size :10pt;
+    }
+            
         </style>
     </head>
     <body>
@@ -63,53 +145,68 @@
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
+			
+					 <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
                         <h2 class="h4 fw-bolder">"구독"이란 무엇인가요?</h2><br>
-                        <p style="font-size: 10pt;">간단하게 끼니를 해결하고 싶으신 분들을 위해 준비했습니다.<br>장보러 가지 않고 집에서 간편하게 받아 드실 수 있도록<br>"eatDa"가 준비했습니다!</p><br>
-                        <button type="button" data-toggle="modal" data-target="#myModal">
-                            더 알아보기&nbsp;<i class="bi bi-arrow-right"></i>
-                        </button>
-                    </div>
+                        <p>간단하게 끼니를 해결하고 싶으신 분들을 위해 준비했습니다.<br>장보러 가지 않고 집에서 간편하게 받아 드실 수 있도록<br>"eatDa"가 준비했습니다!</p><br>
+                        
+	                </div>
+                    
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-heart-fill"></i></div>
                         <h2 class="h4 fw-bolder">"구독"하면 무엇이 좋은가요?</h2><br>
-                        <p style="font-size: 10pt;">구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.<br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.</p><br>
-                        <button type="button" data-toggle="modal" data-target="#myModal">
-                            더 알아보기&nbsp;<i class="bi bi-arrow-right"></i>
-                        </button>
-                        <div class="modal_fade"  id="myModal" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <h4 class="modal-title">구독하면 좋은 점</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>첫 번째 장점👍</p>
-                                        <p>구독 신청 시, 밀키트 할인 쿠폰이 제공됩니다.</p>
-                                    </div>
-                                    <div class="modal-foot">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
+                        <p>구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.<br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.</p><br>
+                     
+	                </div>
+                   
+                    <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-question"></i></div>
                         <h2 class="h4 fw-bolder">F A Q</h2><br>
-                        <p style="font-size: 10pt;">구독에 대해 아직도 잘 모르시겠다면?<br>자주 묻는 질문을 통해 궁금한 점을 해결해보세요 :)<br>구독 신청을 하기 전에 주의할 사항도 함께 확인해주세요.</p><br>
-                        <button type="button" data-toggle="modal" data-target="#myModal">
-                            더 알아보기&nbsp;<i class="bi bi-arrow-right"></i>
-                        </button>
+                        <p>구독에 대해 아직도 잘 모르시겠다면?<br>자주 묻는 질문을 통해 궁금한 점을 해결해보세요 :)<br>구독 신청을 하기 전에 주의할 사항도 함께 확인해주세요.</p><br>
+                        
+					</div>
+					
+					<div class="accordion" id="accordionExample">
+						
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingOne">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">더 알아보기</button>
+						    </h2>
+						    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+						      <div class="accordion-body">
+						        <strong>"구독"이란? </strong><br>이러이런 점이 좋습니다. <code>서비스!!</code>아주 좋아요.
+						      </div>
+						    </div>
+						  </div>
+						  
+						  <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingTwo">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">더 알아보기</button>
+						    </h2>
+						    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" style="">
+						      <div class="accordion-body">
+						        <strong>구독하면 좋은 점</strong><br>첫 번째,~<br>두 번째,~<br>세 번째,<code>이런 장점</code>이 있습니다.
+						      </div>
+						    </div>
+						 </div>
+						 <div class="accordion-item">
+						    <h2 class="accordion-header" id="headingThree">
+						      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">더 알아보기</button>
+						    </h2>
+						    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample" style="">
+						      <div class="accordion-body">
+						        <strong>자주 묻는 질문</strong><br>1) ~~<br>2) ~~<br>3)~~
+						    </div>
+						  </div>
+						</div> 
+						 </div> 
+					
                     </div>
                 </div>
-            </div>
+
         </section>
-        <!-- Pricing section-->
+        
         <section class="bg-light py-5 border-bottom" id="compare">
             <div class="container px-5 my-5">
                 <div class="text-center mb-5">
@@ -157,11 +254,11 @@
                                     </li>
                                     
                                 </ul>
-                                <div class="d-grid"><a class="btn btn-primary" href="subscription_form.html">주간 구독 신청하기</a></div>
+                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do">주간 구독 신청하기</a></div>
                             </div>
                         </div>
                     </div>
-                    <!-- Pricing card pro-->
+                    
                     <div class="col-lg-6 col-xl-4">
                         <div class="card mb-5 mb-xl-0">
                             <div class="card-body p-5">
@@ -204,11 +301,11 @@
                                     </li>
                                 
                                 </ul>
-                                <div class="d-grid"><a class="btn btn-primary" href="subscription_form.html">월간 구독 신청하기</a></div>
+                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do">월간 구독 신청하기</a></div>
                             </div>
                         </div>
                     </div>
-                    <!-- Pricing card enterprise-->
+
                     <div class="col-lg-6 col-xl-4">
                         <div class="card">
                             <div class="card-body p-5">
@@ -232,29 +329,30 @@
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Community access
+                                        아주 좋아요
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited private projects
+                                        아주 좋아요
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Dedicated support
+                                        아주 좋아요
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>Unlimited</strong>
-                                        linked domains
+                                        <strong>이게 정말</strong>
+                                        아주 좋아요
                                     </li>
                                 </ul>
-                                <div class="d-grid"><a class="btn btn-primary" href="subscription_form.html">분기 구독 신청하기</a></div>
+                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do">분기 구독 신청하기</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        
         <section class="py-5 border-bottom">
             <div class="container px-5 my-5 px-5">
                 <div class="text-center mb-5">
@@ -291,7 +389,7 @@
                 </div>
             </div>
         </section>
-        <!-- Contact section-->
+
         <section class="bg-light py-5">
             <div class="container px-5 my-5 px-5">
                 <div class="text-center mb-5">
@@ -302,33 +400,31 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-6">
                         <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                            <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="name">이 름</label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">필수 입력사항입니다.</div>
                             </div>
-                            <!-- Email address input-->
+
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
                                 <label for="email">이메일</label>
                                 <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">필수 입력사항입니다.</div>
                             </div>
-                            <!-- Phone number input-->
+
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
                                 <label for="phone">휴대전화</label>
                                 <div class="invalid-feedback" data-sb-feedback="phone:required">필수 입력사항입니다.</div>
                             </div>
-                            <!-- Message input-->
+
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
-                                <label for="message">한마디</label>
+                                <label for="message">한 줄평</label>
                                 <div class="invalid-feedback" data-sb-feedback="message:required">필수 입력사항입니다.</div>
                             </div>
 
-                            <!-- Submit success message-->
                             <div class="d-none" id="submitSuccessMessage">
                                 <div class="text-center mb-3">
                                     <div class="fw-bolder">한 줄평이 성공적으로 작성되었습니다.<br> 앞으로도 eatDa 많이 사랑해주실거죠 ?♡</div>
@@ -338,16 +434,15 @@
                                 </div>
                             </div>
 
-                            <!-- Submit error message-->
                             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">한 줄평 작성에 실패하였습니다. 다시 시도해주세요.</div></div>
-                            <!-- Submit Button-->
+                            
                             <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">완 료</button></div>
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Footer-->
+        
         <footer class="py-5 alert-warning">
             <div class="container px-5"><p class="m-0 text-center text-dark">Copyright &copy; Your Website 2021</p></div>
         </footer>
@@ -356,7 +451,40 @@
         <script src="resources/subscription/js/scripts.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script>
-            $('#myModal').modal(options);
-        </script>
+		  var modals = document.getElementsByClassName("modal_wrap");
+		  var btns = document.getElementById("modal_btn");
+		  console.log(btns);
+		  var btnss= document.getElementsByClassName("btn");
+		  console.log(btnss);
+		  var divs = document.getElementsByClassName("modal_close");
+		  var funcs = [];
+		  
+		  function Modal(num) {
+		      return function() {
+		          btns[num].onclick =  function() {
+		              modals[num].style.display = "block";
+		              console.log(num);
+		          };
+		      
+		          divs[num].onclick = function() {
+		              modals[num].style.display = "none";
+		          };
+		      };
+		  }
+		
+		  for(var i = 0; i < btns.length; i++) {
+		      funcs[i] = Modal(i);
+		  }
+		  
+		  for(var j = 0; j < btns.length; j++) {
+		      funcs[j]();
+		  }
+		  
+		  window.onclick = function(event) {
+		      if (event.target.className == "modal_wrap") {
+		          event.target.style.display = "none";
+		      }
+		  };
+		</script>
     </body>
 </html>
