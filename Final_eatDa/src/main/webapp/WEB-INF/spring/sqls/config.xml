@@ -6,10 +6,14 @@
   	<typeAliases>
   		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   		<typeAlias type="com.project.eatda.dto.UserDto" alias="userDto"/>
+  		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
+  		<typeAlias type="com.project.eatda.dto.EventDto" alias="eventDto"/>
   	</typeAliases>
   	
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>
   		<mapper resource="/mybatis/marketMapper.xml"/>
+  		<mapper resource="/mybatis/blogMapper.xml"/>
+  		<mapper resource="/mybatis/eventMapper.xml"/>
   	</mappers>
   </configuration>
