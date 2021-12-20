@@ -1,0 +1,13 @@
+package com.project.eatda.dto;
+
+public class EventDto {
+	/*
+	 * EVENT_NO NUMBER PRIMARY KEY ,
+	EVENT_TITLE VARCHAR2(1000) NOT NULL,
+	EVENT_CONTENT VARCHAR2(4000) NOT NULL,
+	EVENT_IMG  VARCHAR2(1000) NOT NULL,
+	REGDATE DATE
+	 * */
+	
+	
+}

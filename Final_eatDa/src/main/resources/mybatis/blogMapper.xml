@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="blog">
+	<resultMap type="blogDto" id="blogMap">
+		<result property="blog_no" column="BLOG_NO" />
+		<result property="user_id" column="USER_ID"/>
+		<result property="blog_title" column="BLOG_TITLE"/>
+		<result property="blog_content" column="BLOG_CONTENT"/>
+		<result property="blog_count" column="BLOG_COUNT"/>
+		<result property="blog_like" column="BLOG_LIKE"/>
+		<result property="blog_img" column="BLOG_IMG"/>
+		<result property="regdate" column="REGDATE"/>
+	</resultMap>
+	
+	<select id="blogList" resultMap="blogMap">
+		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
+		FROM BLOG 
+		ORDER BY BLOG_NO DESC
+	</select>
+</mapper>
