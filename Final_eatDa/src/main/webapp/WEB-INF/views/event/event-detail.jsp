@@ -65,7 +65,7 @@ body{
       <div class="detail-article__titlearea">
         <!-- title -->
         <div class="detail-article__title">
-          <h2>12월 eat다 이벤트</h2>
+          <h2>${dto.event_title} eat다 이벤트</h2>
         </div>
 
         <!-- buttons -->
@@ -78,8 +78,8 @@ body{
 
       <!-- content -->
       <div class="detail-article__content">
-        <img width="600px" src="resources/images/event-content.png">
-        <p></p>
+        <p>${dto.event_content}</p>
+        <img width="600px" src="${dto.event_img}">
       </div>
 
     </div>

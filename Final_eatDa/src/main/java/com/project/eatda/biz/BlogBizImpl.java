@@ -18,6 +18,10 @@ public class BlogBizImpl implements BlogBiz{
 	public List<BlogDto> blogList() {
 		return dao.blogList();
 	}
-
+	
+	@Override
+	public BlogDto selectOne(int blog_no) {
+		return dao.selectOne(blog_no);
+	}
 	
 }

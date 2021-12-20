@@ -6,4 +6,5 @@ import com.project.eatda.dto.EventDto;
 
 public interface EventBiz {
 	public List<EventDto> eventList();
+	public EventDto selectOne(int event_no);
 }

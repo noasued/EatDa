@@ -24,8 +24,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping("/blog-detail.do")
-	public String blogDetail() {
-		logger.info("blog-detail page");
+	public String detail(Model model, int blog_no) {
+		logger.info("Blog detail page");
+		model.addAttribute("dto", biz.selectOne(blog_no));
 		return "/blog/blog-detail";
 	}
 	

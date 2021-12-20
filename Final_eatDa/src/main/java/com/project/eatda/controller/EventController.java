@@ -24,8 +24,9 @@ public class EventController {
 	}
 	
 	@RequestMapping("/event-detail.do")
-	public String eventDetail() {
-		System.out.println("event-detail page");
+	public String detail(Model model, int event_no) {
+		logger.info("event-detail page");
+		model.addAttribute("dto", biz.selectOne(event_no));
 		return "/event/event-detail";
 	}
 	
