@@ -53,13 +53,55 @@
   
   <link href="resources/css/event/event-write.css" rel="stylesheet">
   
-  <!-- summernote -->
+  
+</head>
+<body>
+	<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
+  <main class="event-write">
+    <!-- main img -->
+    <div class="event-write__top">
+      <div class="event-write__top-txt">
+        <h1>eat다 이벤트</h1>
+        <h2>eatDa Event</h2>
+      </div>
+    </div>
+
+    <!-- write content -->
+    <div class="event-write__content">
+      
+      <!-- title -->
+      <div class="event-write__content-title">
+        <h2>새 글 작성</h2>
+      </div>
+
+			<!-- article -> summernote -->
+      <div class="event-write__content-article">
+        <form action="/write" method="post">
+          <input type="text" name="title" placeholder="제목을 입력하세요.">
+					<textarea class="summernote" id="summernote" name="event_content"></textarea>
+					<div class="event-write__content-article__btns">
+						<input type="submit" name="write-submit-btn" value="작성 완료">
+						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='event.do'">
+        	</div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </main>
+  
+  <div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
+	
+	<!-- summernote -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
   <link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet"> 
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
- 
-
 
   <script type="text/javascript">
 	//summernote
@@ -110,45 +152,7 @@
         fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		});
 	});
-</script>
-</head>
-<body>
-	<div id="header">
-		<%@ include file="../common/header.jsp"%>
-	</div>
-  <main class="event-write">
-    <!-- main img -->
-    <div class="event-write__top">
-      <div class="event-write__top-txt">
-        <h1>eat다 이벤트</h1>
-        <h2>eatDa Event</h2>
-      </div>
-    </div>
-
-    <!-- write content -->
-    <div class="event-write__content">
-      
-      <!-- title -->
-      <div class="event-write__content-title">
-        <h2>새 글 작성</h2>
-      </div>
-
-			<!-- article -> summernote -->
-      <div class="event-write__content-article">
-        <form action="/write" method="post">
-          <input type="text" name="title" placeholder="제목을 입력하세요.">
-					<textarea class="summernote" id="summernote" name="editordata"></textarea>
-					<input type="submit" name="write-submit-btn" value="작성 완료">
-					<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='event.do'">
-        </form>
-
-      </div>
-
-    </div>
-
-  </main>
-  <div id="footer">
-		<%@ include file="../common/footer.jsp"%>
-	</div>
+	</script>
+	
 </body>
 </html>

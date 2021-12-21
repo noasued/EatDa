@@ -34,11 +34,14 @@
 
 .event-update__content-article input[name="title"]:focus{
   outline:0.5px solid rgb(213, 214, 118);
-  
+}
+
+.event-update__content-article__btns{
+		margin-top:20px;
 }
 
 .event-update__content-article input[name="update-submit-btn"]{
-  margin-left: 70%;
+  margin-left: 60%;
 }
 
 .event-update__content-article input[name="update-cancel-btn"]{

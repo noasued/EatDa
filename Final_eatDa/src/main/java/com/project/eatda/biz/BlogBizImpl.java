@@ -24,4 +24,13 @@ public class BlogBizImpl implements BlogBiz{
 		return dao.selectOne(blog_no);
 	}
 	
+	@Override
+	public int update(BlogDto dto) {
+		return dao.update(dto);
+	}
+	
+	@Override
+	public int insert(BlogDto dto) {
+		return dao.insert(dto);
+	}
 }

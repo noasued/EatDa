@@ -52,13 +52,56 @@
 	</style> 
   <link href="resources/css/event/event-update.css" rel="stylesheet">
  
-  <!-- summernote -->
+  
+</head>
+<body>
+	<div id="header">
+		<%@ include file="../common/header.jsp"%>
+	</div>
+  <main class="event-update">
+    <!-- main img -->
+    <div class="event-update__top">
+      <div class="event-update__top-txt">
+        <h1>eat다 이벤트</h1>
+        <h2>eatDa Event</h2>
+      </div>
+    </div>
+
+    <!-- write content -->
+    <div class="event-update__content">
+      
+      <!-- title -->
+      <div class="event-update__content-title">
+        <h2>글 수정</h2>
+      </div>
+
+			<!-- article -> summernote -->
+      <div class="event-update__content-article">
+        <form action="/update" method="post">
+          <input type="text" name="title" value="">
+					<textarea class="summernote" id="summernote" name="event_content">${dto.event_content}</textarea>
+					<div class="event-update__content-article__btns">
+						<input type="submit" name="update-submit-btn" value="수정 완료">
+						<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='event-detail.do'">
+        	</div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </main>
+  
+  <div id="footer">
+		<%@ include file="../common/footer.jsp"%>
+	</div>
+	
+	<!-- summernote -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
   <link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet"> 
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
  
-
   <script type="text/javascript">
 	//summernote
 	$(document).ready(function() {
@@ -106,45 +149,6 @@
         fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		});
 	});
-</script>
-</head>
-<body>
-	<div id="header">
-		<%@ include file="../common/header.jsp"%>
-	</div>
-  <main class="event-update">
-    <!-- main img -->
-    <div class="event-update__top">
-      <div class="event-update__top-txt">
-        <h1>eat다 이벤트</h1>
-        <h2>eatDa Event</h2>
-      </div>
-    </div>
-
-    <!-- write content -->
-    <div class="event-update__content">
-      
-      <!-- title -->
-      <div class="event-update__content-title">
-        <h2>글 수정</h2>
-      </div>
-
-			<!-- article -> summernote -->
-      <div class="event-update__content-article">
-        <form action="/update" method="post">
-          <input type="text" name="title" value="">
-					<textarea class="summernote" id="summernote" name="editordata"></textarea>
-					<input type="submit" name="update-submit-btn" value="수정 완료">
-					<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='event-detail.do'">
-        </form>
-
-      </div>
-
-    </div>
-
-  </main>
-  <div id="footer">
-		<%@ include file="../common/footer.jsp"%>
-	</div>
+	</script>
 </body>
 </html>
