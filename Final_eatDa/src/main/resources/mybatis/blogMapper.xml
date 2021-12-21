@@ -27,4 +27,14 @@
 		WHERE BLOG_NO = #{blog_no}
 	</select>
 	
+	<update id="blogUpdate" parameterType="blogDto">
+		UPDATE BLOG
+		SET BLOG_TITLE=#{blog_title}, BLOG_CONTENT=#{blog_content}
+		WHERE BLOG_NO=#{blog_no}
+	</update>
+	
+	<insert id="blogInsert" parameterType="blogDto">
+		INSERT INTO BLOG
+		VALUES(BLOG_NO_SEQ.NEXTVAL, #{blog_title}, #{blog_content}, #{blog_img}, SYSDATE)
+	</insert>
 </mapper>

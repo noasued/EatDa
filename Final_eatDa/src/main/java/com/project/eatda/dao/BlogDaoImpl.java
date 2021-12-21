@@ -36,8 +36,30 @@ public class BlogDaoImpl implements BlogDao{
 			System.out.println("[error] : blog detail");
 			e.printStackTrace();
 		}
-		
 		return dto;
 	}
 	
+	@Override
+	public int update(BlogDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"blogUpdate",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : update");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	@Override
+	public int insert(BlogDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE+"blogInsert",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : insert");
+			e.printStackTrace();
+		}
+		return res;
+	}
 }
