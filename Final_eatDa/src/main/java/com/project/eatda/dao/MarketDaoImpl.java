@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 
 @Repository
 public class MarketDaoImpl implements MarketDao {
@@ -26,10 +27,6 @@ public class MarketDaoImpl implements MarketDao {
 	
 		parameter.add((num==1?num:num*9-8));
 		parameter.add((num==1?num*9:num*9));
-		
-		for (Integer str : parameter) {
-			System.out.println(str);
-		}
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE_MARKET+"productList", parameter);
@@ -127,6 +124,19 @@ public class MarketDaoImpl implements MarketDao {
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public List<ReviewDto> getReview(String p_id) {
+		List<ReviewDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getReview", p_id);
+		} catch (Exception e) {
+			System.out.println("getReview DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.eatda.dao.MarketDao;
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 
 @Service
 public class MarketBizImpl implements MarketBiz{
@@ -55,5 +56,10 @@ public class MarketBizImpl implements MarketBiz{
 		System.out.println("Biz.putShoppingBag.res : " + res);
 		
 		return res;
+	}
+
+	@Override
+	public List<ReviewDto> getReview(String p_id) {
+		return marketDao.getReview(p_id);
 	}
 }

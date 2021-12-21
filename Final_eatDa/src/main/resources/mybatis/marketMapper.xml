@@ -59,9 +59,16 @@
 		WHERE USER_ID = #{user_id} AND P_ID = #{p_id}
 	</select>
 	
+	<select id="getReview" parameterType="string" resultType="reviewDto">
+		SELECT P_ID, REVIEW_CONTENT, REVIEW_REGDATE, USER_ID, USER_NAME, USER_IMG
+		FROM REVIEW
+		JOIN E_ORDER USING(ORDER_ID)
+		JOIN E_USER USING(USER_ID)
+		WHERE P_ID = #{p_id}
+	</select>
+	
 	<insert id="putShoppingBag" parameterType="cartProductDto">
 		INSERT INTO CART_PRODUCT VALUES(#{user_id},#{p_id},#{cart_count},#{cart_price})
 	</insert>
-	
 	
 </mapper>
