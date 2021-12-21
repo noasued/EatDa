@@ -91,11 +91,19 @@
     margin-bottom: 50px;
 }
 
-.market_like, .bought_product{
+.market_like{
     display: flex;
 	flex-direction: column;
     width: 750px;
     height: 250px;
+    align-items: left;
+}
+
+.bought_product{
+    display: flex;
+	flex-direction: column;
+    width: 750px;
+    height: 270px;
     align-items: left;
 }
 
@@ -105,6 +113,17 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.bought_list input{
+	width: 60px;
+	height: 20px;
+	border: 0;
+	background: #FAEED2;
+	color: gray;
+	border-radius: 5px;
+    font-size: 0.7rem;
+
 }
 
 
@@ -162,7 +181,7 @@ table{
 
 .wrap{
 	width: 100%;
-	height: 1300px;
+	height: 1350px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -352,34 +371,48 @@ table{
                         <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
                         <div class="bought_list" onclick="alert('마켓 게시물 이동')">
                             <a>전복죽전복죽전복죽전복죽전복죽전복죽전복죽전복죽</a><br>
-                            <a>23,000원</a>
+                            <a>23,000원</a><br>
+                            <input type="button" value="리뷰 작성" onclick="#">
                         </div>
                         </td>
                     </td>
                     <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
+                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
+                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
+                            <a>전복죽</a><br>
+                            <a>23,000원</a><br>
+                            <input type="button" value="리뷰 작성" onclick="#">
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
+                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
+                            <a>전복죽</a><br>
+                            <a>23,000원</a><br>
+                            <input type="button" value="리뷰 작성" onclick="#">
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
+                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
+                            <a>전복죽</a><br>
+                            <a>23,000원</a><br>
+                            <input type="button" value="리뷰 작성" onclick="#">
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
+                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
+                            <a>전복죽</a><br>
+                            <a>23,000원</a><br>
+                            <input type="button" value="리뷰 작성" onclick="#">
+                        </div>
                     </td>
                     <td>
                         <img src="resources/images/food1.jpg" width="150" height="150"><br>
                         <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
+                        <a>23,000원</a><br>
+                        <input type="button" value="리뷰 작성" onclick="#">
                     </td>
                     
                 </tr>  
