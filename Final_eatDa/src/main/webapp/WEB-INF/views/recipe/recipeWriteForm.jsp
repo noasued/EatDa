@@ -42,6 +42,17 @@
 #recipeTitle{
 	width : 89%;
 }
+.recipe_top{
+	  width:100%;
+	  height:200px;
+	  background: url('resources/images/recipe/recipeLogo.png') no-repeat;
+	  background-size: cover;
+	  overflow: hidden;
+	  display: table;
+	  border: none;
+	  background-position: 0 90%;
+	}
+	
 </style>
 <script type="text/javascript">
 	function checkOne(chk){
@@ -107,9 +118,9 @@
     <div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
-	<div class="rec_logo">
-		<img src="resources/images/recipe/recipeLogo.png">
-	</div>
+	
+	<div class="recipe_top"></div>
+	
 	<form action="#" method="post">
 		<div class="wrap">
 			<div class="title">
