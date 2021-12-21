@@ -140,7 +140,7 @@
                                     <tr>
                                         <td colspan="5">
                                             <button type="button" onclick="" value="delete">삭 제</button>
-                                        	<button type="button" onclick="" value="allChk" style="background-color:rgb(150, 150, 150);">전체 선택</button>
+                                        	<button type="button" onclick="" value="allChk" style="background-color:rgb(150, 150, 150);">전체 선택ㅁ</button>
                                         </td>
                                     </tr>                                   
                                 </table>

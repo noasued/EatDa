@@ -331,7 +331,7 @@
 				</div>
 			</div>
 		</div>
-
+	<a href="adminMain.do">admin</a>
 	</div>
 
 
