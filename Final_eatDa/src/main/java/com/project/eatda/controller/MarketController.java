@@ -3,8 +3,6 @@ package com.project.eatda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.eatda.biz.MarketBiz;
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 
 @Controller
 public class MarketController {
@@ -36,10 +35,6 @@ public class MarketController {
 		
 		int iNum = Integer.parseInt(num.charAt(0)+"");
 		List<ProductDto> list = marketBiz.takeProductList(iNum);
-		
-		for (ProductDto dto : list) {
-			System.out.println(dto.toString());
-		}
 		
 		return list;
 	}
@@ -72,9 +67,6 @@ public class MarketController {
 		String hashTag = tagname.substring(1, tagname.length()-1);
 		
 		List<ProductDto> list = marketBiz.hashTagSearch(hashTag);
-		System.out.println(list);
-		System.out.println(list == null ? true : false);
-		System.out.println(list.size());
 		return list;
 	}
 	
@@ -85,9 +77,6 @@ public class MarketController {
 		String hashTag = tagname.substring(1, tagname.length()-1);
 		
 		List<ProductDto> list = marketBiz.searchKeyword(hashTag);
-		System.out.println(list);
-		System.out.println(list == null ? true : false);
-		System.out.println(list.size());
 		return list;
 	}
 	
@@ -125,6 +114,15 @@ public class MarketController {
 	public String goMarketMain(Model model) {
 		logger.info("Market Main Page");
 		return "/market/marketMain";
+	}
+	
+	@RequestMapping(value="/getReview.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReviewDto> getReview(@RequestBody String p_id) {
+		logger.info("getReview, p_id : " + p_id);
+		
+		List<ReviewDto> list = marketBiz.getReview(p_id.substring(0, p_id.length()-1));
+		return list;
 	}
 	
 	@RequestMapping("/page.do") 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 
 public interface MarketDao {
 	String NAMESPACE_MARKET = "market.";
@@ -15,5 +16,6 @@ public interface MarketDao {
 	public List<ProductDto> searchKeyword(String tagName);
 	public ProductDto getProduct(String p_id);
 	public int putShoppingBag(CartProductDto cpDto);
+	public List<ReviewDto> getReview(String p_id);
 
 }
