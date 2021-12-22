@@ -12,6 +12,37 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+	     // 전체 선택 / 해제
+	        function selectAll(selectAll)  {
+	        	  const checkboxes 
+	        	       = document.getElementsByName('chkBtn');
+	        	  
+	        	  checkboxes.forEach((checkbox) => {
+	        	    checkbox.checked = selectAll.checked;
+	        	  })
+	        	}
+	    
+	    //Modal 실행
+	        $(function(){
+	        	$("a").click(function(){
+	        		$(".modal").fadeIn();
+	        	});
+	        });
+	        
+	        $(".modal-content").click(function(){
+	        	$(".modal").fadeOut();
+	        });
+	
+	        
+		//Modal Close 기능
+		    function close_pop(flag) {
+		         $('#myModal').hide();
+		    };
+        </script>
+        
         <style>
 			button{
 				float:right;
@@ -28,6 +59,29 @@
 			#nav_btn{
 				float:right;
 			}
+			
+			/* Modal (background) */
+	        .modal {
+	            display: none; /* Hidden by default */
+	            position: fixed; /* Stay in place */
+	            z-index: 1; /* Sit on top */
+	            left: 0;
+	            top: 0;
+	            width: 100%; /* Full width */
+	            height: 100%; /* Full height */
+	            overflow: auto; /* Enable scroll if needed */
+	            background-color: rgb(0,0,0); /* Fallback color */
+	            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	        }
+	    
+	        /* Modal Content/Box */
+	        .modal-content {
+	            background-color: #fefefe;
+	            margin: 15% auto; /* 15% from the top and centered */
+	            padding: 20px;
+	            border: 1px solid #888;
+	            width: 30%; /* Could be more or less, depending on screen size */                          
+	        }
 		</style>
     </head>
     <body class="sb-nav-fixed">
@@ -110,8 +164,9 @@
                                 <table id="datatablesSimple">
                                     <col width="50px">
                                     <thead>
+                                    <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th>I D</th>
                                             <th>회원명</th>
                                             <th>닉네임</th>
@@ -122,9 +177,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>OksusuS2</td>
-                                            <td>옥수수</td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">옥수수</a></td>
                                             <td>콘치즈짱</td>
                                             <td>CORN123@naver.com</td>
                                             <td>010-1111-2222</td>
@@ -136,6 +191,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="7">
                                             <a class="adm_mailing" href="#" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">메일 보내기</a>
@@ -152,6 +208,34 @@
                 </footer>
             </div>
         </div>
+        
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+ 
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">회원 정보</span></b></span></p>
+	                <p style="text-align: center; line-height: 1.5;"><br /></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>회원명 : </b></span>김철수</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>닉네임 : </b></span>아메리카농</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>휴대전화 : </b></span>010-1234-5678</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주 소 : </b></span>경기도 안산시 XXXXXXX</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>이메일 : </b></span>abcde123@gmail.com</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구독 여부 : </b></span>O</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구독 유형 : </b></span>일반 구독</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구독 종류 : </b></span>이메일</p>
+	                <p style="text-align: left; line-height: 1.5;"><br /></p>
+	                <p><br /></p>
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">
+	                <span class="pop_bt" style="font-size: 13pt;" >
+	                     닫기
+	                </span>
+	            </div>
+	      </div>
+	 
+	    </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/admin/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

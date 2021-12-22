@@ -3,13 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   <configuration>
+  	
   	<typeAliases>
   		<typeAlias type="com.project.eatda.dto.UserDto" alias="userDto"/>
+  		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
+  		<typeAlias type="com.project.eatda.dto.EventDto" alias="eventDto"/>
   		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
+  		<typeAlias type="com.project.eatda.dto.CartProductDto" alias="cartProductDto"/>
+  		<typeAlias type="com.project.eatda.dto.ReviewDto" alias="reviewDto"/>
   	</typeAliases>
-  	
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>
   		<mapper resource="/mybatis/marketMapper.xml"/>
+  		<mapper resource="/mybatis/blogMapper.xml"/>
+  		<mapper resource="/mybatis/eventMapper.xml"/>
   	</mappers>
   </configuration>

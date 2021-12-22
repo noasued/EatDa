@@ -13,6 +13,36 @@
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+        // 전체 선택 / 해제
+	        function selectAll(selectAll)  {
+	        	  const checkboxes 
+	        	       = document.getElementsByName('chkBtn');
+	        	  
+	        	  checkboxes.forEach((checkbox) => {
+	        	    checkbox.checked = selectAll.checked;
+	        	  })
+	        	}
+        
+        //Modal 실행
+	        $(function(){
+	        	$("a").click(function(){
+	        		$(".modal").fadeIn();
+	        	});
+	        });
+	        
+	        $(".modal-content").click(function(){
+	        	$(".modal").fadeOut();
+	        });
+	
+	        
+		//Modal Close 기능
+		    function close_pop(flag) {
+		         $('#myModal').hide();
+		    };
+        </script>
+        
         <style>
 			button{
 				float:right;
@@ -21,41 +51,33 @@
 				width:80px;
 				height:30px;
 			}
-            .modal {
-	            display: none; 
-	            position: fixed; 
-	            z-index: 1; 
+            
+	        /* Modal (background) */
+	        .modal {
+	            display: none; /* Hidden by default */
+	            position: fixed; /* Stay in place */
+	            z-index: 1; /* Sit on top */
 	            left: 0;
 	            top: 0;
-	            width: 100%; 
-	            height: 100%; 
-	            overflow: auto; 
-	            background-color: rgba(0,0,0,0.5);
+	            width: 100%; /* Full width */
+	            height: 100%; /* Full height */
+	            overflow: auto; /* Enable scroll if needed */
+	            background-color: rgb(0,0,0); /* Fallback color */
+	            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 	        }
-
+	    
 	        /* Modal Content/Box */
 	        .modal-content {
-	            background-color: #c1ebbd;
-	            margin: 15% auto;
+	            background-color: #fefefe;
+	            margin: 15% auto; /* 15% from the top and centered */
 	            padding: 20px;
 	            border: 1px solid #888;
-	            width: 50%;
+	            width: 30%; /* Could be more or less, depending on screen size */                          
 	        }
 
-	        /* Close Button */
-	        .close_btn {
-	            color: #aaa;
-	            font-size: 23px;
-	            font-weight: bold;
-	            margin-right: 5px;
-	        }
-	        .close_btn:hover,.close_btn:focus {
-	            color: black;
-	            text-decoration: none;
-	            cursor: pointer;
-	        }
         </style>
     </head>
+    
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark alert-warning justify-content-between">
             <a class="navbar-brand ps-3" href="index.jsp"><img src="resources/images/logo.png" style="width: 50%; height:30%; float:left;"></a>
@@ -136,8 +158,9 @@
                                 <table id="datatablesSimple">
                                     <col width="1%">
                                     <thead>
+                                    <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th class="col-sm-1">신고인 ID</th>
                                             <th class="col-md-1">신고 대상 ID</th>
                                             <th class="col-md-2">신고 내용</th>
@@ -148,21 +171,21 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
-                                            <td>OksusuS2</td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
+                                            <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">OksusuS2</a></td>
                                             <td>XD</td>
                                             <td>악플이에요</td>
                                             <td>메롱</td>
                                             <td>
                                                 <select>
                                                     <option value="wait">처리 대기</option>
-                                                    <option value="ing">처리중</option>
                                                     <option value="finish">처리 완료</option>
                                                 </select>
                                             </td>
                                             <td>1회</td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="7">
                                             <button type="button" onclick="" value="delete">삭 제</button>
@@ -178,43 +201,37 @@
                 </footer>
             </div>
         </div>
+        
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+ 
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">신고 내용</span></b></span></p>
+	                <p style="text-align: center; line-height: 1.5;"><br /></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고인 ID : </b></span>OksusuS2</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고 대상 ID : </b></span>XD</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고 내용 : </b></span>기분이 나빠요.</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고 댓글 : </b></span>메롱</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><br /></p>
+	                <p><br /></p>
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">
+	                <span class="pop_bt" style="font-size: 13pt;" >
+	                     닫기
+	                </span>
+	            </div>
+	      </div>
+	 
+	    </div>
+
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/admin/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="resources/admin/js/datatables-simple-demo.js"></script>
        
-        <script>
-             var modals = document.getElementsByClassName("modal");
-             var btns = document.getElementsByClassName("open_btn");
-             var spanes = document.getElementsByClassName("close_btn");
-             var funcs = [];
-             
-             function Modal(num) {
-                 return function() {
-                     btns[num].onclick =  function() {
-                         modals[num].style.display = "block";
-                         console.log(num);
-                     };
-                 
-                     spanes[num].onclick = function() {
-                         modals[num].style.display = "none";
-                     };
-                 };
-             }
-         
-             for(var i = 0; i < btns.length; i++) {
-                 funcs[i] = Modal(i);
-             }
-             
-             for(var j = 0; j < btns.length; j++) {
-                 funcs[j]();
-             }
-             
-             window.onclick = function(event) {
-                 if (event.target.className == "modal") {
-                     event.target.style.display = "none";
-                 }
-             };
-         </script>
+        
     </body>
 </html>

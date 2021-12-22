@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.MarketBiz;
+import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 
 @Controller
 public class MarketController {
@@ -23,6 +25,9 @@ public class MarketController {
 	@Autowired
 	private MarketBiz marketBiz;
 	
+	//임시 유저 아이디
+	String user_id = "ADMIN";
+	
 	@RequestMapping(value="/product.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<ProductDto> takeProductList(@RequestBody String num) {
@@ -30,10 +35,6 @@ public class MarketController {
 		
 		int iNum = Integer.parseInt(num.charAt(0)+"");
 		List<ProductDto> list = marketBiz.takeProductList(iNum);
-		
-		for (ProductDto dto : list) {
-			System.out.println(dto.toString());
-		}
 		
 		return list;
 	}
@@ -55,10 +56,7 @@ public class MarketController {
 	public List<ProductDto> likeProductList() {
 		logger.info("likeProductList");
 		
-		//임시 유저 아이디
-		String user_dto = "ADMIN";
-		
-		List<ProductDto> list = marketBiz.likeProductList(user_dto);
+		List<ProductDto> list = marketBiz.likeProductList(user_id);
 		return list;
 	}
 	
@@ -83,7 +81,6 @@ public class MarketController {
 	}
 	
 	
-	
 	@RequestMapping(value="/goProductPage.do", method=RequestMethod.GET)
 	public String goProductPage(Model model, String p_id) {
 		logger.info("goProductPage, p_id : " + p_id);
@@ -93,12 +90,39 @@ public class MarketController {
 		return "/market/marketPage";
 	}
 	
-	
+	@RequestMapping(value="/putShoppingBag.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String putShoppingBag(@RequestBody String data) {
+		//로그인 되어있는 세션에 이미 카트번호가 담겨있음.
+		//장바구니에 해당 상품이 담겨있는지 체크해야함.
+		logger.info("putShoppingBag, data : " + data);
+		String[] sArr = data.split(",");
+		String p_id = sArr[0].substring(9, sArr[0].length()-1);
+		int p_price = Integer.parseInt(sArr[1].substring(11, sArr[1].length()-2));
+		
+		System.out.println("p_id : " + p_id + ", p_price : " + p_price);
+		CartProductDto cpDto = new CartProductDto(user_id,p_id,1,p_price);
+		//세션에서 user_ID 가져와야함 (위 DTO의 첫 번째 파라미터로 넣어줘야 함)
+		
+		int res = marketBiz.putShoppingBag(cpDto);
+		System.out.println("controller.res : "+res); 
+		
+		return res > 0? "true":"false";
+	}
 	
 	@RequestMapping("/marketMain.do")
 	public String goMarketMain(Model model) {
 		logger.info("Market Main Page");
 		return "/market/marketMain";
+	}
+	
+	@RequestMapping(value="/getReview.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReviewDto> getReview(@RequestBody String p_id) {
+		logger.info("getReview, p_id : " + p_id);
+		
+		List<ReviewDto> list = marketBiz.getReview(p_id.substring(0, p_id.length()-1));
+		return list;
 	}
 	
 	@RequestMapping("/page.do") 

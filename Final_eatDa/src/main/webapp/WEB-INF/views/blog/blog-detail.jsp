@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,27 +87,21 @@
       <div class="detail-article__titlearea">
         <!-- title -->
         <div class="detail-article__title">
-          <h2>그릴드 샐러드를 만들어봤어요!</h2>
+          <h2>${dto.blog_title}</h2>
         </div>
 
         <!-- buttons -->
         <div class="detail-article__btn">
           <input type="button" value="목록" onclick="location.href='blog.do'">
-          <input type="button" value="수정" onclick="location.href='blog-update.do'">
+          <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
           <input type="button" value="삭제">
         </div>
       </div>
 
       <!-- content -->
       <div class="detail-article__content">
-        <img width="600px" src="resources/images/grilledsalad.jpg">
-        <p>
-          1 애호박과 가지는 한입 크기로 썰고,<br>
-          2 무화과는 4등분하고,<br>
-          3 드레싱을 만들고,<br>
-          4 센 불로 달군 그릴에 가지, 애호박, 무화과를 구워 그릴 자국을 내고,<br>
-          5 그릇에 구운 재료와 블루베리, 페타치즈를 담고 드레싱을 뿌려 마무리.
-        </p>
+        <img width="600px" src="${dto.blog_img}">
+        <p>${dto.blog_content}</p>
 
         <!-- click likes area -->
         <div class="detail-article__content-likes">

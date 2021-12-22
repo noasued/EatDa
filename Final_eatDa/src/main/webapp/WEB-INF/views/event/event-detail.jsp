@@ -65,12 +65,12 @@ body{
       <div class="detail-article__titlearea">
         <!-- title -->
         <div class="detail-article__title">
-          <h2>12월 eat다 이벤트</h2>
+          <h2>${dto.event_title} eat다 이벤트</h2>
         </div>
 
         <!-- buttons -->
         <div class="detail-article__btn">
-          <input type="button" value="수정" onclick="location.href='event-update.do'">
+          <input type="button" value="수정" onclick="location.href='event-update.do?event_no=${dto.event_no}'">
           <input type="button" value="삭제">
           <input type="button" value="목록" onclick="location.href='event.do'">
         </div>
@@ -78,8 +78,8 @@ body{
 
       <!-- content -->
       <div class="detail-article__content">
-        <img width="600px" src="resources/images/event-content.png">
-        <p></p>
+        <p>${dto.event_content}</p>
+        <img width="600px" src="${dto.event_img}">
       </div>
 
     </div>

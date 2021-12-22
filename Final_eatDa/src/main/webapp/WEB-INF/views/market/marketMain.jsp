@@ -27,7 +27,7 @@
 }
 	
 .banner {
-	background-image: url(resources/images/market/market-banner2.png);
+	background-image: url(resources/images/market/market-banner3.png);
 	background-size: cover;
 	width: 100%;
 	margin: 0 auto;
@@ -67,7 +67,7 @@ $(document).ready(function() {
     });
 
     //배너 사진 변경
-    let index = 2;
+    let index = 3;
     window.setInterval(function() {
         if (index == 5) {
             index = 1;
@@ -81,11 +81,11 @@ $(document).ready(function() {
     
 });
 
+//검색창에서 엔터키 눌렀을 때
 $(function() {
 	$("#search-bar").on("keydown",function(event) {
 		if (event.keyCode == 13) {
 			if (!event.shiftKey) {
-				console.log('keydown');
 				event.preventDefault();
 				searchKeyword();
 			}
@@ -96,7 +96,41 @@ $(function() {
 function searchKeyword() {
 	let keyWord = $('#search-bar').val();
 	hashTagSearch(keyWord);
+	$('#search-bar').val('');
 }
+
+//장바구니에 담기
+function putShoppingBag(object) {
+	let p_id = $(object).parents('.product-desc').siblings('.hidden').text();
+	let p_name = $(object).parent().siblings('.product-margin:eq(1)').children('span').text();
+	let p_price = $(object).siblings('.product-price').eq(0).text();
+	
+	let data = {
+			"p_id":p_id,
+			"p_price":p_price
+	}
+	
+	if (confirm('선택하신 '+p_name+' 을 장바구니에 담시겠습니까?')) {
+		
+		$.ajax({
+			url: 'putShoppingBag.do',
+			type: 'post',
+			data: JSON.stringify(data),
+			contentType: 'application/json; charset=utf-8',
+			success:function(msg) {
+				if (msg == 'true') {
+					alert('담기 완료! 장바구니로 이동합니다.');
+					location.href='shoppingbag.do';
+				} else {
+					alert('상품이 이미 장바구니에 담겨있습니다.');
+				}
+			},
+			error:function(msg) {
+				console.log(msg);
+			}
+		});
+	}
+} 
 
 
 //상품 리스트업 함수
@@ -132,8 +166,8 @@ function takeProduct(num) {
 							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
-							"<span class='product-price'>" + value.p_price + "원</span>" +
-							"<img src='resources/images/market/shop.png' class='shop-cart' onclick=''>" +
+							"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+							"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
 							"</div>" +
 							"</div>" +
 							"</div>"
@@ -155,8 +189,8 @@ function takeProduct(num) {
 							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
 							"</div>" +
 							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
-							"<span class='product-price'>" + value.p_price + "원</span>" +
-							"<img src='resources/images/market/shop.png' class='shop-cart' onclick=''>" +
+							"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+							"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
 							"</div>" +
 							"</div>" +
 							"</div>"	
@@ -284,82 +318,91 @@ function hashTagSearch(object) {
 	let tagname = '';
 	let href = '';
 	if ($(object).attr('class')=='keyword') {
-		console.log('keyword일 떄 : ' + $(object).attr('class'));
 		tagname = tagMatch($(object).text().substring(1));
 		href = 'hashTagSearch.do';
 	} else {
 		tagname = object;
-		console.log('검색 했을 때 : ' + tagname);
 		href = 'searching.do';
 	}
 	
 	$.ajax({
 		url: href,
-		type:"post",
+		type:'post',
 		data: JSON.stringify(tagname),
-		contentType: "application/json; charset=utf-8",
+		contentType: 'application/json; charset=utf-8',
 		success:function(list) {
 			$('.product-container').html('');
 			$('.pagination').html('');
 			let data = list;
 			let idx = 0;
 			let col = 0;
+			console.log(list.length);
 			
-			$(data).each(function(key, value) {
-				if (idx == 0) {
-					$('.product-container').append(
-							"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
-							"<div class='product-card' style='margin: 0 2%;'>" +
-							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
-							"<div class='product-img' align='center'>" +
-							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
-							"</div>" +
-							"<div class='product-desc'>" +
-							"<div class='product-margin'>" +
-							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
-							"</div>" +
-							"<div class='product-margin'>" +
-							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
-							"</div>" +
-							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
-							"<span class='product-price'>" + value.p_price + "원</span>" +
-							"<img src='resources/images/market/shop.png' class='shop-cart' onclick=''>" +
-							"</div>" +
-							"</div>" +
-							"</div>"
-					);
-					idx++;
-					
-				} else {
-					$('.product-col').eq(col).append(
-							"<div class='product-card' style='margin: 0 2%;'>" +
-							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
-							"<div class='product-img' align='center'>" +
-							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
-							"</div>" +
-							"<div class='product-desc'>" +
-							"<div class='product-margin'>" +
-							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
-							"</div>" +
-							"<div class='product-margin'>" +
-							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
-							"</div>" +
-							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
-							"<span class='product-price'>" + value.p_price + "원</span>" +
-							"<img src='resources/images/market/shop.png' class='shop-cart' onclick=''>" +
-							"</div>" +
-							"</div>" +
-							"</div>"	
-					);
-					
-					if (idx != 2) {
+			if (list.length == 0) {
+				$('.product-container').append(
+						"<div class='row' style='height:250px; margin-bottom:40px;'>" +
+						"<div class='col-md-12' align='center'>" +
+						"<div style='width:80%; height:30%; margin:0 auto; padding-top: 4%; font-size:x-large; font-weight:medium'>" +
+						"검색하신 '<span>" + tagname + "</span>' 에 대한 상품이 존재하지 않습니다." +
+						"</div></div></div>"
+				);
+			} else {
+				$(data).each(function(key, value) {
+					if (idx == 0) {
+						$('.product-container').append(
+								"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
+								"<div class='product-card' style='margin: 0 2%;'>" +
+								"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
+								"<div class='product-img' align='center'>" +
+								"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
+								"</div>" +
+								"<div class='product-desc'>" +
+								"<div class='product-margin'>" +
+								"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin'>" +
+								"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+								"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+								"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
+								"</div>" +
+								"</div>" +
+								"</div>"
+						);
 						idx++;
-					} else if (idx == 2) {
-						col++;
-						idx = 0;
+						
+					} else {
+						$('.product-col').eq(col).append(
+								"<div class='product-card' style='margin: 0 2%;'>" +
+								"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
+								"<div class='product-img' align='center'>" +
+								"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
+								"</div>" +
+								"<div class='product-desc'>" +
+								"<div class='product-margin'>" +
+								"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin'>" +
+								"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+								"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+								"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
+								"</div>" +
+								"</div>" +
+								"</div>"	
+						);
+						
+						if (idx != 2) {
+							idx++;
+						} else if (idx == 2) {
+							col++;
+							idx = 0;
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 	});
 }

@@ -37,8 +37,12 @@
   
 }
 
+.event-write__content-article__btns{
+	margin-top:20px;
+}
+
 .event-write__content-article input[name="write-submit-btn"]{
-  margin-left: 70%;
+  margin-left: 60%;
 }
 
 .event-write__content-article input[name="write-cancel-btn"]{

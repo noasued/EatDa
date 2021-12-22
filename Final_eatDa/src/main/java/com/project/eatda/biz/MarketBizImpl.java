@@ -1,13 +1,15 @@
 package com.project.eatda.biz;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.eatda.dao.MarketDao;
+import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 
 @Service
 public class MarketBizImpl implements MarketBiz{
@@ -45,5 +47,19 @@ public class MarketBizImpl implements MarketBiz{
 	@Override
 	public List<ProductDto> searchKeyword(String tagName) {
 		return marketDao.searchKeyword(tagName);
+	}
+
+	@Override
+	@Transactional
+	public int putShoppingBag(CartProductDto dto) {
+		int res = marketDao.putShoppingBag(dto);
+		System.out.println("Biz.putShoppingBag.res : " + res);
+		
+		return res;
+	}
+
+	@Override
+	public List<ReviewDto> getReview(String p_id) {
+		return marketDao.getReview(p_id);
 	}
 }

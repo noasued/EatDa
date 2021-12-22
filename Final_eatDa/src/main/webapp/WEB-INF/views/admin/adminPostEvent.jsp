@@ -12,6 +12,19 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        function selectAll(selectAll)  {
+        	  const checkboxes 
+        	       = document.getElementsByName('chkBtn');
+        	  
+        	  checkboxes.forEach((checkbox) => {
+        	    checkbox.checked = selectAll.checked;
+        	  })
+        	}
+        </script>
+        
         <style>
 			button{
 				float:right;
@@ -109,8 +122,9 @@
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="80px"><col width="60%"><col width="200px"><col width="20%">
                                     <thead>
+                                    <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th>NO</th>
                                             <th>이벤트 제목</th>
                                             <th>작성일</th>
@@ -119,9 +133,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>13</td>
-                                            <td>2022 겨울나기 이벤트 시작</td>
+                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">2022 겨울나기 이벤트 시작</a></td>
                                             <td>2021.12.05</td>
                                             <td>
                                                 <select>
@@ -132,6 +146,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="7">	
                                         	<a class="adm_insert" href="#" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>

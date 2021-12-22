@@ -13,6 +13,36 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+        function selectAll(selectAll)  {
+        	  const checkboxes 
+        	       = document.getElementsByName('chkBtn');
+        	  
+        	  checkboxes.forEach((checkbox) => {
+        	    checkbox.checked = selectAll.checked;
+        	  })
+        	}
+        
+	      //Modal 실행
+	        $(function(){
+	        	$("a").click(function(){
+	        		$(".modal").fadeIn();
+	        	});
+	        });
+	        
+	        $(".modal-content").click(function(){
+	        	$(".modal").fadeOut();
+	        });
+	
+	        
+		    //Modal Close 기능
+		    function close_pop(flag) {
+		         $('#myModal').hide();
+		    };
+        </script>
+        
         <style>
 			button{
 				float:right;
@@ -21,6 +51,30 @@
 				width:80px;
 				height:30px;
 			}
+			
+			 /* Modal (background) */
+	        .modal {
+	            display: none; /* Hidden by default */
+	            position: fixed; /* Stay in place */
+	            z-index: 1; /* Sit on top */
+	            left: 0;
+	            top: 0;
+	            width: 100%; /* Full width */
+	            height: 100%; /* Full height */
+	            overflow: auto; /* Enable scroll if needed */
+	            background-color: rgb(0,0,0); /* Fallback color */
+	            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	        }
+	    
+	        /* Modal Content/Box */
+	        .modal-content {
+	            background-color: #fefefe;
+	            margin: 15% auto; /* 15% from the top and centered */
+	            padding: 20px;
+	            border: 1px solid #888;
+	            width: 30%; /* Could be more or less, depending on screen size */                          
+	        }
+			
 		</style>
     </head>
     <body class="sb-nav-fixed">
@@ -103,8 +157,9 @@
                                 <table id="datatablesSimple">
                                     <col width="50px">
                                     <thead>
+                                    	<tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="allChk"></th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
                                             <th>주문번호</th>
                                             <th>주문자명</th>
                                             <th>주문일자</th>
@@ -115,9 +170,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>B213G64</td>
-                                            <td>주문인</td>
+                                            <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문인</a></td>
                                             <td>2021.12.05</td>
                                             <td>010-1234-5678</td>
                                             <td>
@@ -138,9 +193,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>B213G64</td>
-                                            <td>주문자</td>
+                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문자</a></td>
                                             <td>2021.12.05</td>
                                             <td>010-1234-5678</td>
                                             <td>
@@ -161,9 +216,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chk"></td>
+                                            <td><input type="checkbox" name="chkBtn"></td>
                                             <td>A546</td>
-                                            <td>옥수수</td>
+                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">옥수수</a></td>
                                             <td>2021.12.05</td>
                                             <td>010-1234-5678</td>
                                             <td>
@@ -184,9 +239,9 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <button type="button" onclick="" value="insert" style="background-color:rgb(90, 142, 221); color:white;">등 록</button>
 	                                        <button type="button" onclick="" value="delete">삭 제</button>
                                         </td>
                                     </tr>
@@ -200,6 +255,34 @@
                 </footer>
             </div>
         </div>
+        
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+ 
+	      <!-- Modal content -->
+	      <div class="modal-content">
+	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">주문 내용</span></b></span></p>
+	                <p style="text-align: center; line-height: 1.5;"><br /></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구매자명 : </b></span>주문자</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>배송지 주소 : </b></span>경기도 수원시 XXXXXX</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주문 상품 : </b></span>고구마말랭이 10박스</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>기타 사항 : </b></span>없음</p>
+	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><br /></p>
+	                <p><br /></p>
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">
+	                <span class="pop_bt" style="font-size: 13pt;" >
+	                     닫기
+	                </span>
+	            </div>
+	      </div>
+	 
+	    </div>
+        
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/admin/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
