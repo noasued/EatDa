@@ -11,6 +11,7 @@
   		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   		<typeAlias type="com.project.eatda.dto.CartProductDto" alias="cartProductDto"/>
   		<typeAlias type="com.project.eatda.dto.ReviewDto" alias="reviewDto"/>
+  		<typeAlias type="com.project.eatda.dto.ProductLikeDto" alias="productLikeDto"/>
   	</typeAliases>
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>

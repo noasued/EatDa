@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
 
 @Repository
@@ -136,6 +137,46 @@ public class MarketDaoImpl implements MarketDao {
 			System.out.println("getReview DAO ERROR");
 			e.printStackTrace();
 		}
+		return list;
+	}
+
+	@Override
+	public int likeProductInsert(ProductLikeDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE_MARKET+"likeProductInsert", dto);
+		} catch (Exception e) {
+			System.out.println("likeProductInsert DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteProductLike(ProductLikeDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE_MARKET+"deleteProductLike", dto);
+		} catch (Exception e) {
+			System.out.println("deleteProductLike DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public List<CartProductDto> getCartList(String user_id) {
+		List<CartProductDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCartList", user_id);
+		} catch (Exception e) {
+			System.out.println("getCartList DAO ERROR");
+			e.printStackTrace();
+		}
+		
 		return list;
 	}
 	
