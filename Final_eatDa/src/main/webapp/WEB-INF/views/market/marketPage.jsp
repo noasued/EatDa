@@ -64,10 +64,7 @@ span {
 	width: 50%;
 	height: auto;
 	margin: 0 auto;
-	/*
-            background-color: rgb(247, 244, 239);
-            box-shadow:3px 3px 3px 3px rgb(247, 244, 239);
-            */
+	
 }
 
 .detail-wrap {
@@ -410,22 +407,82 @@ em {
 	function likeThis() {
 		let p_id = document.getElementById('p-id').innerText;
 		let p_name = document.getElementsByClassName('title')[0].innerText;
+		let img_path = $('#img').attr('src');
+		let flag = '';
 		
-		//db에 insert 하고 내가 찜한 상품에 append 해줘야함
-		if (confirm(p_name + ' 상품을 찜하실건가요?')){
-			alert('응 싫어~');
-			$.ajax(function() {
-				url:,
-				type:,
-				data:,
-				success:function(){
-					
-				},
-				error:function(msg){
-					
+		//이미 찜한 상품인지 체크
+		$('.like-img').each(function() {
+			if ($(this).attr('id') == p_id) {
+				if (confirm(p_name + " 상품은 이미 찜한 상품입니다. 취소하시겠습니까?")) {
+					deleteProductLike(p_id);
+					$(this).parent('.like-img-div').remove();
+					flag = 'true';
+				}
+			}
+		});
+		if(flag=='true') {return;}
+		
+		$.ajax({
+			url: "likeProductInsert.do",
+			type: "post",
+			data: p_id,
+			success:function(msg) {
+				if (msg == 'true') {
+					alert(p_name + " 상품을 찜했습니다! 오른쪽 '내가 찜한 상품' 에서 확인해보세요.");
+					$('.like-title').append(
+							"<div class='like-img-div'>" +
+							"<img id='" + p_id + "' class='like-img' src='" + img_path + "' onclick='goLikeProduct(this)'>" +
+							"</div>"
+					);
+				}
+			}
+		});
+	}
+	
+	function deleteProductLike(p_id) {
+		$.ajax({
+			url:"deleteProductLike.do",
+			type:"post",
+			data:p_id,
+			success:function(msg) {
+				if (msg === 'false') {
+					alert('취소 실패!');
+				}
+			}
+		});
+	}
+	
+	function putShoppingBag() {
+		let p_price = $('.right-info-desc').eq(0).children('span').eq(0).text();
+		let quantity = $('#quantity').text();
+		
+		let data = {
+			"p_id":document.getElementById('p-id').innerText,
+			"p_price":p_price*quantity,
+			"quantity":quantity
+		}
+		
+		if (confirm('해당 상품을 장바구니에 넣으시겠습니까?')) {
+			$.ajax({
+				url:"putShoppingBag.do",
+				type:"post",
+				data:JSON.stringify(data),
+				contentType:"application/json; charset=utf-8",
+				success:function(flag) {
+					let msg = (flag=='true'?'장바구니로 이동하시겠습니까?':'해당 상품은 이미 장바구니에 담겨있습니다. 장바구니로 이동하시겠습니까?') 
+					console.log(msg);
+					if (confirm(msg)) {
+						location.href = 'goShoppingBag.do';
+					}
 				}
 			});
 		}
+	}
+	function directPurchase() {
+		//바로 구매하기
+		let p_price = $('.right-info-desc').eq(0).children('span').eq(0).text();
+		let quantity = $('#quantity').text();
+		location.href = 'payment.do';
 	}
 
 </script>
@@ -468,8 +525,8 @@ em {
 					</div>
 				</div>
 				<div class="modal-footer" align="center">
-					<button type="button" class="btn btn-primary">장바구니에 담기</button>
-					<button type="button" class="btn btn-primary">바로 구매하기</button>
+					<button type="button" class="btn btn-primary" onclick="putShoppingBag()">장바구니에 담기</button>
+					<button type="button" class="btn btn-primary" onclick="directPurchase()">바로 구매하기</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">쇼핑 계속하기</button>
 				</div>
 			</div>
@@ -501,7 +558,8 @@ em {
 				<div class="div-top-section" style="margin-top: 10px;">
 					<div class="right-info-title">가격</div>
 					<div class="right-info-desc">
-						<span>${product.p_price}원</span>
+						<span>${product.p_price}</span>
+						<span>원</span>
 					</div>
 				</div>
 
