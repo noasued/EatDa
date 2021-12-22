@@ -1,5 +1,7 @@
 package com.project.eatda.controller;
 
+import java.util.concurrent.ExecutionException;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.eatda.biz.MemberBiz;
@@ -22,12 +26,29 @@ public class MemberController {
 	@Inject
 	MemberBiz memberBiz;
 	
+	//회원가입 폼
 	@RequestMapping("/regist_form.do")
 	public String mypageMain() {
 		System.out.println("regist_form page");
 		return "/login/login_regist_form";
 	}
 	
+	//아이디 중복체크
+	@ResponseBody
+	@RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
+	public int idCheck(UserDto dto) throws Exception{
+		System.out.println("id_check");
+		int result = memberBiz.idCheck(dto);
+		return result;
+	}
+	
+	//회원가입
+	@RequestMapping("/regist.do")
+	public String regist() {
+		return null;
+	}
+	
+	//로그인
 	@RequestMapping("/loginCheck.do")
 	public ModelAndView loginCheck(@ModelAttribute UserDto dto, HttpSession session) throws Exception{
 		
@@ -55,6 +76,7 @@ public class MemberController {
 		return mav;
 	}
 	
+	//로그아웃
 	@RequestMapping("logout.do")
 	public ModelAndView logout(HttpSession session) {
 		memberBiz.logout(session);
