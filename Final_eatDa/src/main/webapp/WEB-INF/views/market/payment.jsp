@@ -215,7 +215,7 @@
                     <div class="del-input-div">
                         <div class="box-gray title-box">주소</div>
                         <div class="del-second-div">
-                            <input type="text" name="name" class="input">
+                            <input type="text" name="name" class="input" disabled>
                         </div>
                     </div>
                     <div class="del-input-div">
@@ -238,25 +238,26 @@
                 </div>
                 <!-- 주문 상품 정보 -->
                 <div class="box-black">
-
+				<c:forEach var="dto" items="${list}">
                     <!-- 상품 한 줄 -->
                     <div class="box-gray product-row">
                         <div class="p-row-first">
-                            <img src="resources/images/market/list.png" alt="상품">
+                            <img src="r${dto.img_path}" alt="상품">
                         </div>
                         <div class="p-row-second">
-                            <span>뜨끈한 우거지탕 1인분</span>
+                            <span>${dto.p_name}</span>
                         </div>
                         <div class="p-row-third">
-                            <span>3</span>
+                            <span>${dto.cart_count}</span>
                             <span>개</span>
                         </div>
                         <div class="p-row-fourth">
-                            <span>42000</span>
+                            <span>${dto.cart_price}</span>
                             <span>&#8361;</span>
                         </div>
                     </div>
                     <!-- 상품 한 줄 끝 -->
+				</c:forEach>                   
                 </div>
 
                 <!-- 쿠폰 적용 섹션 -->

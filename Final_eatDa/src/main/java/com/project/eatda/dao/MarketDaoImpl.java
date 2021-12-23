@@ -179,6 +179,28 @@ public class MarketDaoImpl implements MarketDao {
 		
 		return list;
 	}
+
+	@Override
+	public int deleteProductBag(List<String> list) {
+		int idx = 0;
+		int count = 0;
+		
+		try {
+			CartProductDto dto = new CartProductDto();;
+			dto.setUser_id(list.get(list.size()-1));
+			
+			while (idx < list.size()-1) {
+				dto.setP_id(list.get(idx));
+				count += sqlSession.delete(NAMESPACE_MARKET+"deleteProductBag", dto);
+				idx++;
+			}
+		} catch (Exception e) {
+			System.out.println("deleteProductBag DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
 	
 	
 	

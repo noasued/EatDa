@@ -23,4 +23,7 @@ public interface MarketDao {
 	public int deleteProductLike(ProductLikeDto dto);
 
 	public List<CartProductDto> getCartList(String user_id);
+	
+	public int deleteProductBag(List<String> list);
+	
 }

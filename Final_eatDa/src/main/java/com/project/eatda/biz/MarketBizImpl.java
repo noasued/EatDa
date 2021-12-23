@@ -54,7 +54,6 @@ public class MarketBizImpl implements MarketBiz{
 	@Transactional
 	public int putShoppingBag(CartProductDto dto) {
 		int res = marketDao.putShoppingBag(dto);
-		System.out.println("Biz.putShoppingBag.res : " + res);
 		
 		return res;
 	}
@@ -81,5 +80,11 @@ public class MarketBizImpl implements MarketBiz{
 	@Override
 	public List<CartProductDto> getCartList(String user_id) {
 		return marketDao.getCartList(user_id);
+	}
+
+	@Override
+	public int deleteProductBag(List<String> list) {
+		int res = marketDao.deleteProductBag(list);
+		return res;
 	}
 }

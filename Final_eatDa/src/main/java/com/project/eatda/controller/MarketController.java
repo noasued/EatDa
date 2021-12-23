@@ -1,6 +1,7 @@
 package com.project.eatda.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -100,14 +101,13 @@ public class MarketController {
 		String[] sArr = data.split(",");
 		String p_id = sArr[0].substring(9, sArr[0].length()-1);
 		int p_price = Integer.parseInt(sArr[1].substring(10, sArr[1].length()));
-		int quantity = Integer.parseInt(sArr[2].substring(12,sArr[2].length()-2));
+		int quantity = Integer.parseInt(sArr[2].substring(13,sArr[2].length()-3));
 		
 		System.out.println("p_id : " + p_id + ", p_price : " + p_price + ", quantity : " + quantity);
 		CartProductDto cpDto = new CartProductDto(user_id,p_id,quantity,p_price,null,null);
 		//세션에서 user_ID 가져와야함 (위 DTO의 첫 번째 파라미터로 넣어줘야 함)
 		
 		int res = marketBiz.putShoppingBag(cpDto);
-		System.out.println("controller.res : "+res); 
 		
 		return res > 0? "true":"false";
 	}
@@ -150,11 +150,18 @@ public class MarketController {
 		//장바구니에서 뿌려줄 정보들 select 해오자.
 		logger.info("goShoppingBag");
 		List<CartProductDto> cart = marketBiz.getCartList(user_id);
-		for (CartProductDto dto : cart) {
-			System.out.println(dto);
-		}
+		
 		model.addAttribute("list", cart);
 		return "/market/shoppingBag";
+	}
+	
+	@RequestMapping(value="/deleteProductBag.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteProductBag(@RequestBody String data) {
+		logger.info("deleteProductLike, p_id : " + data);
+		int res = marketBiz.deleteProductBag(convertList(data));
+		
+		return "true";
 	}
 	
 	@RequestMapping("/orderSuccess.do")
@@ -164,11 +171,35 @@ public class MarketController {
 	}
 	
 	//결제 페이지에서 필요한 것 (유저 정보, 유저가 가지고 있는 쿠폰 종류, 장바구니에서 넘어올 데이터)
-	@RequestMapping("/payment.do")
-	public String test5() {
-		System.out.println("test5");
+	@RequestMapping("/makeOrder.do")
+	public String makeOrder(Model model) {
+		//전체 주문이기 때문에 골라서 가져올필요가 없잖아.
+		List<CartProductDto> cart = marketBiz.getCartList(user_id);
+		model.addAttribute("list", cart);
+		
 		return "/market/payment";
 	}
+	
+	public List<String> convertList(String data) {
+		List<String> list = new ArrayList<String>();
+		String temp = data.substring(10, data.length()-2);
+		String[] sarr = temp.split(",");
+		
+		for (int i = 0; i < sarr.length; i++) {
+			list.add(sarr[i].substring(1, sarr[i].length()-1));
+		}
+		list.add(user_id);
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
