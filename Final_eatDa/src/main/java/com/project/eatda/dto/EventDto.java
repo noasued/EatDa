@@ -2,6 +2,9 @@ package com.project.eatda.dto;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class EventDto {
 	private int event_no;
 	private String event_title;

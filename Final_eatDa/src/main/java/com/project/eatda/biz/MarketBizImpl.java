@@ -8,7 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.eatda.dao.MarketDao;
 import com.project.eatda.dto.CartProductDto;
+import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ProductLikeDto;
+import com.project.eatda.dto.ReviewDto;
 
 @Service
 public class MarketBizImpl implements MarketBiz{
@@ -52,8 +55,42 @@ public class MarketBizImpl implements MarketBiz{
 	@Transactional
 	public int putShoppingBag(CartProductDto dto) {
 		int res = marketDao.putShoppingBag(dto);
-		System.out.println("Biz.putShoppingBag.res : " + res);
 		
 		return res;
+	}
+
+	@Override
+	public List<ReviewDto> getReview(String p_id) {
+		return marketDao.getReview(p_id);
+	}
+
+	@Override
+	@Transactional
+	public int likeProductInsert(ProductLikeDto dto) {
+		int res = marketDao.likeProductInsert(dto);
+		return res;
+	}
+
+	@Override
+	@Transactional
+	public int deleteProductLike(ProductLikeDto dto) {
+		int res = marketDao.deleteProductLike(dto);
+		return res;
+	}
+
+	@Override
+	public List<CartProductDto> getCartList(String user_id) {
+		return marketDao.getCartList(user_id);
+	}
+
+	@Override
+	public int deleteProductBag(List<String> list) {
+		int res = marketDao.deleteProductBag(list);
+		return res;
+	}
+
+	@Override
+	public List<CouponDto> getCouponList(String user_id) {
+		return marketDao.getCouponList(user_id);
 	}
 }
