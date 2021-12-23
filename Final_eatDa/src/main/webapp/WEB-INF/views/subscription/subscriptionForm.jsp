@@ -19,6 +19,8 @@
             z-index: 1; 
             left: 0;
             top: 0;
+            width: 50%; 
+	        height: 100%; 
             overflow: auto; 
             background-color: rgb(0,0,0); 
             background-color: rgba(0,0,0,0.4); 
@@ -29,6 +31,7 @@
             margin: 20% auto;
             padding: 10%;
             border: 1px solid #888;
+            width: 10%;
         }
 
         .close {

@@ -17,8 +17,7 @@
         <script type="text/javascript">
         // 전체 선택 / 해제
 	        function selectAll(selectAll)  {
-	        	  const checkboxes 
-	        	       = document.getElementsByName('chkBtn');
+	        	  const checkboxes = document.getElementsByName('chkBtn');
 	        	  
 	        	  checkboxes.forEach((checkbox) => {
 	        	    checkbox.checked = selectAll.checked;
@@ -41,6 +40,14 @@
 		    function close_pop(flag) {
 		         $('#myModal').hide();
 		    };
+		    
+		// select option 값 변경
+		function changeSelect(e){
+			const text = e.options[e.selectedIndex].text;	//선택된 option의 text 값 가져오기
+			console.log(e.options);
+			
+			document.getElementById('selectResult').innerText = text;
+		}
         </script>
         
         <style>
@@ -177,7 +184,7 @@
                                             <td>악플이에요</td>
                                             <td>메롱</td>
                                             <td>
-                                                <select>
+                                                <select id="tmpSelect" name="tmpSelect" onchange="changeSelect(this.form)">
                                                     <option value="wait">처리 대기</option>
                                                     <option value="finish">처리 완료</option>
                                                 </select>

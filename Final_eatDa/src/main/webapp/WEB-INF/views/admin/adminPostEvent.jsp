@@ -149,7 +149,7 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">	
-                                        	<a class="adm_insert" href="#" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
+                                        	<a class="adm_insert" href="event-write.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
 	                                        <button type="button" onclick="" value="delete">삭 제</button>
                                         </td>
                                     </tr>

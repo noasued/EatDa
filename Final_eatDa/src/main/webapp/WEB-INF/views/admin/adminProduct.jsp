@@ -16,8 +16,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         function selectAll(selectAll)  {
-        	  const checkboxes 
-        	       = document.getElementsByName('chkBtn');
+        	  const checkboxes  = document.getElementsByName('chkBtn');
         	  
         	  checkboxes.forEach((checkbox) => {
         	    checkbox.checked = selectAll.checked;
@@ -151,9 +150,9 @@
                                             <td style='vertical-align:middle'>제육볶음(3팩)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P5.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td>덮밥 (1인분)</td>
+                                            <td style='vertical-align:middle'>덮밥 (1인분)</td>
                                         </tr>
                                         <tr>
                                             <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>

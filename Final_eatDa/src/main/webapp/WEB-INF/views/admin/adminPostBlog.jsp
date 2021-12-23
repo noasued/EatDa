@@ -16,8 +16,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         function selectAll(selectAll)  {
-        	  const checkboxes 
-        	       = document.getElementsByName('chkBtn');
+        	  const checkboxes = document.getElementsByName('chkBtn');
         	  
         	  checkboxes.forEach((checkbox) => {
         	    checkbox.checked = selectAll.checked;
@@ -140,7 +139,6 @@
                                     <tr>
                                         <td colspan="5">
                                             <button type="button" onclick="" value="delete">삭 제</button>
-                                        	<button type="button" onclick="" value="allChk" style="background-color:rgb(150, 150, 150);">전체 선택ㅁ</button>
                                         </td>
                                     </tr>                                   
                                 </table>

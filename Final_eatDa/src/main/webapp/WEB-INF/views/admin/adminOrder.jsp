@@ -16,14 +16,33 @@
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
-	        function selectAll(selectAll)  {
-	        	  const checkboxes 
-	        	       = document.getElementsByName('chkBtn');
-	        	  
-	        	  checkboxes.forEach((checkbox) => {
-	        	    checkbox.checked = selectAll.checked;
-	        	  })
-	        	}
+        function selectAll()  {
+        	  // 전체 체크박스
+        	  const checkboxes 
+        	    = document.querySelectorAll('input[name="chkBtn"]');
+        	  // 선택된 체크박스
+        	  const checked 
+        	    = document.querySelectorAll('input[name="chkBtn"]:checked');
+        	  // select all 체크박스
+        	  const selectAll 
+        	    = document.querySelector('input[name="selectall"]');
+        	  
+        	  if(checkboxes.length === checked.length)  {
+        	    selectAll.checked = true;
+        	  }else {
+        	    selectAll.checked = false;
+        	  }
+
+        	}
+
+        	function selectAll(selectAll)  {
+        	  const checkboxes 
+        	     = document.getElementsByName('chkBtn');
+        	  
+        	  checkboxes.forEach((checkbox) => {
+        	    checkbox.checked = selectAll.checked
+        	  })
+        	}
 	        
 		      //Modal 실행
 		        $(function(){
@@ -122,10 +141,10 @@
 	        /* Modal Content/Box */
 	        .modal-content {
 	            background-color: #fefefe;
-	            margin: 15% auto; /* 15% from the top and centered */
+	            margin: 15% auto;
 	            padding: 20px;
 	            border: 1px solid #888;
-	            width: 30%; /* Could be more or less, depending on screen size */                          
+	            width: 30%;                          
 	        }
 			
 		</style>
@@ -203,102 +222,103 @@
                         <br><br>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                주문 관리
+                                <i class="fas fa-table me-1"></i>주문 관리
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <col width="50px">
-                                    <thead>
-                                    	<tr></tr>
-                                        <tr>
-                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
-                                            <th>주문번호</th>
-                                            <th>주문자명</th>
-                                            <th>주문일자</th>
-                                            <th>연락처</th>
-                                            <th>배송 현황</th>
-                                            <th>진행 현황</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" name="RowCheck" value="${list.no }"></td>
-                                            <td>B213G64</td>
-                                            <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문인</a></td>
-                                            <td>2021.12.05</td>
-                                            <td>010-1234-5678</td>
-                                            <td>
-                                                <select>
-                                                    <option value="a">주문 완료</option>
-                                                    <option value="b">상품 준비중</option>
-                                                    <option value="c">배송지 출발</option>
-                                                    <option value="d">배송중</option>
-                                                    <option value="e">배송 완료</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select>
-                                                    <option value="">결제 대기</option>
-                                                    <option value="">결제 완료</option>
-                                                    <option value="">결제 취소</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>B213G64</td>
-                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문자</a></td>
-                                            <td>2021.12.05</td>
-                                            <td>010-1234-5678</td>
-                                            <td>
-                                                <select>
-                                                    <option value="a">주문 완료</option>
-                                                    <option value="b">상품 준비중</option>
-                                                    <option value="c">배송지 출발</option>
-                                                    <option value="d">배송중</option>
-                                                    <option value="e">배송 완료</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select>
-                                                    <option value="">결제 대기</option>
-                                                    <option value="">결제 완료</option>
-                                                    <option value="">결제 취소</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>A546</td>
-                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">옥수수</a></td>
-                                            <td>2021.12.05</td>
-                                            <td>010-1234-5678</td>
-                                            <td>
-                                                <select>
-                                                    <option value="a">주문 완료</option>
-                                                    <option value="b">상품 준비중</option>
-                                                    <option value="c">배송지 출발</option>
-                                                    <option value="d">배송중</option>
-                                                    <option value="e">배송 완료</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select>
-                                                    <option value="">결제 대기</option>
-                                                    <option value="">결제 완료</option>
-                                                    <option value="">결제 취소</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    <tr></tr>
-                                    <tr>
-                                        <td colspan="7">
-	                                        <button type="button" onclick="deleteValue();" value="delete">삭 제</button>
-                                        </td>
-                                    </tr>
-                                </table>
+                            	<form action="multidelete.jsp" method="post" id="multideleteform">
+	                                <table id="datatablesSimple">
+	                                    <col width="50px">
+	                                    <thead>
+	                                    	<tr></tr>
+	                                        <tr>
+	                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
+	                                            <th>주문번호</th>
+	                                            <th>주문자명</th>
+	                                            <th>주문일자</th>
+	                                            <th>연락처</th>
+	                                            <th>배송 현황</th>
+	                                            <th>진행 현황</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr>
+	                                            <td><input type="checkbox" name="RowCheck" value="${list.no }"></td>
+	                                            <td>B213G64</td>
+	                                            <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문인</a></td>
+	                                            <td>2021.12.05</td>
+	                                            <td>010-1234-5678</td>
+	                                            <td>
+	                                                <select>
+	                                                    <option value="a">주문 완료</option>
+	                                                    <option value="b">상품 준비중</option>
+	                                                    <option value="c">배송지 출발</option>
+	                                                    <option value="d">배송중</option>
+	                                                    <option value="e">배송 완료</option>
+	                                                </select>
+	                                            </td>
+	                                            <td>
+	                                                <select>
+	                                                    <option value="">결제 대기</option>
+	                                                    <option value="">결제 완료</option>
+	                                                    <option value="">결제 취소</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td><input type="checkbox" name="chkBtn"></td>
+	                                            <td>B213G64</td>
+	                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문자</a></td>
+	                                            <td>2021.12.05</td>
+	                                            <td>010-1234-5678</td>
+	                                            <td>
+	                                                <select>
+	                                                    <option value="a">주문 완료</option>
+	                                                    <option value="b">상품 준비중</option>
+	                                                    <option value="c">배송지 출발</option>
+	                                                    <option value="d">배송중</option>
+	                                                    <option value="e">배송 완료</option>
+	                                                </select>
+	                                            </td>
+	                                            <td>
+	                                                <select>
+	                                                    <option value="">결제 대기</option>
+	                                                    <option value="">결제 완료</option>
+	                                                    <option value="">결제 취소</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td><input type="checkbox" name="chkBtn"></td>
+	                                            <td>A546</td>
+	                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">옥수수</a></td>
+	                                            <td>2021.12.05</td>
+	                                            <td>010-1234-5678</td>
+	                                            <td>
+	                                                <select>
+	                                                    <option value="a">주문 완료</option>
+	                                                    <option value="b">상품 준비중</option>
+	                                                    <option value="c">배송지 출발</option>
+	                                                    <option value="d">배송중</option>
+	                                                    <option value="e">배송 완료</option>
+	                                                </select>
+	                                            </td>
+	                                            <td>
+	                                                <select>
+	                                                    <option value="">결제 대기</option>
+	                                                    <option value="">결제 완료</option>
+	                                                    <option value="">결제 취소</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                    </tbody>
+	                                    <tr></tr>
+	                                    <tr>
+	                                        <td colspan="7">
+		                                        <button type="button" onclick="deleteValue();" value="delete">삭 제</button>
+	                                        </td>
+	                                    </tr>
+	                                </table>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -317,7 +337,7 @@
 	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">주문 내용</span></b></span></p>
 	                <p style="text-align: center; line-height: 1.5;"><br /></p>
 	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구매자명 : </b></span>주문자</p>
-	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주문번호 : </b></span>B213G64</p>
 	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>배송지 주소 : </b></span>경기도 수원시 XXXXXX</p>
 	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
 	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주문 상품 : </b></span>고구마말랭이 10박스</p>
@@ -326,15 +346,9 @@
 	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
 	                <p style="text-align: left; line-height: 1.5;"><br /></p>
 	                <p><br /></p>
-	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">
-	                <span class="pop_bt" style="font-size: 13pt;" >
-	                     닫기
-	                </span>
-	            </div>
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</span></div>
 	      </div>
-	 
 	    </div>
-        
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/admin/js/scripts.js"></script>
