@@ -33,4 +33,14 @@ public class BlogBizImpl implements BlogBiz{
 	public int insert(BlogDto dto) {
 		return dao.insert(dto);
 	}
+	
+	@Override
+	public int delete(int blog_no) {
+		return dao.delete(blog_no);
+	}
+	
+	@Override
+	public int selectBlogNo(String blog_title) {
+		return dao.selectBlogNo(blog_title);
+	}
 }

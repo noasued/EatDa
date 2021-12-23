@@ -78,7 +78,7 @@
       <div class="blog-update__content-article">
         <form action="/blog-update.do" method="post">
         	<input type="hidden" name="blog_no" values="${dto.blog_no}">
-          <input type="text" name="blog_title" value="${dto.blog_no}">
+          <input type="text" name="blog_title" value="${dto.blog_title}">
 					<textarea class="summernote" id="summernote" name="blog_content">${dto.blog_content}</textarea>
 					<div class="blog-update__content-article__btns">
 						<input type="submit" name="update-submit-btn" value="수정 완료">
