@@ -3,6 +3,9 @@ package com.project.eatda.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.MarketBiz;
 import com.project.eatda.dto.CartProductDto;
+import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
+import com.project.eatda.dto.UserDto;
 
 @Controller
 public class MarketController {
@@ -99,9 +104,19 @@ public class MarketController {
 		//장바구니에 해당 상품이 담겨있는지 체크해야함.
 		logger.info("putShoppingBag, data : " + data);
 		String[] sArr = data.split(",");
-		String p_id = sArr[0].substring(9, sArr[0].length()-1);
-		int p_price = Integer.parseInt(sArr[1].substring(10, sArr[1].length()));
-		int quantity = Integer.parseInt(sArr[2].substring(13,sArr[2].length()-3));
+		
+		String p_id = sArr[0].substring(9, sArr[0].length()-1);;
+		int p_price = 0;
+		int quantity = 1;
+		
+		if (sArr.length == 2) {
+			p_price = Integer.parseInt(sArr[1].substring(11, sArr[1].length()-2));
+			
+		} else if (sArr.length == 3) {
+			p_price = Integer.parseInt(sArr[1].substring(10, sArr[1].length()));
+			quantity = Integer.parseInt(sArr[2].substring(12,sArr[2].length()-2));
+			
+		}
 		
 		System.out.println("p_id : " + p_id + ", p_price : " + p_price + ", quantity : " + quantity);
 		CartProductDto cpDto = new CartProductDto(user_id,p_id,quantity,p_price,null,null);
@@ -161,13 +176,7 @@ public class MarketController {
 		logger.info("deleteProductLike, p_id : " + data);
 		int res = marketBiz.deleteProductBag(convertList(data));
 		
-		return "true";
-	}
-	
-	@RequestMapping("/orderSuccess.do")
-	public String test4() {
-		System.out.println("test4");
-		return "/market/orderSuccess";
+		return res>0?"true":"false";
 	}
 	
 	//결제 페이지에서 필요한 것 (유저 정보, 유저가 가지고 있는 쿠폰 종류, 장바구니에서 넘어올 데이터)
@@ -180,6 +189,38 @@ public class MarketController {
 		return "/market/payment";
 	}
 	
+	@RequestMapping(value="/getUserInfo.do", method=RequestMethod.POST)
+	@ResponseBody
+	public UserDto getUserInfo(HttpServletRequest request) {
+		logger.info("getUserInfo");
+		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		return dto;
+	}
+	
+	@RequestMapping(value="/getCouponList.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<CouponDto> getCouponList(HttpServletRequest request) {
+		logger.info("getCouponList");
+		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		
+		List<CouponDto> list = marketBiz.getCouponList(dto.getUser_id());
+		
+		for(CouponDto coupon : list) {
+			System.out.print(coupon + " ");
+		}
+		
+		return list;
+	}
+	
+	@RequestMapping("/orderSuccess.do")
+	public String test4() {
+		System.out.println("test4");
+		return "/market/orderSuccess";
+	}
+	
+	
+	
+	
 	public List<String> convertList(String data) {
 		List<String> list = new ArrayList<String>();
 		String temp = data.substring(10, data.length()-2);
@@ -191,6 +232,15 @@ public class MarketController {
 		list.add(user_id);
 		
 		return list;
+	}
+	
+	public Map<String, CouponDto> convertMap(List<CouponDto> list) {
+		Map<String, CouponDto> map = new HashMap<String, CouponDto>();
+		
+		for (int i = 0; i < list.size(); i++) {
+			map.put(list.get(i).getCoupon_id(), list.get(i));
+		}
+		return map;
 	}
 	
 	

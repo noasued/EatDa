@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.eatda.dao.MarketDao;
 import com.project.eatda.dto.CartProductDto;
+import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
@@ -86,5 +87,10 @@ public class MarketBizImpl implements MarketBiz{
 	public int deleteProductBag(List<String> list) {
 		int res = marketDao.deleteProductBag(list);
 		return res;
+	}
+
+	@Override
+	public List<CouponDto> getCouponList(String user_id) {
+		return marketDao.getCouponList(user_id);
 	}
 }
