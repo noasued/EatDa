@@ -35,6 +35,17 @@
 	
 	<insert id="blogInsert" parameterType="blogDto">
 		INSERT INTO BLOG
-		VALUES(BLOG_NO_SEQ.NEXTVAL, #{blog_title}, #{blog_content}, #{blog_img}, SYSDATE)
+		VALUES(BLOG_NO_SEQ.NEXTVAL, 'ADMIN', #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'http://drive.google.com/uc?export=viewid=1qW1oV-SmBNqiWHj8wYxY5Pf0v2CctsJ8', SYSDATE)
 	</insert>
+	
+	<delete id="blogDelete" parameterType="int">
+		DELETE FROM BLOG
+		WHERE BLOG_NO=#{blog_no}
+	</delete>
+	
+	<select id="selectBlogNo" parameterType="String" resultType="blogDto">
+		SELECT BLOG_NO
+		FROM BLOG
+		WHERE BLOG_TITLE=#{blog_title}
+	</select>
 </mapper>

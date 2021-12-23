@@ -10,4 +10,6 @@ public interface BlogDao {
 	public BlogDto selectOne(int blog_no);
 	public int update(BlogDto dto);
 	public int insert(BlogDto dto);
+	public int delete(int blog_no);
+	public int selectBlogNo(String blog_title);
 }

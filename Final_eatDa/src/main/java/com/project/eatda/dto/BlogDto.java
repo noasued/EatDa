@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BlogDto {
-	private String blog_no;
+	private int blog_no;
 	private String user_id;
 	private String blog_title;
 	private String blog_content;
@@ -19,7 +19,7 @@ public class BlogDto {
 		super();
 	}
 	
-	public BlogDto(String blog_no, String user_id, String blog_title, String blog_content, int blog_count,
+	public BlogDto(int blog_no, String user_id, String blog_title, String blog_content, int blog_count,
 			int blog_like, String blog_img, Date regdate) {
 		super();
 		this.blog_no = blog_no;
@@ -32,10 +32,10 @@ public class BlogDto {
 		this.regdate = regdate;
 	}
 	
-	public String getBlog_no() {
+	public int getBlog_no() {
 		return blog_no;
 	}
-	public void setBlog_no(String blog_no) {
+	public void setBlog_no(int blog_no) {
 		this.blog_no = blog_no;
 	}
 	public String getUser_id() {

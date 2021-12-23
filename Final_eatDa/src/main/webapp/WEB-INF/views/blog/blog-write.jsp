@@ -88,11 +88,11 @@
 
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
-        <form action="/blog-write.do" method="post">
-          <input type="text" name="blog_title" placeholder="제목을 입력하세요.">
+        <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
+          <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
 					<textarea class="summernote" id="summernote" name="editordata"></textarea>
 					<div class="blog-write__content-article__btns">
-						<input type="submit" name="write-submit-btn" value="작성 완료">
+						<input type="button" onclick="submitBtn()" name="write-submit-btn" value="작성 완료">
 						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='blog.do'">
         	</div>
         </form>
@@ -113,6 +113,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
 
   <script type="text/javascript">
+  /* function doAlert(){
+		alert("글 작성이 완료되었습니다.");
+	} */
+	function submitBtn(){
+		var blog_title=$('#title').val();
+		var blog_content=$('#summernote').val();
+		console.log(blog_title);
+		console.log(blog_content);
+		location.href="blog-write-lala.do?blog_title="+blog_title+"&blog_content="+blog_content;
+		
+	}
 	// summernote
 	$(document).ready(function() {
 		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
@@ -150,41 +161,35 @@
 				    ['custom', ['imageTitle']],
 				  ]
 				},
-				  
-			  callbacks: {	//여기 부분이 이미지를 첨부하는 부분
-					onImageUpload : function(files) {
-						uploadSummernoteImageFile(files[0],this);
-					},
-					onPaste: function (e) {
-						var clipboardData = e.originalEvent.clipboardData;
-						if (clipboardData && clipboardData.items && clipboardData.items.length) {
-							var item = clipboardData.items[0];
-							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-								e.preventDefault();
-							}
-						}
-					}
-				}
+				
+				/* //이미지 업로드를 위한 콜백함수
+			  callbacks : { 
+          onImageUpload : function(files, editor, welEditable) {
+          	// 파일 업로드(다중업로드를 위해 반복문 사용)
+            for(var i = files.length -1; i>=0; i--) {
+		        	sendFile(files[i], this);
+		        }
+          }
+        } */
 		});
-		
-		//이미지 파일 업로드
-		function uploadSummernoteImageFile(file, editor) {
-			data = new FormData();
-			data.append("file", file);
-			$.ajax({
-				data : data,
-				type : "POST",
-				url : "/uploadSummernoteImageFile",
-				contentType : false,
-				processData : false,
-				success : function(data) {
-		       	//항상 업로드된 파일의 url이 있어야 한다.
-						$(editor).summernote('insertImage', data.url);
-				}
-			});
-		}
-		
 	});
+	/* //이미지 파일 업로드
+	function sendFile(file, editor) {
+		var data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/resources/summernoteImageFiles",
+			contentType : false,
+			processData : false,
+			success : function(data) {
+				console.log(data);
+				console.log(editor);
+				$(editor).summernote('insertImage', data.url);
+			}
+		});
+	} */
 	
 	</script>
 	
