@@ -336,9 +336,9 @@
 				array.push($(this).text());
 			});
 		*/
-		let length = $('.order_product').children().length;
+		let product = document.getElementsByClassName('start-row');
 		
-		if (length == 0) {
+		if (product.length == 0) {
 			alert('장바구니에 담긴 상품이 없습니다.');
 			return;
 		}

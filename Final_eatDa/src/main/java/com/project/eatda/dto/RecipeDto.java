@@ -1,16 +1,18 @@
 package com.project.eatda.dto;
 
-import java.sql.Date;
+import java.util.Date;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RecipeDto {
 
 	private int recipe_no;
 	private String recipe_title;
 	private String recipe_category;
 	private String recipe_content;
-	private String recipe_count; //Á¶È¸¼ö
-	private String recipe_image; //½æ³×ÀÏ°æ·Î
-	private String recipe_enabled; //»èÁ¦¾ßºÎ
+	private String recipe_count; //ï¿½ï¿½È¸ï¿½ï¿½
+	private String recipe_image; //ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½
+	private String recipe_enabled; //ï¿½ï¿½ï¿½ï¿½ï¿½ßºï¿½
 	private Date regdate; //
 	public RecipeDto() {
 		super();

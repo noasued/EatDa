@@ -125,4 +125,14 @@ public class UserDto {
 		this.user_mailing = user_mailing;
 	}
 
+	@Override
+	public String toString() {
+		return "UserDto [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_addr="
+				+ user_addr + ", user_email=" + user_email + ", user_phone=" + user_phone + ", user_role=" + user_role
+				+ ", user_img=" + user_img + ", user_penalty=" + user_penalty + ", user_enable=" + user_enable
+				+ ", user_mailing=" + user_mailing + "]";
+	}
+	
+	
+
 }

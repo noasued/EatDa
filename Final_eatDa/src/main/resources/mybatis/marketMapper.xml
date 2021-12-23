@@ -91,4 +91,11 @@
 		WHERE P_ID = #{p_id} AND USER_ID = #{user_id}
 	</delete>
 	
+	<select id="getCouponList" resultType="couponDto" parameterType="string">
+		SELECT COUPON_ID, USER_ID, COUPON_NAME, COUPON_DES, COUPON_RATE, COUPON_TERM
+		FROM COUPON_LIST 
+		JOIN COUPON USING(COUPON_ID)
+		WHERE USER_ID = #{user_id}
+	</select>
+	
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.CartProductDto;
+import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
@@ -200,6 +201,19 @@ public class MarketDaoImpl implements MarketDao {
 		}
 		
 		return count;
+	}
+
+	@Override
+	public List<CouponDto> getCouponList(String user_id) {
+		List<CouponDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCouponList", user_id);
+		} catch (Exception e) {
+			System.out.println("getCouponList DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	
