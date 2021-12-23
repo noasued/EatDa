@@ -85,14 +85,28 @@ div span{
         height: 18px;
     }
 
-    .user_phone_chk{
+    .user_email_chk{
         width: 75px;
         height: 18px;
     }
     
-    .user_phone{
+    .user_eamil{
     	margin-top: 5px;
     }
+    
+    .user_email_injeong{
+    	width: 20px;
+    	margin-top: 5px;
+    	
+    }
+    
+    #user_email_injeong_false{
+    	background-color:#ebebe4;
+	}
+	 
+	#user_email_injeong_true{
+	    background-color:white;
+	}
 
     .regist_btn{
         text-align: center;
@@ -123,12 +137,12 @@ div span{
         font-weight: bold;
     }
     
-    #id_chk_available, #pw_chk_available{
+    #id_chk_available, #pw_chk_available, #email_chk_available{
     	display: none;
     	color: blue;
     }
     
-    #id_chk_unavailable, #id_chk_blank, #pw_chk_unavailable{
+    #id_chk_unavailable, #id_chk_blank, #pw_chk_unavailable, #email_chk_blank, #email_chk_unavailable{
    		display: none;
     	color: red;
     }
@@ -194,6 +208,54 @@ div span{
 			}
 		});
 	});
+	
+	var code = "";	//이메일전송 인증번호 저장하기 위한 코드
+	
+	//이메일 인증
+	function emailCheck(){
+		
+		 var user_email = $(".user_email").val();        // 입력한 이메일
+		 var checkBox = $(".user_email_injeong");		 // 인증번호 입력란
+
+		 $.ajax({
+		 	type:"GET",
+		 	url:"emailCheck.do?user_email=" + user_email,
+		 	success:function(data){
+		 		//console.log("data: " + data);
+		 		
+		 		if(user_email != ''){
+		 			$("#email_chk_blank").hide();
+			 		checkBox.attr("disabled", false);
+			 		checkBox.attr("id","user_email_injeong_true");
+			 		$(".user_email_injeong").focus();
+			 		code = data;
+		 		}else{
+		 			$("#email_chk_blank").show();
+		 		}
+		 	}
+		                
+		 });
+	}
+	
+	//인증번호 비교
+	$(function(){
+		
+		$(".user_email_injeong").keyup(function(){
+			var inputCode = $(".user_email_injeong").val();		//입력코드
+			
+			$("#email_chk_available").hide();
+			$("#email_chk_unavailable").hide();
+			
+			if(inputCode == code){
+				$("#email_chk_available").show();
+				$("#email_chk_unavailable").hide();
+			}else{
+				$("#email_chk_unavailable").show();
+				$("#email_chk_available").hide();
+			}
+		});
+	});
+	
 </script>
 
 <!-- 카카오 주소 api -->
@@ -291,7 +353,14 @@ div span{
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td><input type="text" class="user_email" name="user_email" required="required" placeholder="이메일을 입력하세요." onclick="idChkConfirm();"></td>
+                        <td>
+                        	<input type="text" class="user_email" name="user_email" required="required" placeholder="이메일을 입력하세요.">
+                        	<input type="button" class="user_email_chk" value="인증번호 발급" onclick="emailCheck();">
+                        	<input type="text" class="user_email_injeong" name="user_email_injeong" id="user_email_injeong_false" required="required" disabled="disabled"><br>
+                        	<span id="email_chk_blank">이메일을 입력하세요.</span>
+                        	<span id="email_chk_available">인증번호가 일치합니다.</span>
+                            <span id="email_chk_unavailable">인증번호가 일치하지 않습니다.</span>
+                        </td>
                     </tr>
                     <tr>
                         <th>메일 수신</th>
