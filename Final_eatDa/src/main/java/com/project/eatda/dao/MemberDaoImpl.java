@@ -27,6 +27,11 @@ public class MemberDaoImpl implements MemberDao{
 	public void logout(HttpSession session) {
 		
 	}
+
+	@Override
+	public int idCheck(UserDto dto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE_MEMBER + "idCheck", dto);
+	}
 	
 
 }

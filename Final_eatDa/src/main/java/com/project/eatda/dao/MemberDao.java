@@ -14,4 +14,7 @@ String NAMESPACE_MEMBER = "mymember.";
 
 	//로그아웃
 	public void logout(HttpSession session);
+	
+	//아이디 중복체크
+	public int idCheck(UserDto dto) throws Exception;
 }

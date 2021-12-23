@@ -26,6 +26,13 @@ public class MemberBizImpl implements MemberBiz{
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
+
+	//아이디 중복체크
+	@Override
+	public int idCheck(UserDto dto) throws Exception {
+		return memberDao.idCheck(dto);
+	}
+	
 	
 	
 
