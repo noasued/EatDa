@@ -11,5 +11,8 @@ public interface MemberBiz {
 	
 	//로그아웃
 	public void logout(HttpSession session);
+	
+	//아이디 중복체크
+	public int idCheck(UserDto dto) throws Exception;
 
 }

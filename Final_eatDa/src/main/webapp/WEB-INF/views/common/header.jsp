@@ -92,7 +92,7 @@
 		             <li class="nav-sub__mypage"><a href="mypage.do">마이페이지</a></li>
 		             <li class="nav-sub__subscription"><a href="mypage_subscription.do">구독내역</a></li>
 		             <li class="nav-sub__like"><a href="mypage_like.do">L I K E</a></li>
-		             <li class="nav-sub__subscription"><a href="#">장바구니</a></li>
+		             <li class="nav-sub__subscription"><a href="goShoppingBag.do">장바구니</a></li>
 		             <li class="nav-sub__coupon"><a href="mypage_coupon.do">쿠폰함</a></li>
 		          </ul>
 	          </li>

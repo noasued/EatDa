@@ -52,7 +52,7 @@
 
     .bottom-btn {
         width: 30%;
-        height: 100%;
+        height: 120%;
     }
 
     .order-middle {
@@ -214,6 +214,13 @@
 				$('#m-check').attr('src','resources/images/market/check.png');
 			}
 		});
+		
+		let totalPrice = 0;
+		$('.right-col-price').each(function() {
+			totalPrice += Number($(this).children().eq(0).text());
+		})
+		
+		$('#totalPrice').text(totalPrice);
 	}
 	
 	function leftButton(object) {
@@ -283,28 +290,64 @@
 	
 	//선택삭제 메서드
 	function choiceDelete() {
+		let array = new Array();
+		if($('input:checkbox[name="checkbox"]:checked').length == 0) {
+			alert('선택하신 상품이 없습니다.');
+			return;
+		}
 		if(confirm('선택하신 상품을 장바구니에서 제거 하시겠습니까?')) {
-			if($('input:checkbox[name="checkbox"]:checked').length == 0) {
-				alert('선택하신 상품이 없습니다.');
-				return;
-			}
 			$('input:checkbox[name="checkbox"]').each(function() {
 				if (this.checked==true) {
-					console.log($(this).parents('.start-row'));
+					let price = $(this).parents('.left-col').siblings('.right-col').children('.right-col-price').children('#each-price').text();
+					let totalPrice = $('#totalPrice').text();
+					$('#totalPrice').text(totalPrice-price);
 					$(this).parents('.start-row').remove();
+					array.push($(this).siblings('.p-id').text());
 				}
 			});
 		}
 		
+		let data = {
+			"array":array
+		}
+		
+		$.ajax({
+			url:"deleteProductBag.do",
+			type:"post",
+			contentType:"application/json; charset=utf-8",
+			data:JSON.stringify(data),
+			success:function(msg) {
+				//삭제완료.
+				console.log(msg);
+			}
+		});
+		
 	}
-	
-	
-</script>
-
-<script type="text/javascript">
 	function goMarketMain() {
 		location.href='marketMain.do'
 	}
+	
+	function makeOrder() {
+		/*
+		let idArray = document.getElementsByClassName('p-id');
+			let array = new Array();
+			
+			$(idArray).each(function() {
+				array.push($(this).text());
+			});
+		*/
+		let product = document.getElementsByClassName('start-row');
+		
+		if (product.length == 0) {
+			alert('장바구니에 담긴 상품이 없습니다.');
+			return;
+		}
+		
+		if (confirm('위 상품들을 주문하시겠습니까?')) {
+			location.href='makeOrder.do';
+		}
+	}
+	
 </script>
 
 </head>
@@ -314,7 +357,6 @@
 		<%@ include file="../common/header.jsp"%>
 	</div>
 	
-
 	<div class="container wrap">
 
         <div class="row rows-width order-title" style="margin: 0 auto; margin-bottom:60px;">
@@ -350,104 +392,38 @@
             </div>
         </div>
 
-        <!-- row틀을 만들고 jstl로 추가하는 식으로 만들자. -->
         <div class="row rows-width order-product" style="margin: 0 auto;">
-
-            <!-- 줄 시작 -->
-            <div class="start-row">
-                <div class="col-lg-8 left-col">
-                    <div class="left-col-check">
-						<input type="checkbox" class="check-img" name="checkbox">
-                    </div>
-                    <div class="left-col-img">
-                        <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
-                    </div>
-                    <div class="left-col-title">
-                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~~~
-                    </div>
-                </div>
-                <div class="col-lg-4 right-col">
-                    <!-- 수량선택 -->
-                    <div class="right-col-quantity">
-                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
-                        <span id="quantity" style="font-weight:bold;">1</span>&nbsp;
-                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
-                    </div>
-
-                    <!-- 가격 -->
-                    <div class="right-col-price">
-                        <span>14000</span>
-                        <span>원</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 줄 종료 -->
-
-
-            <!-- 줄 시작 -->
-            <div class="start-row">
-                <div class="col-lg-8 left-col">
-                    <div class="left-col-check">
-                    	<input type="checkbox" class="check-img" name="checkbox">
-                    </div>
-                    <div class="left-col-img">
-                        <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
-                    </div>
-                    <div class="left-col-title">
-                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
-                    </div>
-                </div>
-                <div class="col-lg-4 right-col">
-                    <!-- 수량선택 -->
-                    <div class="right-col-quantity">
-                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
-                        <span id="quantity" style="font-weight:bold;">1</span>&nbsp;
-                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
-                    </div>
-
-                    <!-- 가격 -->
-                    <div class="right-col-price">
-                        <span>14000</span>
-                        <span>원</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 줄 종료 -->
-
-
-            <!-- 줄 시작 -->
-            <div class="start-row">
-                <div class="col-lg-8 left-col">
-                    <div class="left-col-check">
-                    	<input type="checkbox" class="check-img" name="checkbox">
-                    </div>
-                    <div class="left-col-img">
-                        <img src="resources/images/market/shot.png" alt="상품 이미지" class="product-img">
-                    </div>
-                    <div class="left-col-title">
-                        뜨끈한 우거지탕 1인분~~뜨끈한 우거지탕 1인분~~
-                    </div>
-                </div>
-                <div class="col-lg-4 right-col">
-                    <!-- 수량선택 -->
-                    <div class="right-col-quantity">
-                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
-                        <span id="quantity" style="font-weight:bold;">1</span>&nbsp;
-                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
-                    </div>
-
-                    <!-- 가격 -->
-                    <div class="right-col-price">
-                        <span>14000</span>
-                        <span>원</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 줄 종료 -->
-
-
-
-
+        	<!-- 줄 시작 -->
+			<c:forEach var="dto" items="${list}">
+				<div class="start-row">
+	                <div class="col-lg-8 left-col">
+	                    <div class="left-col-check">
+							<input type="checkbox" class="check-img" name="checkbox">
+							<span class="p-id" style="display:none;">${dto.p_id}</span>
+	                    </div>
+	                    <div class="left-col-img">
+	                        <img src="${dto.img_path}" alt="상품 이미지" class="product-img">
+	                    </div>
+	                    <div class="left-col-title">
+	                        ${dto.p_name}
+	                    </div>
+	                </div>
+	                <div class="col-lg-4 right-col">
+	                    <!-- 수량선택 -->
+	                    <div class="right-col-quantity">
+	                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
+	                        <span id="quantity" style="font-weight:bold;">${dto.cart_count}</span>&nbsp;
+	                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
+	                    </div>
+	
+	                    <!-- 가격 -->
+	                    <div class="right-col-price">
+	                        <span id="each-price">${dto.cart_price}</span>
+	                        <span>원</span>
+	                    </div>
+	                </div>
+	            </div>
+			</c:forEach>
         </div>
 
         <!-- 총 가격 -->
@@ -456,7 +432,7 @@
                 총 결제 금액
             </div>
             <div class="order-total-price">
-                <span id="totalPrice">42000</span>
+                <span id="totalPrice"></span>
                 <span>원</span>
             </div>
         </div>
@@ -464,7 +440,7 @@
         <!-- 하단 버튼 2개 -->
         <div class="row rows-width order-button" style="margin: 0 auto; margin-top:5%;">
             <div class="col-lg-12">
-                <button class="btn btn-primary bottom-btn" onclick="">주문하기</button>
+                <button class="btn btn-primary bottom-btn" onclick="makeOrder()">주문하기</button>
                 <button class="btn btn-primary bottom-btn" onclick="goMarketMain()">쇼핑 계속하기</button>
             </div>
         </div>

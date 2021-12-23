@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.CartProductDto;
+import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
 
 @Repository
@@ -134,6 +136,81 @@ public class MarketDaoImpl implements MarketDao {
 			list = sqlSession.selectList(NAMESPACE_MARKET+"getReview", p_id);
 		} catch (Exception e) {
 			System.out.println("getReview DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int likeProductInsert(ProductLikeDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE_MARKET+"likeProductInsert", dto);
+		} catch (Exception e) {
+			System.out.println("likeProductInsert DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteProductLike(ProductLikeDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE_MARKET+"deleteProductLike", dto);
+		} catch (Exception e) {
+			System.out.println("deleteProductLike DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public List<CartProductDto> getCartList(String user_id) {
+		List<CartProductDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCartList", user_id);
+		} catch (Exception e) {
+			System.out.println("getCartList DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int deleteProductBag(List<String> list) {
+		int idx = 0;
+		int count = 0;
+		
+		try {
+			CartProductDto dto = new CartProductDto();;
+			dto.setUser_id(list.get(list.size()-1));
+			
+			while (idx < list.size()-1) {
+				dto.setP_id(list.get(idx));
+				count += sqlSession.delete(NAMESPACE_MARKET+"deleteProductBag", dto);
+				idx++;
+			}
+		} catch (Exception e) {
+			System.out.println("deleteProductBag DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+
+	@Override
+	public List<CouponDto> getCouponList(String user_id) {
+		List<CouponDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCouponList", user_id);
+		} catch (Exception e) {
+			System.out.println("getCouponList DAO ERROR");
 			e.printStackTrace();
 		}
 		return list;
