@@ -86,5 +86,9 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<delete id="deleteProductBag" parameterType="cartProductDto">
+		DELETE FROM CART_PRODUCT
+		WHERE P_ID = #{p_id} AND USER_ID = #{user_id}
+	</delete>
 	
 </mapper>
