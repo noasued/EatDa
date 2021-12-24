@@ -40,18 +40,6 @@ public class BlogDaoImpl implements BlogDao{
 	}
 	
 	@Override
-	public int update(BlogDto dto) {
-		int res = 0;
-		try {
-			res = sqlSession.update(NAMESPACE+"blogUpdate",dto);
-		} catch (Exception e) {
-			System.out.println("[error] : update");
-			e.printStackTrace();
-		}
-		return res;
-	}
-	
-	@Override
 	public int insert(BlogDto dto) {
 		int res = 0;
 		try {
@@ -64,12 +52,13 @@ public class BlogDaoImpl implements BlogDao{
 	}
 	
 	@Override
-	public int delete(int blog_no) {
+	public int update(BlogDto dto) {
 		int res = 0;
 		try {
-			res = sqlSession.delete(NAMESPACE+"blogDelete",blog_no);
+			res = sqlSession.update(NAMESPACE+"blogUpdate",dto);
+			System.out.println("update dao : update blog where blog_no :"+dto.getBlog_no());
 		} catch (Exception e) {
-			System.out.println("[error] : delete");
+			System.out.println("[error] : update");
 			e.printStackTrace();
 		}
 		return res;
@@ -86,5 +75,18 @@ public class BlogDaoImpl implements BlogDao{
 			e.printStackTrace();
 		}
 		return dto.getBlog_no();
+	}
+	
+	@Override
+	public int delete(int blog_no) {
+		int res = 0;
+		try {
+			res = sqlSession.delete(NAMESPACE+"blogDelete",blog_no);
+			System.out.println("delete dao : delete blog where blog_no :"+blog_no);
+		} catch (Exception e) {
+			System.out.println("[error] : delete");
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

@@ -19,8 +19,23 @@
 	</select>
 	
 	<select id="eventDetail" resultType="eventDto" parameterType="int">
-		SELECT EVENT_TITLE, EVENT_CONTENT, EVENT_IMG, REGDATE
+		SELECT EVENT_NO, EVENT_TITLE, EVENT_CONTENT, EVENT_IMG, REGDATE
 		FROM EVENT
 		WHERE EVENT_NO = #{event_no}
 	</select>
+	
+	<insert id="eventInsert" parameterType="eventDto">
+		INSERT INTO EVENT
+		VALUES(EVENT_NO_SEQ.NEXTVAL,#{event_title}, #{event_content}, #{event_img}, SYSDATE)
+	</insert>
+	
+	
+	
+	<select id="selectEventNo" parameterType="String" resultType="eventDto">
+		SELECT EVENT_NO FROM EVENT WHERE EVENT_TITLE=#{event_title}
+	</select>
+	
+	<delete id="eventDelete" parameterType="int">
+		DELETE FROM EVENT WHERE EVENT_NO=#{event_no}
+	</delete>
 </mapper>

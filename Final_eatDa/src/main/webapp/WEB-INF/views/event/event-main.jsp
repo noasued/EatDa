@@ -67,7 +67,7 @@ body{
 
     <div class="event-article">
       <div class="event-write-btn">
-        <input type="button" value="글쓰기" onclick="location.href='event-write.do'">
+        <input type="button" value="글쓰기" onclick="location.href='event-writeform.do'">
       </div>
 
       <!-- event list -->

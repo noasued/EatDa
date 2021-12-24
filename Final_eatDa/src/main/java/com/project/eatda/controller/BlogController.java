@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.dto.BlogDto;
@@ -30,63 +31,54 @@ public class BlogController {
 	@RequestMapping("/blog-detail.do")
 	public String detail(Model model, int blog_no) {
 		logger.info("Blog detail page");
-		System.out.println("blog.do:"+blog_no);
+		System.out.println("blog.do: "+blog_no);
 		model.addAttribute("dto", biz.selectOne(blog_no));
 		return "/blog/blog-detail";
 	}
 	
 	// 글 작성 페이지
-	@RequestMapping(value="/blog-write.do", method=RequestMethod.GET)
+	@RequestMapping(value="/blog-writeform.do", method=RequestMethod.GET)
 	public String write() {
-		logger.info("Blog write page");
+		logger.info("Blog write form page");
 		return "/blog/blog-write";
 	}
 	
-	@RequestMapping("/blog-write-lala.do")
+	@RequestMapping("/blog-write.do")
 	public String write(BlogDto dto) {
 		logger.info("Blog write page - post");
 		System.out.println(dto.toString());
 		biz.insert(dto);
-		int res = biz.selectBlogNo(dto.getBlog_title());
+		int blogNo = biz.selectBlogNo(dto.getBlog_title());
 		
-		return "redirect:blog-detail.do?blog_no="+res;
+		return "redirect:blog-detail.do?blog_no="+blogNo;
 		
-		
-//		if(res>0) {
-//		} else {
-//			return "redirect:/blog-write.do";
-//		}
 	}
 	
 	// 글 수정
-	@RequestMapping("/blog-updateform.do")
+	@RequestMapping(value="/blog-updateform.do", method=RequestMethod.GET)
 	public String updateForm(Model model, int blog_no) {
 		logger.info("Blog update form page");
+		System.out.println("update -> "+blog_no);
 		model.addAttribute("dto",biz.selectOne(blog_no));
 		return "/blog/blog-update";
 	}
 	
 	@RequestMapping("/blog-update.do")
 	public String updateForm(BlogDto dto) {
-		logger.info("Blog update result");
-		int res = biz.update(dto);
-		if(res>0) {
-			return "redirect:blog-detail.do?blog_no"+dto.getBlog_no();
-		} else {
-			return "redirect:blog-updateform.do?blog_no"+dto.getBlog_no();
-		}
+		logger.info("Blog update result - post");
+		System.out.println(dto.toString());
+		biz.update(dto);
+		
+		return "redirect:blog-detail.do?blog_no="+dto.getBlog_no();
+		
 	}
 	
 	// 글 삭제
-	@RequestMapping("/blog-delete.do")
+	@RequestMapping(value="/blog-delete.do", method=RequestMethod.GET)
 	public String delete(int blog_no) {
 		logger.info("Blog delete");
-		int res = biz.delete(blog_no);
-		if(res>0) {
-			return "redirect:blog.do";
-		}else {
-			return "redirect:blog_detail,do?blog_no="+blog_no;
-		}
+		biz.delete(blog_no);
+		return "redirect:blog.do";
 	}
 
 }
