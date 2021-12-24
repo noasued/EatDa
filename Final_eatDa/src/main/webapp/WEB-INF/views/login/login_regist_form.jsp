@@ -181,14 +181,14 @@ div span{
 	
 	//아이디 중복체크 확인
 	function idChkConfirm(){
-		var chk = document.getElementsByName("id")[0].title;
+		var chk = document.getElementById("id").title;
 		if(chk=="n"){
-			alert("아이디 중복체크를 해주세요");
-			document.getElementsByName("id")[0].focus();
+			alert("아이디 중복체크를 해주세요.");
+			document.getElementById("id").focus();
 		}
 	}
 	
-	//비밀번호 일치 확인
+	//비밀번호 일치
 	$(function(){
 		$("#pw_chk_available").hide();
 		$("#pw_chk_unavailable").hide();
@@ -201,6 +201,7 @@ div span{
 				if(pw == pw_chk){
 					$("#pw_chk_available").show();
 					$("#pw_chk_unavailable").hide();
+					$("#pw").attr("title", "y");
 				}else{
 					$("#pw_chk_available").hide();
 					$("#pw_chk_unavailable").show();
@@ -208,6 +209,15 @@ div span{
 			}
 		});
 	});
+	
+	//비밀번호 일치 확인
+	function pwChkConfirm(){
+		var chk = document.getElementById("pw").title;
+		if(chk=="n"){
+			alert("비밀번호를 확인해주세요.");
+			document.getElementById("pw").focus();
+		}
+	}
 	
 	var code = "";	//이메일전송 인증번호 저장하기 위한 코드
 	
@@ -249,12 +259,62 @@ div span{
 			if(inputCode == code){
 				$("#email_chk_available").show();
 				$("#email_chk_unavailable").hide();
+				$("#user_email").attr("title", "y");
 			}else{
 				$("#email_chk_unavailable").show();
 				$("#email_chk_available").hide();
 			}
 		});
 	});
+	
+	//인증번호 일치 확인
+	function emailChkConfirm(){
+		var chk = document.getElementById("user_email").title;
+		if(chk=="n"){
+			alert("이메일 인증을 해주세요.");
+			document.getElementById("user_email").focus();
+		}
+	}
+	
+	
+	//null값 방지
+	$(document).ready(function(){
+	
+		$("#submit").on("click", function(){
+			if($("#id").val()==""){
+				alert("아이디를 입력해주세요.");
+				$("#id").focus();
+				return false;
+			}
+			if($("#user_name").val()==""){
+				alert("이름을 입력해주세요.");
+				$("#user_name").focus();
+				return false;
+			}
+			if($("#pw").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#pw").focus();
+				return false;
+			}
+			if($("#user_email").val()==""){
+				alert("이메일을 입력해주세요.");
+				$("#user_email").focus();
+				return false;
+			}
+			if($("#user_addr").val()==""){
+				alert("주소 입력해주세요.");
+				$("#user_addr").focus();
+				return false;
+			}
+			if($("#user_phone").val()==""){
+				alert("핸드폰 번호를 입력해주세요.");
+				$("#user_phone").focus();
+				return false;
+			}
+
+		});
+	
+	})
 	
 </script>
 
@@ -294,14 +354,14 @@ div span{
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("user_addr1").value = extraAddr;
+                    document.getElementById("user_addr").value = extraAddr;
                 
                 } else {
-                    document.getElementById("user_addr1").value = '';
+                    document.getElementById("user_addr").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("user_addr1").value = addr;
+                document.getElementById("user_addr").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("user_addr2").focus();
             }
@@ -320,7 +380,7 @@ div span{
                 <hr>
             </div>
             <div class="regist_form">
-            <form action="regist.do" method="post">
+            <form action="memberRegist.do" method="post">
                 <table width="550px">
                     <tr>
                         <col width="150px"> <col width="300px">
@@ -328,7 +388,7 @@ div span{
                     <tr>
                         <th>아이디</th>
                         <td>
-                            <input type="text" class="user_id" name="id" id="id" title="n" required="required" placeholder="아이디를 입력하세요." autofocus>
+                            <input type="text" class="user_id" name="user_id" id="id" title="n" required="required" placeholder="아이디를 입력하세요." autofocus>
                             <input type="button" class="user_id_chk" value="중복 확인" onclick="idCheck();"><br>
                             <span id="id_chk_available">사용가능한 아이디입니다.</span>
                             <span id="id_chk_unavailable">중복된 아이디입니다.</span>
@@ -341,7 +401,7 @@ div span{
                     </tr>
                     <tr>
                         <th>비밀번호</th>
-                        <td><input type="password" class="user_pw" name="pw" id="pw" required="required" placeholder="비밀번호를 입력하세요." onclick="idChkConfirm();"></td>
+                        <td><input type="password" class="user_pw" name="user_pw" id="pw" title="n" required="required" placeholder="비밀번호를 입력하세요." onclick="idChkConfirm();"></td>
                     </tr>
                     <tr>
                         <th>비밀번호 확인</th>
@@ -354,7 +414,7 @@ div span{
                     <tr>
                         <th>이메일</th>
                         <td>
-                        	<input type="text" class="user_email" name="user_email" required="required" placeholder="이메일을 입력하세요.">
+                        	<input type="text" class="user_email" name="user_email" id="user_email" title="n" required="required" placeholder="이메일을 입력하세요." onclick="pwChkConfirm();">
                         	<input type="button" class="user_email_chk" value="인증번호 발급" onclick="emailCheck();">
                         	<input type="text" class="user_email_injeong" name="user_email_injeong" id="user_email_injeong_false" required="required" disabled="disabled"><br>
                         	<span id="email_chk_blank">이메일을 입력하세요.</span>
@@ -372,16 +432,15 @@ div span{
                     <tr>
                         <th>주소</th>
                         <td>
-                            <input type="text" class="user_addr1" name="user_addr1" id="user_addr1" required="required" placeholder="우편번호를 입력하세요." readonly="readonly">
+                            <input type="text" class="user_addr" name="user_addr" id="user_addr" required="required" placeholder="우편번호를 입력하세요." readonly="readonly">
                             <input type="button" class="user_addr_chk" value="주소 검색" onclick="addr_search();"><br>
-                            <input type="text" class="user_addr2" name="user_addr2" id="user_addr2" required="required" placeholder="상세주소를 입력하세요." onclick="idChkConfirm();">
+                            <input type="text" class="user_addr2" name="user_addr2" id="user_addr2" required="required" placeholder="상세주소를 입력하세요." onclick="emailChkConfirm();">
                         </td>
                     </tr>
                     <tr>
                         <th>핸드폰 번호</th>
                         <td>
-                            <input type="text" class="user_phone" name="user_phone" required="required" placeholder="'-' 부호 없이 숫자만 입력하세요." onclick="idChkConfirm();">
-                            <input type="button" class="user_phone_chk" value="인증번호 발급" onclick="">
+                            <input type="text" class="user_phone" name="user_phone" id="user_phone" required="required" placeholder="'-' 부호 없이 숫자만 입력하세요.">
                         </td>
                     </tr>
                     <tr>
@@ -397,7 +456,7 @@ div span{
                     </tr>         
                 </table>
                     <div class="regist_btn">
-                        <input type="submit" class="submit_btn" value="가입하기">
+                        <input type="submit" class="submit_btn" id="submit" value="가입하기">
                         <input type="button" class="back_btn" value="취 소" onclick="location.href='index.do'">
                     </div>
             </form>
