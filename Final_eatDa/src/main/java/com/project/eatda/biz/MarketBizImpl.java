@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.eatda.dao.MarketDao;
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderDto;
+import com.project.eatda.dto.OrderProductDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
@@ -92,5 +94,35 @@ public class MarketBizImpl implements MarketBiz{
 	@Override
 	public List<CouponDto> getCouponList(String user_id) {
 		return marketDao.getCouponList(user_id);
+	}
+
+	@Override
+	@Transactional
+	public int paySuccess(OrderDto order) {
+		int res = marketDao.paySuccess(order);
+		return res;
+	}
+
+	@Override
+	public OrderDto getOrder(String user_id) {
+		return marketDao.getOrder(user_id);
+	}
+
+	@Override
+	@Transactional
+	public int deleteCartList(String user_id) {
+		return marketDao.deleteCartList(user_id);
+	}
+
+	@Override
+	@Transactional
+	public int deleteCoupon(OrderDto dto) {
+		return marketDao.deleteCoupon(dto);
+	}
+
+	@Override
+	@Transactional
+	public int insertOrderProduct(List<OrderProductDto> list) {
+		return marketDao.insertOrderProduct(list);
 	}
 }

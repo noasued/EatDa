@@ -14,8 +14,33 @@
     
 	<script type="text/javascript">
 		
+		function getCoupon_id(){
+			let rate = $('#coupon-list').val();
+			let coupon_id = '';
+			$('option').each(function(){
+				if($(this).val() == rate) {
+					coupon_id = $(this).attr('id');
+				}
+			});
+			return coupon_id;
+		}
+	
 		function progressPay() {
-			let paymentOption = $('input:radio[name="payment"]:checked').val();
+			const pay_info = {
+					order_code:'O'+ Math.floor(Math.random()*10000+1) + 'C' + Math.floor(Math.random()*10000+1),
+					buyer_name:$('.input').eq(0).val(),
+					buyer_email:$('.input').eq(4).val(),
+					buyer_tel:$('.input').eq(3).val(),
+					buyer_addr:$('.input:eq(1)').val() + ' ' + $('.input:eq(2)').val(),
+					paymentOption:$('input:radio[name="payment"]:checked').val(),
+					order_price:$('.after-price').eq(1).text(),
+					original_price:$('.original-price').eq(0).text(),
+					discount_price:$('.discount-price').text(),
+					coupon_rate:$('#coupon-list').val(),
+					order_message:$('.input').eq(4).val(),
+					coupon_id:getCoupon_id()
+			}
+			console.log(pay_info);
 			
 			for (var i = 0; i < 4; i++) {
 				if($('.input').eq(i).val() == '') {
@@ -29,7 +54,7 @@
 				return;
 			}
 			
-			if (paymentOption==null) {
+			if (pay_info.paymentOption==null) {
 				alert('결제 방식을 선택해주세요.');
 				return;
 			}
@@ -39,51 +64,57 @@
 				return;
 			}
 			
-			if (paymentOption == 'basic') {
+			if (pay_info.paymentOption == 'basic') {
 				//무통장 입금
 				alert('무통장 입금을 선택하셨습니다.');
+				afterPayment(pay_info);
 				location.href = 'orderSuccess.do';
 			} else {
-				iamport(paymentOption);
+				iamport(pay_info);
 			}
-			
 		}
 		
 		//결제 api
-        function iamport(paymentOption) {
-			let amount = $('.after-price').eq(1).text();
-			let order_code = 'O'+ Math.floor(Math.random()*10000+1) + 'C' + Math.floor(Math.random()*10000+1);
-			let buyer_name = $('.input').eq(0).val();
-			let buyer_email = $('.input').eq(4).val();
-			let buyer_tel = $('.input').eq(3).val();
-			let buyer_addr = $('.input:eq(2)').val() + ' ' + $('.input:eq(3)').val();
+        function iamport(pay_info) {
+			console.log(pay_info)
 			
             IMP.init('imp62869817');
             IMP.request_pay({
-                pg: paymentOption,
+                pg: pay_info.paymentOption,
                 pay_method: 'card',
                 merchant_uid: 'merchant_' + new Date().getTime(),
-                name: order_code, 
-                amount: 100, 
-                buyer_email: buyer_email,
-                buyer_name: buyer_name,
-                buyer_tel: buyer_tel,
-                buyer_addr: buyer_addr,
+                name: pay_info.order_code, 
+                amount: pay_info.order_price, 
+                buyer_email: pay_info.buyer_email,
+                buyer_name: pay_info.buyer_name,
+                buyer_tel: pay_info.buyer_tel,
+                buyer_addr: pay_info.buyer_addr,
                 buyer_postcode: '123-456'
             }, function(rsp) {
-    		    if ( rsp.success ) {
-    		    	var msg = '결제가 완료되었습니다.';
-    		        msg += '고유ID : ' + rsp.imp_uid;
-    		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-    		        msg += '결제 금액 : ' + rsp.paid_amount;
-    		        msg += '카드 승인번호 : ' + rsp.apply_num;
+    		    if (rsp.success) {
+    		    	alert('결제가 완료되었습니다.');
+    		    	afterPayment(pay_info);
+    		    	location.href = 'orderSuccess.do';
     		    } else {
-    		    	var msg = '결제에 실패하였습니다. ';
     		       	msg += '에러내용 : ' + rsp.error_msg;
+	    		    alert('결제에 실패하였습니다. ');
     		    }
-    		    alert(msg);
     		});
     	}
+		
+		function afterPayment(pay_info) {
+			//결제 이후 데이터 삽입
+			console.log('afterPayment.pay_info: ' + pay_info);
+			$.ajax({
+				url:"paySuccess.do",
+				type:"post",
+				contentType:"application/json; charset=utf-8",
+				data:JSON.stringify(pay_info),
+				success:function(msg){
+					console.log(msg);	
+				}
+			});
+		}
     </script>
     
     
@@ -343,7 +374,7 @@ $(document).ready(function() {
 		success:function(data) {
 			$(data).each(function(key,value) {
 				$('#coupon-list').append(
-						"<option value='"+ value.coupon_rate +"'>"+value.coupon_name+"</option>"
+						"<option id='" + value.coupon_id + "' value='"+ value.coupon_rate +"'>"+value.coupon_name+"</option>"
 				)
 			});
 		}
@@ -351,7 +382,7 @@ $(document).ready(function() {
 	
 	//쿠폰 변경 시 가격 계산
 	$('#coupon-list').on('change', function() {
-		discountPrice = originalPrice * this.value;
+		discountPrice = Math.floor(originalPrice * this.value);
 		afterPrice = originalPrice - discountPrice;
 		$('.discount-price').text(discountPrice);
 		$('.after-price').each(function() {
@@ -517,7 +548,7 @@ $(document).ready(function() {
                                             <a href="#" class="payment-desc">카카오 페이 약관></a>
                                         </div>
                                         <div>
-                                            <input type="radio" id="payco" name="payment" value="payco.AUTOPY"><label for="payco">페이코결제</label><br>
+                                            <input type="radio" id="smile" name="payment" value="smile"><label for="smile">스마일페이</label><br>
                                             <a href="#" class="payment-desc">페이코 결제 약관></a>
                                         </div>
                                     </div>

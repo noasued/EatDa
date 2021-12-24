@@ -98,4 +98,26 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<insert id="paySuccess" parameterType="orderDto">
+		INSERT INTO E_ORDER VALUES(#{order_id},#{user_id},SYSDATE,#{order_addr},#{order_name},#{order_phone},#{order_message},#{order_price},#{pay_option},#{original_price},#{discount_price},#{coupon_rate})
+	</insert>
+	
+	<select id="getOrder" parameterType="string" resultType="orderDto">
+		SELECT * 
+		FROM E_ORDER
+		WHERE ORDER_DATE = (SELECT MAX(ORDER_DATE) FROM E_ORDER WHERE USER_ID = #{user_id})
+	</select>
+	
+	<delete id="deleteCartList" parameterType="string">
+		DELETE FROM CART_PRODUCT WHERE USER_ID = #{user_id}
+	</delete>
+	
+	<delete id="deleteCoupon" parameterType="orderDto">
+		DELETE FROM COUPON_LIST WHERE USER_ID = #{user_id} AND COUPON_ID = #{coupon_id}
+	</delete>
+	
+	<insert id="insertOrderProduct" parameterType="orderProductDto">
+		INSERT INTO ORDER_PRODUCT VALUES(#{order_id},#{p_id},#{p_count})
+	</insert>
+	
 </mapper>
