@@ -23,7 +23,7 @@
   margin-left: 10%;
 }
 
-.blog-update__content-article input[name="title"]{
+.blog-update__content-article input[name="blog_title"]{
   width:840px;
   height:40px;
   border:0.5px solid gainsboro;
@@ -32,13 +32,17 @@
   margin-left: 10%;
 }
 
-.blog-update__content-article input[name="title"]:focus{
+.blog-update__content-article input[name="blog_title"]:focus{
   outline:0.5px solid rgb(213, 214, 118);
   
 }
 
+.blog-update__content-article__btns{
+	margin-top:20px;
+}
+
 .blog-update__content-article input[name="update-submit-btn"]{
-  margin-left: 70%;
+  margin-left: 60%;
 }
 
 .blog-update__content-article input[name="update-cancel-btn"]{

@@ -8,17 +8,21 @@ public class CartProductDto {
 	private String p_id;
 	private int cart_count;
 	private int cart_price;
+	private String p_name;
+	private String img_path;
 
 	public CartProductDto() {
 		super();
 	}
 
-	public CartProductDto(String user_id, String p_id, int cart_count, int cart_price) {
+	public CartProductDto(String user_id, String p_id, int cart_count, int cart_price, String p_name, String img_path) {
 		super();
 		this.user_id = user_id;
 		this.p_id = p_id;
 		this.cart_count = cart_count;
 		this.cart_price = cart_price;
+		this.p_name = p_name;
+		this.img_path = img_path;
 	}
 
 	public String getUser_id() {
@@ -53,10 +57,26 @@ public class CartProductDto {
 		this.cart_price = cart_price;
 	}
 
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public String getImg_path() {
+		return img_path;
+	}
+
+	public void setImg_path(String img_path) {
+		this.img_path = img_path;
+	}
+
 	@Override
 	public String toString() {
 		return "CartProductDto [user_id=" + user_id + ", p_id=" + p_id + ", cart_count=" + cart_count + ", cart_price="
-				+ cart_price + "]";
+				+ cart_price + ", p_name=" + p_name + ", img_path=" + img_path + "]";
 	}
 
 }

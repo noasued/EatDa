@@ -81,7 +81,7 @@
 	background-color: #ffe38f;
 }
 
-.list_img{
+.list_img, .thumbnail{
 	width: 50PX;
 	height: 50px;
 }
@@ -89,6 +89,9 @@
 	width: 20px;
 	height: 20px;
 }
+.item-inner{display: flex;}
+.item-title, .item-heart{ margin: 2% 5%;}
+.recommend-menu .list-base{margin-left: 15%;}
 </style>
 
 <title>Insert title here</title>
@@ -150,7 +153,7 @@
 	<div class="container" style="height: fit-content;">
 
 		<!-- 배너 -->
-		<div class="row" style="margin-top: 10px;">
+		<div class="row" style="margin:2% 0;">
 			<div class="col-md-12 banner"></div>
 		</div>
 
@@ -196,48 +199,67 @@
 					<p class="title-font"> REAL-TIME POPULAR RECIPE </p>
 				</div>
 				<div class="col-md-6">
-					<table class="recipe_rank">
-						<col width="100px">
-						<col width="500px">
-
-						<tr>
-							<th>순위</th>
-							<th>요리명</th>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>
-								<a href="#">
-									<img class="list_img" src="resources/images/recipe/eggroll.png">계란말이
-								</a> 
-								<a href="#">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</a>
-							</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>
-								<a href="#">
-									<img class="list_img" src="resources/images/recipe/eggroll.png">계란말이
-								</a> 
-								<a href="#">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</a>
-							</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>
-								<a href="#">
-									<img class="list_img" src="resources/images/recipe/eggroll.png">계란말이
-								</a> 
-								<a href="#">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</a>
-							</td>
-						</tr>
-					</table>
+					<ul class="list-base">
+						<div>
+							<div>
+								<li class="list-item">
+									<div class="item-inner">
+										<div class="item-img">
+											<a href="#">
+												<img class="thumbnail" src="resources/images/recipe/eggroll.png">
+											</a>
+										</div>
+										<div class="item-title">
+											<a href="#">계란말이</a>
+										</div>
+										<div class="item-heart">
+											<a href="#">
+												<img class="heart" src="resources/images/recipe/heart.png">
+											</a>
+										</div>
+									</div>
+								</li>
+							</div>
+							<div>
+								<li class="list-item">
+									<div class="item-inner">
+										<div class="item-img">
+											<a href="#">
+												<img class="thumbnail" src="resources/images/recipe/eggroll.png">
+											</a>
+										</div>
+										<div class="item-title">
+											<a href="#">계란말이</a>
+										</div>
+										<div class="item-heart">
+											<a href="#">
+												<img class="heart" src="resources/images/recipe/heart.png">
+											</a>
+										</div>
+									</div>
+								</li>
+							</div>
+							<div>
+								<li class="list-item">
+									<div class="item-inner">
+										<div class="item-img">
+											<a href="#">
+												<img class="thumbnail" src="resources/images/recipe/eggroll.png">
+											</a>
+										</div>
+										<div class="item-title">
+											<a href="#">계란말이</a>
+										</div>
+										<div class="item-heart">
+											<a href="#">
+												<img class="heart" src="resources/images/recipe/heart.png">
+											</a>
+										</div>
+									</div>
+								</li>
+							</div>
+						</div>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -246,48 +268,67 @@
 		<div class="recommend-menu block">
 			<div class="row">
 				<div class="col-md-6">
-					<table class="recipe_rank">
-						<col width="100px">
-						<col width="500px">
-
-						<tr>
-							<th>순위</th>
-							<th>요리명</th>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>
-								<a href="#">
-									<img class="list_img" src="resources/images/recipe/eggroll.png">계란말이
-								</a> 
-								<a href="#">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</a>
-							</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>
-								<a href="#">
-									<img class="list_img" src="resources/images/recipe/eggroll.png">계란말이
-								</a> 
-								<a href="#">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</a>
-							</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td>
-								<a href="#">
-									<img class="list_img" src="resources/images/recipe/eggroll.png">계란말이
-								</a> 
-								<a href="#">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</a>
-							</td>
-						</tr>
-					</table>
+					<ul class="list-base">
+						<div>
+							<div>
+								<li class="list-item">
+									<div class="item-inner">
+										<div class="item-img">
+											<a href="#">
+												<img class="thumbnail" src="resources/images/recipe/eggroll.png">
+											</a>
+										</div>
+										<div class="item-title">
+											<a href="#">계란말이</a>
+										</div>
+										<div class="item-heart">
+											<a href="#">
+												<img class="heart" src="resources/images/recipe/heart.png">
+											</a>
+										</div>
+									</div>
+								</li>
+							</div>
+							<div>
+								<li class="list-item">
+									<div class="item-inner">
+										<div class="item-img">
+											<a href="#">
+												<img class="thumbnail" src="resources/images/recipe/eggroll.png">
+											</a>
+										</div>
+										<div class="item-title">
+											<a href="#">계란말이</a>
+										</div>
+										<div class="item-heart">
+											<a href="#">
+												<img class="heart" src="resources/images/recipe/heart.png">
+											</a>
+										</div>
+									</div>
+								</li>
+							</div>
+							<div>
+								<li class="list-item">
+									<div class="item-inner">
+										<div class="item-img">
+											<a href="#">
+												<img class="thumbnail" src="resources/images/recipe/eggroll.png">
+											</a>
+										</div>
+										<div class="item-title">
+											<a href="#">계란말이</a>
+										</div>
+										<div class="item-heart">
+											<a href="#">
+												<img class="heart" src="resources/images/recipe/heart.png">
+											</a>
+										</div>
+									</div>
+								</li>
+							</div>
+						</div>
+					</ul>
 				</div>
 				<div class="col-md-6 new-title">
 					<p class="title-font"> RECOMMEND-MENU </p>
@@ -331,7 +372,7 @@
 				</div>
 			</div>
 		</div>
-
+	<a href="adminMain.do">admin</a>
 	</div>
 
 

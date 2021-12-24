@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.recipe_top{
+	width:100%;
+	height:200px;
+	background: url('resources/images/recipe/recipeLogo.png') no-repeat;
+	background-size: cover;
+	overflow: hidden;
+	display: table;
+	border: none;
+	background-position: 0 90%;
+}
 hr{
    border: 10px;
    width: 800px;
@@ -42,7 +52,7 @@ hr{
    <div id="header">
       <%@ include file="../common/header.jsp"%>
    </div>
-   
+   <div class="recipe_top"></div>
    <div class="body">
       <div class="title">
          <h4 style="text-align:center;">계란말이</h4>

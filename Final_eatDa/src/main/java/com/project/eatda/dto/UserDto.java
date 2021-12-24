@@ -15,7 +15,6 @@ public class UserDto {
 	private String user_penalty;
 	private String user_enable;
 	private String user_mailing;
-	private int cart;
 
 	public UserDto() {
 		super();
@@ -23,7 +22,7 @@ public class UserDto {
 
 	public UserDto(String user_id, String user_pw, String user_name, String user_addr, String user_email,
 			String user_phone, String user_role, String user_img, String user_penalty, String user_enable,
-			String user_mailing, int cart) {
+			String user_mailing) {
 		super();
 		this.user_id = user_id;
 		this.user_pw = user_pw;
@@ -36,15 +35,6 @@ public class UserDto {
 		this.user_penalty = user_penalty;
 		this.user_enable = user_enable;
 		this.user_mailing = user_mailing;
-		this.cart = cart;
-	}
-
-	public int getCart() {
-		return cart;
-	}
-
-	public void setCart(int cart) {
-		this.cart = cart;
 	}
 
 	public String getUser_id() {
@@ -134,5 +124,15 @@ public class UserDto {
 	public void setUser_mailing(String user_mailing) {
 		this.user_mailing = user_mailing;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDto [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_addr="
+				+ user_addr + ", user_email=" + user_email + ", user_phone=" + user_phone + ", user_role=" + user_role
+				+ ", user_img=" + user_img + ", user_penalty=" + user_penalty + ", user_enable=" + user_enable
+				+ ", user_mailing=" + user_mailing + "]";
+	}
+	
+	
 
 }
