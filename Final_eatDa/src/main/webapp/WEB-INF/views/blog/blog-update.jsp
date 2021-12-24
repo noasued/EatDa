@@ -81,7 +81,7 @@
           <input type="text" name="blog_title" id="title" value="${dto.blog_title}">
 					<textarea class="summernote" id="summernote" name="blog_content">${dto.blog_content}</textarea>
 					<div class="blog-update__content-article__btns">
-						<input type="button" name="update-submit-btn" value="수정 완료" onclick="submitBtn()">
+						<input type="button" name="update-submit-btn" value="수정 완료" onclick="submitBtn();">
 						<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='blog-detail.do?blog_no=${dto.blog_no}'">
         	</div>
         </form>
