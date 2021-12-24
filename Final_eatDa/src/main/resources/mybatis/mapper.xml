@@ -16,5 +16,11 @@
 		SELECT COUNT(USER_ID) FROM E_USER
 		WHERE USER_ID = #{user_id}
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="memberRegist" parameterType="UserDto">
+		INSERT INTO E_USER
+		VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_addr}, #{user_email}, #{user_phone}, 'USER', 'IMG', '0', 'Y', #{user_mailing} )
+	</insert>
 
 </mapper>
