@@ -17,9 +17,4 @@ public class SubscriptionController {
         System.out.println("subForm");
         return "/subscription/subscriptionForm";
     }
-	@RequestMapping("/ex.do")
-    public String ex() {
-        System.out.println("ex");
-        return "/subscription/ex";
-    }
 }
