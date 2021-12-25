@@ -480,9 +480,24 @@ em {
 	}
 	function directPurchase() {
 		//바로 구매하기
-		let p_price = $('.right-info-desc').eq(0).children('span').eq(0).text();
-		let quantity = $('#quantity').text();
-		location.href = 'payment.do';
+		let product = {
+				p_name:$('.modal-info-title').children('span').text(),
+				img_path:$('#img').attr('src'),
+				p_price:$('#price').text(),
+				quantity:$('#quantity').text(),
+				p_id:$('#p-id').text()
+		}
+		
+		$.ajax({
+			url: 'directPurchase.do',
+			type: 'post',
+			contentType:"application/json; charset=utf-8",
+			data: JSON.stringify(product),
+			success:function(msg){
+				console.log(msg);
+			}
+		});
+		location.href = 'makeOrder.do?data=directPurchase';
 	}
 
 </script>

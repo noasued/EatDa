@@ -158,6 +158,7 @@ function deleteCartList() {
 	});
 }
 
+//쿠폰 삭제 체크
 function deleteCoupon() {
 	console.log($('#coupon-id').text());
 	let coupon_id = {

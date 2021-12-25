@@ -35,6 +35,9 @@ public class MarketController {
 	@Autowired
 	private MarketBiz marketBiz;
 	
+	@Autowired
+	private CartProductDto tempCartProduct;
+	
 	//임시 유저 아이디
 	String user_id = "ADMIN";
 	
@@ -182,13 +185,26 @@ public class MarketController {
 		return res>0?"true":"false";
 	}
 	
-	//결제 페이지에서 필요한 것 (유저 정보, 유저가 가지고 있는 쿠폰 종류, 장바구니에서 넘어올 데이터)
+	@RequestMapping(value="/directPurchase.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String directPurchase(@RequestBody String data) {
+		logger.info("directPurchase, product : " + data);
+		convertCartProduct(data);
+		return "true";
+	}
+	
 	@RequestMapping("/makeOrder.do")
-	public String makeOrder(Model model) {
-		//전체 주문이기 때문에 골라서 가져올필요가 없잖아.
-		List<CartProductDto> cart = marketBiz.getCartList(user_id);
+	public String makeOrder(Model model, String data) {
+		logger.info("makeOrder, data :" + data);
+		List<CartProductDto> cart = null;
+
+		if (data.equals("fromShoppingBag")) {
+			cart = marketBiz.getCartList(user_id);
+		} else if (data.equals("directPurchase")) {
+			cart = new ArrayList<CartProductDto>();
+			cart.add(tempCartProduct);
+		}
 		model.addAttribute("list", cart);
-		
 		return "/market/payment";
 	}
 	
@@ -216,7 +232,7 @@ public class MarketController {
 	public String paySuccess(HttpServletRequest request, @RequestBody String data) {
 		logger.info("paySuccess, data: " + data);
 		UserDto user = getLoginUser(request);
-		OrderDto order = convertData(data, user.getUser_id());
+		OrderDto order = convertOrder(data, user.getUser_id());
 		
 		System.out.println("orderDto: " + order.toString());
 		
@@ -299,6 +315,14 @@ public class MarketController {
 		
 	}
 	
+	public void convertCartProduct(String data) {
+		String[] temp = data.split(",");
+		tempCartProduct.setP_name(temp[0].substring(11,temp[0].length()-1));
+		tempCartProduct.setImg_path(temp[1].substring(12, temp[1].length()-1));
+		tempCartProduct.setCart_price(Integer.parseInt(temp[2].substring(11, temp[2].length()-1)));
+		tempCartProduct.setCart_count(Integer.parseInt(temp[3].substring(12, temp[3].length()-1)));
+		tempCartProduct.setP_id(temp[4].substring(8, temp[4].length()-2));
+	}
 	
 	
 	
@@ -308,7 +332,7 @@ public class MarketController {
 		return dto;
 	}
 	
-	public OrderDto convertData(String data, String user_id) {
+	public OrderDto convertOrder(String data, String user_id) {
 		OrderDto order = new OrderDto();
 		String[] temp = data.split(",");
 		String pay_option = temp[5].substring(17, temp[5].length()-1);
@@ -363,14 +387,4 @@ public class MarketController {
 		}
 		return map;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
