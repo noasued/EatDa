@@ -344,7 +344,7 @@
 		}
 		
 		if (confirm('위 상품들을 주문하시겠습니까?')) {
-			location.href='makeOrder.do';
+			location.href='makeOrder.do?data=fromShoppingBag';
 		}
 	}
 	
