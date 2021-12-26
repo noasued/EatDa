@@ -11,6 +11,9 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
     
 	<script type="text/javascript">
 		
@@ -93,6 +96,7 @@
             }, function(rsp) {
     		    if (rsp.success) {
     		    	alert('결제가 완료되었습니다.');
+    		    	//데이터 삽입-> 오더 + 오더 상품까지 데이터 삽입하자.
     		    	afterPayment(pay_info);
     		    	location.href = 'orderSuccess.do';
     		    } else {
@@ -400,6 +404,33 @@ $(document).ready(function() {
 			$('#paybutton').addClass('btn-secondary');
 		}
 	});
+	
+	//toast message 처리하기..
+	if ($('input:radio[name="payment"]:checked')) {
+		var value = $('input:radio[name="payment"]:checked').attr('id');
+		
+		Command: toastr["info"](value+"을 선택하셨습니다..", "알림")
+
+		toastr.options = {
+		  "closeButton": true,
+		  "debug": false,
+		  "newestOnTop": false,
+		  "progressBar": false,
+		  "positionClass": "toast-top-right",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+	}
+	
+	
 });
 </script>
 

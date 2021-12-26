@@ -38,4 +38,6 @@ public interface MarketBiz {
 	
 	public int deleteCoupon(OrderDto dto);
 	public int insertOrderProduct(List<OrderProductDto> list);
+	
+	public int updateCartList(List<CartProductDto> list);
 }

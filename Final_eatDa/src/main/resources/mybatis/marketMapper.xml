@@ -120,4 +120,8 @@
 		INSERT INTO ORDER_PRODUCT VALUES(#{order_id},#{p_id},#{p_count})
 	</insert>
 	
+	<update id="updateCartList" parameterType="cartProductDto">
+		UPDATE CART_PRODUCT SET CART_COUNT = #{cart_count}, CART_PRICE = #{cart_price} WHERE USER_ID=#{user_id} AND P_ID = #{p_id}
+	</update>
+	
 </mapper>
