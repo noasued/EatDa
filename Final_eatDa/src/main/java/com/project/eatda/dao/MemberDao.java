@@ -17,4 +17,7 @@ String NAMESPACE_MEMBER = "mymember.";
 	
 	//아이디 중복체크
 	public int idCheck(UserDto dto) throws Exception;
+	
+	//회원가입
+	public void memberRegist(UserDto dto);
 }

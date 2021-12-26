@@ -1,6 +1,7 @@
 package com.project.eatda.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.eatda.biz.MarketBiz;
 import com.project.eatda.dto.CartProductDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderDto;
+import com.project.eatda.dto.OrderProductDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
@@ -31,6 +34,10 @@ public class MarketController {
 	
 	@Autowired
 	private MarketBiz marketBiz;
+	@Autowired
+	private CartProductDto tempCartProduct;
+	@Autowired
+	private OrderDto orderDto;
 	
 	//임시 유저 아이디
 	String user_id = "ADMIN";
@@ -179,13 +186,59 @@ public class MarketController {
 		return res>0?"true":"false";
 	}
 	
-	//결제 페이지에서 필요한 것 (유저 정보, 유저가 가지고 있는 쿠폰 종류, 장바구니에서 넘어올 데이터)
-	@RequestMapping("/makeOrder.do")
-	public String makeOrder(Model model) {
-		//전체 주문이기 때문에 골라서 가져올필요가 없잖아.
-		List<CartProductDto> cart = marketBiz.getCartList(user_id);
-		model.addAttribute("list", cart);
+	@RequestMapping(value="/directPurchase.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String directPurchase(@RequestBody String data) {
+		logger.info("directPurchase, product : " + data);
+		convertCartProduct(data);
+		return "true";
+	}
+	
+	@RequestMapping(value="/updateCartList.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateCartList(@RequestBody String data, HttpServletRequest request) {
+		logger.info("updateCartList, product : " + data);
+		UserDto login_user = getLoginUser(request);
+		List<CartProductDto> list = convertCartList(data, login_user.getUser_id());
+		int res = marketBiz.updateCartList(list);
 		
+		return res>0?"true":"false";
+	}
+	
+	public List<CartProductDto> convertCartList(String data, String user_id) {
+		String[] temp = data.split("},");
+		List<CartProductDto> list = new ArrayList<CartProductDto>();
+		
+		for(int i = 0; i < temp.length; i++) {
+			String[] array = temp[i].split(",");
+			String p_id = array[0].substring(9, array[0].length()-1);
+			String p_price = array[2].substring(9, array[2].length()-1);
+			int quantity = Integer.parseInt(array[1].substring(12, array[1].length()-1)); 
+			
+			if (i == 0) {
+				p_id = array[0].substring(10, array[0].length()-1);
+			} else if (i == temp.length-1) {
+				p_price = array[2].substring(9, array[2].length()-3);
+			}
+			
+			list.add(new CartProductDto(user_id, p_id, quantity, Integer.parseInt(p_price), null, null));
+		}
+		return list;
+	}
+	
+	
+	@RequestMapping("/makeOrder.do")
+	public String makeOrder(Model model, String data) {
+		logger.info("makeOrder, data :" + data);
+		List<CartProductDto> cart = null;
+
+		if (data.equals("fromShoppingBag")) {
+			cart = marketBiz.getCartList(user_id);
+		} else if (data.equals("directPurchase")) {
+			cart = new ArrayList<CartProductDto>();
+			cart.add(tempCartProduct);
+		}
+		model.addAttribute("list", cart);
 		return "/market/payment";
 	}
 	
@@ -201,24 +254,152 @@ public class MarketController {
 	@ResponseBody
 	public List<CouponDto> getCouponList(HttpServletRequest request) {
 		logger.info("getCouponList");
-		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		UserDto user = getLoginUser(request);
 		
-		List<CouponDto> list = marketBiz.getCouponList(dto.getUser_id());
-		
-		for(CouponDto coupon : list) {
-			System.out.print(coupon + " ");
-		}
+		List<CouponDto> list = marketBiz.getCouponList(user.getUser_id());
 		
 		return list;
 	}
 	
-	@RequestMapping("/orderSuccess.do")
-	public String test4() {
-		System.out.println("test4");
-		return "/market/orderSuccess";
+	@RequestMapping(value="/paySuccess.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String paySuccess(HttpServletRequest request, @RequestBody String data) {
+		logger.info("paySuccess, data: " + data);
+		UserDto user = getLoginUser(request);
+		OrderDto order = convertOrder(data, user.getUser_id());
+		
+		System.out.println("paySuccess.orderDto: " + order.toString());
+		orderDto.setOrder_id(order.getOrder_id());
+		System.out.println("paySuccess.orderBean: " + orderDto.getOrder_id());
+		
+		int res = marketBiz.paySuccess(order); //insert
+		
+		return res>0?"true":"false";
 	}
 	
 	
+	@RequestMapping("/orderSuccess.do")
+	public String orderSuccess(Model model, HttpServletRequest request) {
+		logger.info("orderSuccess.do : " + orderDto.getOrder_id());
+		UserDto user = getLoginUser(request);
+		//여기 삽입하자
+		int res = insertOrderProduct(orderDto.getOrder_id(), marketBiz.getCartList(user_id));
+		System.out.println(res>0?"insertOrderProdut 성공":"insertOrderProdut 실패");
+		
+		
+		return "redirect:successDirect.do?user_id="+user.getUser_id();
+	}
+	
+	//쿠폰 못하는 이유 -> db(order 테이블)에 쿠폰id 컬럼이 없음 
+	@RequestMapping("/successDirect.do")
+	public String successDirect(Model model, String user_id) {
+		logger.info("successDirect.do, user_id : " + user_id);
+		OrderDto order = marketBiz.getOrder(user_id);
+		System.out.println("successDirect.coupon_id : " + order.getCoupon_id());
+		model.addAttribute("order", order);
+		return "/market/orderSuccess";
+	}
+	
+	@RequestMapping(value="/getOrderList.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<CartProductDto> getOrderList(HttpServletRequest request) {
+		logger.info("getOrderList");
+		UserDto user = getLoginUser(request);
+		List<CartProductDto> cart = marketBiz.getCartList(user.getUser_id());
+		return cart;
+	}
+	
+	@RequestMapping(value="/deleteCartList.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteCartList(HttpServletRequest request) {
+		logger.info("deleteCartList");
+		UserDto user = getLoginUser(request);
+		int res = marketBiz.deleteCartList(user.getUser_id());
+		return res>0?"true":"false";
+	}
+	
+	@RequestMapping(value="/deleteCoupon.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteCoupon(HttpServletRequest request, @RequestBody String data) {
+		logger.info("deleteCoupon, data : " + data);
+		UserDto user = getLoginUser(request);
+		
+		OrderDto dto = new OrderDto();
+		dto.setCoupon_id(data.substring(13,data.length()-2));
+		dto.setUser_id(user.getUser_id());
+		
+		int res = marketBiz.deleteCoupon(dto);
+		
+		return res>0?"true":"false";
+	}
+	
+	public int insertOrderProduct(String order_id, List<CartProductDto> list) {
+		List<OrderProductDto> opList = new ArrayList<OrderProductDto>();
+		int res = 0;
+		System.out.println("insertOrderProduct.order_id: " + order_id);
+		
+		for (int i = 0; i < list.size(); i++) {
+			OrderProductDto dto = new OrderProductDto(order_id, list.get(i).getP_id(), list.get(i).getCart_count());
+			opList.add(dto);
+			System.out.println("list : " + list.get(i).toString());
+			System.out.println("opList: "+opList.get(i).toString());
+		}
+		
+		res = marketBiz.insertOrderProduct(opList);
+		
+		return res;
+		
+	}
+	
+	public void convertCartProduct(String data) {
+		String[] temp = data.split(",");
+		tempCartProduct.setP_name(temp[0].substring(11,temp[0].length()-1));
+		tempCartProduct.setImg_path(temp[1].substring(12, temp[1].length()-1));
+		tempCartProduct.setCart_price(Integer.parseInt(temp[2].substring(11, temp[2].length()-1)));
+		tempCartProduct.setCart_count(Integer.parseInt(temp[3].substring(12, temp[3].length()-1)));
+		tempCartProduct.setP_id(temp[4].substring(8, temp[4].length()-2));
+	}
+	
+	
+	
+	
+	public UserDto getLoginUser(HttpServletRequest request) {
+		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		return dto;
+	}
+	
+	public OrderDto convertOrder(String data, String user_id) {
+		OrderDto order = new OrderDto();
+		String[] temp = data.split(",");
+		String pay_option = temp[5].substring(17, temp[5].length()-1);
+		System.out.println("temp[11]: " + temp[11]);
+		
+		order.setUser_id(user_id);
+		order.setOrder_id(temp[0].substring(15, temp[0].length()-1));
+		order.setOrder_name(temp[1].substring(14, temp[1].length()-1));
+		order.setOrder_phone(temp[3].substring(13, temp[3].length()-1));
+		order.setOrder_addr(temp[4].substring(14, temp[4].length()-1));
+		order.setPay_option(getPayOption(pay_option));
+		order.setOrder_price(Integer.parseInt(temp[6].substring(15, temp[6].length()-1)));
+		order.setOriginal_price(Integer.parseInt(temp[7].substring(18, temp[7].length()-1)));
+		order.setDiscount_price(Integer.parseInt(temp[8].substring(18, temp[8].length()-1)));
+		order.setCoupon_rate(Double.parseDouble(temp[9].substring(15, temp[9].length()-1)));
+		order.setOrder_message(temp[10].substring(17, temp[10].length()-1));
+		order.setCoupon_id(temp[11].substring(13, temp[11].length()-2));
+		order.setOrder_date(new Date());
+		
+		return order;
+	}
+	
+	public String getPayOption(String pay_option) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("basic", "무통장");
+		map.put("kcp", "카드");
+		map.put("kakaopay", "카카오페이");
+		map.put("smile", "스마일페이");
+		
+		return map.get(pay_option);
+	}
 	
 	
 	public List<String> convertList(String data) {
@@ -242,14 +423,4 @@ public class MarketController {
 		}
 		return map;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

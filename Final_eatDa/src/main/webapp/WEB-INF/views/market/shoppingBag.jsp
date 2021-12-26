@@ -224,30 +224,30 @@
 	}
 	
 	function leftButton(object) {
-		let quantity = $(object).siblings('#quantity').text();
+		let quantity = $(object).siblings('.quantity').text();
 		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
 		
 		if (quantity == 1) {
 			alert('한 개 이상을 선택해주세요.');
 			return;
 		} else {
-			$(object).siblings('#quantity').text('');
-			$(object).siblings('#quantity').text(quantity-1);
+			$(object).siblings('.quantity').text('');
+			$(object).siblings('.quantity').text(quantity-1);
 			$(object).parent().siblings('.right-col-price').children().eq(0).text(price-(price/quantity));
 			calcTotal();
 		}
 	}
 	
 	function rightButton(object) {
-		let quantity = $(object).siblings('#quantity').text();
+		let quantity = $(object).siblings('.quantity').text();
 		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
 		
 		if (quantity == 9) {
 			alert('한 상품은 한번에 10개 이하 주문 가능합니다.');
 			return;
 		} else {
-			$(object).siblings('#quantity').text('');
-			$(object).siblings('#quantity').text(Number(quantity)+1);
+			$(object).siblings('.quantity').text('');
+			$(object).siblings('.quantity').text(Number(quantity)+1);
 			$(object).parent().siblings('.right-col-price').children().eq(0).text(price+price/quantity);
 			calcTotal();
 		}
@@ -298,7 +298,7 @@
 		if(confirm('선택하신 상품을 장바구니에서 제거 하시겠습니까?')) {
 			$('input:checkbox[name="checkbox"]').each(function() {
 				if (this.checked==true) {
-					let price = $(this).parents('.left-col').siblings('.right-col').children('.right-col-price').children('#each-price').text();
+					let price = $(this).parents('.left-col').siblings('.right-col').children('.right-col-price').children('.each-price').text();
 					let totalPrice = $('#totalPrice').text();
 					$('#totalPrice').text(totalPrice-price);
 					$(this).parents('.start-row').remove();
@@ -328,14 +328,6 @@
 	}
 	
 	function makeOrder() {
-		/*
-		let idArray = document.getElementsByClassName('p-id');
-			let array = new Array();
-			
-			$(idArray).each(function() {
-				array.push($(this).text());
-			});
-		*/
 		let product = document.getElementsByClassName('start-row');
 		
 		if (product.length == 0) {
@@ -344,7 +336,28 @@
 		}
 		
 		if (confirm('위 상품들을 주문하시겠습니까?')) {
-			location.href='makeOrder.do';
+			let array = new Array();
+			var idx = 0;
+			$('.p-id').each(function() {
+				let data = {
+					p_id:$(this).text(),
+					quantity:$('.quantity').eq(idx).text(),
+					price:$('.each-price').eq(idx).text()
+				}
+				array.push(data);
+				idx++;
+			});
+			$.ajax({
+				url:"updateCartList.do",
+				type:"post",
+				contentType:"application/json; charset=utf-8",
+				data:JSON.stringify(array),
+				success:function(msg){
+					console.log(msg);
+				}
+			});
+			location.href='makeOrder.do?data=fromShoppingBag';
+			
 		}
 	}
 	
@@ -412,13 +425,13 @@
 	                    <!-- 수량선택 -->
 	                    <div class="right-col-quantity">
 	                        <span id="left-Button" onclick="leftButton(this)">&laquo;</span>&nbsp;
-	                        <span id="quantity" style="font-weight:bold;">${dto.cart_count}</span>&nbsp;
+	                        <span class="quantity" style="font-weight:bold;">${dto.cart_count}</span>&nbsp;
 	                        <span id="right-Button" onclick="rightButton(this)">&raquo;</span>
 	                    </div>
 	
 	                    <!-- 가격 -->
 	                    <div class="right-col-price">
-	                        <span id="each-price">${dto.cart_price}</span>
+	                        <span class="each-price">${dto.cart_price}</span>
 	                        <span>원</span>
 	                    </div>
 	                </div>

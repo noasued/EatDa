@@ -66,7 +66,7 @@ public class MemberController {
         String toMail = user_email;
         String title = "[EatDa] 회원가입 이메일 인증번호입니다.";
         String content = 
-                "EatDa에 방문해주셔서 감사합니다." +
+                "EatDa에 방문해주셔서 감사합니다:)" +
                 "<br><br>" + 
                 "인증번호는 " + checkNum + " 입니다." + 
                 "<br>" + 
@@ -92,9 +92,12 @@ public class MemberController {
 	}
 	
 	//회원가입
-	@RequestMapping("/regist.do")
-	public String regist() {
-		return null;
+	@RequestMapping(value="/memberRegist.do", method=RequestMethod.POST)
+	public String memberRegistPOST(UserDto dto) throws Exception {
+		logger.info("memberRegist");		
+		memberBiz.memberRegist(dto);
+		
+		return "../../index";
 	}
 	
 	
