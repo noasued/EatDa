@@ -221,6 +221,7 @@ public class MarketDaoImpl implements MarketDao {
 	@Override
 	public int paySuccess(OrderDto order) {
 		int res = 0;
+		//결제한 상품이 뭔지도 넣어야함.
 		
 		try {
 			res = sqlSession.insert(NAMESPACE_MARKET+"paySuccess", order);
@@ -289,6 +290,21 @@ public class MarketDaoImpl implements MarketDao {
 		
 		return res;
 	}
+
+	@Override
+	public int updateCartList(List<CartProductDto> list) {
+		int res = 0;
+		
+		try {
+			for (CartProductDto dto : list) {
+				res += sqlSession.update(NAMESPACE_MARKET+"updateCartList", dto);
+			}
+		} catch (Exception e) {
+			System.out.println("updateCartList DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 	
 	
@@ -313,4 +329,5 @@ public class MarketDaoImpl implements MarketDao {
 	
 	
 
+	
 }

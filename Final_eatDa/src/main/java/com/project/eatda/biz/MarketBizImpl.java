@@ -125,4 +125,10 @@ public class MarketBizImpl implements MarketBiz{
 	public int insertOrderProduct(List<OrderProductDto> list) {
 		return marketDao.insertOrderProduct(list);
 	}
+
+	@Override
+	@Transactional
+	public int updateCartList(List<CartProductDto> list) {
+		return marketDao.updateCartList(list);
+	}
 }
