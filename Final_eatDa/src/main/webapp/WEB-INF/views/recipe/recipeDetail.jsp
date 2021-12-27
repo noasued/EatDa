@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>eat다</title>
 <style type="text/css">
 .recipe_top{
 	width:100%;
@@ -53,11 +53,12 @@ hr{
       <%@ include file="../common/header.jsp"%>
    </div>
    <div class="recipe_top"></div>
+   
    <div class="body">
       <div class="title">
-         <h4 style="text-align:center;">계란말이</h4>
+         <h4 style="text-align:center;">${dto.recipe_title }</h4>
          <div>
-            <strong>조회수 11</strong>
+            <strong>조회수 ${dto.recipe_count }</strong>
             <img src="resources/images/recipe/heart.png" onclick="#">
             <a href="recipeUpdateForm.do"><img src="resources/images/recipe/update.png"></a>
             <img src="resources/images/recipe/delete.png" onclick="#">
@@ -65,19 +66,13 @@ hr{
          <hr>
       </div>
       <div class="content">      
-         <img src="resources/images/recipe/eggroll.png">      
-         <p> 재료 | 계란3알, 자투리야채(파,양파,당근 추천), 소금약간</p>
-         <br>
-         <p> 1. 계란을 깬다</p>
-         <p> 2. 야채를 다지고 소금약간과 1번에 넣는다. </p>
-         <p> 3. 프라이팬을 약불로 올려놓고 달궈지기전에 계란물 반을 붓는다</p>
-         <p> 4. 돌돌 말다가 마지막 말기전에 나머지 반을 부워 다시 만다 </p>   
+         <img src="${dto.recipe_img }"><br>      
+         ${dto.recipe_content } 
          <hr>
       </div>   
       <br>
       <div class="button">
          <input type="button" class="list" value="목록" onclick="location.href='recipeList.do'">&nbsp;&nbsp;&nbsp;
-         
       </div>
    </div>
    <div id="footer">

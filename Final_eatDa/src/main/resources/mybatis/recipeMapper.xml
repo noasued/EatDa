@@ -11,14 +11,26 @@
 		<result property="recipe_category" column="RECIPE_CATEGORY"/>
 		<result property="recipe_content" column="RECIPE_CONTENT"/>
 		<result property="recipe_count" column="RECIPE_COUNT"/>
-		<result property="recipe_image" column="RECIPE_IMAGE"/>
+		<result property="recipe_img" column="RECIPE_IMG"/>
 		<result property="recipe_enabled" column="RECIPE_ENABLED"/>
 		<result property="regdate" column="REGDATE"/>
 	</resultMap>
 	
 	<select id="recipeList" parameterType="list" resultMap="recipeMap">
-		SELECT RECIP
+		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+		FROM RECIPE
+		ORDER BY RECIPE_NO DESC
 	</select>
-
+	
+	<select id="recipeDetail" resultType="recipeDto" parameterType="int">
+		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+		FROM RECIPE
+		WHERE RECIPE_NO = #{recipe_no} 
+	</select>
+	
+	<insert id="recipeInsert" parameterType="recipeDto">
+		INSERT INTO RECIPE
+		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},#{recipe_img},0,DEFAULT,SYSDATE);
+	</insert>
 
 </mapper>
