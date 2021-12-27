@@ -324,7 +324,7 @@
 		
 	}
 	function goMarketMain() {
-		location.href='marketMain.do'
+		location.href='marketMain.do';
 	}
 	
 	function makeOrder() {
@@ -362,10 +362,9 @@
 	}
 	
 </script>
-
 </head>
 
-<body style="margin:0; min-width:1400px;">
+<body style="margin:0; min-width:1400px; margin-top:150px; margin-top:200px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>

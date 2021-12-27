@@ -4,17 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
-    
 	<script type="text/javascript">
 		
 		function getCoupon_id(){
@@ -47,7 +39,6 @@
 			
 			for (var i = 0; i < 4; i++) {
 				if($('.input').eq(i).val() == '') {
-					alert('배송지 정보를 정확하게 입력해주세요.');
 					return;
 				}
 			}
@@ -121,13 +112,6 @@
 		}
     </script>
     
-    
-	<style type="text/css">
-		/* body 최소 크기, 마진 0 지정 */
-		body {
-			margin:0; min-width:1400px;
-		}
-	</style>
 	<style type="text/css">
         body {
             margin:0;
@@ -253,6 +237,8 @@
         }
         .payment-desc {
             margin-left: 20px;
+           	text-decoration:none;
+           	color:gray;
         }
         .payment-section {
             padding:10px 0;
@@ -404,39 +390,12 @@ $(document).ready(function() {
 			$('#paybutton').addClass('btn-secondary');
 		}
 	});
-	
-	//toast message 처리하기..
-	if ($('input:radio[name="payment"]:checked')) {
-		var value = $('input:radio[name="payment"]:checked').attr('id');
-		
-		Command: toastr["info"](value+"을 선택하셨습니다..", "알림")
-
-		toastr.options = {
-		  "closeButton": true,
-		  "debug": false,
-		  "newestOnTop": false,
-		  "progressBar": false,
-		  "positionClass": "toast-top-right",
-		  "preventDuplicates": false,
-		  "onclick": null,
-		  "showDuration": "300",
-		  "hideDuration": "1000",
-		  "timeOut": "5000",
-		  "extendedTimeOut": "1000",
-		  "showEasing": "swing",
-		  "hideEasing": "linear",
-		  "showMethod": "fadeIn",
-		  "hideMethod": "fadeOut"
-		}
-	}
-	
-	
 });
 </script>
 
 
 
-<body>
+<body style="margin-top:200px;"> 
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
