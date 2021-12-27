@@ -1,31 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>eat다</title>
 <style type="text/css">
-.body {
-	margin-left: 19%
+.recipe_top {
+	width: 100%;
+	height: 200px;
+	background: url('resources/images/recipe/recipeLogo.png') no-repeat;
+	background-size: cover;
+	overflow: hidden;
+	display: table;
+	border: none;
+	background-position: 0 90%;
 }
-.recipe_top{
-	  width:100%;
-	  height:200px;
-	  background: url('resources/images/recipe/recipeLogo.png') no-repeat;
-	  background-size: cover;
-	  overflow: hidden;
-	  display: table;
-	  border: none;
-	  background-position: 0 90%;
-	}
 
 .rec_list>img {
 	width: 200px;
 	height: 200px;
+}
+.rec_list{
+	margin-bottom: 2%;
 }
 
 .img_wrap {
@@ -35,7 +35,7 @@
 .rec_title {
 	position: relative;
 	top: 165px;
-	left: 55px;
+	
 }
 
 .rec_title p {
@@ -54,31 +54,35 @@
 	height: 50px;
 }
 
-.container {
-	
-}
-
 .container, .rec_logo {
 	margin: 2% 0;
 }
 
-.rec_button input {
+.rec_button input, .searchBtn{
 	background-color: #fdd300;
 	color: black;
 	font-weight: bolder;
 }
 
-.paging, .rec_logo {
+.paging, .rec_logo, .searchbox, .rec_list {
 	display: flex;
 	justify-content: center;
 }
 
-.writeBtn {
-	margin: 2% 0 2% 70%;
+.searchbox .keyword{
+	margin-top:2%;
+	width : 840px;
+	height: 40px;
 }
-
 .writeBtn {
+	margin-left:75%;
 	width: 100px;
+	height: 30px;
+}
+.searchBtn, .recipeCategory{
+	margin:2% 1%;
+	width: 80px;
+	height: 40px;
 }
 </style>
 </head>
@@ -86,44 +90,61 @@
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
-	
+
 	<div class="recipe_top"></div>
-	
-	
+
+
 	<div class="body">
+	<div class="searchbox">
+          <select class="recipeCategory" name="searchSelect">
+            <option disabled selected>선택</option>
+            <option value="korea">한식</option>
+            <option value="japan">일식</option>
+            <option value="china">중식</option>
+            <option value="weston">양식</option>
+            <option value="simple">간단식</option>
+            <option value="night">야식</option>
+          </select>
+          <input type="text" class="keyword" placeholder="검색어를 입력하세요.">
+          <input type="button" class="searchBtn" value="검색" onclick="#">
+      </div>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<c:choose>
-						<c:when test="${empty list }">
-							<p>-----------------작성된 글이 없습니다.-----------------</p>		
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${list }" var="dto">
-								<a href="recipeDetail.do?recipe_no=${dto.recipe_no }">
-									<div class="rec_list">
-										<div class="img_wrap">
-											<div class="bg_img">
-												<img src="resources/images/recipe/main_prod_bg.png"></img>
-											</div>
+			<c:choose>
+				<c:when test="${empty list}">
+					<div class="col-md-12">
+						<p style="text-align:center;">--------------작성된 글이 없습니다.-----------</p>
+					</div>
+				</c:when>
+				<c:otherwise>
+				<c:set var="i" value="0" />
+				<c:set var="j" value="3" />
+					<div class="row">
+					<c:forEach items="${list}" var="recipeDto">
+						<div class="col-md-4">
+							<a href="recipeDetail.do?recipe_no=${recipeDto.recipe_no }">
+								<div class="rec_list">
+									<div class="img_wrap">
+										<div class="bg_img">
+											<img src="resources/images/recipe/main_prod_bg.png"></img>
 										</div>
-										<div class="img_wrap">
-											<div class="rec_title">
-												<p>${dto.recipe_title }</p>
-											</div>
-										</div>
-										<img src="${dto.recipe_image }" />
 									</div>
-								</a>				
-							</c:forEach>
-						</c:otherwise>		
-					</c:choose>
-				</div>
-			</div>
+									<div class="img_wrap">
+										<div class="rec_title">
+											<p>${recipeDto.recipe_title }</p>
+										</div>
+									</div>
+									<img src="${recipeDto.recipe_img }" />
+								</div>
+							</a>	
+						</div>
+					</c:forEach>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
-<!--  	<div class="body">
+	<!--  	<div class="body">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
@@ -292,7 +313,7 @@
 	<div class="bottom">
 		<div class="rec_button">
 			<input class="writeBtn" type="button" value="글쓰기"
-				onclick="location.href='recipeWriteForm.do'">
+				onclick="location.href='recipeInsert.do'">
 		</div>
 		<div class="paging">
 			<p>◀ 1 2 3 4 5 ▶</p>
