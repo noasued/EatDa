@@ -12,11 +12,13 @@
   		<typeAlias type="com.project.eatda.dto.CartProductDto" alias="cartProductDto"/>
   		<typeAlias type="com.project.eatda.dto.ReviewDto" alias="reviewDto"/>
   		<typeAlias type="com.project.eatda.dto.ProductLikeDto" alias="productLikeDto"/>
+  		<typeAlias type="com.project.eatda.dto.RecipeDto" alias="recipeDto"/>  		
   	</typeAliases>
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>
   		<mapper resource="/mybatis/marketMapper.xml"/>
   		<mapper resource="/mybatis/blogMapper.xml"/>
   		<mapper resource="/mybatis/eventMapper.xml"/>
+  		<mapper resource="/mybatis/recipeMapper.xml"/>  		
   	</mappers>
   </configuration>

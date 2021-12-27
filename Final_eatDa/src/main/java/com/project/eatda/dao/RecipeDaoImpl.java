@@ -22,7 +22,7 @@ public class RecipeDaoImpl implements RecipeDao{
 		try {
 			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeList");
 		} catch (Exception e) {
-			System.out.println("¿¡·¯ : recipeList");
+			System.out.println("error : recipeList");
 			e.printStackTrace();
 		}
 				
@@ -30,7 +30,41 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public RecipeDto serchRecipe(String tag) {
+	public RecipeDto recipeDetail(int recipe_no) {
+		RecipeDto dto = null;
+		try {
+			dto = sqlSession.selectOne(NAMESPACE_RECIPE+"recipeDetail", recipe_no);
+		} catch (Exception e) {
+			System.out.println("error : recipe detail");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override	
+	public int recipeInsert(RecipeDto dto) {
+		int res = 0;
+		try {
+			res=sqlSession.insert(NAMESPACE_RECIPE+"recipeInsert",dto);
+		} catch (Exception e) {
+			System.out.println("error : recipeinsert");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public int recipeUpdate(RecipeDto dto) {
+		return 0;
+	}
+
+	@Override
+	public int recipeDelete(int recipe_no) {
+		return 0;
+	}
+
+	@Override
+	public RecipeDto searchRecipe(String tag) {
 		return null;
 	}
 
@@ -48,5 +82,5 @@ public class RecipeDaoImpl implements RecipeDao{
 	public int paging() {
 		return 0;
 	}
-
+	
 }
