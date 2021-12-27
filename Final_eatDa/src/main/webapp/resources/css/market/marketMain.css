@@ -132,13 +132,6 @@ body {
   border-radius: 25px;
 }
 
-.banner-text {
-  font-size: larger;
-  text-align: center;
-  letter-spacing: 2px;
-  line-height: 30px;
-}
-
 .banner-content {
   margin-bottom: 10px;
 }
@@ -151,6 +144,7 @@ body {
   width: auto;
   height: 20px;
   margin: 0 auto;
+  list-style:none;
 }
 
 .keyword-tag li {
@@ -213,16 +207,7 @@ body {
 	cursor:pointer;
 }
 	
-.banner {
-	background-image: url(resources/images/market/market-banner2.png);
-	background-size: cover;
-	width: 100%;
-	margin: 0 auto;
-	height: 400px;
-	margin-bottom: 30px;
-	padding-top: 180px;
-	border-radius: 4px;
-}
+
 .fixed-Banner {
   right:0px;
   position:fixed; width:100px; margin:5% 5% 1% 1%; height:250px;
