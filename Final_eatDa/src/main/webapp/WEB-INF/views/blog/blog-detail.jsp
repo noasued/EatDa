@@ -94,7 +94,7 @@
         <div class="detail-article__btn">
           <input type="button" value="목록" onclick="location.href='blog.do'">
           <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
-          <input type="button" value="삭제">
+          <input type="button" value="삭제" onclick="location.href='blog-delete.do?blog_no=${dto.blog_no}'">
         </div>
       </div>
 

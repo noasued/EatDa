@@ -131,24 +131,24 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td valign="middle"><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle' ><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href="#"><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
-                                            <td valign="middle">즉석 떡볶이(2인분)</td>
+                                            <td style='vertical-align:middle'>즉석 떡볶이(2인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P2.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td>오뎅식당 X 부대찌개</td>
+                                            <td style='vertical-align:middle'>오뎅식당 X 부대찌개</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P3.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td>샤브샤브 (2인분)</td>
+                                            <td style='vertical-align:middle'>샤브샤브 (2인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P4.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td>제육볶음(3팩)</td>
+                                            <td style='vertical-align:middle'>제육볶음(3팩)</td>
                                         </tr>
                                         <tr>
                                             <td><input type="checkbox" name="chkBtn" id="chk"></td>
@@ -156,14 +156,14 @@
                                             <td>덮밥 (1인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
-                                            <td>즉석 떡볶이(2인분)</td>
+                                            <td style='vertical-align:middle'>즉석 떡볶이(2인분)</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn" id="chk"></td>
+                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
                                             <td><a href=""><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
-                                            <td>즉석 떡볶이(2인분)</td>
+                                            <td style='vertical-align:middle'>즉석 떡볶이(2인분)</td>
                                         </tr>
                                     </tbody>
                                     <tr></tr>

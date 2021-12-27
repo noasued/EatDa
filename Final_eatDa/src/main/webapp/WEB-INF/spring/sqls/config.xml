@@ -5,9 +5,12 @@
   <configuration>
   	
   	<typeAliases>
+  		<typeAlias type="com.project.eatda.dto.OrderDto" alias="orderDto"/>
   		<typeAlias type="com.project.eatda.dto.UserDto" alias="userDto"/>
-  		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
+  		<typeAlias type="com.project.eatda.dto.OrderProductDto" alias="orderProductDto"/>
+  		<typeAlias type="com.project.eatda.dto.CouponDto" alias="couponDto"/>
   		<typeAlias type="com.project.eatda.dto.EventDto" alias="eventDto"/>
+  		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
   		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   		<typeAlias type="com.project.eatda.dto.CartProductDto" alias="cartProductDto"/>
   		<typeAlias type="com.project.eatda.dto.ReviewDto" alias="reviewDto"/>

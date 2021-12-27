@@ -120,7 +120,7 @@ function putShoppingBag(object) {
 			success:function(msg) {
 				if (msg == 'true') {
 					alert('담기 완료! 장바구니로 이동합니다.');
-					location.href='shoppingbag.do';
+					location.href='goShoppingBag.do';
 				} else {
 					alert('상품이 이미 장바구니에 담겨있습니다.');
 				}

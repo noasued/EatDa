@@ -14,7 +14,7 @@ public class CartProductDto {
 	public CartProductDto() {
 		super();
 	}
-	
+
 	public CartProductDto(String user_id, String p_id, int cart_count, int cart_price, String p_name, String img_path) {
 		super();
 		this.user_id = user_id;

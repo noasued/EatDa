@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.CartProductDto;
+import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderDto;
+import com.project.eatda.dto.OrderProductDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
@@ -179,6 +182,129 @@ public class MarketDaoImpl implements MarketDao {
 		
 		return list;
 	}
+
+	@Override
+	public int deleteProductBag(List<String> list) {
+		int idx = 0;
+		int count = 0;
+		
+		try {
+			CartProductDto dto = new CartProductDto();;
+			dto.setUser_id(list.get(list.size()-1));
+			
+			while (idx < list.size()-1) {
+				dto.setP_id(list.get(idx));
+				count += sqlSession.delete(NAMESPACE_MARKET+"deleteProductBag", dto);
+				idx++;
+			}
+		} catch (Exception e) {
+			System.out.println("deleteProductBag DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+
+	@Override
+	public List<CouponDto> getCouponList(String user_id) {
+		List<CouponDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCouponList", user_id);
+		} catch (Exception e) {
+			System.out.println("getCouponList DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int paySuccess(OrderDto order) {
+		int res = 0;
+		//결제한 상품이 뭔지도 넣어야함.
+		
+		try {
+			res = sqlSession.insert(NAMESPACE_MARKET+"paySuccess", order);
+		} catch (Exception e) {
+			System.out.println("paySuccess DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public OrderDto getOrder(String user_id) {
+		OrderDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE_MARKET+"getOrder", user_id);
+		} catch (Exception e) {
+			System.out.println("paySuccess DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public int deleteCartList(String user_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE_MARKET+"deleteCartList", user_id);
+		} catch (Exception e) {
+			System.out.println("deleteCartList DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int deleteCoupon(OrderDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE_MARKET+"deleteCoupon", dto);
+		} catch (Exception e) {
+			System.out.println("deleteCoupon DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertOrderProduct(List<OrderProductDto> list) {
+		int res = 0;
+		
+		try {
+			for (int i = 0; i < list.size(); i++) {
+				res += sqlSession.insert(NAMESPACE_MARKET+"insertOrderProduct", list.get(i));
+			}
+		} catch (Exception e) {
+			System.out.println("insertOrderProduct DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int updateCartList(List<CartProductDto> list) {
+		int res = 0;
+		
+		try {
+			for (CartProductDto dto : list) {
+				res += sqlSession.update(NAMESPACE_MARKET+"updateCartList", dto);
+			}
+		} catch (Exception e) {
+			System.out.println("updateCartList DAO ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 	
 	
@@ -203,4 +329,5 @@ public class MarketDaoImpl implements MarketDao {
 	
 	
 
+	
 }

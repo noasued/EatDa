@@ -86,5 +86,42 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<delete id="deleteProductBag" parameterType="cartProductDto">
+		DELETE FROM CART_PRODUCT
+		WHERE P_ID = #{p_id} AND USER_ID = #{user_id}
+	</delete>
+	
+	<select id="getCouponList" resultType="couponDto" parameterType="string">
+		SELECT COUPON_ID, USER_ID, COUPON_NAME, COUPON_DES, COUPON_RATE, COUPON_TERM
+		FROM COUPON_LIST 
+		JOIN COUPON USING(COUPON_ID)
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<insert id="paySuccess" parameterType="orderDto">
+		INSERT INTO E_ORDER VALUES(#{order_id},#{user_id},SYSDATE,#{order_addr},#{order_name},#{order_phone},#{order_message},#{order_price},#{pay_option},#{original_price},#{discount_price},#{coupon_rate})
+	</insert>
+	
+	<select id="getOrder" parameterType="string" resultType="orderDto">
+		SELECT * 
+		FROM E_ORDER
+		WHERE ORDER_DATE = (SELECT MAX(ORDER_DATE) FROM E_ORDER WHERE USER_ID = #{user_id})
+	</select>
+	
+	<delete id="deleteCartList" parameterType="string">
+		DELETE FROM CART_PRODUCT WHERE USER_ID = #{user_id}
+	</delete>
+	
+	<delete id="deleteCoupon" parameterType="orderDto">
+		DELETE FROM COUPON_LIST WHERE USER_ID = #{user_id} AND COUPON_ID = #{coupon_id}
+	</delete>
+	
+	<insert id="insertOrderProduct" parameterType="orderProductDto">
+		INSERT INTO ORDER_PRODUCT VALUES(#{order_id},#{p_id},#{p_count})
+	</insert>
+	
+	<update id="updateCartList" parameterType="cartProductDto">
+		UPDATE CART_PRODUCT SET CART_COUNT = #{cart_count}, CART_PRICE = #{cart_price} WHERE USER_ID=#{user_id} AND P_ID = #{p_id}
+	</update>
 	
 </mapper>
