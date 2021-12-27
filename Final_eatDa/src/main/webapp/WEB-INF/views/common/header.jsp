@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="resources/css/login/login_main.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 
 <style type="text/css">
 body{
@@ -24,7 +27,7 @@ body {
 	margin: 0px;
 }
 .header {
-	height: 150px;
+	height: 155px;
 	background-color: rgb(248, 249, 250);
 	border-bottom: 1px rgb(232, 229, 229) solid;
 }
@@ -33,7 +36,7 @@ body {
 	padding-top: 10px;
 }
 .bottom-header {
-	height: 40px;
+	height: 45px;
 }
 .img-div {
 	padding-top: 10px;
@@ -54,7 +57,7 @@ body {
 	float: left;
 }
 .nav-menu {
-	width: 12%;
+	width: 11%;
 	height: 100%;
 	padding-left: 1%;
 }
@@ -71,7 +74,7 @@ body {
 }
 .header-a {
 	text-decoration: none;
-	color: black;
+	color: gray;
 }
 .sub-menu {
 	padding: 0px;
@@ -91,21 +94,28 @@ body {
 #user-name {
 	letter-spacing:1px;
 }
-
+.banner-text {
+	text-decoration: none; color: black; font-size: small; padding-top: 5px;
+}
+.header-a, .banner-text {
+	font-family: 'Cute Font', cursive;
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	font-family: 'Nanum Myeongjo', serif;
+}
 </style>
 <script type="text/javascript">
     function loginModalIn() {
-    	$(".login_wrap1").fadeIn();
+		$(".login_wrap1").fadeIn();
     }
     function loginModalOut() {
-      $(".login_wrap1").fadeOut();
+		$(".login_wrap1").fadeOut();
     }
 </script>
 </head>
 <body>
-	<div class="container-fluid header" style="position: fixed; top: 0; right: 0; left: 0;">
-		<div class="row top-banner" align="center" style="background-color: #ffe084; height: 25px">
-			<a href="#" style="text-decoration: none; color: black; font-size: small; padding-top: 5px;">
+	<div class="container-fluid header" style="position: fixed; top: 0; right: 0; left: 0; z-index:1;">
+		<div class="row top-banner" align="center" style="background-color:rgb(240, 220, 170); height: 32px">
+			<a href="#" class="banner-text" style="">
 				회원가입하고 최대 80% 쿠폰 받아가자!
 			</a>
 		</div>
@@ -136,6 +146,7 @@ body {
 					<li class="nav-menu"><a class="header-a" href="#">마이페이지</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="mypage.do">마이페이지</a></li>
+							<li><a class="header-a" href="goShoppingBag.do">장바구니</a></li>
 							<li><a class="header-a" href="mypage_subscription.do">구독내역</a></li>
 							<li><a class="header-a" href="mypage_like.do">찜목록</a></li>
 							<li><a class="header-a" href="mypage_coupon.do">쿠폰함</a></li>
@@ -143,17 +154,17 @@ body {
 					</li>
 				</ul>
 			</div>
-			<div class="col-sm-3" align="right" style="padding: 20px 7% 0 0;">
+			<div class="col-sm-3" align="right" style="padding: 20px 6% 0 0;">
 				<c:choose>
 					<c:when test="${member != null}">
 						<span id="user-name">${member.user_name}님 반가워요😃</span>&nbsp;&nbsp;&nbsp;
 						<span style="color: gray" id="logout-btn" onclick="location.href='logout.do'">로그아웃</span>
 					</c:when>
 					<c:otherwise>
-						<span id="login" style="color: gray" onclick="loginModalIn()">로그인</span>
+						<span id="login" style="color: gray; font-size:large;" onclick="loginModalIn()">로그인</span>
 					</c:otherwise>
 				</c:choose>
-				<div class="login_wrap1">
+				<div class="login_wrap1" style="z-index:1;">
 					<div class="login_wrap">
 						<div class="login">
 							<div class="login_modal_close">

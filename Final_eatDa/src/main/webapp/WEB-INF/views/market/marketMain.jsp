@@ -20,26 +20,42 @@
 .pagination a:hover {
 	cursor:pointer;
 }
-	
-.banner {
-	background-image: url(resources/images/market/market-banner3.png);
-	background-size: cover;
-	width: 100%;
-	margin: 0 auto;
-	height: 400px;
-	margin-bottom: 30px;
-	padding-top: 180px;
-	border-radius: 4px;
-}
+
 .fixed-Banner {
   right:0px;
-  position:fixed; width:100px; margin:5% 5% 1% 1%; height:250px;
+  position:fixed; width:100px; margin:21% 5% 1% 1%; height:250px;
   padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
   border: 1px gray solid; overflow:scroll;
 }
 
 .like-img:hover, .product-title:hover, .product-img:hover, .shop-cart:hover {
   cursor:pointer;
+}
+.banner {
+	background-image: url(resources/images/market/market-banner3.png);
+	background-size: cover;
+	width: 100%;
+	margin: 0 auto;
+	height: 300px;
+	margin-bottom: 30px;
+	padding-top: 140px;
+	border-radius: 4px;
+}
+.keyword-tag {
+  width: auto;
+  height: 20px;
+  margin: 0 auto;
+  list-style:none;
+}
+.keyword:hover, .total-keyword:hover {
+	color:black;
+	font-weight:bold;
+}
+.banner-text {
+  font-size: x-large;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 30px;
 }
 
 </style>
@@ -451,7 +467,7 @@ function goProductPage(object) {
 		<div class="row" style="margin-top: 10px;">
 			<div class="col-md-12 banner">
 				<div class="banner-content">
-					<div class="banner-text">우리의 밥상에 건강과 행복을 차려볼까요?</div>
+					<div class="banner-text" style="font-size:larger;">우리의 밥상에 건강과 행복을 차려볼까요?</div>
 				</div>
 				<div class="search-box-narrow">
 					<input type="text" class="search-narrow" id="search-bar" placeholder="키워드를 입력해주세요.">
@@ -463,7 +479,7 @@ function goProductPage(object) {
 		<div class="row">
 			<ul class="keyword-tag" style="margin: 0 auto; width: auto;">
 				<li>
-                    <span onclick="totalProduct()" style="color: red;">#키워드검색</span>
+                    <span class="total-keyword" onclick="totalProduct()" style="color: red;">#키워드검색</span>
                 </li>
 				<li><span class="keyword" onclick="hashTagSearch(this)">#양식</span></li>
 				<li><span class="keyword" onclick="hashTagSearch(this)">#중식</span></li>
