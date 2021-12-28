@@ -3,7 +3,7 @@ package com.project.eatda.dto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductDto {
+public class ProductDto { 
 
 	private String p_id;
 	private String p_name;

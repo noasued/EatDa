@@ -22,7 +22,7 @@
             width: 70%;
             height: auto;
             margin:0px auto;
-        }
+        } 
 
         .first-section {
             padding: 3%;

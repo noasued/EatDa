@@ -58,7 +58,7 @@ public class MarketBizImpl implements MarketBiz{
 	public int putShoppingBag(CartProductDto dto) {
 		int res = marketDao.putShoppingBag(dto);
 		
-		return res;
+		return res; 
 	}
 
 	@Override

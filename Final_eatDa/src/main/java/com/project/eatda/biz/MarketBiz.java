@@ -39,5 +39,8 @@ public interface MarketBiz {
 	public int deleteCoupon(OrderDto dto);
 	public int insertOrderProduct(List<OrderProductDto> list);
 	
-	public int updateCartList(List<CartProductDto> list);
+	public int updateCartList(List<CartProductDto> list);	
+	public List<OrderProductDto> getOrderList(String order_id);
+	public List<CartProductDto> directPurchase(CartProductDto dto); 
+
 }

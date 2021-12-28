@@ -356,8 +356,7 @@
 					console.log(msg);
 				}
 			});
-			location.href='makeOrder.do?data=fromShoppingBag';
-			
+			location.href='makeOrder.do'; 			
 		}
 	}
 	

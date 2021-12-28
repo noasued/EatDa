@@ -15,7 +15,7 @@ span {
 	margin-top: 25px;
 	margin-bottom: 100px;
 	width: 100%;
-	height: auto;
+	height: auto; 
 }
 
 .top-section {
@@ -480,24 +480,27 @@ em {
 	}
 	function directPurchase() {
 		//바로 구매하기
-		let product = {
-				p_name:$('.modal-info-title').children('span').text(),
-				img_path:$('#img').attr('src'),
-				p_price:$('#price').text(),
-				quantity:$('#quantity').text(),
-				p_id:$('#p-id').text()
-		}
-		
-		$.ajax({
-			url: 'directPurchase.do',
-			type: 'post',
-			contentType:"application/json; charset=utf-8",
-			data: JSON.stringify(product),
-			success:function(msg){
-				console.log(msg);
+		if (confirm('알림::바로 구매하기를 이용하시면 장바구니가 비워집니다. 계속하시겠습니까?')) {
+			let product = {
+					p_name:$('.modal-info-title').children('span').text(),
+					img_path:$('#img').attr('src'),
+					p_price:$('#price').text(),
+					quantity:$('#quantity').text(),
+					p_id:$('#p-id').text()
 			}
-		});
-		location.href = 'makeOrder.do?data=directPurchase';
+			console.log(product);
+			
+			/* $.ajax({
+				url: 'directPurchase.do',
+				type: 'post',
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify(product),
+				success:function(msg){
+					console.log(msg);	
+				}
+			}); */
+			location.href = 'makeOrder.do?p_id=' + product.p_id + '&quantity='+product.quantity + '&price=' + product.p_price;
+		};
 	}
 
 </script>

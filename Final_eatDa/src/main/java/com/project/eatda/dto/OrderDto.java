@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderDto {
+public class OrderDto { 
 	private String order_id;
 	private String user_id;
 	private Date order_date;
