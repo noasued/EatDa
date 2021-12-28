@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypage">
+
+	<resultMap type="subscriptionDto" id="subscriptionMap">
+		<result property="subscription_id" column="SUBSCRIPTION_ID"/>
+		<result property="user_id" column="USER_ID"/>
+		<result property="subscription_title" column="SUBSCRIPTION_TITLE"/>
+		<result property="subscription_price" column="SUBSCRIPTION_PRICE"/>
+		<result property="subscription_type" column="SUBSCRIPTION_TYPE"/>
+		<result property="subscription_term" column="SUBSCRIPTION_TERM"/>
+		
+	</resultMap>
+
+	<!-- 구독 내역 -->
+	<select id="subscriptionList" resultType="subscriptionDto" parameterType="string">
+		SELECT *
+		FROM SUBSCRIPTION
+		WHERE USER_ID = #{user_id}
+	</select>
+</mapper>

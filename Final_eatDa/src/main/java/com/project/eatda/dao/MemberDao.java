@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.project.eatda.dto.SubscriptionDto;
 import com.project.eatda.dto.UserDto;
 
 public interface MemberDao {
@@ -26,4 +27,5 @@ String NAMESPACE_MEMBER = "mymember.";
 	
 	//회원탈퇴
 	public void memberDelete(UserDto dto) throws Exception;
+	
 }

@@ -114,6 +114,7 @@ public class MemberController {
 				//사용자
 				if(dto2.getUser_role().equals("USER")) {
 					session.setAttribute("member", dto2);
+					session.setAttribute("user_id", dto.getUser_id());
 					mav.setViewName("../../index");
 					mav.addObject("msg", "success");
 				
