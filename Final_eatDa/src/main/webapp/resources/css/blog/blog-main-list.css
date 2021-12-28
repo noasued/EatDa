@@ -20,12 +20,11 @@ a{
 
 .blog-article__list{
 	height:550px;
-	/* margin-left:2%; */
-	align-items: center;
+	margin-left:3%;
 }
 
 .blog-article__list li{
-	width:800px;
+	width:980px;
   margin:20px 0;
   height:140px;
   border:0.5px solid rgba(213, 214, 118, 0.7);

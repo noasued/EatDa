@@ -23,7 +23,7 @@
   margin-left: 10%;
 }
 
-.event-write__content-article input[name="event_title"]{
+.event-write__content-article input[name="title"]{
   width:840px;
   height:40px;
   border:0.5px solid gainsboro;
@@ -32,7 +32,7 @@
   margin-left: 10%;
 }
 
-.event-write__content-article input[name="event_title"]:focus{
+.event-write__content-article input[name="title"]:focus{
   outline:0.5px solid rgb(213, 214, 118);
   
 }

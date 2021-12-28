@@ -6,39 +6,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-	  $(function(){
-	
-	    // 하트 클릭 -> 하트 채워짐
-	    $(".emptyheart").click(function(){
-	      $(".fullheart").fadeIn(300);
-	    });
-	    // 다시 클릭 -> 하트 비워짐
-	    $(".fullheart").click(function(){
-	      $(".fullheart").fadeOut(300);
-	    });
-	
-	    // 신고 버튼 클릭 -> 모달창 띄우기
-	    $("#report-btn").click(function(){
-	      $(".reply-report__modal").fadeIn();
-	    });
-	    // x 버튼 클릭 -> 모달창 fade out
-	    $(".fa-times").click(function(){
-	      $(".reply-report__modal").fadeOut();
-	    });
-	
-	  });
-	  
-		function blogDelete(blog_no){
-		  var chk = confirm("정말 삭제하시겠습니까?");
-		  if(chk){
-			  location.href='blog-delete.do?blog_no='+blog_no;
-		  }
-		}
-	</script>
 <link href="resources/css/blog/blog-detail.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+
+    // 하트 클릭 -> 하트 채워짐
+    $(".emptyheart").click(function(){
+      $(".fullheart").fadeIn(300);
+    });
+    // 다시 클릭 -> 하트 비워짐
+    $(".fullheart").click(function(){
+      $(".fullheart").fadeOut(300);
+    });
+
+    // 신고 버튼 클릭 -> 모달창 띄우기
+    $("#report-btn").click(function(){
+      $(".reply-report__modal").fadeIn();
+    });
+    // x 버튼 클릭 -> 모달창 fade out
+    $(".fa-times").click(function(){
+      $(".reply-report__modal").fadeOut();
+    });
+
+  });
+</script>
+
 <style type="text/css">
 .blog-detail__top{
   width:100%;
@@ -75,7 +69,6 @@
 }
 
 </style>
-
 </head>
 <body>
 	<div id="header">
@@ -101,7 +94,7 @@
         <div class="detail-article__btn">
           <input type="button" value="목록" onclick="location.href='blog.do'">
           <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
-          <input type="button" value="삭제" onclick="blogDelete(${dto.blog_no})">
+          <input type="button" value="삭제" onclick="location.href='blog-delete.do?blog_no=${dto.blog_no}'">
         </div>
       </div>
 
@@ -211,6 +204,5 @@
   <div id="footer">
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-	
 </body>
 </html>

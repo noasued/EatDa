@@ -5,16 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-	function eventDelete(event_no){
-	  var chk = confirm("정말 삭제하시겠습니까?");
-	  if(chk){
-		  location.href='event-delete.do?event_no='+event_no;
-	  }
-		console.log(event_no);
-	}
-</script>
 <style type="text/css">
 body{
   margin:0;
@@ -80,8 +70,8 @@ body{
 
         <!-- buttons -->
         <div class="detail-article__btn">
-          <input type="button" value="수정" onclick="location.href='event-updateform.do?event_no=${dto.event_no}'">
-          <input type="button" value="삭제" onclick="eventDelete(${dto.event_no})">
+          <input type="button" value="수정" onclick="location.href='event-update.do?event_no=${dto.event_no}'">
+          <input type="button" value="삭제">
           <input type="button" value="목록" onclick="location.href='event.do'">
         </div>
       </div>
