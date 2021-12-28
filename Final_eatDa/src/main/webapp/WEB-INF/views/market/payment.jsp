@@ -62,7 +62,8 @@
 				//무통장 입금
 				alert('무통장 입금을 선택하셨습니다.');
 				afterPayment(pay_info);
-				location.href = 'orderSuccess.do';
+				console.log(pay_info.order_code);
+				location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
 			} else {
 				iamport(pay_info);
 			}
@@ -89,7 +90,7 @@
     		    	alert('결제가 완료되었습니다.');
     		    	//데이터 삽입-> 오더 + 오더 상품까지 데이터 삽입하자.
     		    	afterPayment(pay_info);
-    		    	location.href = 'orderSuccess.do';
+    		    	location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
     		    } else {
     		       	msg += '에러내용 : ' + rsp.error_msg;
 	    		    alert('결제에 실패하였습니다. ');
@@ -247,7 +248,7 @@
         .fixed-Banner {
             position:fixed; width:300px; margin:1%; height:400px;
             padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-			border: 1px gray solid;
+			border: 1px gray solid; z-index:1; background-color:white;
         }
         #agreePay {
             margin-left: 10px;
