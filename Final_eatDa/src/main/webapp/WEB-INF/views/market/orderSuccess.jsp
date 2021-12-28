@@ -4,11 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
 <style type="text/css">
 	/* body 최소 크기, 마진 0 지정 */
 	body {
@@ -113,7 +108,7 @@ function getCartList() {
 			let list = data;
 			$(list).each(function(key, value) {
 				let dp = Number(value.cart_price)*Number($('#coupon-rate').text());
-				$('.container-fluid').eq(1).append(
+				$('.container-fluid').eq(2).append(
 						"<div class='row rows-width product-section' style='margin:0px auto;'>" +
 						"<div class='col-md-2 p-img'>" +
 						"<img src='" + value.img_path + "' class='product-img'>" +
@@ -125,13 +120,13 @@ function getCartList() {
 						"</div>" +
 						"<div>" +
 						"<span class='title'>주문 수량 : </span>" +
-						"<span>" + value.cart_count +"</span>" +
+						"<span>" + value.p_count +"</span>" +
 						"</div>" +
 						"</div>" +
 						"<div class='col-md-4 li-div p-price'>" +
 						"<div>" +
 						"<span class='title'>상품 금액 : </span>" +
-						"<span>" + value.cart_price + "</span>" +
+						"<span>" + value.price + "</span>" +
 						"<span>&#8361;</span>" +
 						"</div>" +
 						"<div>" +
@@ -188,7 +183,7 @@ function goMain() {
 	
 </script>
 </head>
-<body>
+<body style="margin-top:200px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>

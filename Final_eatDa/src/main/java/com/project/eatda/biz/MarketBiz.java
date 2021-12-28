@@ -40,4 +40,6 @@ public interface MarketBiz {
 	public int insertOrderProduct(List<OrderProductDto> list);
 	
 	public int updateCartList(List<CartProductDto> list);
+	
+	public List<OrderProductDto> getOrderList(String order_id);
 }

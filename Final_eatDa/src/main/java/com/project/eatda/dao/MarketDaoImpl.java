@@ -305,6 +305,19 @@ public class MarketDaoImpl implements MarketDao {
 		}
 		return res;
 	}
+
+	@Override
+	public List<OrderProductDto> getOrderList(String order_id) {
+		List<OrderProductDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getOrderList", order_id);
+		} catch (Exception e) {
+			System.out.println("getOrderList DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	
 	

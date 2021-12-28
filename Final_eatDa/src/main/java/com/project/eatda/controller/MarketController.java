@@ -39,9 +39,6 @@ public class MarketController {
 	@Autowired
 	private OrderDto orderDto;
 	
-	//임시 유저 아이디
-	String user_id = "ADMIN";
-	
 	@RequestMapping(value="/product.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<ProductDto> takeProductList(@RequestBody String num) {
@@ -67,10 +64,9 @@ public class MarketController {
 	
 	@RequestMapping(value="/likeProduct-main.do", method=RequestMethod.POST)
 	@ResponseBody
-	public List<ProductDto> likeProductList() {
+	public List<ProductDto> likeProductList(HttpServletRequest request) {
 		logger.info("likeProductList");
-		
-		List<ProductDto> list = marketBiz.likeProductList(user_id);
+		List<ProductDto> list = marketBiz.likeProductList(getLoginUser(request).getUser_id());
 		return list;
 	}
 	
@@ -106,7 +102,7 @@ public class MarketController {
 	
 	@RequestMapping(value="/putShoppingBag.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String putShoppingBag(@RequestBody String data) {
+	public String putShoppingBag(@RequestBody String data, HttpServletRequest request) {
 		//로그인 되어있는 세션에 이미 카트번호가 담겨있음.
 		//장바구니에 해당 상품이 담겨있는지 체크해야함.
 		logger.info("putShoppingBag, data : " + data);
@@ -126,7 +122,7 @@ public class MarketController {
 		}
 		
 		System.out.println("p_id : " + p_id + ", p_price : " + p_price + ", quantity : " + quantity);
-		CartProductDto cpDto = new CartProductDto(user_id,p_id,quantity,p_price,null,null);
+		CartProductDto cpDto = new CartProductDto(getLoginUser(request).getUser_id(),p_id,quantity,p_price,null,null);
 		//세션에서 user_ID 가져와야함 (위 DTO의 첫 번째 파라미터로 넣어줘야 함)
 		
 		int res = marketBiz.putShoppingBag(cpDto);
@@ -151,27 +147,27 @@ public class MarketController {
 	
 	@RequestMapping(value="/likeProductInsert.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String likeProductInsert(@RequestBody String p_id) {
+	public String likeProductInsert(@RequestBody String p_id, HttpServletRequest request) {
 		logger.info("likeProductInsert, p_id : " + p_id);
 		
-		int res = marketBiz.likeProductInsert(new ProductLikeDto(user_id, p_id.substring(0,p_id.length()-1)));
+		int res = marketBiz.likeProductInsert(new ProductLikeDto(getLoginUser(request).getUser_id(), p_id.substring(0,p_id.length()-1)));
 		return res > 0 ? "true":"false";
 	}
 	
 	@RequestMapping(value="/deleteProductLike.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String deleteProductLike(@RequestBody String p_id) {
+	public String deleteProductLike(@RequestBody String p_id, HttpServletRequest request) {
 		logger.info("deleteProductLike, p_id : " + p_id);
 		
-		int res = marketBiz.deleteProductLike(new ProductLikeDto(user_id, p_id.substring(0,p_id.length()-1)));
+		int res = marketBiz.deleteProductLike(new ProductLikeDto(getLoginUser(request).getUser_id(), p_id.substring(0,p_id.length()-1)));
 		return res > 0 ? "true":"false";
 	}
 	
 	@RequestMapping("/goShoppingBag.do")
-	public String goShoppingBag(Model model) {
+	public String goShoppingBag(Model model, HttpServletRequest request) {
 		//장바구니에서 뿌려줄 정보들 select 해오자.
 		logger.info("goShoppingBag");
-		List<CartProductDto> cart = marketBiz.getCartList(user_id);
+		List<CartProductDto> cart = marketBiz.getCartList(getLoginUser(request).getUser_id());
 		
 		model.addAttribute("list", cart);
 		return "/market/shoppingBag";
@@ -179,9 +175,9 @@ public class MarketController {
 	
 	@RequestMapping(value="/deleteProductBag.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String deleteProductBag(@RequestBody String data) {
+	public String deleteProductBag(@RequestBody String data, HttpServletRequest request) {
 		logger.info("deleteProductLike, p_id : " + data);
-		int res = marketBiz.deleteProductBag(convertList(data));
+		int res = marketBiz.deleteProductBag(convertList(data, request));
 		
 		return res>0?"true":"false";
 	}
@@ -198,8 +194,7 @@ public class MarketController {
 	@ResponseBody
 	public String updateCartList(@RequestBody String data, HttpServletRequest request) {
 		logger.info("updateCartList, product : " + data);
-		UserDto login_user = getLoginUser(request);
-		List<CartProductDto> list = convertCartList(data, login_user.getUser_id());
+		List<CartProductDto> list = convertCartList(data, getLoginUser(request).getUser_id());
 		int res = marketBiz.updateCartList(list);
 		
 		return res>0?"true":"false";
@@ -211,14 +206,24 @@ public class MarketController {
 		
 		for(int i = 0; i < temp.length; i++) {
 			String[] array = temp[i].split(",");
-			String p_id = array[0].substring(9, array[0].length()-1);
-			String p_price = array[2].substring(9, array[2].length()-1);
-			int quantity = Integer.parseInt(array[1].substring(12, array[1].length()-1)); 
+			String p_price = null;
+			String p_id = null;
+			int quantity = 0;
 			
-			if (i == 0) {
+			if (temp.length != 1) {
+				p_id = array[0].substring(9, array[0].length()-1);
+				p_price = array[2].substring(9, array[2].length()-1);
+				quantity = Integer.parseInt(array[1].substring(12, array[1].length()-1)); 
+				
+				if (i == 0) {
+					p_id = array[0].substring(10, array[0].length()-1);
+				} else if (i == temp.length-1) {
+					p_price = array[2].substring(9, array[2].length()-3);
+				}
+			} else if (temp.length == 1) {
 				p_id = array[0].substring(10, array[0].length()-1);
-			} else if (i == temp.length-1) {
 				p_price = array[2].substring(9, array[2].length()-3);
+				quantity = Integer.parseInt(array[1].substring(12, array[1].length()-1));
 			}
 			
 			list.add(new CartProductDto(user_id, p_id, quantity, Integer.parseInt(p_price), null, null));
@@ -228,15 +233,16 @@ public class MarketController {
 	
 	
 	@RequestMapping("/makeOrder.do")
-	public String makeOrder(Model model, String data) {
+	public String makeOrder(Model model, String data, HttpServletRequest request) {
 		logger.info("makeOrder, data :" + data);
 		List<CartProductDto> cart = null;
 
 		if (data.equals("fromShoppingBag")) {
-			cart = marketBiz.getCartList(user_id);
+			cart = marketBiz.getCartList(getLoginUser(request).getUser_id());
 		} else if (data.equals("directPurchase")) {
 			cart = new ArrayList<CartProductDto>();
 			cart.add(tempCartProduct);
+			System.out.println("tempCartProduct: "+tempCartProduct.getP_id());
 		}
 		model.addAttribute("list", cart);
 		return "/market/payment";
@@ -265,14 +271,14 @@ public class MarketController {
 	@ResponseBody
 	public String paySuccess(HttpServletRequest request, @RequestBody String data) {
 		logger.info("paySuccess, data: " + data);
-		UserDto user = getLoginUser(request);
-		OrderDto order = convertOrder(data, user.getUser_id());
+		OrderDto order = convertOrder(data, getLoginUser(request).getUser_id());
 		
 		System.out.println("paySuccess.orderDto: " + order.toString());
 		orderDto.setOrder_id(order.getOrder_id());
 		System.out.println("paySuccess.orderBean: " + orderDto.getOrder_id());
 		
 		int res = marketBiz.paySuccess(order); //insert
+		insertOrderProduct(orderDto.getOrder_id(), marketBiz.getCartList(getLoginUser(request).getUser_id()));
 		
 		return res>0?"true":"false";
 	}
@@ -280,14 +286,14 @@ public class MarketController {
 	
 	@RequestMapping("/orderSuccess.do")
 	public String orderSuccess(Model model, HttpServletRequest request) {
-		logger.info("orderSuccess.do : " + orderDto.getOrder_id());
-		UserDto user = getLoginUser(request);
+		logger.info("orderSuccess.do");
+		/*
 		//여기 삽입하자
 		int res = insertOrderProduct(orderDto.getOrder_id(), marketBiz.getCartList(user_id));
 		System.out.println(res>0?"insertOrderProdut 성공":"insertOrderProdut 실패");
+		*/
 		
-		
-		return "redirect:successDirect.do?user_id="+user.getUser_id();
+		return "redirect:successDirect.do?user_id="+getLoginUser(request).getUser_id();
 	}
 	
 	//쿠폰 못하는 이유 -> db(order 테이블)에 쿠폰id 컬럼이 없음 
@@ -295,6 +301,7 @@ public class MarketController {
 	public String successDirect(Model model, String user_id) {
 		logger.info("successDirect.do, user_id : " + user_id);
 		OrderDto order = marketBiz.getOrder(user_id);
+		System.out.println("successDirect.order : " + order.toString());
 		System.out.println("successDirect.coupon_id : " + order.getCoupon_id());
 		model.addAttribute("order", order);
 		return "/market/orderSuccess";
@@ -302,19 +309,18 @@ public class MarketController {
 	
 	@RequestMapping(value="/getOrderList.do", method=RequestMethod.POST)
 	@ResponseBody
-	public List<CartProductDto> getOrderList(HttpServletRequest request) {
+	public List<OrderProductDto> getOrderList(HttpServletRequest request) {
 		logger.info("getOrderList");
-		UserDto user = getLoginUser(request);
-		List<CartProductDto> cart = marketBiz.getCartList(user.getUser_id());
-		return cart;
+		String order_id = marketBiz.getOrder(getLoginUser(request).getUser_id()).getOrder_id();
+		List<OrderProductDto> order_list = marketBiz.getOrderList(order_id);
+		return order_list;
 	}
 	
 	@RequestMapping(value="/deleteCartList.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String deleteCartList(HttpServletRequest request) {
 		logger.info("deleteCartList");
-		UserDto user = getLoginUser(request);
-		int res = marketBiz.deleteCartList(user.getUser_id());
+		int res = marketBiz.deleteCartList(getLoginUser(request).getUser_id());
 		return res>0?"true":"false";
 	}
 	
@@ -322,11 +328,10 @@ public class MarketController {
 	@ResponseBody
 	public String deleteCoupon(HttpServletRequest request, @RequestBody String data) {
 		logger.info("deleteCoupon, data : " + data);
-		UserDto user = getLoginUser(request);
 		
 		OrderDto dto = new OrderDto();
-		dto.setCoupon_id(data.substring(13,data.length()-2));
-		dto.setUser_id(user.getUser_id());
+		dto.setCoupon_id(data.substring(14,data.length()-2));
+		dto.setUser_id(getLoginUser(request).getUser_id());
 		
 		int res = marketBiz.deleteCoupon(dto);
 		
@@ -336,13 +341,10 @@ public class MarketController {
 	public int insertOrderProduct(String order_id, List<CartProductDto> list) {
 		List<OrderProductDto> opList = new ArrayList<OrderProductDto>();
 		int res = 0;
-		System.out.println("insertOrderProduct.order_id: " + order_id);
 		
 		for (int i = 0; i < list.size(); i++) {
-			OrderProductDto dto = new OrderProductDto(order_id, list.get(i).getP_id(), list.get(i).getCart_count());
+			OrderProductDto dto = new OrderProductDto(order_id, list.get(i).getP_id(), list.get(i).getCart_count(), list.get(i).getCart_price(),null,null);
 			opList.add(dto);
-			System.out.println("list : " + list.get(i).toString());
-			System.out.println("opList: "+opList.get(i).toString());
 		}
 		
 		res = marketBiz.insertOrderProduct(opList);
@@ -359,9 +361,6 @@ public class MarketController {
 		tempCartProduct.setCart_count(Integer.parseInt(temp[3].substring(12, temp[3].length()-1)));
 		tempCartProduct.setP_id(temp[4].substring(8, temp[4].length()-2));
 	}
-	
-	
-	
 	
 	public UserDto getLoginUser(HttpServletRequest request) {
 		UserDto dto = (UserDto)request.getSession().getAttribute("member");
@@ -402,7 +401,7 @@ public class MarketController {
 	}
 	
 	
-	public List<String> convertList(String data) {
+	public List<String> convertList(String data, HttpServletRequest request) {
 		List<String> list = new ArrayList<String>();
 		String temp = data.substring(10, data.length()-2);
 		String[] sarr = temp.split(",");
@@ -410,7 +409,7 @@ public class MarketController {
 		for (int i = 0; i < sarr.length; i++) {
 			list.add(sarr[i].substring(1, sarr[i].length()-1));
 		}
-		list.add(user_id);
+		list.add(getLoginUser(request).getUser_id());
 		
 		return list;
 	}
