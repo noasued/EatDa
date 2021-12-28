@@ -39,6 +39,7 @@
 			
 			for (var i = 0; i < 4; i++) {
 				if($('.input').eq(i).val() == '') {
+					alert('배송지 정보를 빠짐없이 입력해주세요.')
 					return;
 				}
 			}
