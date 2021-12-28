@@ -38,6 +38,18 @@ public class MemberBizImpl implements MemberBiz{
 	public void memberRegist(UserDto dto) throws Exception {
 		memberDao.memberRegist(dto);
 	}
+
+	//회원정보 수정
+	@Override
+	public void memberUpdate(UserDto dto) throws Exception {
+		memberDao.memberUpdate(dto);
+	}
+
+	//회원탈퇴
+	@Override
+	public void memberDelete(UserDto dto) throws Exception {
+		memberDao.memberDelete(dto);
+	}
 	
 	
 	

@@ -20,4 +20,10 @@ String NAMESPACE_MEMBER = "mymember.";
 	
 	//회원가입
 	public void memberRegist(UserDto dto);
+	
+	//회원정보 수정
+	public void memberUpdate(UserDto dto) throws Exception;
+	
+	//회원탈퇴
+	public void memberDelete(UserDto dto) throws Exception;
 }
