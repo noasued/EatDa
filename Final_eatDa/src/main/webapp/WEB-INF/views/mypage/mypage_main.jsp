@@ -99,17 +99,8 @@ div span{
         color: rgb(95, 95, 95);
     }
 
-    .user_id_chk, .user_addr_chk{
-        width: 55px;
-        height: 18px;
-    }
-
-    .user_phone_chk{
-        width: 75px;
-        height: 18px;
-    }
-
     .update_btn{
+    	width: 650px;
         text-align: right;
         margin: 30px;
     }
@@ -128,16 +119,28 @@ div span{
         font-weight: bold;
     }
 
-    .back_btn{
-        border: none;
-        border-radius: 4px;
-        width: 60px;
-        height: 30px;
-        background-color: rgb(134, 134, 132);
-        color: white;
-        font-weight: bold;
-    }
 </style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+	//비밀번호 확인 -> 정보 수정
+	function pwChkConfirm(){
+		var pw = ${member.user_pw };
+		
+		var prt = prompt("비밀번호를 입력해주세요.");
+		
+		if(prt == pw){
+			location.href='mypage_updateForm.do';
+		}else{
+			alert("비밀번호가 틀렸습니다.");
+			return false;
+		}
+	}
+	
+</script>
+
+
 <body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
@@ -153,39 +156,37 @@ div span{
                 <a>내 정보 관리</a>
             </div>
             <div class="info_update_form">
-            <form action="" method="post">
                 <table width="550px">
                     <tr>
                         <col width="150px"> <col width="300px">
                     </tr>
                     <tr>
                         <th>아이디</th>
-                        <td> <a>eatDa_user</a></td>
+                        <td> <a>${member.user_id }</a></td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td><a>어쩌구</a></td>
+                        <td><a>${member.user_name }</a></td>
                     </tr>
                     <tr>
                         <th>이메일</th>
-                        <td><a>asdf123@eatda.com</a></td>
+                        <td><a>${member.user_email }</a></td>
                     </tr>
                     <tr>
                         <th>핸드폰 번호</th>
-                        <td><a>010 1234 1234</a></td>
+                        <td><a>${member.user_phone }</a></td>
                     </tr>  
                     <tr>
                         <th>주소</th>
                         <td>
-                            <a>경기도 ㅇㅇ시 ㅇㅇ구</a><br>
-                            <a>ㅇㅇㅇ동 ㅇㅇㅇ호</a>
+                            <a>${member.user_addr }</a><br>
+                            <a>${member.user_addr_sub }</a>
                         </td>
                     </tr>          
                 </table>
                     <div class="update_btn">
-                        <input type="submit" class="submit_btn" value="수 정">
+                        <input type="button" class="submit_btn" value="수 정" onclick="pwChkConfirm();">
                     </div>
-            </form>
           </div>
         </div>
        
