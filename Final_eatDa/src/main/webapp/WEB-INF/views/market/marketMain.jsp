@@ -25,7 +25,7 @@
   right:0px;
   position:fixed; width:100px; margin:21% 5% 1% 1%; height:250px;
   padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-  border: 1px gray solid; overflow:scroll; z-index:1; background-color:white;
+  border: 1px gray solid; overflow:scroll;
 }
 
 .like-img:hover, .product-title:hover, .product-img:hover, .shop-cart:hover {

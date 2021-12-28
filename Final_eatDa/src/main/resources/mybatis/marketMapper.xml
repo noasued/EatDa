@@ -133,9 +133,7 @@
 		WHERE ORDER_ID = #{order_id}
 	</select>
 	
-	<delete id="deleteAllCart" parameterType="string">
-		DELETE FROM CART_PRODUCT WHERE USER_ID = #{user_id}
-	</delete>
+	
 	
 	
 	
