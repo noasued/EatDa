@@ -278,7 +278,7 @@ em {
   right:0px;
   position:fixed; width:100px; margin:5% 5% 1% 1%; height:250px;
   padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-  border: 1px gray solid; overflow:scroll; z-index:1; background-color:white;
+  border: 1px gray solid; overflow:scroll;
 }
 
 .like-title {
@@ -322,7 +322,7 @@ em {
 
 </head>
 
-<body style="margin: 0; min-width: 1400px; margin-top:180px;">
+<body style="margin: 0; min-width: 1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
@@ -550,6 +550,13 @@ em {
 			</div>
 		</div>
 	</div>
+	
+	<!-- paging navi -->
+	<div style="width: 67%; height: 40px; margin: 0 auto; padding: 10px; margin-top: 15px;">
+		<span style="color: rgb(148, 148, 32); font-size: larger;">
+			HOME > MARKET > PRODUCT </span>
+	</div>
+
 	<!-- 상품 페이지 시작 -->
 	<div id="wrap">
 		<div class="top-section">

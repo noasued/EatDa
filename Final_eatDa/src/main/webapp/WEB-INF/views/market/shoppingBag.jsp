@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style type="text/css">
     .wrap {
@@ -325,7 +324,7 @@
 		
 	}
 	function goMarketMain() {
-		location.href='marketMain.do';
+		location.href='marketMain.do'
 	}
 	
 	function makeOrder() {
@@ -357,15 +356,15 @@
 					console.log(msg);
 				}
 			});
-			location.href='makeOrder.do'; 
-			
+			location.href='makeOrder.do'; 			
 		}
 	}
 	
 </script>
+
 </head>
 
-<body style="margin:0; min-width:1400px; margin-top:150px; margin-top:200px;">
+<body style="margin:0; min-width:1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
