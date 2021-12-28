@@ -17,7 +17,7 @@
 
 	flex-direction: column;
 	width: 800px;
-	margin-top: 180px; 
+	margin-top: 40px; 
 	padding-top: 0;
 }
 
@@ -71,7 +71,7 @@ div span{
 
 .wrap{
 	width: 100%;
-	height: 1000px;
+	height: 900px;
 	display: flex;
 
 	justify-content: center;
