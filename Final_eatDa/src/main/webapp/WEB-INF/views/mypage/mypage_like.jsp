@@ -18,7 +18,7 @@
 	position: absolute;
 	flex-direction: column;
 	width: 800px;  
-	margin-top: 20px;
+	margin-top: 180px;
     padding-top: 0;
 }
 
@@ -181,7 +181,7 @@ table{
 
 .wrap{
 	width: 100%;
-	height: 1350px;
+	height: 1500px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

@@ -39,6 +39,18 @@ public class MemberDaoImpl implements MemberDao{
 	public void memberRegist(UserDto dto) {
 		sqlSession.insert(NAMESPACE_MEMBER + "memberRegist", dto);
 	}
+
+	//회원정보 수정
+	@Override
+	public void memberUpdate(UserDto dto) throws Exception {
+		sqlSession.update(NAMESPACE_MEMBER + "memberUpdate", dto);
+	}
+
+	//회원탈퇴
+	@Override
+	public void memberDelete(UserDto dto) throws Exception {
+		sqlSession.update(NAMESPACE_MEMBER + "memberDelete", dto);
+	}
 	
 
 }
