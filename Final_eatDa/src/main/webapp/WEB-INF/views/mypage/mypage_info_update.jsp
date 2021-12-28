@@ -16,7 +16,7 @@
 .mypage_update{
 	flex-direction: column;
 	width: 800px;
-    margin-top: 40px;  
+    margin-top: 180px;  
 }
 
 .update_form{
@@ -61,7 +61,7 @@ td a{
 	font-size: 0.7rem;
 }
 
-div span{
+.prefer_txt span{
     text-decoration: none;
 	font-size: 0.6rem;
     color: grey;
@@ -69,7 +69,7 @@ div span{
 
 .wrap{
 	width: 100%;
-	height: 650px;
+	height: 850px;
 	display: flex;
 	justify-content: center;
 }

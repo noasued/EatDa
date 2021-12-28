@@ -14,7 +14,8 @@
 .regist_wrap{
 	flex-direction: column;
 	width: 800px;
-    magin-top: 40px;
+	heignt: 600px;
+    magin-top: 80px;
 }
 
 .regist_form{
@@ -27,7 +28,7 @@
 }
 
 .headline{
-	margin-top: 50px;
+	margin-top: 200px;
 }
 
 .headline a{
@@ -53,7 +54,7 @@ div span{
 
 .login_regist_wrap{
 	width: 100%;
-	height: 700px;
+	height: 850px;
 	display: flex;
 	justify-content: center;
 }

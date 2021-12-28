@@ -16,7 +16,7 @@
 .mypage_info_update{
 	flex-direction: column;
 	width: 800px;
-    margin-top: 40px;
+    margin-top: 180px;
 }
   
 
@@ -63,15 +63,11 @@ td a{
 	font-size: 0.7rem;
 }
 
-div span{
-    text-decoration: none;
-	font-size: 0.6rem;
-    color: grey;
-}
+
 
 .wrap{
 	width: 100%;
-	height: 520px;
+	height: 650px;
 	display: flex;
 	justify-content: center;
 }
