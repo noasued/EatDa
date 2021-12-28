@@ -76,13 +76,15 @@
 
 			<!-- article -> summernote -->
       <div class="blog-update__content-article">
-        	<input id="blog-no" type="hidden" name="blog_no" value="${dto.blog_no}">
-          <input type="text" name="blog_title" id="title" value="${dto.blog_title}">
+        <form action="/blog-update.do" method="post">
+        	<input type="hidden" name="blog_no" values="${dto.blog_no}">
+          <input type="text" name="blog_title" value="${dto.blog_title}">
 					<textarea class="summernote" id="summernote" name="blog_content">${dto.blog_content}</textarea>
 					<div class="blog-update__content-article__btns">
-						<input type="button" name="update-submit-btn" value="수정 완료" onclick="submitBtn()">
+						<input type="submit" name="update-submit-btn" value="수정 완료">
 						<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='blog-detail.do?blog_no=${dto.blog_no}'">
         	</div>
+        </form>
 
       </div>
 
@@ -101,18 +103,6 @@
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
  
   <script type="text/javascript">
-  
-  function submitBtn(){
-	  let blog_no = $('#blog-no').val();
-		var blog_title=$('#title').val();
-		var blog_content=$('#summernote').val();
-		console.log(blog_no);
-		console.log(blog_title);
-		console.log(blog_content);
-		location.href="blog-update.do?blog_title="+blog_title+"&blog_content="+blog_content+"&blog_no="+blog_no;
-		
-	}
-  
 	//summernote
 	$(document).ready(function() {
 		$('#summernote').summernote({

@@ -77,13 +77,12 @@
 
 			<!-- article -> summernote -->
       <div class="event-update__content-article">
-        <form action="/event-update.do" method="post">
-        	<input type="hidden" name="event_no" value="${dto.event_no}">
-          <input type="text" name="event_title" value="${dto.event_title}">
+        <form action="/update" method="post">
+          <input type="text" name="title" value="">
 					<textarea class="summernote" id="summernote" name="event_content">${dto.event_content}</textarea>
 					<div class="event-update__content-article__btns">
-						<input type="button" name="update-submit-btn" value="수정 완료" onclick="submitBtn()">
-						<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='event-detail.do?event_no=${dto.event_no}'">
+						<input type="submit" name="update-submit-btn" value="수정 완료">
+						<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='event-detail.do'">
         	</div>
         </form>
 
@@ -104,14 +103,6 @@
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
  
   <script type="text/javascript">
-  function submitBtn(){
-		var event_title=$('#title').val();
-		var event_content=$('#summernote').val();
-		console.log(event_title);
-		console.log(event_content);
-		location.href="event-update.do?event_title="+event_title+"&event_content="+event_content;
-		
-	}
 	//summernote
 	$(document).ready(function() {
 		$('#summernote').summernote({

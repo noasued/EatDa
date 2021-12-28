@@ -23,26 +23,4 @@ public class EventBizImpl implements EventBiz{
 	public EventDto selectOne(int event_no) {
 		return dao.selectOne(event_no);
 	}
-	
-	@Override
-	public int insert(EventDto dto) {
-		return dao.insert(dto);
-	}
-	
-	@Override
-	public int update(EventDto dto) {
-		System.out.println("update biz");
-		return dao.update(dto);
-	}
-	
-	@Override
-	public int selectEventNo(String event_title) {
-		return dao.selectEventNo(event_title);
-	}
-	
-	@Override
-	public int delete(int event_no) {
-		System.out.println("delete biz");
-		return dao.delete(event_no);
-	}
 }
