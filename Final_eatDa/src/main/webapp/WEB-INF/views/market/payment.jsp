@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    
 	<script type="text/javascript">
 		
 		function getCoupon_id(){
@@ -63,8 +71,7 @@
 				//무통장 입금
 				alert('무통장 입금을 선택하셨습니다.');
 				afterPayment(pay_info);
-				console.log(pay_info.order_code);
-				location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+				location.href = 'orderSuccess.do';
 			} else {
 				iamport(pay_info);
 			}
@@ -91,7 +98,7 @@
     		    	alert('결제가 완료되었습니다.');
     		    	//데이터 삽입-> 오더 + 오더 상품까지 데이터 삽입하자.
     		    	afterPayment(pay_info);
-    		    	location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+    		    	location.href = 'orderSuccess.do';
     		    } else {
     		       	msg += '에러내용 : ' + rsp.error_msg;
 	    		    alert('결제에 실패하였습니다. ');
@@ -114,6 +121,13 @@
 		}
     </script>
     
+    
+	<style type="text/css">
+		/* body 최소 크기, 마진 0 지정 */
+		body {
+			margin:0; min-width:1400px;
+		}
+	</style>
 	<style type="text/css">
         body {
             margin:0;
@@ -239,8 +253,6 @@
         }
         .payment-desc {
             margin-left: 20px;
-           	text-decoration:none;
-           	color:gray;
         }
         .payment-section {
             padding:10px 0;
@@ -249,7 +261,7 @@
         .fixed-Banner {
             position:fixed; width:300px; margin:1%; height:400px;
             padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-			border: 1px gray solid; z-index:1; background-color:white;
+			border: 1px gray solid;
         }
         #agreePay {
             margin-left: 10px;
@@ -392,12 +404,39 @@ $(document).ready(function() {
 			$('#paybutton').addClass('btn-secondary');
 		}
 	});
+	
+	//toast message 처리하기..
+	if ($('input:radio[name="payment"]:checked')) {
+		var value = $('input:radio[name="payment"]:checked').attr('id');
+		
+		Command: toastr["info"](value+"을 선택하셨습니다..", "알림")
+
+		toastr.options = {
+		  "closeButton": true,
+		  "debug": false,
+		  "newestOnTop": false,
+		  "progressBar": false,
+		  "positionClass": "toast-top-right",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "5000",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+	}
+	
+	
 });
 </script>
 
 
 
-<body style="margin-top:200px;"> 
+<body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>

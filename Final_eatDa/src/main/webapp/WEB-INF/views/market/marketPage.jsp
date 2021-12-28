@@ -278,7 +278,7 @@ em {
   right:0px;
   position:fixed; width:100px; margin:5% 5% 1% 1%; height:250px;
   padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-  border: 1px gray solid; overflow:scroll; z-index:1; background-color:white;
+  border: 1px gray solid; overflow:scroll;
 }
 
 .like-title {
@@ -322,7 +322,7 @@ em {
 
 </head>
 
-<body style="margin: 0; min-width: 1400px; margin-top:180px;">
+<body style="margin: 0; min-width: 1400px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
@@ -480,27 +480,24 @@ em {
 	}
 	function directPurchase() {
 		//바로 구매하기
-		if (confirm('알림::바로 구매하기를 이용하시면 장바구니가 비워집니다. 계속하시겠습니까?')) {
-			let product = {
-					p_name:$('.modal-info-title').children('span').text(),
-					img_path:$('#img').attr('src'),
-					p_price:$('#price').text(),
-					quantity:$('#quantity').text(),
-					p_id:$('#p-id').text()
+		let product = {
+				p_name:$('.modal-info-title').children('span').text(),
+				img_path:$('#img').attr('src'),
+				p_price:$('#price').text(),
+				quantity:$('#quantity').text(),
+				p_id:$('#p-id').text()
+		}
+		
+		$.ajax({
+			url: 'directPurchase.do',
+			type: 'post',
+			contentType:"application/json; charset=utf-8",
+			data: JSON.stringify(product),
+			success:function(msg){
+				console.log(msg);
 			}
-			console.log(product);
-			
-			$.ajax({
-				url: 'directPurchase.do',
-				type: 'post',
-				contentType:"application/json; charset=utf-8",
-				data: JSON.stringify(product),
-				success:function(msg){
-					console.log(msg);	
-				}
-			});
-			location.href = 'makeOrder.do?p_id=' + product.p_id + '&quantity='+product.quantity + '&price=' + product.p_price;
-		};
+		});
+		location.href = 'makeOrder.do?data=directPurchase';
 	}
 
 </script>
@@ -550,6 +547,13 @@ em {
 			</div>
 		</div>
 	</div>
+	
+	<!-- paging navi -->
+	<div style="width: 67%; height: 40px; margin: 0 auto; padding: 10px; margin-top: 15px;">
+		<span style="color: rgb(148, 148, 32); font-size: larger;">
+			HOME > MARKET > PRODUCT </span>
+	</div>
+
 	<!-- 상품 페이지 시작 -->
 	<div id="wrap">
 		<div class="top-section">

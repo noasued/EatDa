@@ -177,6 +177,10 @@ ul {
   padding-left: 2rem;
 }
 
+ol{
+	font-size:10pt;
+}
+
 ol,
 ul,
 dl {
