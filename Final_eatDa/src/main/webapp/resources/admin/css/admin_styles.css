@@ -11581,8 +11581,8 @@ body {
 }
 
 .dataTable-info {
-  margin: 7px 0;
-}
+	display:none;
+	}
 
 /* PAGER */
 .dataTable-pagination a:hover {

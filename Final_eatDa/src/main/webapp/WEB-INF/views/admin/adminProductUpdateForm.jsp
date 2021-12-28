@@ -14,23 +14,6 @@
   <link href="resources/css/blog/blog-write.css" rel="stylesheet">
     <!-- 분리가 안 먹혀서 top 부분만 이곳에 작성함 -->
   <style type="text/css">
-  	.blog-write__top{
-		  width:100%;
-		  height:300px;
-		  background: url('resources/images/blog-cooking02.png') no-repeat;
-		  background-size: cover;
-		  overflow: hidden;
-		  display: table;
-		  border: none;
-		  background-position: 0 90%;
-		}
-		
-		.blog-write__top-txt{
-		  color:white;
-		  opacity: 0.4;
-		  display: table-cell;
-		  vertical-align: bottom;
-		}
   	.blog-write__top h1, .blog-write__top h2{
 		  display: inline;
 		}
@@ -70,30 +53,22 @@
 		<%@ include file="../common/header.jsp"%>
 	</div>
   <main class="blog-write">
-    <!-- main img -->
-    <div class="blog-write__top blog__top">
-      <div class="blog-write__top-txt blog__top-txt">
-        <h1>eat다 블로그</h1>
-        <h2>eatDa Blog</h2>
-      </div>
-    </div>
-
     <!-- write content -->
     <div class="blog-write__content">
       
       <!-- title -->
       <div class="blog-write__content-title">
-        <h2>새 글 작성</h2>
+        <h2>상품 수정</h2>
       </div>
 
-			<!-- article -> summernote -->
+	  <!-- article -> summernote -->
       <div class="blog-write__content-article">
-        <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
-          <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
+        <form action="/adminProductInsert.do" method="post"> <!-- onsubmit="return doAlert()" -->
+          <div>${productDto.p_name}</div>
 					<textarea class="summernote" id="summernote" name="editordata"></textarea>
 					<div class="blog-write__content-article__btns">
 						<input type="button" onclick="submitBtn()" name="write-submit-btn" value="작성 완료">
-						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='blog.do'">
+						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='adminProduct.do'">
         	</div>
         </form>
 
@@ -117,11 +92,11 @@
 		alert("글 작성이 완료되었습니다.");
 	} */
 	function submitBtn(){
-		var blog_title=$('#title').val();
-		var blog_content=$('#summernote').val();
-		console.log(blog_title);
-		console.log(blog_content);
-		location.href="blog-write-lala.do?blog_title="+blog_title+"&blog_content="+blog_content;
+		var product_name=$('#p_name').val();
+		var product_description=$('#summernote').val();
+		console.log(product_name);
+		console.log(product_description);
+		location.href="blog-write-lala.do?product_name="+product_name+"&product_description="+product_description;
 		
 	}
 	// summernote
@@ -131,13 +106,12 @@
 			  lang: "ko-KR",								// 한글 설정
 			  fontNames: fontList,
 			  fontNamesIgnoreCheck: fontList,
-				// 추가한 폰트사이즈
 			  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			  height: 350,									// 에디터 높이
         width: 840,									  // 에디터 넓이
 			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
         tabsize: 2,
-			  placeholder: '내용을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	//placeholder 설정
+			  placeholder: '상품 상세 설명을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	//placeholder 설정
         prettifyHtml:false,
 				
 			  toolbar: [
