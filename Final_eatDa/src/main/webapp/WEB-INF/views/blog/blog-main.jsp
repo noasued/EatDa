@@ -70,7 +70,7 @@
           </select>
           <input type="text" name="keyword">
           <input type="submit" value="검색">
-          <input type="button" value="글쓰기" onclick="location.href='blog-write.do'">
+          <input type="button" value="글쓰기" onclick="location.href='blog-writeform.do'">
         </form>
       </div>
     

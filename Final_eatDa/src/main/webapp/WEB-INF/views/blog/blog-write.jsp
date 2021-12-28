@@ -12,7 +12,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
   <link href="resources/css/blog/blog-write.css" rel="stylesheet">
-    <!-- 분리가 안 먹혀서 top 부분만 이곳에 작성함 -->
+  <!-- top 부분 -->
   <style type="text/css">
   	.blog-write__top{
 		  width:100%;
@@ -63,7 +63,6 @@
 	<link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet">  
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	
-	
 </head>
 <body>
 	<div id="header">
@@ -111,7 +110,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<!--  include summernote-ko-KR -->
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
-
   <script type="text/javascript">
   /* function doAlert(){
 		alert("글 작성이 완료되었습니다.");
@@ -121,7 +119,7 @@
 		var blog_content=$('#summernote').val();
 		console.log(blog_title);
 		console.log(blog_content);
-		location.href="blog-write-lala.do?blog_title="+blog_title+"&blog_content="+blog_content;
+		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content;
 		
 	}
 	// summernote
