@@ -42,6 +42,4 @@ public interface MarketBiz {
 	public int updateCartList(List<CartProductDto> list);
 	
 	public List<OrderProductDto> getOrderList(String order_id);
-	
-	public List<CartProductDto> directPurchase(CartProductDto dto);
 }

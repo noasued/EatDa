@@ -97,7 +97,7 @@ body {
 .banner-text {
 	text-decoration: none; color: black; font-size: small; padding-top: 5px;
 }
-.header-a, .banner-text, #login, #logout-btn {
+.header-a, .banner-text {
 	font-family: 'Cute Font', cursive;
 	font-family: 'IBM Plex Sans KR', sans-serif;
 	font-family: 'Nanum Myeongjo', serif;
@@ -161,7 +161,7 @@ body {
 						<span style="color: gray" id="logout-btn" onclick="location.href='logout.do'">로그아웃</span>
 					</c:when>
 					<c:otherwise>
-						<span id="login" style="color: gray;" onclick="loginModalIn()">로그인</span>
+						<span id="login" style="color: gray; font-size:large;" onclick="loginModalIn()">로그인</span>
 					</c:otherwise>
 				</c:choose>
 				<div class="login_wrap1" style="z-index:1;">
