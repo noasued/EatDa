@@ -5,7 +5,12 @@ import java.util.List;
 import com.project.eatda.dto.BlogDto;
 
 public interface BlogBiz {
-	public List<BlogDto> blogList();
+	
+	public List<BlogDto> takeBlogList(int num);
+	public int paging();
+	
+//	public List<BlogDto> blogList();
+	public List<BlogDto> searchBlog(String search_option, String keyword);
 	public BlogDto selectOne(int blog_no);
 	public int insert(BlogDto dto);
 	public int update(BlogDto dto);

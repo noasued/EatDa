@@ -29,7 +29,11 @@ public class EventBizImpl implements EventBiz{
 		return dao.insert(dto);
 	}
 	
-	
+	@Override
+	public int update(EventDto dto) {
+		System.out.println("update biz");
+		return dao.update(dto);
+	}
 	
 	@Override
 	public int selectEventNo(String event_title) {

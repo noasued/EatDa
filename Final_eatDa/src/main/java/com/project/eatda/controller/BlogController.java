@@ -1,13 +1,18 @@
 package com.project.eatda.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.dto.BlogDto;
@@ -19,11 +24,52 @@ public class BlogController {
 	@Autowired
 	private BlogBiz biz;
 	
-	// 블로그 메인 겸 리스트
+	
+	
+	@RequestMapping(value="/takeBlog.do", method=RequestMethod.GET)
+	@ResponseBody
+	public List<BlogDto> takeBlog(String num) {
+		logger.info("take Blog List, num :" + num);
+		int page = Integer.parseInt(num);
+		
+		List<BlogDto> list = biz.takeBlogList(page);
+		for (BlogDto dto : list) {
+			System.out.println(dto.toString());
+		}
+		
+		return list;
+	}
+	
+	@RequestMapping(value="/blog-paging.do", method=RequestMethod.POST) 
+	@ResponseBody
+	public List<Integer> paging() {
+		logger.info("paging");
+		
+		int count = biz.paging();
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(count);
+		
+		return list;
+	}
+	
 	@RequestMapping("/blog.do")
-	public String list(Model model) {
+	public String list() {
 		logger.info("Blog list page");
-		model.addAttribute("list", biz.blogList());
+		return "/blog/blog-main2";
+	}
+	
+	@RequestMapping("/blog-search.do")
+	public String list(@RequestParam(defaultValue="blog_title") String search_option, 
+						@RequestParam(defaultValue="") String keyword, Model model) throws Exception{
+		logger.info("Blog list page");
+		
+		List<BlogDto> list = biz.searchBlog(search_option,keyword);
+		System.out.println("keyword : "+keyword);
+		for(BlogDto dto : list) {
+			System.out.println(dto.toString());
+		}
+        model.addAttribute("list", list);
+        
 		return "/blog/blog-main";
 	}
 	
@@ -56,15 +102,17 @@ public class BlogController {
 	
 	// 글 수정
 	@RequestMapping(value="/blog-updateform.do", method=RequestMethod.GET)
-	public String updateForm(Model model, int blog_no) {
+	public String update(Model model, int blog_no) {
 		logger.info("Blog update form page");
 		System.out.println("update -> "+blog_no);
-		model.addAttribute("dto",biz.selectOne(blog_no));
+		BlogDto dto = biz.selectOne(blog_no);
+		model.addAttribute("dto",dto);
+		System.out.println(dto.toString());
 		return "/blog/blog-update";
 	}
 	
-	@RequestMapping("/blog-update.do")
-	public String updateForm(BlogDto dto) {
+	@RequestMapping(value="/blog-update.do",method=RequestMethod.GET)
+	public String update(BlogDto dto) {
 		logger.info("Blog update result - post");
 		System.out.println(dto.toString());
 		biz.update(dto);

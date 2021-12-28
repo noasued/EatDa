@@ -79,7 +79,7 @@ body{
           		<li>----------- 작성된 글이 없습니다. -----------</li>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${list}" var="dto">
+							<c:forEach items="${list}" var="dto" begin="1" end="9">
 			          <li>
 			            <figure class="event-article__list-img">
 			              <img src="resources/images/event-list.png">

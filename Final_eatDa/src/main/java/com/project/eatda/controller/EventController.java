@@ -55,10 +55,21 @@ public class EventController {
 	}
 	
 	// 글 수정 페이지
-	@RequestMapping("/event-update.do")
-	public String eventUpdate() {
-		System.out.println("event-update page");
+	@RequestMapping(value="/event-updateform.do", method=RequestMethod.GET)
+	public String updateForm(Model model, int event_no) {
+		logger.info("Event update form page");
+		System.out.println("update -> "+event_no);
+		model.addAttribute("dto",biz.selectOne(event_no));
 		return "/event/event-update";
+	}
+	
+	@RequestMapping("/event-update.do")
+	public String update(EventDto dto) {
+		logger.info("Event update result - post");
+		System.out.println(dto.toString());
+		biz.update(dto);
+		
+		return "redirect:event-detail.do?event_no="+dto.getEvent_no();
 	}
 	
 	// 글 삭제

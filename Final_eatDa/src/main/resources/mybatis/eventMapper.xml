@@ -29,7 +29,11 @@
 		VALUES(EVENT_NO_SEQ.NEXTVAL,#{event_title}, #{event_content}, #{event_img}, SYSDATE)
 	</insert>
 	
-	
+	<update id="eventUpdate" parameterType="eventDto">
+		UPDATE EVENT
+		SET EVENT_TITLE=#{event_title}, EVENT_CONTENT=#{event_content}
+		WHERE EVENT_NO=#{event_no}
+	</update>
 	
 	<select id="selectEventNo" parameterType="String" resultType="eventDto">
 		SELECT EVENT_NO FROM EVENT WHERE EVENT_TITLE=#{event_title}

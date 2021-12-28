@@ -51,6 +51,18 @@ public class EventDaoImpl implements EventDao{
 		return res;
 	}
 	
+	@Override
+	public int update(EventDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"eventUpdate",dto);
+			System.out.println("update dao : update event where event_no : "+dto.getEvent_no());
+		} catch (Exception e) {
+			System.out.println("[error] : update");
+			e.printStackTrace();
+		}
+		return res;
+	}
 	
 	@Override
 	public int selectEventNo(String event_title) {

@@ -15,9 +15,28 @@
 		<result property="regdate" column="REGDATE"/>
 	</resultMap>
 	
-	<select id="blogList" resultMap="blogMap">
-		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
+	<select id="lastNumber" resultType="int">
+		SELECT MAX(BLOG_NO) FROM BLOG
+	</select>
+	
+	<select id="blogList" parameterType="list" resultMap="blogMap">
+		SELECT *
 		FROM BLOG 
+		WHERE BLOG_NO BETWEEN
+		<foreach collection="list" item="blog_no" separator="AND">
+			#{blog_no}
+		</foreach>
+		ORDER BY BLOG_NO DESC
+	</select>
+	
+	<select id="pagingBlog" resultType="int">
+		SELECT COUNT(*) FROM BLOG
+	</select>
+	
+	<select id="searchBlog" parameterType="string" resultType="blogDto">
+		SELECT * 
+		FROM BLOG
+		WHERE BLOG_TITLE LIKE #{keyword}
 		ORDER BY BLOG_NO DESC
 	</select>
 	

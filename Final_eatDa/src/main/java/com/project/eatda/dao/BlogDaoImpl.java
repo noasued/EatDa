@@ -15,13 +15,75 @@ public class BlogDaoImpl implements BlogDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
 	@Override
-	public List<BlogDto> blogList(){
-		List<BlogDto> list = new ArrayList<BlogDto>();
+	public List<BlogDto> takeBlogList(int num) {
+		//0 -> 15    13
+		//1 -> 12 11 10
+		//2 -> 9 8 7
+		//3 -> 6 5 4
+		//4 -> 3 2 1
+		List<BlogDto> list = null;
+		ArrayList<Integer> parameter = new ArrayList<Integer>();
+		int lastNum = sqlSession.selectOne(NAMESPACE+"lastNumber"); //15
+		
+		System.out.println(lastNum);
+		
+		parameter.add(num==1?lastNum-2:lastNum-3*(num-1)-2);
+		parameter.add(num==1?lastNum:lastNum-(num-1)*3);
+		
+		for (int i : parameter) {
+			System.out.println(i);
+		}
+	
 		try {
-			list = sqlSession.selectList(NAMESPACE+"blogList");
+			list = sqlSession.selectList(NAMESPACE+"blogList", parameter);
 		} catch (Exception e) {
-			System.out.println("[error]: blog list");
+			System.out.println("takeBlogList DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int paging() {
+		int blogCount = 0;
+		
+		try {
+			blogCount = sqlSession.selectOne(NAMESPACE+"pagingBlog");
+		} catch (Exception e) {
+			System.out.println("paging DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return blogCount;
+	}
+	
+	
+	
+	
+	
+//	@Override
+//	public List<BlogDto> blogList(){
+//		List<BlogDto> list = new ArrayList<BlogDto>();
+//		try {
+//			list = sqlSession.selectList(NAMESPACE+"blogList");
+//		} catch (Exception e) {
+//			System.out.println("[error]: blog list");
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+	
+	@Override
+	public List<BlogDto> searchBlog(String search_option, String keyword){
+		List<BlogDto> list = new ArrayList<BlogDto>();
+		keyword = "%"+keyword+"%";
+		try {
+			list = sqlSession.selectList(NAMESPACE+"searchBlog", keyword);
+		} catch (Exception e) {
+			System.out.println("[error]: search blog");
 			e.printStackTrace();
 		}
 		return list;
@@ -89,4 +151,6 @@ public class BlogDaoImpl implements BlogDao{
 		}
 		return res;
 	}
+
+	
 }
