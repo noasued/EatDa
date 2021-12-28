@@ -105,7 +105,7 @@ body {
 </style>
 <script type="text/javascript">
     function loginModalIn() {
-		$(".login_wrap1").fadeIn();
+		$(".login_wrap1").fadeIn(); 
     }
     function loginModalOut() {
 		$(".login_wrap1").fadeOut();
@@ -152,7 +152,7 @@ body {
 							<li><a class="header-a" href="mypage_coupon.do">쿠폰함</a></li>
 						</ul>
 					</li>
-				</ul>
+				</ul> 
 			</div>
 			<div class="col-sm-3" align="right" style="padding: 20px 6% 0 0;">
 				<c:choose>

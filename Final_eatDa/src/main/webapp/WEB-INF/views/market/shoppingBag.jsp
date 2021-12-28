@@ -357,7 +357,7 @@
 					console.log(msg);
 				}
 			});
-			location.href='makeOrder.do';
+			location.href='makeOrder.do'; 
 			
 		}
 	}

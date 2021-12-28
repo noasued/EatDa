@@ -15,7 +15,7 @@ span {
 	margin-top: 25px;
 	margin-bottom: 100px;
 	width: 100%;
-	height: auto;
+	height: auto; 
 }
 
 .top-section {
@@ -490,7 +490,7 @@ em {
 			}
 			console.log(product);
 			
-			$.ajax({
+			/* $.ajax({
 				url: 'directPurchase.do',
 				type: 'post',
 				contentType:"application/json; charset=utf-8",
@@ -498,7 +498,7 @@ em {
 				success:function(msg){
 					console.log(msg);	
 				}
-			});
+			}); */
 			location.href = 'makeOrder.do?p_id=' + product.p_id + '&quantity='+product.quantity + '&price=' + product.p_price;
 		};
 	}

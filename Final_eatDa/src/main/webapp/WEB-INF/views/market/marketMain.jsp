@@ -18,7 +18,7 @@
 
 <style type="text/css">
 .pagination a:hover {
-	cursor:pointer;
+	cursor:pointer; 
 }
 
 .fixed-Banner {

@@ -314,41 +314,31 @@ public class MarketDaoImpl implements MarketDao {
 			list = sqlSession.selectList(NAMESPACE_MARKET+"getOrderList", order_id);
 		} catch (Exception e) {
 			System.out.println("getOrderList DAO ERROR");
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 		return list;
 	}
 
 	@Override
 	public List<CartProductDto> directPurchase(CartProductDto dto) {
-		int res = 0;
+		int res = 0; 
 		String user_id = dto.getUser_id();
 		List<CartProductDto> list = null;
 		
 		try {
 			//1. 카트 비우기
 			res += sqlSession.delete(NAMESPACE_MARKET+"deleteAllCart", user_id);
+			System.out.println("delete 후 res : " + res);
+			
 			//2. 데이터 cart에 insert
 			res += sqlSession.insert(NAMESPACE_MARKET+"putShoppingBag", dto);
 			
-			if (res != 2) {
-				throw new Exception("res != 2");
-			} else {
-				list = sqlSession.selectList(NAMESPACE_MARKET+"getCartList", dto);
-			}
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCartList", dto);
+			System.out.println("최종res : " + res);
 		} catch (Exception e) {
 			System.out.println("getOrderList DAO ERROR");
 			e.printStackTrace();
-		}
+		} 
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

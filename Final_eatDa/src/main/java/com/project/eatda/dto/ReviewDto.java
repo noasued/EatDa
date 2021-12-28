@@ -3,7 +3,7 @@ package com.project.eatda.dto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReviewDto {
+public class ReviewDto { 
 	private int review_no;
 	private String order_id;
 	private String p_id;

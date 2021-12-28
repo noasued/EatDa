@@ -18,7 +18,7 @@
 				}
 			});
 			return coupon_id;
-		}
+		} 
 	
 		function progressPay() {
 			const pay_info = {

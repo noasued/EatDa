@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&display=swap" rel="stylesheet">
 
 <style>
-.banner {
+.banner { 
 	background-image: url(resources/images/recipe/main-banner2.png);
 	background-size: cover;
 	width: 100%;

@@ -42,5 +42,5 @@ public interface MarketDao {
 	
 	public List<OrderProductDto> getOrderList(String order_id);
 	
-	public List<CartProductDto> directPurchase(CartProductDto dto);
+	public List<CartProductDto> directPurchase(CartProductDto dto); 
 }

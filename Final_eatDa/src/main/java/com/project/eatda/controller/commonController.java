@@ -14,4 +14,4 @@ public class commonController {
 		logger.info("Index page");
 		return "../../index";
 	}
-}
+} 

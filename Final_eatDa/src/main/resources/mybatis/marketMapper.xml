@@ -18,7 +18,7 @@
 		<result property="seller_desc" column="seller_desc"/>
 	</resultMap>
 
-
+ 
 	<select id="productList" parameterType="list" resultMap="productMap">
 		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH FROM PRODUCT 
 		WHERE P_NO BETWEEN
