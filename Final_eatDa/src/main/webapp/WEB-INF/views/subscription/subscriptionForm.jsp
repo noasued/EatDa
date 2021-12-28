@@ -76,6 +76,7 @@
 		<div class="input-form col-md-12 mx-auto">
 			<form class="validation-form" style="padding-left:2%;" novalidate>
 				<div class="container px-5 my-5 px-5 justify-content-flex-start">
+					<label for="sub_type" style="font-weight: bold; font-size: 20pt; color:rgb(70, 70, 70);">구독 유형</label><br><br>  				
 					<label for="sub_type" style="font-weight: bold; font-size: 20pt; color:rgb(70, 70, 70);">구독 유형</label><br><br>  
 					
 					<div class="sub_form_select" >  
