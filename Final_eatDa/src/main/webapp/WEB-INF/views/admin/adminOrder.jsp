@@ -16,31 +16,84 @@
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
-        function selectAll(selectAll)  {
-        	  const checkboxes 
-        	       = document.getElementsByName('chkBtn');
-        	  
-        	  checkboxes.forEach((checkbox) => {
-        	    checkbox.checked = selectAll.checked;
-        	  })
-        	}
-        
-	      //Modal 실행
-	        $(function(){
-	        	$("a").click(function(){
-	        		$(".modal").fadeIn();
-	        	});
-	        });
+	        function selectAll(selectAll)  {
+	        	  const checkboxes 
+	        	       = document.getElementsByName('chkBtn');
+	        	  
+	        	  checkboxes.forEach((checkbox) => {
+	        	    checkbox.checked = selectAll.checked;
+	        	  })
+	        	}
 	        
-	        $(".modal-content").click(function(){
-	        	$(".modal").fadeOut();
-	        });
-	
-	        
-		    //Modal Close 기능
-		    function close_pop(flag) {
-		         $('#myModal').hide();
-		    };
+		      //Modal 실행
+		        $(function(){
+		        	$("a").click(function(){
+		        		$(".modal").fadeIn();
+		        	});
+		        });
+		        
+		        $(".modal-content").click(function(){
+		        	$(".modal").fadeOut();
+		        });
+		
+		        
+			    //Modal Close 기능
+			    function close_pop(flag) {
+			         $('#myModal').hide();
+			    };
+			    
+			    // 전체 선택 및 선택 게시물 삭제
+			    $(function(){
+			    	var chkObj = document.getElementsByName("RowCheck");
+			    	var rowCnt = chkObj.length;
+			    	
+			    	$("input[name='allCheck']").click(function(){
+			    		var chk_listArr = $("input[name='RowCheck']");
+			    		for(var i = 0 ; i<chk_listArr.length; i++){
+			    			chk_listArr[i].checked = this.checked;
+			    		}
+			    	});
+			    	$("input[name='RowCheck']").click(function(){
+			    		if($("input[name='RowCheck']:checked").length == rowCnt){
+			    			$("input[name='allCheck']")[0].checked = true;
+			    		}else{
+			    			$("input[name='allCheck']")[0].checked = false;
+			    		}
+			    	});
+			    });
+			    
+			    function deleteValue(){
+			    	var url = "delete"; // Controller로 보내고자 하는 url
+			    	var valueArr = new Array();
+			    	var list = $("input[name='RowCheck']");
+			    	for(var i = 0; i<list.length; i++){
+			    		if(list[i].checked){	// 선택이 되어있다면 배열에 값을 저장하기
+			    			valueArr.push(list[i].value);
+			    		}
+			    	}
+			    	if(valueArr.length == 0){
+			    		alert("선택된 글이 없습니다.");
+			    	}
+			    	else{
+			    		var chk = confirm("정말 삭제하시겠습니까?");
+			    		$.ajax({
+			    			url : url,					// 전송 url
+			    			type : 'POST',				// POST 방식
+			    			traditional : true,
+			    			data : {
+			    				valueArr : valueArr		// 보내고자 하는 data 변수 설정
+			    			},
+			    			success : function(jdata){
+			    				if(jdata = 1){
+			    					alert("성공적으로 삭제되었습니다.");
+			    					location.replace("list")	//list로 페이지 새로고침하기
+			    				}else{
+			    					alert("삭제에 실패하였습니다.")
+			    				}
+			    			}
+			    		});
+			    	}
+			    }
         </script>
         
         <style>
@@ -159,7 +212,7 @@
                                     <thead>
                                     	<tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
+                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
                                             <th>주문번호</th>
                                             <th>주문자명</th>
                                             <th>주문일자</th>
@@ -170,7 +223,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
+                                            <td><input type="checkbox" name="RowCheck" value="${list.no }"></td>
                                             <td>B213G64</td>
                                             <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문인</a></td>
                                             <td>2021.12.05</td>
@@ -242,7 +295,7 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-	                                        <button type="button" onclick="" value="delete">삭 제</button>
+	                                        <button type="button" onclick="deleteValue();" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>

@@ -14,4 +14,16 @@ String NAMESPACE_MEMBER = "mymember.";
 
 	//로그아웃
 	public void logout(HttpSession session);
+	
+	//아이디 중복체크
+	public int idCheck(UserDto dto) throws Exception;
+	
+	//회원가입
+	public void memberRegist(UserDto dto);
+	
+	//회원정보 수정
+	public void memberUpdate(UserDto dto) throws Exception;
+	
+	//회원탈퇴
+	public void memberDelete(UserDto dto) throws Exception;
 }

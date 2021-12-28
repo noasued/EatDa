@@ -4,20 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ page import="com.project.eatda.dto.ProductDto" %>
-<%@ page import="java.util.List" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="resources/css/market/marketMain.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <title>Insert title here</title>
 
@@ -25,26 +20,42 @@
 .pagination a:hover {
 	cursor:pointer;
 }
-	
+
+.fixed-Banner {
+  right:0px;
+  position:fixed; width:100px; margin:21% 5% 1% 1%; height:250px;
+  padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
+  border: 1px gray solid; overflow:scroll; z-index:1; background-color:white;
+}
+
+.like-img:hover, .product-title:hover, .product-img:hover, .shop-cart:hover {
+  cursor:pointer;
+}
 .banner {
 	background-image: url(resources/images/market/market-banner3.png);
 	background-size: cover;
 	width: 100%;
 	margin: 0 auto;
-	height: 400px;
+	height: 300px;
 	margin-bottom: 30px;
-	padding-top: 180px;
+	padding-top: 140px;
 	border-radius: 4px;
 }
-.fixed-Banner {
-  right:0px;
-  position:fixed; width:100px; margin:5% 5% 1% 1%; height:250px;
-  padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-  border: 1px gray solid; overflow:scroll;
+.keyword-tag {
+  width: auto;
+  height: 20px;
+  margin: 0 auto;
+  list-style:none;
 }
-
-.like-img:hover, .product-title:hover, .product-img:hover, .shop-cart:hover {
-  cursor:pointer;
+.keyword:hover, .total-keyword:hover {
+	color:black;
+	font-weight:bold;
+}
+.banner-text {
+  font-size: x-large;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 30px;
 }
 
 </style>
@@ -77,7 +88,7 @@ $(document).ready(function() {
         });
         $('.banner').animate({opacity:1}, 800);
         index++;
-    }, 7000);
+    }, 10000);
     
 });
 
@@ -120,7 +131,7 @@ function putShoppingBag(object) {
 			success:function(msg) {
 				if (msg == 'true') {
 					alert('담기 완료! 장바구니로 이동합니다.');
-					location.href='shoppingbag.do';
+					location.href='goShoppingBag.do';
 				} else {
 					alert('상품이 이미 장바구니에 담겨있습니다.');
 				}
@@ -441,7 +452,7 @@ function goProductPage(object) {
 
 
 </head>
-<body>
+<body style="margin-top:150px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
@@ -449,24 +460,14 @@ function goProductPage(object) {
 	<!-- 본문 작성 -->
 	<div class="fixed-Banner">
 		<div class="like-title">내가 찜한 상품</div>
-		<!-- 이미지만 리스트로 -->
 	</div>
 
 	<div class="container" style="height: fit-content;">
-
 		<!-- 베너 -->
 		<div class="row" style="margin-top: 10px;">
-			<div class="row page-navi">
-	            <div class="col-md-3">
-	                <span>
-	                    HOME > MARKET
-	                </span>
-	            </div>
-	        </div>
-		
 			<div class="col-md-12 banner">
 				<div class="banner-content">
-					<div class="banner-text">우리의 밥상에 건강과 행복을 차려볼까요?</div>
+					<div class="banner-text" style="font-size:larger;">우리의 밥상에 건강과 행복을 차려볼까요?</div>
 				</div>
 				<div class="search-box-narrow">
 					<input type="text" class="search-narrow" id="search-bar" placeholder="키워드를 입력해주세요.">
@@ -478,7 +479,7 @@ function goProductPage(object) {
 		<div class="row">
 			<ul class="keyword-tag" style="margin: 0 auto; width: auto;">
 				<li>
-                    <span onclick="totalProduct()" style="color: red;">#키워드검색</span>
+                    <span class="total-keyword" onclick="totalProduct()" style="color: red;">#키워드검색</span>
                 </li>
 				<li><span class="keyword" onclick="hashTagSearch(this)">#양식</span></li>
 				<li><span class="keyword" onclick="hashTagSearch(this)">#중식</span></li>

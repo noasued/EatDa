@@ -64,10 +64,7 @@ span {
 	width: 50%;
 	height: auto;
 	margin: 0 auto;
-	/*
-            background-color: rgb(247, 244, 239);
-            box-shadow:3px 3px 3px 3px rgb(247, 244, 239);
-            */
+	
 }
 
 .detail-wrap {
@@ -281,7 +278,7 @@ em {
   right:0px;
   position:fixed; width:100px; margin:5% 5% 1% 1%; height:250px;
   padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-  border: 1px gray solid; overflow:scroll;
+  border: 1px gray solid; overflow:scroll; z-index:1; background-color:white;
 }
 
 .like-title {
@@ -325,7 +322,7 @@ em {
 
 </head>
 
-<body style="margin: 0; min-width: 1400px;">
+<body style="margin: 0; min-width: 1400px; margin-top:180px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
@@ -410,22 +407,100 @@ em {
 	function likeThis() {
 		let p_id = document.getElementById('p-id').innerText;
 		let p_name = document.getElementsByClassName('title')[0].innerText;
+		let img_path = $('#img').attr('src');
+		let flag = '';
 		
-		//db에 insert 하고 내가 찜한 상품에 append 해줘야함
-		if (confirm(p_name + ' 상품을 찜하실건가요?')){
-			alert('응 싫어~');
-			$.ajax(function() {
-				url:,
-				type:,
-				data:,
-				success:function(){
-					
-				},
-				error:function(msg){
-					
+		//이미 찜한 상품인지 체크
+		$('.like-img').each(function() {
+			if ($(this).attr('id') == p_id) {
+				if (confirm(p_name + " 상품은 이미 찜한 상품입니다. 취소하시겠습니까?")) {
+					deleteProductLike(p_id);
+					$(this).parent('.like-img-div').remove();
+					flag = 'true';
+				}
+			}
+		});
+		if(flag=='true') {return;}
+		
+		$.ajax({
+			url: "likeProductInsert.do",
+			type: "post",
+			data: p_id,
+			success:function(msg) {
+				if (msg == 'true') {
+					alert(p_name + " 상품을 찜했습니다! 오른쪽 '내가 찜한 상품' 에서 확인해보세요.");
+					$('.like-title').append(
+							"<div class='like-img-div'>" +
+							"<img id='" + p_id + "' class='like-img' src='" + img_path + "' onclick='goLikeProduct(this)'>" +
+							"</div>"
+					);
+				}
+			}
+		});
+	}
+	
+	function deleteProductLike(p_id) {
+		$.ajax({
+			url:"deleteProductLike.do",
+			type:"post",
+			data:p_id,
+			success:function(msg) {
+				if (msg === 'false') {
+					alert('취소 실패!');
+				}
+			}
+		});
+	}
+	
+	function putShoppingBag() {
+		let p_price = $('.right-info-desc').eq(0).children('span').eq(0).text();
+		let quantity = $('#quantity').text();
+		
+		let data = {
+			"p_id":document.getElementById('p-id').innerText,
+			"p_price":p_price*quantity,
+			"quantity":quantity
+		}
+		
+		if (confirm('해당 상품을 장바구니에 넣으시겠습니까?')) {
+			$.ajax({
+				url:"putShoppingBag.do",
+				type:"post",
+				data:JSON.stringify(data),
+				contentType:"application/json; charset=utf-8",
+				success:function(flag) {
+					let msg = (flag=='true'?'장바구니로 이동하시겠습니까?':'해당 상품은 이미 장바구니에 담겨있습니다. 장바구니로 이동하시겠습니까?') 
+					console.log(msg);
+					if (confirm(msg)) {
+						location.href = 'goShoppingBag.do';
+					}
 				}
 			});
 		}
+	}
+	function directPurchase() {
+		//바로 구매하기
+		if (confirm('알림::바로 구매하기를 이용하시면 장바구니가 비워집니다. 계속하시겠습니까?')) {
+			let product = {
+					p_name:$('.modal-info-title').children('span').text(),
+					img_path:$('#img').attr('src'),
+					p_price:$('#price').text(),
+					quantity:$('#quantity').text(),
+					p_id:$('#p-id').text()
+			}
+			console.log(product);
+			
+			$.ajax({
+				url: 'directPurchase.do',
+				type: 'post',
+				contentType:"application/json; charset=utf-8",
+				data: JSON.stringify(product),
+				success:function(msg){
+					console.log(msg);	
+				}
+			});
+			location.href = 'makeOrder.do?p_id=' + product.p_id + '&quantity='+product.quantity + '&price=' + product.p_price;
+		};
 	}
 
 </script>
@@ -468,20 +543,13 @@ em {
 					</div>
 				</div>
 				<div class="modal-footer" align="center">
-					<button type="button" class="btn btn-primary">장바구니에 담기</button>
-					<button type="button" class="btn btn-primary">바로 구매하기</button>
+					<button type="button" class="btn btn-primary" onclick="putShoppingBag()">장바구니에 담기</button>
+					<button type="button" class="btn btn-primary" onclick="directPurchase()">바로 구매하기</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">쇼핑 계속하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<!-- paging navi -->
-	<div style="width: 67%; height: 40px; margin: 0 auto; padding: 10px; margin-top: 15px;">
-		<span style="color: rgb(148, 148, 32); font-size: larger;">
-			HOME > MARKET > PRODUCT </span>
-	</div>
-
 	<!-- 상품 페이지 시작 -->
 	<div id="wrap">
 		<div class="top-section">
@@ -501,7 +569,8 @@ em {
 				<div class="div-top-section" style="margin-top: 10px;">
 					<div class="right-info-title">가격</div>
 					<div class="right-info-desc">
-						<span>${product.p_price}원</span>
+						<span>${product.p_price}</span>
+						<span>원</span>
 					</div>
 				</div>
 

@@ -27,6 +27,30 @@ public class MemberDaoImpl implements MemberDao{
 	public void logout(HttpSession session) {
 		
 	}
+
+	//아이디 중복체크
+	@Override
+	public int idCheck(UserDto dto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE_MEMBER + "idCheck", dto);
+	}
+
+	//회원가입
+	@Override
+	public void memberRegist(UserDto dto) {
+		sqlSession.insert(NAMESPACE_MEMBER + "memberRegist", dto);
+	}
+
+	//회원정보 수정
+	@Override
+	public void memberUpdate(UserDto dto) throws Exception {
+		sqlSession.update(NAMESPACE_MEMBER + "memberUpdate", dto);
+	}
+
+	//회원탈퇴
+	@Override
+	public void memberDelete(UserDto dto) throws Exception {
+		sqlSession.update(NAMESPACE_MEMBER + "memberDelete", dto);
+	}
 	
 
 }

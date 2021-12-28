@@ -5,11 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&display=swap"
-	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&display=swap" rel="stylesheet">
 
 <style>
 .banner {
@@ -138,25 +135,22 @@
 						opacity : 1
 					}, 800);
 					index++;
-				}, 7000);
+				}, 12000);
 
 			});
 </script>
 
 </head>
-<body>
-<body>
+<body style="margin-top:155px;">
 	<div id="header">
 		<%@ include file="WEB-INF/views/common/header.jsp"%>
 	</div>
 
 	<div class="container" style="height: fit-content;">
-
 		<!-- 배너 -->
 		<div class="row" style="margin:2% 0;">
 			<div class="col-md-12 banner"></div>
 		</div>
-
 		<!-- 최신레시피 -->
 		<div class="new-recipe block">
 			<div class="row">
@@ -191,6 +185,7 @@
 				</div>
 			</div>
 		</div>
+		
 
 		<!-- 실시간 검색순위 -->
 		<div class="search-rank block">

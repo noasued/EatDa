@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>eat다</title>
 <style type="text/css">
 .recipe_top{
 	width:100%;
