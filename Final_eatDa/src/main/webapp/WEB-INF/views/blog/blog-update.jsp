@@ -98,7 +98,6 @@
   <!--  include summernote-ko-KR -->
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
   <script type="text/javascript">
-  
  	function submitBtn(){
 		let blog_no = $('#blog-no').val();
 		var blog_title=$('#title').val();
