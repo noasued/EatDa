@@ -17,7 +17,7 @@
 
 	flex-direction: column;
 	width: 800px;
-    margin-top: 40px; 
+    margin-top: 180px; 
 } 
 
 .coupon_list{
@@ -25,9 +25,22 @@
 	position: absolute;
 	flex-direction: column; 
     width: 800px;
+    height: 570px;
+    margin-top: 30px;
     align-items: center;
+    overflow-y: scroll;
     
 }
+
+.coupon_list::-webkit-scrollbar{
+    width: 6px;
+}
+
+.coupon_list::-webkit-scrollbar-thumb{
+    background-color: #ffe084;
+    border-radius: 10px;
+}
+
 .headline{
 	margin-top: 0px;
 }
@@ -54,46 +67,54 @@ hr{
 
 
 .coupon_list table{
-    margin-top: 30px;
     align-items: center;
-}
-
-a{
-	text-decoration: none;
-	font-size: 0.7rem;
 }
 
 .wrap{
 	width: 100%;
-	height: 800px;
+	height: 1000px;
 	display: flex;
 	justify-content: center;
 }
 
 
     .coupon{
-        width: 250px;
-        height: 130px;
-        padding: 20px;
+        width: 670px;
+        height: 180px;
+        padding: 22px;
         margin: 5px;
-        text-align: right;
-        background: url("resources/images/coupon.jpg");
+        text-align: left;
+        background: url("resources/images/coupon01.jpg");
         background-size: 100% 100%;
-        border-radius: 10px;
+        border-radius: 15px;
     }
     
 
     .coupon h3{
-        margin-bottom: 20px;
-        color: white;
+        margin-bottom: 50px;
         font-weight: bold;
+        
+        color: white;
     }
 
-    .coupon a{
-        text-decoration: none;
+    .coupon p{
+    	margin: 0;
+    	padding: 0;
 		font-size: 0.9rem;
 		font-weight: bold;
+		color: gray;
     }
+    
+    .no_coupon{
+    	width: 770px;
+    	margin-top: 40px;
+    	text-align: center;
+    }
+    .no_coupon a{
+	text-decoration: none;
+	font-size: 0.8rem;
+	}
+	
 </style>
 <body>
 	<div id="header">
@@ -105,62 +126,37 @@ a{
                 <a>마이페이지</a>
                 <hr>
             </div>
-            <div class="headline2">
-                <a>쿠폰함</a>
-            </div>
-            <div class="coupon_list">
-                <table  width="630px">
-                    <tr>
-                        <col width="210px"> <col width="210px"><col width="210px">
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="coupon">
-                                <h3>이달의 쿠폰</h3>
-                                <a>10% 할인</a><br>
-                                <a>사용 가능 기간: 90일</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="coupon">
-                                <h3>이달의 쿠폰</h3>
-                                <a>10% 할인</a><br>
-                                <a>사용 가능 기간: 90일</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="coupon">
-                                <h3>이달의 쿠폰</h3>
-                                <a>10% 할인</a><br>
-                                <a>사용 가능 기간: 90일</a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="coupon">
-                                <h3>이달의 쿠폰</h3>
-                                <a>10% 할인</a><br>
-                                <a>사용 가능 기간: 90일</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="coupon">
-                                <h3>이달의 쿠폰</h3>
-                                <a>10% 할인</a><br>
-                                <a>사용 가능 기간: 90일</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="coupon">
-                                <h3>이달의 쿠폰</h3>
-                                <a>10% 할인</a><br>
-                                <a>사용 가능 기간: 90일</a>
-                            </div>
-                        </td>
-                    </tr>
-             
-                </table>
+            <c:choose>
+	            <c:when test="${empty list }">
+	            	<div class="no_coupon">
+		                <a>보유하신 쿠폰이 없습니다.</a> &nbsp;
+	                </div>
+	            </c:when>
+            	<c:otherwise>
+                	
+                	<div class="headline2">
+                		<a>쿠폰함</a>
+            		</div>
+		            <div class="coupon_list">
+		                <table  width="630px">
+		                    <tr>
+		                        <col width="210px"> <col width="210px"><col width="210px">
+		                    </tr>
+		                    <c:forEach items="${list }" var="dto">
+			                    <tr>
+			                        <td>
+			                            <div class="coupon">
+			                                <h3>${dto.coupon_name }</h3>
+				                            <p>${dto.coupon_des }</p>
+				                            <p>사용 가능 기간: ${dto.coupon_term }개월</p>
+			                            </div>
+			                        </td>
+			                    </tr>
+		                    </c:forEach>
+		                </table>
+		            </div>
+                </c:otherwise>
+                </c:choose>
           </div>
         </div>
     </div>

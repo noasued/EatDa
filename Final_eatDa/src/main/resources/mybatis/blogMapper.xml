@@ -15,16 +15,42 @@
 		<result property="regdate" column="REGDATE"/>
 	</resultMap>
 	
-	<select id="blogList" resultMap="blogMap">
-		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
-		FROM BLOG 
+	<select id="lastNumber" resultType="int">
+		SELECT MAX(BLOG_NO) FROM BLOG
+	</select>
+	
+	<select id="blogList" parameterType="list" resultMap="blogMap">
+		SELECT *
+		FROM 
+		(SELECT ROWNUM,BLOG_NO,USER_ID,BLOG_TITLE,BLOG_CONTENT,BLOG_COUNT,BLOG_LIKE,BLOG_IMG,REGDATE 
+		FROM BLOG ORDER BY BLOG_NO DESC)
+		
+	</select>
+	
+	<select id="pagingBlog" resultType="int">
+		SELECT COUNT(*) FROM BLOG
+	</select>
+	
+	<select id="searchBlog" parameterType="string" resultType="blogDto">
+		SELECT * 
+		FROM BLOG
+		WHERE BLOG_TITLE LIKE #{keyword}
 		ORDER BY BLOG_NO DESC
 	</select>
 	
 	<select id="blogDetail" resultType="blogDto" parameterType="int">
-		SELECT BLOG_NO, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
+		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
 		FROM BLOG
 		WHERE BLOG_NO = #{blog_no}
+	</select>
+	
+	<insert id="blogInsert" parameterType="blogDto">
+		INSERT INTO BLOG
+		VALUES(BLOG_NO_SEQ.NEXTVAL, 'ADMIN', #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'resources/images/blog-write01.png', SYSDATE)
+	</insert>
+	
+	<select id="selectBlogNo" parameterType="String" resultType="blogDto">
+		SELECT BLOG_NO FROM BLOG WHERE BLOG_TITLE=#{blog_title}
 	</select>
 	
 	<update id="blogUpdate" parameterType="blogDto">
@@ -33,19 +59,7 @@
 		WHERE BLOG_NO=#{blog_no}
 	</update>
 	
-	<insert id="blogInsert" parameterType="blogDto">
-		INSERT INTO BLOG
-		VALUES(BLOG_NO_SEQ.NEXTVAL, 'ADMIN', #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'http://drive.google.com/uc?export=viewid=1qW1oV-SmBNqiWHj8wYxY5Pf0v2CctsJ8', SYSDATE)
-	</insert>
-	
 	<delete id="blogDelete" parameterType="int">
-		DELETE FROM BLOG
-		WHERE BLOG_NO=#{blog_no}
+		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
-	
-	<select id="selectBlogNo" parameterType="String" resultType="blogDto">
-		SELECT BLOG_NO
-		FROM BLOG
-		WHERE BLOG_TITLE=#{blog_title}
-	</select>
 </mapper>

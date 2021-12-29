@@ -136,7 +136,7 @@ body {
 				<ul class="header-ul">
 					<li class="nav-menu"><a class="header-a" href="marketMain.do">마켓</a></li>
 					<li class="nav-menu"><a class="header-a" href="recipeList.do">레시피</a></li>
-					<li class="nav-menu"><a class="header-a" href="#">블로그</a>
+					<li class="nav-menu"><a class="header-a" href="blog.do">블로그</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="blog.do">블로그</a></li>
 							<li><a class="header-a" href="event.do">이벤트</a></li>
@@ -149,7 +149,7 @@ body {
 							<li><a class="header-a" href="goShoppingBag.do">장바구니</a></li>
 							<li><a class="header-a" href="mypage_subscription_list.do?user_id=${member.user_id }">구독내역</a></li>
 							<li><a class="header-a" href="mypage_like.do">찜목록</a></li>
-							<li><a class="header-a" href="mypage_coupon.do">쿠폰함</a></li>
+							<li><a class="header-a" href="mypage_couponList.do?user_id=${member.user_id }">쿠폰함</a></li>
 						</ul>
 					</li>
 				</ul>

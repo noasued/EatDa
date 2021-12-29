@@ -7,14 +7,15 @@
   text-align: center;
 }
 
-.blog-article__paging li{
-  display: inline;
+.pagination a, #left-paging, #right-paging{
   margin: 0px 10px;
   color:#666666;
+  text-decoration: none;
   transition: 0.25s;
 }
 
-.blog-article__paging li:hover{
+.blog-article__paging .pagination a:hover, #left-paging:hover, #right-paging:hover {
+	cursor:pointer;
   color: rgb(255, 157, 29);
   text-decoration: underline;
   transform: translateY(2px);
