@@ -48,11 +48,13 @@ body{
   margin-left: 350px;
   font-size: 15px;
 }
-
+.event-article {
+	height:auto;
+}
 </style>
 <link href="resources/css/event/event-main.css" rel="stylesheet">
 </head>
-<body>
+<body style="margin-top:155px;">
   <div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>

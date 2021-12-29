@@ -131,7 +131,7 @@
 
 					for (var i = 1; i <= paging; i++) {
 						$('.pagination').append(
-								"<a id='page" + i + "' onclick='movePage(this)'>"+i+"</a>"
+								"<a class='page" + i + "' onclick='movePage(this)'>"+i+"</a>"
 						);
 					}
 					$('.pagination').children().eq(1).addClass('active');
@@ -212,7 +212,7 @@
 		}
 	</script>
 </head>
-<body>
+<body style="margin-top:155px;">
 <div id="header">
 	<%@ include file="../common/header.jsp"%>
 </div>
