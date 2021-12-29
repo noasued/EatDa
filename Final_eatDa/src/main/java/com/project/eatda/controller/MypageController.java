@@ -1,5 +1,9 @@
 package com.project.eatda.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.eatda.biz.MemberBiz;
 import com.project.eatda.biz.MypageBiz;
+import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.SubscriptionDto;
+import com.project.eatda.dto.UserDto;
 
 @Controller
 public class MypageController {
@@ -52,13 +58,22 @@ public class MypageController {
 		return "/mypage/mypage_coupon";
 	}	
 	
-	
+	//구독내역
 	@RequestMapping("mypage_subscription_list.do")
 	public String subscriptionList(Model model, SubscriptionDto dto) {
 		logger.info(dto.getUser_id());
 		model.addAttribute("dto", mypageBiz.subscriptionList(dto));
 		
 		return "/mypage/mypage_subscription";
+	}
+	
+	//쿠폰함
+	@RequestMapping("mypage_couponList.do")
+	public String couponList(Model model, CouponDto dto){
+		logger.info("couponList, user_id=" + dto.getUser_id());
+		model.addAttribute("list", mypageBiz.couponList(dto));
+		
+		return "/mypage/mypage_coupon";
 	}
 
 	

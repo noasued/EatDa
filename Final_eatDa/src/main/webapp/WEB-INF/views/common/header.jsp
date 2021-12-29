@@ -149,7 +149,7 @@ body {
 							<li><a class="header-a" href="goShoppingBag.do">장바구니</a></li>
 							<li><a class="header-a" href="mypage_subscription_list.do?user_id=${member.user_id }">구독내역</a></li>
 							<li><a class="header-a" href="mypage_like.do">찜목록</a></li>
-							<li><a class="header-a" href="mypage_coupon.do">쿠폰함</a></li>
+							<li><a class="header-a" href="mypage_couponList.do?user_id=${member.user_id }">쿠폰함</a></li>
 						</ul>
 					</li>
 				</ul>
