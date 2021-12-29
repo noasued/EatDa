@@ -30,7 +30,17 @@
 	
 	<insert id="recipeInsert" parameterType="recipeDto">
 		INSERT INTO RECIPE
-		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},#{recipe_img},0,DEFAULT,SYSDATE);
+		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE);
 	</insert>
 
+	<update id="recipeUpdate" parameterType="recipeDto">
+		UPDATE RECIPE
+		SET RECIPE_TITLE=#{recipe_title}, RECIPE_CATEGORY=#{recipe_category}, RECIPE_CONTENT=#{recipe_content}
+		WHERE RECIPE_NO=#{recipe_no}
+	</update>
+	
+	<delete id="recipeDelete" parameterType="String">
+		DELETE FROM RECIPE
+		WHERE RECIPE_NO=#{recipe_no}
+	</delete>
 </mapper>
