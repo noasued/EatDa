@@ -142,7 +142,7 @@ body {
 							<li><a class="header-a" href="event.do">이벤트</a></li>
 						</ul></li>
 					<li class="nav-menu"><a class="header-a"
-						href="subscriptionMain.do">정기구독</a></li>
+						href="subMain.do">정기구독</a></li>
 					<li class="nav-menu"><a class="header-a" href="#">마이페이지</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="mypage.do">마이페이지</a></li>
