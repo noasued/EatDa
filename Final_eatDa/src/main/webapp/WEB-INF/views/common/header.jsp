@@ -136,7 +136,7 @@ body {
 				<ul class="header-ul">
 					<li class="nav-menu"><a class="header-a" href="marketMain.do">마켓</a></li>
 					<li class="nav-menu"><a class="header-a" href="recipeList.do">레시피</a></li>
-					<li class="nav-menu"><a class="header-a" href="#">블로그</a>
+					<li class="nav-menu"><a class="header-a" href="blog.do">블로그</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="blog.do">블로그</a></li>
 							<li><a class="header-a" href="event.do">이벤트</a></li>

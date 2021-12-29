@@ -48,7 +48,9 @@
 		  font-size: 15px;
 		}
   </style>
-  
+  <!-- summernote -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+  <link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet"> 
 </head>
 <body style="margin-top:155px;">
 	<div id="header">
@@ -92,11 +94,9 @@
 	</div>
 	
 	<!-- summernote -->
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
-  <link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet"> 
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
- 
+  <!--  include summernote-ko-KR -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
   <script type="text/javascript">
   
  	function submitBtn(){
@@ -111,49 +111,42 @@
   
 	//summernote
 	$(document).ready(function() {
+		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
 		$('#summernote').summernote({
+			  lang: "ko-KR",								// 한글 설정
+			  fontNames: fontList,
+			  fontNamesIgnoreCheck: fontList,
+				// 추가한 폰트사이즈
+			  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			  height: 350,									// 에디터 높이
         width: 840,									  // 에디터 넓이
 			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
         tabsize: 2,
-			  lang: "ko-KR",								// 한글 설정
+			  placeholder: '내용을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	//placeholder 설정
         prettifyHtml:false,
-        popover: {
-          image: [
-           	['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']],
-            ['custom', ['imageTitle']],
-          ],
-        },
-        toolbar: [
-          // 글꼴 설정
-          ['fontname', ['fontname']],
-          // 글자 크기 설정
-          ['fontsize', ['fontsize']],
-          // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
-          ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-          // 글자색
-          ['color', ['forecolor','color']],
-          //형광펜
-          ['highlight', ['highlight']],
-          // 줄간격
-          ['height', ['height']],
-          // 그림첨부, 링크만들기
-          ['insert',['picture','link']],
-          //이모지
-          ['misc', ['emoji']],
-          // 글머리 기호, 번호매기기, 문단정렬
-          ['para', ['ul', 'ol', 'paragraph']],
-          // 표만들기
-          ['table', ['table']],
-          // 확대해서보기, 도움말
-          ['view', ['fullscreen', 'help']]
-        ],
-        // 추가한 글꼴
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','나눔 고딕','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-        // 추가한 폰트사이즈
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+				
+			  toolbar: [
+			    // 글꼴 설정
+			    ['font', ['fontname','fontsize']],
+			    ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
+			    ['style', ['style']],
+			    ['highlight', ['highlight']],
+			    ['paragraph', ['paragraph','height','ul', 'ol']],
+			    // 그림첨부, 링크만들기
+			    ['insert',['table','hr','link','picture']],
+			    //이모지
+			    ['misc', ['emoji']]
+			  ],
+			  
+			  popover: {
+				  image: [
+				    ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+				    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+				    ['remove', ['removeMedia']],
+				    ['custom', ['imageTitle']],
+				  ]
+				},
+				
 		});
 	});
 	</script>
