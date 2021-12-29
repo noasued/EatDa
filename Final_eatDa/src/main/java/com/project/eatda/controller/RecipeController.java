@@ -53,6 +53,14 @@ public class RecipeController {
 		return "/recipe/recipeInsert";
 	}
 	
+	//서머노트 test
+	@RequestMapping("/test.do")
+	public String test() {
+		logger.info("TETST");
+		
+		return "/recipe/test";
+	}
+	
 	@RequestMapping("/recipeInsertRes.do")
 	public String recipeInsertRes(RecipeDto dto) {
 		logger.info("RECIPE INSERT RESULT");
@@ -67,9 +75,43 @@ public class RecipeController {
 	}
 	
 	@RequestMapping("/recipeUpdateForm.do")
-	public String recipeUpdateForm() {
+	public String recipeUpdateForm(Model model, int recipe_no) {
+		logger.info("RECIPE UPDATE FORM");
+		
+		model.addAttribute("dto",biz.recipeDetail(recipe_no));
 		return "/recipe/recipeUpdateForm";
 	}
+	
+	@RequestMapping("/recipeupdateRes.do")
+	public String recipeUpdateRes(RecipeDto dto) {
+		logger.info("RECIPE UPDATE RESULT");
+		
+		int res = biz.recipeUpdate(dto);
+		if(res>0) {
+			return "redirect:recipeDetail.do?recipe_no="+dto.getRecipe_no();
+		}else {
+			return "redirect:recipeUpdateForm.do?recipe_no="+dto.getRecipe_no();			
+		}
+	}
+	
+	@RequestMapping("/deleteConfirm.do")
+	public String deleteConfirm(int recipe_no) {
+		logger.info("RECIPE DELETE CONFIRM");
+		
+		return "recipe/deleteConfirm";
+	}
+	@RequestMapping("/recipeDelete.do")
+	public String recipeDelete(int recipe_no) {
+		logger.info("RECIPE DELETE");
+		
+		int res = biz.recipeDelete(recipe_no);
+		if(res>0) {
+			return "redirect:recipeList.do";
+		}else {
+			return "redirect:recipeDetail.do?recipe_no="+recipe_no;
+		}
+	}
+	
 	
 //	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 //	@ResponseBody

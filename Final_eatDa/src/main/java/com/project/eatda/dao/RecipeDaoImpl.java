@@ -55,12 +55,30 @@ public class RecipeDaoImpl implements RecipeDao{
 
 	@Override
 	public int recipeUpdate(RecipeDto dto) {
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE_RECIPE+"recipeUpdate",dto);
+		} catch (Exception e) {
+			System.out.println("error : recipe update");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
 	public int recipeDelete(int recipe_no) {
-		return 0;
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE_RECIPE+"recipeDelete",recipe_no);
+		} catch (Exception e) {
+			System.out.println("error : recipe delete");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	@Override
