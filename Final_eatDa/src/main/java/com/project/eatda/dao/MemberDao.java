@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.project.eatda.dto.SubscriptionDto;
 import com.project.eatda.dto.UserDto;
 
 public interface MemberDao {
@@ -20,4 +21,12 @@ String NAMESPACE_MEMBER = "mymember.";
 	
 	//회원가입
 	public void memberRegist(UserDto dto);
+
+	
+	//회원정보 수정
+	public void memberUpdate(UserDto dto) throws Exception;
+	
+	//회원탈퇴
+	public void memberDelete(UserDto dto) throws Exception;
+
 }

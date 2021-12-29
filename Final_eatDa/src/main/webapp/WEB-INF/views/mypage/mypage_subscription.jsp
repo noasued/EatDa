@@ -63,12 +63,6 @@ hr{
 	font-size: 0.7rem;
 }
 
-div span{
-    text-decoration: none;
-	font-size: 0.6rem;
-    color: grey;
-}
-
 .wrap{
 	width: 100%;
 	height: 900px;
@@ -147,6 +141,16 @@ div span{
     .alter_product_name3 a{
         margin-left: 130px;
     }
+    
+    .no_subscription{
+    	width: 750px;
+    	margin-top: 40px;
+    	text-align: center;
+    }
+    .no_subscription a{
+	text-decoration: none;
+	font-size: 0.8rem;
+	}
 </style>
 <body>
 	<div id="header">
@@ -159,6 +163,8 @@ div span{
                 <a>마이페이지</a>
                 <hr>
             </div>
+            <c:choose>
+            		<c:when test="${dto != null }">
             <div class="headline2">
                 <a>구독 내역</a>
             </div>
@@ -170,23 +176,15 @@ div span{
                     </tr>
                     <tr>
                         <th>구독 종류</th>
-                        <td> <a>제철 음식</a></td>
+                        <td> <a>${dto.subscription_type }</a></td>
                     </tr>
                     <tr>
                         <th>구독 기간</th>
-                        <td><a>3개월</a></td>
+                        <td><a>${dto.subscription_term }</a></td>
                     </tr>
                     <tr>
                         <th>결제 금액</th>
-                        <td><a>123,000 원</a></td>
-                    </tr>
-                    <tr>
-                        <th>결제일</th>
-                        <td><a>2021.09.08</a></td>
-                    </tr>
-                    <tr>
-                        <th>만료일</th>
-                        <td><a>2021.12.08</a></td>
+                        <td><a>${dto.subscription_price } 원</a></td>
                     </tr>
                     <tr>
                         <th>배송 예정 상품</th>
@@ -226,6 +224,14 @@ div span{
                     	</td>
                     </tr>    
                 </table>
+                </c:when>
+                <c:otherwise>
+                	<div class="no_subscription">
+	                	<a>구독중인 상품이 없습니다.</a> &nbsp;
+	                	<a href="#">구독 신청하기</a>
+                	</div>
+                </c:otherwise>
+                </c:choose>
                     
             </form>
           </div>

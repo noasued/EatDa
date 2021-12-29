@@ -147,7 +147,7 @@ body {
 						<ul class="sub-menu">
 							<li><a class="header-a" href="mypage.do">마이페이지</a></li>
 							<li><a class="header-a" href="goShoppingBag.do">장바구니</a></li>
-							<li><a class="header-a" href="mypage_subscription.do">구독내역</a></li>
+							<li><a class="header-a" href="mypage_subscription_list.do?user_id=${member.user_id }">구독내역</a></li>
 							<li><a class="header-a" href="mypage_like.do">찜목록</a></li>
 							<li><a class="header-a" href="mypage_coupon.do">쿠폰함</a></li>
 						</ul>
@@ -196,5 +196,10 @@ body {
 			</div>
 		</div>
 	</div>
+	<c:if test="${msg == 'fail' }">
+        	<script type="text/javascript">
+        		alert('로그인 실패');
+        	</script>
+        </c:if>
 </body>
 </html>
