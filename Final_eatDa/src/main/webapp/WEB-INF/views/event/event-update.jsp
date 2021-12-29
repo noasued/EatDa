@@ -53,7 +53,7 @@
   <link href="resources/css/event/event-update.css" rel="stylesheet">
   
 </head>
-<body>
+<body style="margin-top:155px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>

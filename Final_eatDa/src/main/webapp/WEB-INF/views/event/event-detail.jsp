@@ -58,7 +58,7 @@ body{
 <link href="resources/css/event/event-detail.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
-<body>
+<body style="margin-top:155px;">
   <div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
