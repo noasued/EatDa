@@ -23,9 +23,8 @@ public class BlogController {
 
 	@Autowired
 	private BlogBiz biz;
-
-
-
+	
+	//블로그 리스트 
 	@RequestMapping(value="/takeBlog.do", method=RequestMethod.GET)
 	@ResponseBody
 	public List<BlogDto> takeBlog(String num) {
@@ -36,10 +35,10 @@ public class BlogController {
 		for (BlogDto dto : list) {
 			System.out.println(dto.toString());
 		}
-
 		return list;
 	}
-
+	
+	//페이징
 	@RequestMapping(value="/blog-paging.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<Integer> paging() {
@@ -51,27 +50,15 @@ public class BlogController {
 
 		return list;
 	}
-
+	
+	//블로그 메인
 	@RequestMapping("/blog.do")
 	public String list() {
 		logger.info("Blog list page");
 		return "/blog/blog-main2";
 	}
-
-//	@RequestMapping("/blog-search.do")
-//	public String list(@RequestParam(defaultValue="blog_title") String search_option,
-//					   @RequestParam(defaultValue="") String keyword, Model model) throws Exception{
-//		logger.info("Blog list page");
-//
-//		List<BlogDto> list = biz.searchBlog(search_option);
-//		for(BlogDto dto : list) {
-//			System.out.println(dto.toString());
-//		}
-//		model.addAttribute("list", list);
-//
-//		return "/blog/blog-main2";
-//	}
-
+	
+	// 블로그 검색
 	@RequestMapping(value="/blog-search.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<BlogDto> search(@RequestBody String keyword) {
@@ -82,7 +69,6 @@ public class BlogController {
 		for(BlogDto dto : list) {
 			System.out.println(dto.toString());
 		}
-
 		return list;
 	}
 
@@ -101,7 +87,7 @@ public class BlogController {
 		logger.info("Blog write form page");
 		return "/blog/blog-write";
 	}
-
+	//글 작성 결과
 	@RequestMapping("/blog-write.do")
 	public String write(BlogDto dto) {
 		logger.info("Blog write page - post");
@@ -113,7 +99,7 @@ public class BlogController {
 
 	}
 
-	// 글 수정
+	// 글 수정 페이지
 	@RequestMapping(value="/blog-updateform.do", method=RequestMethod.GET)
 	public String update(Model model, int blog_no) {
 		logger.info("Blog update form page");
@@ -123,7 +109,7 @@ public class BlogController {
 		System.out.println(dto.toString());
 		return "/blog/blog-update";
 	}
-
+	// 글 수정 결과
 	@RequestMapping(value="/blog-update.do",method=RequestMethod.GET)
 	public String update(BlogDto dto) {
 		logger.info("Blog update result - post");
@@ -141,5 +127,10 @@ public class BlogController {
 		biz.delete(blog_no);
 		return "redirect:blog.do";
 	}
-
+	
+	//댓글
+	
+	
+	
+	
 }

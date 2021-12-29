@@ -10,7 +10,6 @@ public interface BlogDao {
 	public List<BlogDto> takeBlogList(int num);
 	public int paging();
 	
-//	public List<BlogDto> blogList();
 	public List<BlogDto> searchBlog(String keyword);
 	public BlogDto selectOne(int blog_no);
 	public int insert(BlogDto dto);

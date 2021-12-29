@@ -23,15 +23,23 @@
   margin-left: 10%;
 }
 
-.blog-update__content-article input[name="blog_title"]{
+.blog-update__content-article input[name="user_id"]{
+	margin-bottom:15px;
+	border:none;
+	background-color:white;
+}
+
+.blog-update__content-article input[name="blog_title"], .blog-update__content-article input[name="user_id"]{
   width:840px;
   height:40px;
-  border:0.5px solid gainsboro;
   padding-left:10px;
   font-size: 16px;
   margin-left: 10%;
 }
 
+.blog-update__content-article input[name="blog_title"]{
+	border:0.5px solid gainsboro;
+}
 .blog-update__content-article input[name="blog_title"]:focus{
   outline:0.5px solid rgb(213, 214, 118);
   
