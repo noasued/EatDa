@@ -7,7 +7,7 @@ public class CouponDto {
 	private String coupon_id;
 	private String user_id;
 	private String coupon_name;
-	private String coupon_desc;
+	private String coupon_des;
 	private double coupon_rate;
 	private int coupon_term;
 
@@ -15,13 +15,13 @@ public class CouponDto {
 		super();
 	}
 
-	public CouponDto(String coupon_id, String user_id, String coupon_name, String coupon_desc, double coupon_rate,
+	public CouponDto(String coupon_id, String user_id, String coupon_name, String coupon_des, double coupon_rate,
 			int coupon_term) {
 		super();
 		this.coupon_id = coupon_id;
 		this.user_id = user_id;
 		this.coupon_name = coupon_name;
-		this.coupon_desc = coupon_desc;
+		this.coupon_des = coupon_des;
 		this.coupon_rate = coupon_rate;
 		this.coupon_term = coupon_term;
 	}
@@ -50,12 +50,12 @@ public class CouponDto {
 		this.coupon_name = coupon_name;
 	}
 
-	public String getCoupon_desc() {
-		return coupon_desc;
+	public String getCoupon_des() {
+		return coupon_des;
 	}
 
-	public void setCoupon_desc(String coupon_desc) {
-		this.coupon_desc = coupon_desc;
+	public void setCoupon_des(String coupon_des) {
+		this.coupon_des = coupon_des;
 	}
 
 	public double getCoupon_rate() {
@@ -77,7 +77,7 @@ public class CouponDto {
 	@Override
 	public String toString() {
 		return "CouponDto [coupon_id=" + coupon_id + ", user_id=" + user_id + ", coupon_name=" + coupon_name
-				+ ", coupon_desc=" + coupon_desc + ", coupon_rate=" + coupon_rate + ", coupon_term=" + coupon_term
+				+ ", coupon_des=" + coupon_des + ", coupon_rate=" + coupon_rate + ", coupon_term=" + coupon_term
 				+ "]";
 	}
 

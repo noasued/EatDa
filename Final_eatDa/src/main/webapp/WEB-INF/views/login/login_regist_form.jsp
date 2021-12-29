@@ -14,7 +14,8 @@
 .regist_wrap{
 	flex-direction: column;
 	width: 800px;
-    magin-top: 40px;
+	heignt: 600px;
+    magin-top: 80px;
 }
 
 .regist_form{
@@ -27,7 +28,7 @@
 }
 
 .headline{
-	margin-top: 50px;
+	margin-top: 200px;
 }
 
 .headline a{
@@ -53,7 +54,7 @@ div span{
 
 .login_regist_wrap{
 	width: 100%;
-	height: 700px;
+	height: 850px;
 	display: flex;
 	justify-content: center;
 }
@@ -113,7 +114,7 @@ div span{
         margin: 30px;
     }
 
-    .user_addr2{
+    .user_addr_sub{
         margin-top: 5px;
     }
 
@@ -363,7 +364,7 @@ div span{
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("user_addr").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("user_addr2").focus();
+                document.getElementById("user_addr_sub").focus();
             }
         }).open();
     }
@@ -434,7 +435,7 @@ div span{
                         <td>
                             <input type="text" class="user_addr" name="user_addr" id="user_addr" required="required" placeholder="우편번호를 입력하세요." readonly="readonly">
                             <input type="button" class="user_addr_chk" value="주소 검색" onclick="addr_search();"><br>
-                            <input type="text" class="user_addr2" name="user_addr2" id="user_addr2" required="required" placeholder="상세주소를 입력하세요." onclick="emailChkConfirm();">
+                            <input type="text" class="user_addr_sub" name="user_addr_sub" id="user_addr_sub" required="required" placeholder="상세주소를 입력하세요." onclick="emailChkConfirm();">
                         </td>
                     </tr>
                     <tr>
@@ -461,7 +462,7 @@ div span{
                     </div>
             </form>
           </div>
-        </div>
+        </div> 
     </div>
     <div id="footer">
 		<%@ include file="../common/footer.jsp"%>
