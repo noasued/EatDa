@@ -15,13 +15,65 @@ public class BlogDaoImpl implements BlogDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
 	@Override
-	public List<BlogDto> blogList(){
+	public List<BlogDto> takeBlogList(int num) {
+		//0 -> 15    13
+		//1 -> 12 11 10
+		//2 -> 9 8 7
+		//3 -> 6 5 4
+		//4 -> 3 2 1
+		//넘어오는 데이터가 페이지
+		List<BlogDto> temp = null;
 		List<BlogDto> list = new ArrayList<BlogDto>();
+		num = num*3;
 		try {
-			list = sqlSession.selectList(NAMESPACE+"blogList");
+			temp = sqlSession.selectList(NAMESPACE+"blogList");
+			for (int i = num-3; i < num; i++) {
+				list.add(temp.get(i));
+			}
 		} catch (Exception e) {
-			System.out.println("[error]: blog list");
+			System.out.println("takeBlogList DAO ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int paging() {
+		int blogCount = 0;
+		
+		try {
+			blogCount = sqlSession.selectOne(NAMESPACE+"pagingBlog");
+		} catch (Exception e) {
+			System.out.println("paging DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return blogCount;
+	}
+	
+//	@Override
+//	public List<BlogDto> blogList(){
+//		List<BlogDto> list = new ArrayList<BlogDto>();
+//		try {
+//			list = sqlSession.selectList(NAMESPACE+"blogList");
+//		} catch (Exception e) {
+//			System.out.println("[error]: blog list");
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+	
+	@Override
+	public List<BlogDto> searchBlog(String keyword){
+		List<BlogDto> list = new ArrayList<BlogDto>();
+		String makekeyword = "%"+keyword+"%";
+		try {
+			System.out.println("keyword: " + makekeyword);
+			list = sqlSession.selectList(NAMESPACE+"searchBlog", makekeyword);
+		} catch (Exception e) {
+			System.out.println("[error]: search blog");
 			e.printStackTrace();
 		}
 		return list;
@@ -40,18 +92,6 @@ public class BlogDaoImpl implements BlogDao{
 	}
 	
 	@Override
-	public int update(BlogDto dto) {
-		int res = 0;
-		try {
-			res = sqlSession.update(NAMESPACE+"blogUpdate",dto);
-		} catch (Exception e) {
-			System.out.println("[error] : update");
-			e.printStackTrace();
-		}
-		return res;
-	}
-	
-	@Override
 	public int insert(BlogDto dto) {
 		int res = 0;
 		try {
@@ -64,12 +104,13 @@ public class BlogDaoImpl implements BlogDao{
 	}
 	
 	@Override
-	public int delete(int blog_no) {
+	public int update(BlogDto dto) {
 		int res = 0;
 		try {
-			res = sqlSession.delete(NAMESPACE+"blogDelete",blog_no);
+			res = sqlSession.update(NAMESPACE+"blogUpdate",dto);
+			System.out.println("update dao : update blog where blog_no :"+dto.getBlog_no());
 		} catch (Exception e) {
-			System.out.println("[error] : delete");
+			System.out.println("[error] : update");
 			e.printStackTrace();
 		}
 		return res;
@@ -87,4 +128,19 @@ public class BlogDaoImpl implements BlogDao{
 		}
 		return dto.getBlog_no();
 	}
+	
+	@Override
+	public int delete(int blog_no) {
+		int res = 0;
+		try {
+			res = sqlSession.delete(NAMESPACE+"blogDelete",blog_no);
+			System.out.println("delete dao : delete blog where blog_no :"+blog_no);
+		} catch (Exception e) {
+			System.out.println("[error] : delete");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	
 }

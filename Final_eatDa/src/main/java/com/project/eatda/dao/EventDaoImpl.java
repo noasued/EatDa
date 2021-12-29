@@ -38,4 +38,54 @@ public class EventDaoImpl implements EventDao{
 		}
 		return dto;
 	}
+	
+	@Override
+	public int insert(EventDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE+"eventInsert",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : insert");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	@Override
+	public int update(EventDto dto) {
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"eventUpdate",dto);
+			System.out.println("update dao : update event where event_no : "+dto.getEvent_no());
+		} catch (Exception e) {
+			System.out.println("[error] : update");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	@Override
+	public int selectEventNo(String event_title) {
+		EventDto dto = null;
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectEventNo",event_title);
+		} catch (Exception e) {
+			System.out.println("[error] : selectEventNo");
+			e.printStackTrace();
+		}
+		return dto.getEvent_no();
+	}
+	
+	@Override
+	public int delete(int event_no) {
+		int res = 0;
+		try {
+			res = sqlSession.delete(NAMESPACE+"eventDelete",event_no);
+			System.out.println("delete dao : delete event where event_no:"+event_no);
+		} catch (Exception e) {
+			System.out.println("[error] : delete");
+			e.printStackTrace();
+		}
+		return res;
+	}
 }
