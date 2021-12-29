@@ -131,4 +131,15 @@ public class MarketBizImpl implements MarketBiz{
 	public int updateCartList(List<CartProductDto> list) {
 		return marketDao.updateCartList(list);
 	}
+
+	@Override
+	public List<OrderProductDto> getOrderList(String order_id) {
+		return marketDao.getOrderList(order_id);
+	}
+
+	@Override
+	@Transactional
+	public List<CartProductDto> directPurchase(CartProductDto dto) {
+		return marketDao.directPurchase(dto);
+	}
 }
