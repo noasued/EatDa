@@ -24,12 +24,6 @@ public class BlogBizImpl implements BlogBiz{
 		return dao.paging();
 	}
 	
-	
-//	@Override
-//	public List<BlogDto> blogList() {
-//		return dao.blogList();
-//	}
-	
 	@Override
 	public List<BlogDto> searchBlog(String keyword) {
 		return dao.searchBlog(keyword);

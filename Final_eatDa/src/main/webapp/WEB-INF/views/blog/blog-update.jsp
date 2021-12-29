@@ -75,6 +75,7 @@
 
 			<!-- article -> summernote -->
       <div class="blog-update__content-article">
+        	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.user_id}" disabled>
         	<input id="blog-no" type="hidden" name="blog_no" value="${dto.blog_no}">
           <input type="text" name="blog_title" id="title" value="${dto.blog_title}">
 					<textarea class="summernote" id="summernote" name="blog_content">${dto.blog_content}</textarea>
@@ -100,12 +101,13 @@
   <script type="text/javascript">
  	function submitBtn(){
 		let blog_no = $('#blog-no').val();
+		var user_id=$('#user_id').val();
 		var blog_title=$('#title').val();
 		var blog_content=$('#summernote').val();
 		console.log(blog_no);
 		console.log(blog_title);
 		console.log(blog_content);
-		location.href="blog-update.do?blog_title="+blog_title+"&blog_content="+blog_content+"&blog_no="+blog_no;
+		location.href="blog-update.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id+"&blog_no="+blog_no;
 	}
   
 	//summernote

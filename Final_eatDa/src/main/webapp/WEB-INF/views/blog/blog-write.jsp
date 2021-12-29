@@ -88,6 +88,7 @@
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
         <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
+        	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.user_id}" disabled>
           <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
 					<textarea class="summernote" id="summernote" name="editordata"></textarea>
 					<div class="blog-write__content-article__btns">
@@ -113,11 +114,12 @@
   <script type="text/javascript">
   // click submit button
 	function submitBtn(){
+		var user_id=$('#user_id').val();
 		var blog_title=$('#title').val();
 		var blog_content=$('#summernote').val();
 		console.log(blog_title);
 		console.log(blog_content);
-		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content;
+		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id;
 		alert("글 작성이 완료되었습니다.");
 	}
 	// summernote

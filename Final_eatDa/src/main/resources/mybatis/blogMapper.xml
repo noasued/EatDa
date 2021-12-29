@@ -46,7 +46,7 @@
 	
 	<insert id="blogInsert" parameterType="blogDto">
 		INSERT INTO BLOG
-		VALUES(BLOG_NO_SEQ.NEXTVAL, 'ADMIN', #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'http://drive.google.com/uc?export=viewid=1qW1oV-SmBNqiWHj8wYxY5Pf0v2CctsJ8', SYSDATE)
+		VALUES(BLOG_NO_SEQ.NEXTVAL, 'ADMIN', #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'resources/images/blog-write01.png', SYSDATE)
 	</insert>
 	
 	<select id="selectBlogNo" parameterType="String" resultType="blogDto">

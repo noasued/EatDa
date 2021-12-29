@@ -53,18 +53,6 @@ public class BlogDaoImpl implements BlogDao{
 		return blogCount;
 	}
 	
-//	@Override
-//	public List<BlogDto> blogList(){
-//		List<BlogDto> list = new ArrayList<BlogDto>();
-//		try {
-//			list = sqlSession.selectList(NAMESPACE+"blogList");
-//		} catch (Exception e) {
-//			System.out.println("[error]: blog list");
-//			e.printStackTrace();
-//		}
-//		return list;
-//	}
-	
 	@Override
 	public List<BlogDto> searchBlog(String keyword){
 		List<BlogDto> list = new ArrayList<BlogDto>();

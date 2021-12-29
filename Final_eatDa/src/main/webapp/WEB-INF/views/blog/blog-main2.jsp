@@ -85,7 +85,7 @@
 									"<li>"+"<a href='blog-detail.do?blog_no="+value.blog_no+"'>"+
 									"<div class='blog-article__list-title'>"+
 									"<h3>"+value.blog_title+"</h3>"+
-									"<i class='fas fa-heart'></i>"+"</div>"+
+									"<i class='fas fa-heart'></i>"+"<span>"+value.user_id+"</span>"+"</div>"+
 									"<div class='blog-article__list-content'>"+
 									"<p>"+value.blog_content+"</p>"+"</div>"+
 									"<div class='blog-article__list-img'>"+
@@ -194,12 +194,17 @@
 						$('.blog-article__list').append(
 							"<li>"+"<a href='blog-detail.do?blog_no="+value.blog_no+"'>"+
 							"<div class='blog-article__list-title'>"+
-							"<h3>"+value.blog_title+"</h3>"+
-							"<i class='fas fa-heart'></i>"+"</div>"+
+								"<h3>"+value.blog_title+"</h3>"+
+								"<i class='fas fa-heart'></i>"+
+								"<span>"+value.user_id+"</span>"+
+								"<span>"+value.regdate+"</span>"+
+							"</div>"+
 							"<div class='blog-article__list-content'>"+
-							"<p>"+value.blog_content+"</p>"+"</div>"+
+								"<p>"+value.blog_content+"</p>"+
+							"</div>"+
 							"<div class='blog-article__list-img'>"+
-							"<img src='resources/images/blog-thumbnail.png'></div></a></li>"
+								"<img src='resources/images/blog-thumbnail.png'>"+
+							"</div></a></li>"
 						);
 					});
 					$('.pagination').html('');

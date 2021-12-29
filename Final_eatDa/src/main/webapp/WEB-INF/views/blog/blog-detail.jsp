@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,9 +96,13 @@
         <div class="detail-article__title">
           <h2>${dto.blog_title}</h2>
         </div>
-
+				
+				<div class="detail-article__user-date">
+					
+				</div>
         <!-- buttons -->
         <div class="detail-article__btn">
+       	 	<span>작성자&nbsp;&nbsp;&nbsp;${dto.user_id}</span><span><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></span>
           <input type="button" value="목록" onclick="location.href='blog.do'">
           <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
           <input type="button" value="삭제" onclick="blogDelete(${dto.blog_no})">
