@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +16,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        <script type="text/javascript">
+        // 게시글 전체 선택 및 해제
         function selectAll(selectAll)  {
         	  const checkboxes 
         	       = document.getElementsByName('chkBtn');
@@ -25,6 +27,9 @@
         	  });
         	}
         
+		console.log(formatDate(date));
+        
+        // 이벤트 진행 현황
         function statusUpdate(status){
         	console.log(status);
         	
@@ -187,11 +192,11 @@
                                     <tbody>
                                     	<c:forEach items="${list}" var="dto">
 	                                        <tr>
-	                                            <td><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
-	                                            <td>${dto.event_no}</td>
-	                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
-	                                            <td>${dto.regdate}</td>
-	                                            <td>
+	                                            <td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
+	                                            <td style="vertical-align:middle;">${dto.event_no}</td>
+	                                            <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
+	                                            <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+	                                            <td style="vertical-align:middle;">
 	                                                <select onChange="statusUpdate(this.value);">
 	                                                    <option value="1">대 기</option>
 	                                                    <option value="2">진행중</option>
