@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 	/* body 최소 크기, 마진 0 지정 */
 	body {
@@ -108,6 +109,7 @@ function getCartList() {
 			let list = data;
 			$(list).each(function(key, value) {
 				let dp = Number(value.cart_price)*Number($('#coupon-rate').text());
+				console.log(dp);
 				$('.container-fluid').eq(2).append(
 						"<div class='row rows-width product-section' style='margin:0px auto;'>" +
 						"<div class='col-md-2 p-img'>" +
@@ -218,12 +220,8 @@ function goMain() {
         <div class="row rows-width title-section" style="margin:0px auto; margin-top: 5%;">
             <h4>주문 상품 정보</h4>
         </div>
-
-        <!-- 주문 상품에 따라서 동적으로 처리 -->
-        <!-- 상품 한 종류 -->
-        
     </div>
-
+    
     <!-- payment part -->
     <div class="container-fluid">
         <div class="row rows-width payment-section" style="margin:0px auto;">

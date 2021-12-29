@@ -20,8 +20,9 @@
 	<!-- 회원가입 -->
 	<insert id="memberRegist" parameterType="UserDto">
 		INSERT INTO E_USER
-		VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_addr}, #{user_email}, #{user_phone}, 'USER', 'IMG', '0', 'Y', #{user_mailing}, #{user_addr_sub} )
+		VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_addr}, #{user_email}, #{user_phone}, 'USER', 'IMG', '0', 'Y', #{user_mailing} )
 	</insert>
+
 	
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate">
@@ -38,4 +39,7 @@
 		WHERE USER_ID = #{user_id}
 	</update>
 	
+
+
+
 </mapper>

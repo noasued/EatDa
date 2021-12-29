@@ -53,6 +53,7 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.update(NAMESPACE_MEMBER + "memberDelete", dto);
 	}
 
+
 	
 
 }

@@ -17,7 +17,7 @@
 
 	flex-direction: column;
 	width: 800px;
-    margin-top: 180px; 
+    margin-top: 40px; 
 } 
 
 .coupon_list{
@@ -58,10 +58,14 @@ hr{
     align-items: center;
 }
 
+a{
+	text-decoration: none;
+	font-size: 0.7rem;
+}
 
 .wrap{
 	width: 100%;
-	height: 950px;
+	height: 800px;
 	display: flex;
 	justify-content: center;
 }
