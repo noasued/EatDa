@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="resources/subscription/css/subscriptionModal_style.css"><!-- Modal css -->
         
         <style>
+        	header{
+        		margin-top:9%;
+        	}
             .tiledBackground{
                 background-image: url(resources/subscription/assets/image/kitchen1.jpg);
                 background-size: 1200px 600px;
@@ -102,7 +105,7 @@
         <section class="bg-light py-5 border-bottom" id="compare">
             <div class="container px-5 my-5">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bolder">한 번에 비교하기</h2>
+                    <h2 class="fw-bolder">구독 기간 비교하기</h2>
                     <p class="lead mb-0">구독 기간에 대해 궁금한 점을 한 눈에 비교해드립니다.</p>
                 </div>
                 <div class="row gx-5 justify-content-center">
@@ -122,7 +125,7 @@
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>좋아요</ol>
 	                                </ul>
 	                                <br>
-                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do?command=weekly">주간구독 신청</a></div>
+                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do?type=weekly">주간구독 신청</a></div>
                             </div>
                         </div>
                     </div>
@@ -142,7 +145,7 @@
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
 	                                </ul>
 	                                <br>
-                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do?command=monthly">월간구독 신청</a></div>
+                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do?type=monthly">월간구독 신청</a></div>
                             </div>
                         </div>
                     </div>
@@ -162,7 +165,7 @@
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
 	                                </ul>
 	                                <br>
-                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do?command=quarterly">분기구독 신청</a></div>
+                                <div class="d-grid"><a class="btn btn-primary" href="subForm.do?type=quarterly">분기구독 신청</a></div>
                             </div>
                         </div>
                     </div>
