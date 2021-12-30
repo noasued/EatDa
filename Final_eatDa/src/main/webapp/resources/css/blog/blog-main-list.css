@@ -63,9 +63,13 @@ a{
 }
 
 .fa-heart{
-  margin-top: 2em;
+  margin-top: 10px;
   margin-right: 13em;
   color:rgb(255, 119, 95);
+}
+
+.blog-article__list-title span{
+	font:italic 12px "Fira Sans", serif;
 }
 
 .blog-article__list-content{

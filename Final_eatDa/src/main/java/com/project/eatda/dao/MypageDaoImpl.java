@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.SubscriptionDto;
 
@@ -47,5 +48,20 @@ public class MypageDaoImpl implements MypageDao{
 		return list;
 		
 	}
+
+	@Override
+	public List<BlogDto> blogLikeList(String user_id) {
+		List<BlogDto> blogList = null;
+		
+		try {
+			blogList = sqlSession.selectList(NAMESPACE_MYPAGE + "blogLikeList", user_id);
+		} catch (Exception e) {
+			System.out.println("blogLikeList Dao ERROR");
+			e.printStackTrace();
+		}
+		return blogList;
+	}
+
+
 	
 }

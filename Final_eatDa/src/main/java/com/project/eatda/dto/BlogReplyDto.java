@@ -5,23 +5,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BlogReplyDto {
-	private int reply_no;
-	private int blog_no;
-	private String user_id;
-	private String reply_content;
-	private Date regdate;
+	private int reply_no;			// 댓글 번호
+	private int blog_no;			// 게시글 번호
+	private String user_id;			// 댓글 작성자
+	private String reply_content;	// 댓글 내용
+	private Date regdate;			// 댓글 작성일자
+	private Date updatedate;		// 댓글 수정일자
 	
 	public BlogReplyDto() {
 		super();
 	}
 	
-	public BlogReplyDto(int reply_no, int blog_no, String user_id, String reply_content, Date regdate) {
+	public BlogReplyDto(int reply_no, int blog_no, String user_id, String reply_content, Date regdate, Date updatedate) {
 		super();
 		this.reply_no = reply_no;
 		this.blog_no = blog_no;
 		this.user_id = user_id;
 		this.reply_content = reply_content;
 		this.regdate = regdate;
+		this.updatedate = updatedate;
 	}
 	
 	public int getReply_no() {
@@ -54,4 +56,19 @@ public class BlogReplyDto {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	
+	public Date getUpdatedate() {
+		return updatedate;
+	}
+	public void setUpdatedate(Date updatedate) {
+		this.updatedate = updatedate;
+	}
+
+	@Override
+	public String toString() {
+		return "BlogReplyDto [reply_no=" + reply_no + ", blog_no=" + blog_no + ", user_id=" + user_id
+				+ ", reply_content=" + reply_content + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+	}
+	
+	
 }

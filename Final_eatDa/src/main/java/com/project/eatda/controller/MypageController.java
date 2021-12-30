@@ -10,10 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.eatda.biz.MemberBiz;
 import com.project.eatda.biz.MypageBiz;
+import com.project.eatda.dto.BlogDto;
+import com.project.eatda.dto.BlogLikeDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.SubscriptionDto;
 import com.project.eatda.dto.UserDto;
 
@@ -76,6 +80,25 @@ public class MypageController {
 		return "/mypage/mypage_coupon";
 	}
 
+	//블로그 찜
+	@RequestMapping(value="blogLikeList.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<BlogDto> blogLikeList(HttpServletRequest requset){
+		logger.info("blogLikeList");
+		UserDto user = getLoginUser(requset);
+		
+		List<BlogDto> list = mypageBiz.blogLikeList(user.getUser_id());
+		
+		return list;
+	}
+	
+	
+	
+	
+	public UserDto getLoginUser(HttpServletRequest request) {
+		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		return dto;
+	}
 	
 	
 	

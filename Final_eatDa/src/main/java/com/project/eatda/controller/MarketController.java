@@ -118,7 +118,7 @@ public class MarketController {
 		}
 		
 		System.out.println("p_id : " + p_id + ", p_price : " + p_price + ", quantity : " + quantity);
-		CartProductDto cpDto = new CartProductDto(getLoginUser(request).getUser_id(),p_id,quantity,p_price,null,null);
+		CartProductDto cpDto = new CartProductDto(getLoginUser(request).getUser_id(),p_id,quantity,p_price,null,null, "NORMAL");
 		//세션에서 user_ID 가져와야함 (위 DTO의 첫 번째 파라미터로 넣어줘야 함)
 		
 		int res = marketBiz.putShoppingBag(cpDto);
@@ -197,6 +197,22 @@ public class MarketController {
 		
 		return res>0?"true":"false";
 	}
+	@RequestMapping(value="/getCartProduct.do", method=RequestMethod.GET)
+	@ResponseBody
+	public List<CartProductDto> getCartProduct(String command, HttpServletRequest request) {
+		logger.info("getCartProduct, product : " + command);
+		List<CartProductDto> list = null;
+		
+		if (command.equals("NORMAL")) {
+			list = marketBiz.getCartList(getLoginUser(request).getUser_id());
+		} else if (command.equals("SUBSCRIPTION")) {
+			list = marketBiz.getSubCartList(getLoginUser(request).getUser_id());
+		}
+		for (CartProductDto dto : list) {
+			System.out.println(dto.toString());
+		}
+		return list;
+	}
 	
 	public List<CartProductDto> convertCartList(String data, String user_id) {
 		String[] temp = data.split("},");
@@ -224,7 +240,7 @@ public class MarketController {
 				quantity = Integer.parseInt(array[1].substring(12, array[1].length()-1));
 			}
 			
-			list.add(new CartProductDto(user_id, p_id, quantity, Integer.parseInt(p_price), null, null));
+			list.add(new CartProductDto(user_id, p_id, quantity, Integer.parseInt(p_price), null, null, "NORMAL"));
 		}
 		return list;
 	}
@@ -239,14 +255,14 @@ public class MarketController {
 			cart = marketBiz.getCartList(getLoginUser(request).getUser_id());
 		} else {
 			//장바구니 비우고 그냥 하나만 처넣자~ 그게 답이다.
-			CartProductDto cp = new CartProductDto(getLoginUser(request).getUser_id(),p_id, Integer.parseInt(quantity), Integer.parseInt(price), null, null);
+			CartProductDto cp = new CartProductDto(getLoginUser(request).getUser_id(),p_id, Integer.parseInt(quantity), Integer.parseInt(price), null, null, "NORMAL");
 			cart = marketBiz.directPurchase(cp);
 		}
 		
 		model.addAttribute("list", cart);
 		return "/market/payment";
 	}
-	
+
 	@RequestMapping(value="/getUserInfo.do", method=RequestMethod.POST)
 	@ResponseBody
 	public UserDto getUserInfo(HttpServletRequest request) {
@@ -284,7 +300,7 @@ public class MarketController {
 	public String orderSuccess(Model model, HttpServletRequest request, String order_id) {
 		logger.info("orderSuccess.do, order_id : " + order_id);
 		//잘 삽입되었는지 체크해보자.
-		
+		//주문 상품 잘 나오게로직 체
 		while(true) {
 			String chk_order = marketBiz.getOrder(getLoginUser(request).getUser_id()).getOrder_id();
 			System.out.println("chk_order: " + chk_order);

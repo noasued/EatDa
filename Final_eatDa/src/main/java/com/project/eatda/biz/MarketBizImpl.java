@@ -16,11 +16,10 @@ import com.project.eatda.dto.ProductLikeDto;
 import com.project.eatda.dto.ReviewDto;
 
 @Service
-public class MarketBizImpl implements MarketBiz{
-	
+public class MarketBizImpl implements MarketBiz {
+
 	@Autowired
 	private MarketDao marketDao;
-	
 
 	@Override
 	public List<ProductDto> takeProductList(int num) {
@@ -36,7 +35,6 @@ public class MarketBizImpl implements MarketBiz{
 	public List<ProductDto> likeProductList(String user_id) {
 		return marketDao.likeProductList(user_id);
 	}
-
 
 	@Override
 	public List<ProductDto> hashTagSearch(String tagName) {
@@ -57,7 +55,7 @@ public class MarketBizImpl implements MarketBiz{
 	@Transactional
 	public int putShoppingBag(CartProductDto dto) {
 		int res = marketDao.putShoppingBag(dto);
-		
+
 		return res;
 	}
 
@@ -141,5 +139,10 @@ public class MarketBizImpl implements MarketBiz{
 	@Transactional
 	public List<CartProductDto> directPurchase(CartProductDto dto) {
 		return marketDao.directPurchase(dto);
+	}
+
+	@Override
+	public List<CartProductDto> getSubCartList(String user_id) {
+		return marketDao.getSubCartList(user_id);
 	}
 }

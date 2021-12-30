@@ -6,21 +6,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BlogDto {
-	private int blog_no;
-	private String user_id;
-	private String blog_title;
-	private String blog_content;
-	private int blog_count;
-	private int blog_like;
-	private String blog_img;
-	private Date regdate;
+	private int blog_no;			// 게시글 번호
+	private String user_id;			// 게시글 작성자
+	private String blog_title;		// 게시글 제목
+	private String blog_content;		// 게시글 내용
+	private int blog_count;			// 게시글 조회수
+	private int blog_like;			// 게시글 좋아요 갯
+	private String blog_img;			// 게시글 이미지( 썸머노트 해결후 컬럼 삭제 예상 )
+	private Date regdate;			// 게시글 작성일자
+	private int reply_count;		// 게시글 댓글 수 ( 2021 12 30 추가 )
 	
 	public BlogDto() {
 		super();
 	}
 	
 	public BlogDto(int blog_no, String user_id, String blog_title, String blog_content, int blog_count,
-			int blog_like, String blog_img, Date regdate) {
+			int blog_like, String blog_img, Date regdate, int reply_count) {
 		super();
 		this.blog_no = blog_no;
 		this.user_id = user_id;
@@ -30,6 +31,7 @@ public class BlogDto {
 		this.blog_like = blog_like;
 		this.blog_img = blog_img;
 		this.regdate = regdate;
+		this.reply_count = reply_count;
 	}
 	
 	public int getBlog_no() {
@@ -80,11 +82,19 @@ public class BlogDto {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	
+	public int getReply_count() {
+		return reply_count;
+	}
+	
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
+	}
 
 	@Override
 	public String toString() {
 		return "BlogDto [blog_no=" + blog_no + ", user_id=" + user_id + ", blog_title=" + blog_title + ", blog_content="
 				+ blog_content + ", blog_count=" + blog_count + ", blog_like=" + blog_like + ", blog_img=" + blog_img
-				+ ", regdate=" + regdate + "]";
+				+ ", regdate=" + regdate + ",reply_count=" + reply_count + "]";
 	}
 }

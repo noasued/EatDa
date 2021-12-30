@@ -193,6 +193,72 @@
           
           <div id="reply-list"></div>
           
+          <table class="reply-list">
+            <colgroup>
+              <col width="13%"><col width="70%"><col width="15%">
+            </colgroup>
+            <tr>
+              <td class="reply-list__userid">user_id</td>
+              <td class="reply-list__reply">
+                <p>
+                  <span>yyyy-MM-dd HH:mm:ss</span>
+                  <br>
+                  reply content will be exists here.
+                </p>
+              </td>
+              <td class="reply-list__btns">
+                <input type="button" title="댓글 수정" name="reply-update-btn" value="&#xf044">
+                <input type="button" title="댓글 삭제" name="reply-del-btn" value="&#xf2ed">
+                <input type="button" title="댓글 신고" name="reply-report-btn" id="report-btn" value="&#xf1d8">
+               
+                <!-- report modal -->
+                <div class="reply-report__modal">
+                  <div class="reply-report__modal-content">
+                    <i title="창 닫기" class="fas fa-times fa-lg"></i>
+                    <h5>댓글 신고하기</h5>
+                    <form action="report-reply" method="post">
+                      <table>
+                        <colgroup>
+                          <col width="120px"><col width="350px">
+                        </colgroup>
+                        <tr>
+                          <th>제목</th>
+                          <td><input type="text" name="report-title" placeholder="제목을 작성해주세요."></td>
+                        </tr>
+                        <tr>
+                          <th>신고자</th>
+                          <td>user_id</td>
+                        </tr>
+                        <tr>
+                          <th>신고 대상</th>
+                          <td>user_id2</td>
+                        </tr>
+                        <tr>
+                          <th>신고 댓글 내용</th>
+                          <td>신고 대상이 작성한 댓글</td>
+                        </tr>
+                        <tr>
+                          <th colspan="2">신고 내용</th>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <textarea path="report" name="report" placeholder="신고 내용을 작성해 주세요"></textarea>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2" class="report-submit-btn">
+                            <input type="submit" title="관리자에게 신고내용 전송" name="report-submit-btn" value="&#xf1d8">
+                          </td>
+                        </tr>
+                      </table>
+                    </form>
+                  </div>
+                </div>
+
+              </td>
+            </tr>
+          </table>
+
         </div>
        
       </div>
