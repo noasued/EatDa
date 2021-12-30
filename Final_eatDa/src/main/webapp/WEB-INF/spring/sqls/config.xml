@@ -29,5 +29,6 @@
   		<mapper resource="/mybatis/eventMapper.xml"/>
   		<mapper resource="/mybatis/recipeMapper.xml"/>  
   		<mapper resource="/mybatis/mypageMapper.xml"/>  
+  		<mapper resource="/mybatis/reportMapper.xml" />
   	</mappers>
   </configuration>
