@@ -18,7 +18,7 @@
   		<typeAlias type="com.project.eatda.dto.ProductLikeDto" alias="productLikeDto"/>
   		<typeAlias type="com.project.eatda.dto.RecipeDto" alias="recipeDto"/>  	
   		<typeAlias type="com.project.eatda.dto.SubscriptionDto" alias="subscriptionDto"/>
-  		<typeAlias type="com.project.eatda.dto.BlogReplyDto" alias="blogReplyDto"/>
+  		<typeAlias type="com.project.eatda.dto.BlogReplyDto" alias="replyDto"/>
   		<typeAlias type="com.project.eatda.dto.ReportDto" alias="reportDto" />  
   		<typeAlias type="com.project.eatda.dto.OrderAdminDto" alias="orderAdminDto" />		
   	</typeAliases>
