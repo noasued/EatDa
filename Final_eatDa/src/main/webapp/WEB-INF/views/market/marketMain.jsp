@@ -8,17 +8,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
+<link rel="stylesheet" href="resources/css/market/marketMain.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="resources/css/market/marketMain.css">
 
 <title>Insert title here</title>
 
 <style type="text/css">
 .pagination a:hover {
-	cursor:pointer;
+	cursor:pointer; 
 }
 
 .fixed-Banner {
