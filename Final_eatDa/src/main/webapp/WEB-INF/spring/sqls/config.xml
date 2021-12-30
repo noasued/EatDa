@@ -30,5 +30,6 @@
   		<mapper resource="/mybatis/recipeMapper.xml"/>  
   		<mapper resource="/mybatis/mypageMapper.xml"/>  
   		<mapper resource="/mybatis/reportMapper.xml" />
+  		<mapper resource="/mybatis/adminMapper.xml" />
   	</mappers>
   </configuration>
