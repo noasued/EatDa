@@ -17,7 +17,9 @@
   		<typeAlias type="com.project.eatda.dto.ReviewDto" alias="reviewDto"/>
   		<typeAlias type="com.project.eatda.dto.ProductLikeDto" alias="productLikeDto"/>
   		<typeAlias type="com.project.eatda.dto.RecipeDto" alias="recipeDto"/>  	
-  		<typeAlias type="com.project.eatda.dto.SubscriptionDto" alias="subscriptionDto"/>  		
+  		<typeAlias type="com.project.eatda.dto.SubscriptionDto" alias="subscriptionDto"/>
+  		<typeAlias type="com.project.eatda.dto.BlogReplyDto" alias="blogReplyDto"/>
+  		<typeAlias type="com.project.eatda.dto.ReportDto" alias="reportDto" />  		
   	</typeAliases>
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>
@@ -25,6 +27,6 @@
   		<mapper resource="/mybatis/blogMapper.xml"/>
   		<mapper resource="/mybatis/eventMapper.xml"/>
   		<mapper resource="/mybatis/recipeMapper.xml"/>  
-  		<mapper resource="/mybatis/mypageMapper.xml"/>  		
+  		<mapper resource="/mybatis/mypageMapper.xml"/>  
   	</mappers>
   </configuration>
