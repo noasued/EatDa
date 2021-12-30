@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,14 +17,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        <script type="text/javascript">
         function selectAll(selectAll)  {
-        	  const checkboxes = document.getElementsByName('chkBtn');
-        	  
-        	  checkboxes.forEach((checkbox) => {
-        	    checkbox.checked = selectAll.checked;
-        	  })
-        	}
+      	  const checkboxes = document.getElementsByName('chkBtn');
+      	  
+      	  checkboxes.forEach((checkbox) => {
+      	    checkbox.checked = selectAll.checked;
+      	  })
+      	}
         </script>
         
         <style>
@@ -172,17 +175,19 @@
                                             <th>NO</th>
                                             <th>I D</th>
                                             <th>제 목</th>
-                                            <th>댓 글</th>
+                                            <th>작성일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>13</td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">블로그 제목을 입력</a></td>
-                                            <td>: )</td>
-                                        </tr>
+                                    	<c:forEach items="${list}" var="dto">
+	                                        <tr>
+	                                            <td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.blog_no}"></td>
+	                                            <td style="vertical-align:middle;">${dto.blog_no}</td>
+	                                            <td style="vertical-align:middle;">${dto.user_id}</td>
+	                                            <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.blog_title}</a></td>
+	                                            <td style="vertical-align:middle;">${dto.regdate}</td>
+	                                        </tr>
+                                        </c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>

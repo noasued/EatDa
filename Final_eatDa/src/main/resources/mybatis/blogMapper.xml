@@ -63,6 +63,11 @@
 	</delete>
 	
 	
+	<select id="adminBlogList" parameterType="list" resultMap="blogMap">
+		SELECT * FROM BLOG
+		ORDER BY BLOG_NO DESC
+	</select>
+	
 	<resultMap type="replyDto" id="replyMap">
 		<result property="reply_no" column="REPLY_NO" />
 		<result property="blog_no" column="BLOG_NO" />
@@ -83,7 +88,6 @@
 		WHERE R.USER_ID = U.USER_ID AND BLOG_NO=#{blog_no}
 		ORDER BY REPLY_NO
 	</select>
-	
 	
 	
 	

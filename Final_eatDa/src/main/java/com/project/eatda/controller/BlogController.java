@@ -127,4 +127,13 @@ public class BlogController {
 		return "redirect:blog.do";
 	}
 	
+	/* 관리자 블로그 리스트 (전체 조회) */
+	@RequestMapping(value="/adminPostBlog.do", method=RequestMethod.GET)
+	public String adminBlogList(Model model){
+		logger.info("admin blog list");
+		model.addAttribute("list", biz.adminBlogList());
+		
+		return "/admin/adminPostBlog";
+	}
+	
 }
