@@ -2,6 +2,9 @@ package com.project.eatda.dto;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ReportDto {
 		private int report_no;
 		private String reporter;

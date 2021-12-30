@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -163,10 +167,7 @@
                         <h1 class="title_tab">레시피 관리</h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                레시피 관리
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i> 레시피 관리</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="80px"><col width="60%"><col width="200px">
@@ -180,12 +181,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>1</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">똑같은 듯 다른 10가지 에그 토스트 만들기</a></td>
-                                            <td>2021.12.05</td>
-                                        </tr>
+                                    	<c:forEach items="${recipeList}" var="dto">
+	                                        <tr>
+	                                            <td><input type="checkbox" name="chkBtn" value="${dto.recipe_no}"></td>
+	                                            <td>${dto.recipe_no}</td>
+	                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.recipe_title}</a></td>
+	                                            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+	                                        </tr>
+	                                	</c:forEach>        
                                     </tbody>
                                     <tr></tr>
                                     <tr>

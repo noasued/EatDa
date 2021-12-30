@@ -1,7 +1,9 @@
 package com.project.eatda.dto;
 
 import java.util.Date;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BlogReplyDto {
 	private int reply_no;
 	private int blog_no;
