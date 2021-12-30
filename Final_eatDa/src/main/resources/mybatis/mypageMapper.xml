@@ -12,7 +12,6 @@
 		<result property="subscription_price" column="SUBSCRIPTION_PRICE"/>
 		<result property="subscription_type" column="SUBSCRIPTION_TYPE"/>
 		<result property="subscription_term" column="SUBSCRIPTION_TERM"/>
-		
 	</resultMap>
 
 	<!-- 구독 내역 -->
@@ -28,6 +27,14 @@
 		FROM COUPON_LIST 
 		JOIN COUPON USING(COUPON_ID)
 		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 블로그 -->
+	<select id="blogLikeList" parameterType="string" resultType="blogDto">
+		SELECT BLOG_NO, BLOG_TITLE, BLOG_CONTENT, BLOG_CONTENT
+		FROM BLOG 
+		JOIN BLOG_LIKE b USING(BLOG_NO)
+		WHERE b.USER_ID = #{user_id}
 	</select>
 	
 

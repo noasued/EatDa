@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.MemberDao;
 import com.project.eatda.dao.MypageDao;
+import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.SubscriptionDto;
 
@@ -28,4 +29,11 @@ public class MypageBizImpl implements MypageBiz{
 	public List<CouponDto> couponList(CouponDto dto) {
 		return mypageDao.couponList(dto);
 	}
+
+	//블로그 찜
+	@Override
+	public List<BlogDto> blogLikeList(String user_id) {
+		return mypageDao.blogLikeList(user_id);
+	}
+
 }
