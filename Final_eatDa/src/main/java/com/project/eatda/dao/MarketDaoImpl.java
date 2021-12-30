@@ -327,10 +327,11 @@ public class MarketDaoImpl implements MarketDao {
 		
 		try {
 			//1. 카트 비우기
-			res += sqlSession.delete(NAMESPACE_MARKET+"deleteAllCart", user_id);
+			res += sqlSession.delete(NAMESPACE_MARKET+"deleteCartList", user_id);
+			System.out.println("first res: " + res);
 			//2. 데이터 cart에 insert
 			res += sqlSession.insert(NAMESPACE_MARKET+"putShoppingBag", dto);
-			
+			System.out.println("second res: " + res);
 			if (res != 2) {
 				throw new Exception("res != 2");
 			} else {
@@ -342,13 +343,18 @@ public class MarketDaoImpl implements MarketDao {
 		}
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public List<CartProductDto> getSubCartList(String user_id) {
+		List<CartProductDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getSubCartList", user_id);
+		} catch (Exception e) {
+			System.out.println("getSubCartList DAO ERROR");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

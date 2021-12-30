@@ -5,10 +5,9 @@
 <head>
 <meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
-		
 		function getCoupon_id(){
 			let rate = $('#coupon-list').val();
 			let coupon_id = '';
@@ -39,6 +38,7 @@
 			
 			for (var i = 0; i < 4; i++) {
 				if($('.input').eq(i).val() == '') {
+					alert('배송 정보를 정확히 입력해주세요.');
 					return;
 				}
 			}

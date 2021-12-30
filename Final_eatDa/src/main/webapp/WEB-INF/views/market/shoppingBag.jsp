@@ -13,7 +13,6 @@
         margin-top: 50px;
         margin-bottom: 100px;
     }
-
     .rows-width {
         width:80%;
     }
@@ -31,11 +30,6 @@
         height: 8%;
         border-bottom: 2px solid black;
     }
-
-    /*
-        나중에 fit-content
-        한 줄 높이 100px 적당
-    */
     .order-product {
         height: fit-content;
         border-bottom: 1px solid black;
@@ -87,11 +81,7 @@
     	height:18px;
     }
 
-    #m-check:hover {
-        cursor: pointer;
-    }
-
-    #choice-delete:hover {
+    #m-check:hover, #choice-delete:hover, #right-Button:hover, #left-Button:hover, #subDev, #norDev {
         cursor: pointer;
     }
 </style>
@@ -104,15 +94,6 @@
         width: 90px;
         height: 90px;
     }
-
-    #left-Button:hover {
-        cursor: pointer;
-    }
-
-    #right-Button:hover {
-        cursor: pointer;
-    }
-
     .start-row {
         width: 100%;
         height: 100px;
@@ -161,6 +142,9 @@
         font-size: larger;
         float: left
     }
+    .sub-col-price {
+    	margin-left:40%;
+    }
 </style>
 <style type="text/css">
     .title {
@@ -202,6 +186,7 @@
     .order-total-price {
         font-size:xx-large; font-weight:bold; text-align:center; padding-top:10px;
     }
+    
 </style>
 
 <script type="text/javascript">
@@ -209,6 +194,7 @@
 	let totalPrice = 0;
 	
 	window.onload = function() {
+		makeSubDelivery();
 		//멀티버튼 구현
 		$('input:checkbox').on('click', function() {
 			if (!($(this).prop('checked'))) {
@@ -290,20 +276,31 @@
 	}
 	
 	//선택삭제 메서드
+	//
 	function choiceDelete() {
 		let array = new Array();
-		if($('input:checkbox[name="checkbox"]:checked').length == 0) {
+		console.log($('now-tab').children('input:checkbox[name="checkbox"]:checked'));
+		if($('.now-tab').text() == '일반배송' && $('input:checkbox[name="checkbox"]:checked').length == 0) {
 			alert('선택하신 상품이 없습니다.');
 			return;
 		}
+		
+		if ($('input:checkbox[name="checkbox"]:checked').parent().parent().siblings('.category').text() == 'SUBSCRIPTION') {
+			alert('구독 배송 상품은 삭제하실 수 없습니다.');
+			return;
+		}
+		
 		if(confirm('선택하신 상품을 장바구니에서 제거 하시겠습니까?')) {
 			$('input:checkbox[name="checkbox"]').each(function() {
 				if (this.checked==true) {
 					let price = $(this).parents('.left-col').siblings('.right-col').children('.right-col-price').children('.each-price').text();
 					let totalPrice = $('#totalPrice').text();
 					$('#totalPrice').text(totalPrice-price);
-					$(this).parents('.start-row').remove();
-					array.push($(this).siblings('.p-id').text());
+					
+					if ($(this).parents('.start-row').css('display')=="block") {
+						array.push($(this).siblings('.p-id').text());
+						$(this).parents('.start-row').remove();
+					}
 				}
 			});
 		}
@@ -319,10 +316,13 @@
 			data:JSON.stringify(data),
 			success:function(msg) {
 				//삭제완료.
-				console.log(msg);
+				alert('선택하신 상품을 장바구니에서 제거했습니다.');
 			}
 		});
-		
+		$('#m-check').attr('src','resources/images/market/check.png');
+		$('input:checkbox[name="checkbox"]').each(function() {
+			this.checked=false;
+		});
 	}
 	function goMarketMain() {
 		location.href='marketMain.do';
@@ -338,6 +338,7 @@
 		
 		if (confirm('위 상품들을 주문하시겠습니까?')) {
 			let array = new Array();
+			/*
 			var idx = 0;
 			$('.p-id').each(function() {
 				let data = {
@@ -348,6 +349,17 @@
 				array.push(data);
 				idx++;
 			});
+			*/
+			$('.category').each(function() {
+				console.log($(this).text());
+				let data = {
+					p_id:$(this).siblings('.left-col').find('.p-id').text(),
+					quantity:$(this).siblings('.right-col').find('.quantity').text(),
+					price:$(this).siblings('.right-col').find('.each-price').text()
+				}
+				array.push(data);
+			});
+			
 			$.ajax({
 				url:"updateCartList.do",
 				type:"post",
@@ -357,9 +369,81 @@
 					console.log(msg);
 				}
 			});
+			
 			location.href='makeOrder.do';
 			
+			
 		}
+	}
+	//하나의 컨트롤러에서 처리하자. 커맨드 처럼 넣어서
+	//버튼 누르면 비워주
+	//구독상품 배송 관련
+	
+	function makeSubDelivery() {
+		$.ajax({
+			url:"getCartProduct.do?command=SUBSCRIPTION",
+			type:"get",
+			dataType:"json",
+			success:function(data) {
+				var list = data;
+				$(list).each(function(key, value) {
+					$('.order-product').append(
+							"<div class='start-row' style='display:none;'>" +
+							"<div class='category' style='display:none;'>" + value.category + "</div>" +
+							"<div class='col-lg-8 left-col'>" +
+							"<div class='left-col-check'>" +
+							"<input type='checkbox' class='check-img' name='checkbox'>" +
+							"<span class='p-id' style='display:none;'>" + value.p_id + "</span>" +
+							"</div>" +
+							"<div class='left-col-img'>" +
+							"<img src='" + value.img_path + "' class='product-img'>" +
+							"</div>" +
+							"<div class='left-col-title'>" + value.p_name + "</div>" +
+							"</div>" +
+							"<div class='col-lg-4 right-col'>" +
+							"<div class='right-col-quantity'>" +
+							"<span class='quantity' style='font-weight:bold;'>" + value.cart_count  + "</span>&nbsp;" +
+							"<span style='font-weight:bold;'>개</span>" +
+							"</div>" +
+							"<div class='right-col-price sub-col-price'>" +
+							"<span class='each-price'>" + value.cart_price + "</span>&nbsp;" +
+							"&nbsp;<span>원</span>" +
+							"</div></div></div>"
+					);
+				});
+			}
+		});
+	}
+	
+	
+	function subDelivery() {
+		$('#norDev').removeClass('now-tab');
+		$('#subDev').addClass('now-tab');
+		$('#totalPrice').css("display","none");
+		$('.sub-price').css("display","inline");
+		
+		$('.category').each(function() {
+			if($(this).text()=='SUBSCRIPTION') {
+				$(this).parent('.start-row').css("display","block");
+			} else if ($(this).text()=='NORMAL') {
+				$(this).parent('.start-row').css("display","none");
+			}
+		});
+	}
+	
+	function normalDelivery() {
+		$('#norDev').addClass('now-tab');
+		$('#subDev').removeClass('now-tab');
+		$('.sub-price').css("display","none");
+		$('#totalPrice').css("display","inline");
+		
+		$('.category').each(function() {
+			if($(this).text()=='NORMAL') {
+				$(this).parent('.start-row').css("display","block");
+			} else if ($(this).text()=='SUBSCRIPTION') {
+				$(this).parent('.start-row').css("display","none");
+			}
+		});
 	}
 	
 </script>
@@ -387,8 +471,8 @@
 
         <div class="row rows-width order-middle" style="margin: 0 auto; padding-bottom:10px;">
             <div class="col-lg-6 order-table">
-                <div class="order-table-column now-tab division-col">일반배송</div>
-                <div class="order-table-column">구독배송</div>
+                <div class="order-table-column now-tab division-col" id="norDev" onclick="normalDelivery()">일반배송</div>
+                <div class="order-table-column" id="subDev" onclick="subDelivery()">구독배송</div>
             </div>
             <div class="col-lg-6 order-table desc-order">
                 장바구니에 담긴 상품은 14일간 보관되며, 이후 좋아요 목록으로 이동됩니다.
@@ -409,6 +493,7 @@
         	<!-- 줄 시작 -->
 			<c:forEach var="dto" items="${list}">
 				<div class="start-row">
+					<div class="category" style="display:none;">${dto.category}</div>
 	                <div class="col-lg-8 left-col">
 	                    <div class="left-col-check">
 							<input type="checkbox" class="check-img" name="checkbox">
@@ -446,6 +531,7 @@
             </div>
             <div class="order-total-price">
                 <span id="totalPrice"></span>
+                <span class="sub-price" style="display:none;">0</span>
                 <span>원</span>
             </div>
         </div>
