@@ -55,6 +55,8 @@
 	  display: table;
 	  border: none;
 	  background-position: 0 90%;
+	  margin-top:155px;
+	  
 	}
 
 .recipe_content-category{letter-spacing: 8px;}

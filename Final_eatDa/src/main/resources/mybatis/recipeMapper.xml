@@ -16,31 +16,71 @@
 		<result property="regdate" column="REGDATE"/>
 	</resultMap>
 	
+	<!-- 레시피 리스트 -->
 	<select id="recipeList" parameterType="list" resultMap="recipeMap">
 		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
 		FROM RECIPE
 		ORDER BY RECIPE_NO DESC
 	</select>
 	
+	<!-- 레시피 상세페이지 -->
 	<select id="recipeDetail" resultType="recipeDto" parameterType="int">
 		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
 		FROM RECIPE
 		WHERE RECIPE_NO = #{recipe_no} 
 	</select>
 	
+	<!-- 레시피 추가 -->
 	<insert id="recipeInsert" parameterType="recipeDto">
 		INSERT INTO RECIPE
 		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE);
 	</insert>
 
+	<!-- 레시피 수정 -->
 	<update id="recipeUpdate" parameterType="recipeDto">
 		UPDATE RECIPE
 		SET RECIPE_TITLE=#{recipe_title}, RECIPE_CATEGORY=#{recipe_category}, RECIPE_CONTENT=#{recipe_content}
-		WHERE RECIPE_NO=#{recipe_no}
+		WHERE RECIPE_NO = #{recipe_no} 
+	</update>
+
+	<!-- 레시피삭제 -->	
+	<delete id="recipeDelete" parameterType="int">
+		DELETE FROM RECIPE
+		WHERE RECIPE_NO = #{recipe_no} 
+	</delete>
+
+	<!-- 조회수 -->
+	<update id="recipeCount" parameterType="int">
+		UPDATE RECIPE
+		SET RECIPE_COUNT = RECIPE_COUNT + 1
+		WHERE RECIPE_NO = #{recipe_no}
 	</update>
 	
-	<delete id="recipeDelete" parameterType="String">
-		DELETE FROM RECIPE
-		WHERE RECIPE_NO=#{recipe_no}
-	</delete>
+	<!-- 레시피 카테고리별 출력 -->
+	<select id="recipeCategory" parameterType="list" resultMap="recipeMap">
+		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+		FROM RECIPE
+		WHERE RECIPE_CATEGORY = #{recipe_category}  
+	</select>
+
+	<!-- 검색 -->
+	<select id="recipeSearch" parameterType="map" resultType="map">
+		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+		FROM RECIPE
+		<choose>
+			<when test="#{searchType}.equals('title')">
+				WHERE RECIPE_TITLE LIKE %'||#{keyword}||'%' 
+			</when>
+			<when test="#{searchType}.equals('content')">
+				WHERE RECIPE_CONTENT LIKE %'||#{keyword}||'%'
+			</when>
+			<when test="#{searchType}.equals('titcon')">
+				WHERE RECIPE_TITLE LIKE CONCAT%'||#{keyword}||'%'
+				AND RECIPE_CONTENT LIKE CONCAT%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+		ORDER BY RECIPE_NO DESC
+	</select>
 </mapper>

@@ -38,6 +38,23 @@ public class RecipeBizImpl implements RecipeBiz{
 	public int recipeDelete(int recipe_no) {
 		return dao.recipeDelete(recipe_no);
 	}
+	
+	@Override
+	public List<RecipeDto> recipeCategory(String recipe_category){
+		
+		return dao.recipeCategory(recipe_category);
+	}
+	@Override
+	public List<RecipeDto> recipeListTest(String searchType, String keyword){
+		return dao.recipeListTest(searchType, keyword);
+	}
+
+
+	@Override
+	public int updateRecipeCount(int recipe_no) {
+		
+		return dao.recipeCount(recipe_no);
+	}
 
 	@Override
 	public RecipeDto searchRecipe(String tag) {
@@ -47,11 +64,6 @@ public class RecipeBizImpl implements RecipeBiz{
 	@Override
 	public RecipeDto recommandRecipe(String category) {
 		return dao.recommandRecipe(category);
-	}
-
-	@Override
-	public List<RecipeDto> recipeListHeart(String user_id) {
-		return dao.recipeListHeart(user_id);
 	}
 
 	@Override

@@ -6,21 +6,22 @@
 <meta charset="UTF-8">
 <title>eat다</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
- 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <style type="text/css">
 .recipe_top{
-	width:100%;
-	height:200px;
-	background: url('resources/images/recipe/recipeLogo.png') no-repeat;
-	background-size: cover;
-	overflow: hidden;
-	display: table;
-	border: none;
-	background-position: 0 90%;
+   width:100%;
+   height:200px;
+   background: url('resources/images/recipe/recipeLogo.png') no-repeat;
+   background-size: cover;
+   overflow: hidden;
+   display: table;
+   border: none;
+   background-position: 0 90%;
+   margin-top:155px;
+   
 }
 hr{
    border: 10px;
@@ -45,6 +46,10 @@ hr{
    width: 20px;
    height: 20px;
 }
+.title p{
+   font-size: 13px;
+   margin-bottom: 0;
+}
 .content img{
    margin : 2% 0;
 }
@@ -52,51 +57,63 @@ hr{
    text-align: left;
    margin-left: 19%;
 }
-.modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+
+.deleteConfirm_modal{
+  position:fixed;
+  
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.6);
+  top:0;
+  left:0;
+  display:none;
 }
 
-.modal .bg {
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.6);
-}
- .modalBox {
-          position: absolute;
-          background-color: #fff;
-          width: 400px;
-          height: 200px;
-          padding: 15px;
+.deleteConfirm_modal_content{
+  width:300px; 
+  height:150px;
+  background:#fff; border-radius:10px;
+  position:relative; 
+  top:50%; 
+  left:50%;
+  margin-top:-100px; 
+  margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box; 
+  padding:15px 15px;
+  line-height:23px; 
+  box-shadow: 0px 0px 30px rgba(0,0,0,0.8);
+  color:#444444;
 }
 
-.hidden { display: none;}
-
+.fa-times{
+  float: right;
+  cursor: pointer;
+}
 </style>
-
 <script type="text/javascript">
-const open = () => {
-    document.querySelector(".modal").classList.remove("hidden");
-  }
+function confirmModal(){
+   $(".deleteConfirm_modal").fadeIn();
+}
+function confirmModalClose(){
+   $(".deleteConfirm_modal").fadeOut();
+}
 
-  const close = () => {
-    document.querySelector(".modal").classList.add("hidden");
-  }
+$(document).ready(function() {
+   $('.full').hide();
+});
 
-  document.querySelector(".deleteModal").addEventListener("click", open);
-  document.querySelector(".cancelBtn").addEventListener("click", close);
-  document.querySelector(".bg").addEventListener("click", close);
-
-
-//delete모달확인창 구현예정
+function empty(){
+   $(".full").show();
+   $(".empty").hide();
+}
+function full(){
+   $('.full').hide();
+   $(".empty").show();
+}
 
 </script>
+
 </head>
 <body>
    <div id="header">
@@ -106,13 +123,14 @@ const open = () => {
    
    <div class="body">
       <div class="title">
+        <p>[ ${dto.recipe_category } ]</p>
          <h4 style="text-align:center;">${dto.recipe_title }</h4>
-         <p>${dto.recipe_category }</p>
          <div>
             <strong>조회수 ${dto.recipe_count }</strong>
-            <img src="resources/images/recipe/heart.png" onclick="#">
-            <a href="recipeUpdateForm.do?recipe_no=${dto.recipe_no }"><img src="resources/images/recipe/update.png"></a>
-            <img class="deleteModal" src="resources/images/recipe/delete.png">
+            <i class="fas fa-heart full" onclick="full()"></i>
+            <i class="far fa-heart empty" onclick="empty()"></i>
+            <i class="fas fa-edit" onclick="location.href='recipeUpdateForm.do?recipe_no=${dto.recipe_no }'"></i>
+            <i class="fas fa-trash-alt" onclick="confirmModal()"></i>
          </div>
          <hr>
       </div>
@@ -126,17 +144,16 @@ const open = () => {
          <input type="button" class="list" value="목록" onclick="location.href='recipeList.do'">&nbsp;&nbsp;&nbsp;
       </div>
    </div>
-   
-   
-   <div class="modal hidden">
-   	<div class="bg"></div>
-   	<div class="modalBox">
-   		<p>삭제하시겠습니까?</p>
-		<input type="button" class="okBtn" value="OK" onclick="location.href='recipeDelete.do?recipe_no=${recipe_no}'">
-		<input type="button" class="cancelBtn" value="CANCEL">
-   	</div>	
-   </div>
-   
+
+
+  <div class="deleteConfirm_modal">
+     <div class="deleteConfirm_modal_content">
+          <i title="닫기" class="fas fa-times fa-lg" onclick="confirmModalClose()"></i>
+        <p>삭제하시겠습니까?</p>
+        <input type="button" value="확인" onclick="location.href='recipeDelete.do?recipe_no=${dto.recipe_no }'">
+     </div>
+  </div> 
+ 
    <div id="footer">
       <%@ include file="../common/footer.jsp"%>
    </div>

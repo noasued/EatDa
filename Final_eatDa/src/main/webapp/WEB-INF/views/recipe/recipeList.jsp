@@ -18,11 +18,13 @@
 	display: table;
 	border: none;
 	background-position: 0 90%;
+	margin-top:155px;
 }
 
 .rec_list>img {
 	width: 200px;
 	height: 200px;
+	margin-bottom: 5%;
 }
 .rec_list{
 	margin-bottom: 2%;
@@ -64,11 +66,23 @@
 	font-weight: bolder;
 }
 
-.paging, .rec_logo, .searchbox, .rec_list {
+.paging, .rec_logo, .searchbox, .rec_list, .category {
 	display: flex;
 	justify-content: center;
 }
 
+.category{
+	letter-spacing: 8px;
+}
+.category a{
+	text-decoration: none;
+	color : #808080;
+	category{}
+}
+
+.category a:hover{
+	color : #fdd300;
+}
 .searchbox .keyword{
 	margin-top:2%;
 	width : 840px;
@@ -84,6 +98,10 @@
 	width: 80px;
 	height: 40px;
 }
+.www{
+	width: 850px;
+	margin-left: 20%;
+}
 </style>
 </head>
 <body>
@@ -93,22 +111,25 @@
 
 	<div class="recipe_top"></div>
 
-
 	<div class="body">
-	<div class="searchbox">
-          <select class="recipeCategory" name="searchSelect">
-            <option disabled selected>선택</option>
-            <option value="korea">한식</option>
-            <option value="japan">일식</option>
-            <option value="china">중식</option>
-            <option value="weston">양식</option>
-            <option value="simple">간단식</option>
-            <option value="night">야식</option>
-          </select>
-          <input type="text" class="keyword" placeholder="검색어를 입력하세요.">
-          <input type="button" class="searchBtn" value="검색" onclick="#">
-      </div>
-		<div class="container">
+		<form action="recipeListTest.do" method="get"> 
+			<div class="searchbox">
+				<select class="recipeCategory" name="searchType">
+					<option disabled selected>선택</option>
+					<option value="title" <c:if test="${searchType eq 'title'}">selected</c:if> >제목</option>
+					<option value="content" <c:if test="${searchType eq 'content'}">selected</c:if> >내용</option>
+					<option value="titcon" <c:if test="${searchType eq 'titcon'}">selected</c:if> >제목+내용</option>
+				</select>
+				<input type="text" class="keyword" id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
+				<input type="submit" class="searchBtn" value="검색">
+			</div>
+		</form>
+	      
+	    <div class="category">
+			<p> <a href="recipeCategory.do?recipe_category=한식">한식</a> | <a href="recipeCategory.do?recipe_category=일식">일식</a> | <a href="recipeCategory.do?recipe_category=중식">중식</a> | <a href="recipeCategory.do?recipe_category=양식">양식</a> | <a href="recipeCategory.do?recipe_category=야식">야식</a> | <a href="recipeCategory.do?recipe_category=비건">비건</a> </p>
+		</div>
+      
+		<div class="www">
 			<c:choose>
 				<c:when test="${empty list}">
 					<div class="col-md-12">

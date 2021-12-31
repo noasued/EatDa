@@ -1,12 +1,5 @@
 package com.project.eatda.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.project.eatda.biz.RecipeBiz;
 import com.project.eatda.dto.RecipeDto;
@@ -36,6 +26,31 @@ public class RecipeController {
 		
 		return "/recipe/recipeList";
 	}
+	
+	@RequestMapping("/recipeListTest.do")
+	public String recipeListTest(Model model,String searchType, String keyword) {
+		logger.info("RECIPE SEARCH LIST");
+		
+		model.addAttribute("list", biz.recipeListTest(searchType, keyword));
+		
+		return "/recipe/recipeList";
+	}
+	
+	@RequestMapping("/recipeCategory.do")
+	public String recipeCategory(Model model, String recipe_category) {
+		logger.info("RECIPE CATEGORY");
+		
+		model.addAttribute("list", biz.recipeCategory(recipe_category));
+		
+		return "/recipe/recipeList";
+	}
+	
+	@RequestMapping("/test2.do")
+	public String test2() {
+		logger.info("test222");
+	
+		return "/recipe/test2";
+	}
 
 	@RequestMapping("/recipeDetail.do")
 	public String recipeDetail(Model model, int recipe_no) {
@@ -43,6 +58,8 @@ public class RecipeController {
 		
 		model.addAttribute("dto", biz.recipeDetail(recipe_no));
 		
+		//조회수 +1
+		biz.updateRecipeCount(recipe_no);
 		return "/recipe/recipeDetail";
 	}
 
@@ -111,8 +128,6 @@ public class RecipeController {
 			return "redirect:recipeDetail.do?recipe_no="+recipe_no;
 		}
 	}
-	
-	
 //	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 //	@ResponseBody
 //	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
