@@ -1,11 +1,13 @@
 package com.project.eatda.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.BlogReplyDto;
 
 @Repository
@@ -36,6 +38,19 @@ public class BlogReplyDaoImpl implements BlogReplyDao{
 	@Override
 	public void delete(int reply_no) {
 		
+	}
+
+	/* 관리자 댓글 리스트(전체 조회) */
+	@Override
+	public List<BlogReplyDto> adminReplyList() {
+		List<BlogReplyDto> adminReplyList = new ArrayList<BlogReplyDto>();
+		try {
+			adminReplyList = sqlSession.selectList(NAMESPACE+"adminReplyList");
+		} catch (Exception e) {
+			System.out.println("[error] : admin reply list");
+			e.printStackTrace();
+		}
+		return adminReplyList;
 	}
 
 }

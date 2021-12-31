@@ -67,19 +67,6 @@ public class BlogDaoImpl implements BlogDao{
 		return list;
 	}
 	
-	/* 관리자 블로그 리스트(전체 조회) */
-	@Override
-	public List<BlogDto> adminBlogList() {
-		List<BlogDto> adminBlogList = new ArrayList<BlogDto>();
-		try {
-			adminBlogList = sqlSession.selectList(NAMESPACE+"adminBlogList");
-		} catch (Exception e) {
-			System.out.println("[error] : admin blog list");
-			e.printStackTrace();
-		}
-		return adminBlogList;
-	}
-	
 	@Override
 	public BlogDto selectOne(int blog_no) {
 		BlogDto dto = null;
@@ -143,5 +130,18 @@ public class BlogDaoImpl implements BlogDao{
 		return res;
 	}
 
+	
+	/* 관리자 블로그 리스트(전체 조회) */
+	@Override
+	public List<BlogDto> adminBlogList() {
+		List<BlogDto> adminBlogList = new ArrayList<BlogDto>();
+		try {
+			adminBlogList = sqlSession.selectList(NAMESPACE+"adminBlogList");
+		} catch (Exception e) {
+			System.out.println("[error] : admin blog list");
+			e.printStackTrace();
+		}
+		return adminBlogList;
+	}
 	
 }
