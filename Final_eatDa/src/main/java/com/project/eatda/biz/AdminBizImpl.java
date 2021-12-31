@@ -16,44 +16,50 @@ import com.project.eatda.dto.UserDto;
 @Service
 public class AdminBizImpl implements AdminBiz{
 
-
+	/* 댓글 리스트 */
+		@Autowired
+		public AdminDao replyDao;
+		
+		@Override
+		public List<BlogReplyDto> adminReplyList() {
+			return replyDao.adminReplyList();
+		}
 	
-	@Autowired
-	public AdminDao productDao;
+	/* 상품 리스트 */
+		@Autowired
+		public AdminDao productDao;
+		
+		@Override
+		public List<ProductDto> adminProductList() {
+			return productDao.adminProductList();
+		}
 	
-	@Override
-	public List<ProductDto> adminProductList() {
-		return productDao.adminProductList();
-	}
+	/* 주문 리스트 */
+		@Autowired
+		public AdminDao orderDao;
+		
+		@Override
+		public List<OrderAdminDto> adminOrderList() {
+			return orderDao.adminOrderList();
+		}
 	
-	
-	
-	@Autowired
-	public AdminDao orderDao;
-	
-	@Override
-	public List<OrderAdminDto> adminOrderList() {
-		return orderDao.adminOrderList();
-	}
-	
-	
-	
-	@Autowired
-	public AdminDao userDao;
-	
-	@Override
-	public List<UserDto> adminUserList() {
-		return userDao.adminUserList();
-	}
-	
+	/* 회원 리스트 */	
+		@Autowired
+		public AdminDao userDao;
+		
+		@Override
+		public List<UserDto> adminUserList() {
+			return userDao.adminUserList();
+		}
 	
 	
-	@Autowired
-	public AdminDao reportDao;
-	
-	@Override
-	public List<ReportDto> adminReportList(){
-		return reportDao.adminReportList();
-	}
+	/* 신고 리스트 */
+		@Autowired
+		public AdminDao reportDao;
+		
+		@Override
+		public List<ReportDto> adminReportList(){
+			return reportDao.adminReportList();
+		}
 
 }

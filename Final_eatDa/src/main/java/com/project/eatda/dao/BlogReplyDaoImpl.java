@@ -40,17 +40,5 @@ public class BlogReplyDaoImpl implements BlogReplyDao{
 		
 	}
 
-	/* 관리자 댓글 리스트(전체 조회) */
-	@Override
-	public List<BlogReplyDto> adminReplyList() {
-		List<BlogReplyDto> adminReplyList = new ArrayList<BlogReplyDto>();
-		try {
-			adminReplyList = sqlSession.selectList(NAMESPACE+"adminReplyList");
-		} catch (Exception e) {
-			System.out.println("[error] : admin reply list");
-			e.printStackTrace();
-		}
-		return adminReplyList;
-	}
 
 }

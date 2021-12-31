@@ -5,6 +5,21 @@
   
 <mapper namespace="admin">
 
+	<!-- Admin Reply -->
+	<resultMap type="replyDto" id="replyMap">
+		<result property="reply_no" column="REPLY_NO" />
+		<result property="blog_no" column="BLOG_NO" />
+		<result property="user_id" column="USER_ID"/>
+		<result property="reply_content" column="REPLY_CONTENT"/>
+		<result property="regdate" column="REGDATE"/>
+		<result property="updatedate" column="UPDATEDATE"/>
+	</resultMap>
+
+	<select id="adminReplyList" parameterType="list" resultMap="replyMap">
+		SELECT * FROM BLOG_REPLY
+		ORDER BY REPLY_NO DESC
+	</select>
+	
 	<!-- Admin Product -->
 	<resultMap type="productDto" id="productMap">
 		<result property="p_id" column="P_ID" />
@@ -18,7 +33,7 @@
 	</select>
 	
 	
-	<!-- Admin OrderAdmin -->
+	<!-- Admin Order -->
 	<resultMap type="orderAdminDto" id="orderAdminMap">
 		<result property="order_id" column="ORDER_ID" />
 		<result property="user_name" column="USER_NAME" />

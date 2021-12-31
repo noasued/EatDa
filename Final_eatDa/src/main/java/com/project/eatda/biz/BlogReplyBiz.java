@@ -10,6 +10,5 @@ public interface BlogReplyBiz {
 	public void update(BlogReplyDto dto);			// 댓글 수정
 	public void delete(int reply_no);				// 댓글 삭제
 	
-	/* 관리자 댓글 리스트 (전체 조회) */
-	public List<BlogReplyDto> adminReplyList();	
+
 }

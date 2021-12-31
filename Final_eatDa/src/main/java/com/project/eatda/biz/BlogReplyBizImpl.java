@@ -38,10 +38,5 @@ public class BlogReplyBizImpl implements BlogReplyBiz{
 		
 	}
 
-	/* 관리자 댓글 리스트 (전체 조회) */
-	@Override
-	public List<BlogReplyDto> adminReplyList() {
-		return replyDao.adminReplyList();
-	}
 
 }

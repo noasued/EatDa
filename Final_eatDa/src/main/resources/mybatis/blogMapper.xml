@@ -89,11 +89,7 @@
 		ORDER BY REPLY_NO
 	</select>
 	
-	<!-- Admin Reply -->
-	<select id="adminReplyList" parameterType="list" resultMap="replyMap">
-		SELECT * FROM BLOG_REPLY
-		ORDER BY REPLY_NO DESC
-	</select>
+
 	
 	
 </mapper>

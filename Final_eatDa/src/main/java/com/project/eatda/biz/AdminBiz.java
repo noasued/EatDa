@@ -11,6 +11,8 @@ import com.project.eatda.dto.UserDto;
 
 public interface AdminBiz {
 
+	public List<BlogReplyDto> adminReplyList();
+	
 	public List<ProductDto> adminProductList();
 	
 	public List<OrderAdminDto> adminOrderList();
@@ -18,6 +20,7 @@ public interface AdminBiz {
 	public List<UserDto> adminUserList();
 	
 	public List<ReportDto> adminReportList();
+
 
 
 }

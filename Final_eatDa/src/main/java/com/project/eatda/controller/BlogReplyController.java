@@ -53,14 +53,7 @@ public class BlogReplyController {
 		return list;
 	}
 	
-//	/* 관리자 댓글 리스트(전체 조회) */
-//	@RequestMapping(value="/adminPostReply.do", method=RequestMethod.GET)
-//	public String adminReplyList(Model model){
-//		logger.info("admin reply list");
-//		model.addAttribute("list", replyBiz.adminReplyList());
-//		
-//		return "/admin/adminPostReply";
-//	}
+
 	
 	
 	

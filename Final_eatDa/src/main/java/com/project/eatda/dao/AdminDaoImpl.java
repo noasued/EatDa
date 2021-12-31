@@ -19,7 +19,21 @@ public class AdminDaoImpl implements AdminDao{
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	/* 댓글 리스트 */
+	@Override
+	public List<BlogReplyDto> adminReplyList() {
+		List<BlogReplyDto> adminReplyList = new ArrayList<BlogReplyDto>();
+		try {
+			adminReplyList = sqlSession.selectList(NAMESPACE+"adminReplyList");
+		} catch (Exception e) {
+			System.out.println("[error] : admin reply list");
+			e.printStackTrace();
+		}
+		return adminReplyList;
+	}
 
+	/* 상품 리스트 */
 	@Override
 	public List<ProductDto> adminProductList() {
 		List<ProductDto> adminProductList = new ArrayList<ProductDto>();
@@ -33,6 +47,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminProductList;
 	}
 	
+	/* 주문 리스트 */
 	@Override
 	public List<OrderAdminDto> adminOrderList() {
 		List<OrderAdminDto> adminOrderList = new ArrayList<OrderAdminDto>();
@@ -46,6 +61,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminOrderList;
 	}
 
+	/* 회원 리스트 */
 	@Override
 	public List<UserDto> adminUserList() {
 		List<UserDto> adminUserList = new ArrayList<UserDto>();
@@ -59,7 +75,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminUserList;
 	}
 
-	
+	/* 신고 리스트 */
 	@Override
 	public List<ReportDto> adminReportList(){
 		List<ReportDto> adminReportList = new ArrayList<ReportDto>();

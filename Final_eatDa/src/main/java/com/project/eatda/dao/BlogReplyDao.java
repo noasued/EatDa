@@ -5,13 +5,11 @@ import java.util.List;
 import com.project.eatda.dto.BlogReplyDto;
 
 public interface BlogReplyDao {
-	String NAMESPACE = "blog.";
+	String NAMESPACE = "reply.";
 	
 	public List<BlogReplyDto> list(int blog_no);		// 댓글 목록
 	public void insert(BlogReplyDto dto);			// 댓글 입력
 	public void update(BlogReplyDto dto);			// 댓글 수정
 	public void delete(int reply_no);				// 댓글 삭제
 	
-	/* 관리자 댓글 리스트 (전체 조회) */
-	public List<BlogReplyDto> adminReplyList();
 }

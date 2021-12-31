@@ -46,11 +46,11 @@ public class AdminController {
 	}
 
 	/* 게시글 댓글 관리 */
-	@RequestMapping("/adminPostReply.do")
-	public String adminPostReply(Model model) {
-		logger.info("adminPostReply");
-		model.addAttribute("replyList", replyBiz.adminReplyList());
-		
+	@RequestMapping(value="/adminPostReply.do", method=RequestMethod.GET)
+	public String adminReplyList(Model model){
+		logger.info("admin reply list");
+		model.addAttribute("replyList", adminBiz.adminReplyList());
+
 		return "/admin/adminPostReply";
 	}
 
@@ -98,7 +98,7 @@ public class AdminController {
 		return "/admin/adminProduct";
 	}
 
-	// 상품 추가
+	// 상품 등록 페이지
 	@RequestMapping("/adminProductWrite.do")
 	public String p_write() {
 		logger.info("admin product write");
@@ -106,7 +106,7 @@ public class AdminController {
 		return "/admin/adminProductWrite";
 	}
 	
-	@RequestMapping("adminProductInsert.do")
+	@RequestMapping("p_insert.do")
 	public int p_insert(ProductDto dto) {
 		return 0;
 	}
