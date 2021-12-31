@@ -49,7 +49,7 @@
 		}
 
 		.blog-main__top-txt h2 {
-			margin-left: 350px;
+			margin-left: 20px;
 			font-size: 15px;
 		}
 		.blog-main__top:hover {
@@ -62,7 +62,6 @@
 	<link href="resources/css/blog/blog-main.css" rel="stylesheet">
 	<script type="text/javascript">
 		// blog list
-
 		$(document).ready(function() {
 			takeBlog(1);
 			pagination();
@@ -86,7 +85,9 @@
 									"<div class='blog-article__list-title'>"+
 										"<h3>"+value.blog_title+"</h3>"+
 										"<span>"+value.user_id+"</span>"+
-										"<i class='fas fa-heart'></i>"+
+										"<div class='blog-article__list-title__icons'>"+
+											"<i class='fas fa-heart'></i>"+"<i class='fas fa-comment'></i>"+
+										"</div>"+
 									"</div>"+
 									"<div class='blog-article__list-content'>"+
 										"<p>"+value.blog_content+"</p>"+
@@ -196,19 +197,20 @@
 					// {"KEYWORD":"!@#"}
 					$(data).each(function(key,value){
 						$('.blog-article__list').append(
-							"<li>"+"<a href='blog-detail.do?blog_no="+value.blog_no+"'>"+
-							"<div class='blog-article__list-title'>"+
-								"<h6>"+value.user_id+"</h6>"+
-								"<h3>"+value.blog_title+"</h3>"+
-								"<i class='fas fa-heart'></i>"+
-								"<span>"+value.regdate+"</span>"+
-							"</div>"+
-							"<div class='blog-article__list-content'>"+
-								"<p>"+value.blog_content+"</p>"+
-							"</div>"+
-							"<div class='blog-article__list-img'>"+
-								"<img src='resources/images/blog-thumbnail.png'>"+
-							"</div></a></li>"
+								"<li>"+"<a href='blog-detail.do?blog_no="+value.blog_no+"'>"+
+								"<div class='blog-article__list-title'>"+
+									"<h3>"+value.blog_title+"</h3>"+
+									"<span>"+value.user_id+"</span>"+
+									"<div class='blog-article__list-title__icons'>"+
+										"<i class='fas fa-heart'></i>"+"<i class='fas fa-comment'></i>"+
+									"</div>"+
+								"</div>"+
+								"<div class='blog-article__list-content'>"+
+									"<p>"+value.blog_content+"</p>"+
+								"</div>"+
+								"<div class='blog-article__list-img'>"+
+									"<img src='resources/images/blog-thumbnail.png'>"+
+								"</div></a></li>"
 						);
 					});
 					$('.pagination').html('');
@@ -229,8 +231,8 @@
 	<!-- main img -->
 	<div class="blog-main__top" onclick="goBlogMain()">
 		<div class="blog-main__top-txt">
-			<h1>eat다 블로그</h1>
-			<h2>eatDa Blog</h2>
+			<h1>eat다 그램</h1>
+			<h2>eatDagram</h2>
 		</div>
 	</div>
 

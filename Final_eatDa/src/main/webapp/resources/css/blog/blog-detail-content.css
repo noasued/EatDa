@@ -21,16 +21,26 @@
   margin-left: -30px;
 }
 
+.detail-article__undertitle{
+	display: flex;
+	justify-content: space-between;
+}
+.detail-article__blog-count{
+	font:italic 13px "Fira Sans", serif;
+	color:#666666;
+	margin-top:15px;
+	margin-left:15px;
+}
 
 /* buttons */
 .detail-article__btn{
-  margin-top: 15px;
+  margin-top: 5px;
   margin-right: 30px;
-  text-align: right;
 }
 .detail-article__btn span{
 	margin-right: 20px;
 	font:italic 13px "Fira Sans", serif;
+	color:#666666;
 }
 input{
   font-size:14px;

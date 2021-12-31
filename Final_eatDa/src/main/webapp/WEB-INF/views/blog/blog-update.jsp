@@ -44,7 +44,7 @@
 		}
 		
 		.blog-update__top-txt h2{
-		  margin-left: 350px;
+		  margin-left: 20px;
 		  font-size: 15px;
 		}
   </style>
@@ -60,8 +60,8 @@
     <!-- main img -->
     <div class="blog-update__top blog__top">
       <div class="blog-update__top-txt blog__top-txt">
-        <h1>eat다 블로그</h1>
-        <h2>eatDa Blog</h2>
+        <h1>eat다 그램</h1>
+				<h2>eatDagram</h2>
       </div>
     </div>
 

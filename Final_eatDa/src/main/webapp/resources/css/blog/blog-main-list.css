@@ -62,14 +62,23 @@ a{
   margin-top:15%;
 }
 
-.fa-heart{
-  margin-top: 10px;
-  margin-right: 13em;
-  color:rgb(255, 119, 95);
-}
-
 .blog-article__list-title span{
 	font:italic 12px "Fira Sans", serif;
+}
+
+.blog-article__list-title__icons{
+	width:50px;
+	margin-top:5px;
+}
+
+.fa-heart{
+  margin-top: 10px;
+  margin-right: 10px;
+  color:rgb(255, 148, 120);
+}
+
+.fa-comment{
+	color: rgb(183, 193, 172);
 }
 
 .blog-article__list-content{
