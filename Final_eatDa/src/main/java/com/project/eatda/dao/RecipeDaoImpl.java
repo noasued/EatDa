@@ -1,7 +1,9 @@
 package com.project.eatda.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,7 @@ public class RecipeDaoImpl implements RecipeDao{
 		RecipeDto dto = null;
 		try {
 			dto = sqlSession.selectOne(NAMESPACE_RECIPE+"recipeDetail", recipe_no);
+			
 		} catch (Exception e) {
 			System.out.println("error : recipe detail");
 			e.printStackTrace();
@@ -80,6 +83,54 @@ public class RecipeDaoImpl implements RecipeDao{
 		}
 		return res;
 	}
+	
+	@Override
+	public List<RecipeDto> recipeCategory(String recipe_category){
+		
+		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
+		
+		try {
+			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeCategory",recipe_category);
+		} catch (Exception e) {
+			System.out.println("error : recipeList");
+			e.printStackTrace();
+		}
+				
+		return rec_list;
+		
+	}
+
+	@Override
+	public List<RecipeDto> recipeListTest(String searchType, String keyword){
+		
+		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		
+		try {
+			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeSearch",map);
+		} catch (Exception e) {
+			System.out.println("error : recipeList");
+			e.printStackTrace();
+		}
+		
+		return rec_list;
+	}
+
+	@Override
+	public int recipeCount(int recipe_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE_RECIPE+"recipeCount", recipe_no);
+		} catch (Exception e) {
+			System.out.println("error : recipe count");
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 	@Override
 	public RecipeDto searchRecipe(String tag) {
@@ -88,11 +139,6 @@ public class RecipeDaoImpl implements RecipeDao{
 
 	@Override
 	public RecipeDto recommandRecipe(String category) {
-		return null;
-	}
-
-	@Override
-	public List<RecipeDto> recipeListHeart(String user_id) {
 		return null;
 	}
 
