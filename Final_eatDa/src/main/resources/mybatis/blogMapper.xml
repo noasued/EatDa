@@ -62,7 +62,7 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
-	
+	<!-- Admin Blog -->
 	<select id="adminBlogList" parameterType="list" resultMap="blogMap">
 		SELECT * FROM BLOG
 		ORDER BY BLOG_NO DESC
@@ -89,7 +89,11 @@
 		ORDER BY REPLY_NO
 	</select>
 	
-	
+	<!-- Admin Reply -->
+	<select id="adminReplyList" parameterType="list" resultMap="replyMap">
+		SELECT * FROM BLOG_REPLY
+		ORDER BY REPLY_NO DESC
+	</select>
 	
 	
 </mapper>

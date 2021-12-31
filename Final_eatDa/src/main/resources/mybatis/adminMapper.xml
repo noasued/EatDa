@@ -17,25 +17,43 @@
 		ORDER BY P_NO DESC
 	</select>
 	
-	<!-- Admin User -->
-	<resultMap type="userDto" id="userMap">
-		<result property="user_id" column="USER_ID" />
+	
+	<!-- Admin OrderAdmin -->
+	<resultMap type="orderAdminDto" id="orderAdminMap">
+		<result property="order_id" column="ORDER_ID" />
 		<result property="user_name" column="USER_NAME" />
-		<result property="user_nickname" column="USER_NICKNAME" />
+		<result property="order_date" column="ORDER_DATE" />
 		<result property="user_phone" column="USER_PHONE" />
-		<result property="user_addr" column="USER_ADDR" />
-		<result property="user_email" column="USER_EMAIL" />
-		<result property="user_role" column="USER_ROLE" />
-		<result property="user_penalty" column="USER_PENALTY" />
-		<result property="user_enable" column="USER_ENABLE" />
-		<result property="user_mailing" column="USER_MAILING" />
-		<result property="user_img" column="USER_IMG" />
+		<result property="shipping_status" column="SHIPPING_STATUS" />
+		<result property="order_status" column="ORDER_STATUS" />
 	</resultMap>
 	
 		
-	<select id="userList" parameterType="list" resultMap="userMap">
+	<select id="adminOrderList" parameterType="list" resultMap="orderAdminMap">
+		SELECT * FROM ORDER_ADMIN
+		ORDER BY ORDER_ID DESC
+	</select>
+	
+	
+	<!-- Admin User -->
+	<resultMap type="userDto" id="userMap">
+		<result property="user_id" column="USER_ID" />
+		<result property="user_pw" column="USER_PW" />
+		<result property="user_name" column="USER_NAME" />
+		<result property="user_addr" column="USER_ADDR" />
+		<result property="user_email" column="USER_EMAIL" />
+		<result property="user_phone" column="USER_PHONE" />
+		<result property="user_role" column="USER_ROLE" />
+		<result property="user_img" column="USER_IMG" />
+		<result property="user_penalty" column="USER_PENALTY" />
+		<result property="user_enable" column="USER_ENABLE" />
+		<result property="user_mailing" column="USER_MAILING" />
+		<result property="user_addr_sub" column="USER_ADDR_SUB" />
+	</resultMap>
+	
+		
+	<select id="adminUserList" parameterType="list" resultMap="userMap">
 		SELECT * FROM E_USER
-		ORDER BY USER_ID DESC
 	</select>
 
 	<!-- Admin Report -->
