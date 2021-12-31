@@ -19,7 +19,7 @@
 	position: absolute;
 	flex-direction: column;
 	width: 800px;  
-	margin-top: 180px;
+	margin-top: 160px;
     padding-top: 0;
 }
 
@@ -118,7 +118,7 @@
     text-overflow: ellipsis;
 }
 
-.bought_list input{
+.market_order_list input{
 	width: 60px;
 	height: 20px;
 	border: 0;
@@ -201,16 +201,71 @@ table{
 	font-weight: bold;
 }
 
-.blog_like_list:hover{
+.blog_like_list:hover, .market_like_list:hover, .market_order_list:hover{
 	cursor:pointer;
+}
+
+.no_blog_list{
+	width: 550px;
+	margin-top: 140px;
+	text-align: center;
+}
+
+.no_market_list, .no_order_list{
+	width: 750px;
+	margin-top: 60px;
+	text-align: center;
+}
+
+.no_blog_list a, .no_market_list a, .no_order_list a{
+	text-decoration: none;
+	font-size: 0.8rem;
+}
+
+.review_wrap1{
+	position:fixed;
+  	width:100%;
+  	height:100%;
+  	background: rgba(0,0,0,0.6);
+  	top:0;
+ 	left:0;
+  	display:none;
+  	z-index:1;
+}
+
+.review_wrap{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.review{
+	width: 500px;
+	height: 330px;
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	border: none;
+	border-radius: 10px;
+	margin-bottom: 20px;
+    background-color: #FAEED2;
+    text-align: center;
+    justify-content: center;
+    
 }
 </style>
 <script type="text/javascript">
 
 $(document).ready(function() {
 	blogLike();
+	marketLike();
+	marketOrderList();
+	registReview();
 });
 
+//블로그 찜 목록
 function blogLike() {
 	$.ajax({
 		url:"blogLikeList.do",
@@ -218,6 +273,14 @@ function blogLike() {
 		dataType:"json",
 		success:function(data) {
 			let list = data;
+			
+			if(list == 0){
+				$('.blog_like').append(
+						"<div class='no_blog_list'>" +
+						"<a>좋아한 EatDagram 글이 없습니다.</a>" +
+						"</div>"
+					);
+			}else{
 			$(list).each(function(key, value) {
 				$('.blog_like').append(
 						"<table class='blog_like_list' id='" + value.blog_no + "' onclick='goBlogLike(this)'>" +
@@ -225,29 +288,165 @@ function blogLike() {
 						"<td>" +
 						"<div class='like-img-div'>" +
 						"<img id='" + value.blog_no + "' class='like-img' src='" + value.blog_img + "' width='150' height='150'>" +
-						"<a id='" + value.blog_no + "' class='blog_list' value='" + value.blog_title + "'></a>" +
 						"</div>"+
 						"</td>"+
 						
 						"<td>"+
 						"<div class='blog_list'>" +
-						"<h3 id='" + value.blog_no + "'>" +value.blog_title + "</h3>" +
-						"<a id='" + value.blog_no + "'>" +value.blog_content + "</a>" +
+						"<h3>" +value.blog_title + "</h3>" +
+						"<a>" +value.blog_content + "</a>" +
 						"</div>" +
 						"</td>"+
 						"</tr>" +
 						"</table>"
 					);
 			});
+			}
 		}
 	});
 	
 }
 
+//블로그 상세 페이지로 이동
 function goBlogLike(object) {
 	var blog_no = $(object).attr('id');
 	location.href = 'blog-detail.do?blog_no='+blog_no;
 }
+
+//마켓 찜 목록
+function marketLike() {
+	$.ajax({
+		url:"likeProduct-main.do",
+		type:"post",
+		dataType:"json",
+		success:function(data) {
+			let list = data;
+			
+			if(list == 0){
+				$('.market_like').append(
+						"<div class='no_market_list'>" +
+						"<a>좋아한 상품이 없습니다.</a>" +
+						"</div>"
+					);
+			}else{
+			$(list).each(function(key, value) {
+				$('.market_like_list').append(
+						"<td id='"+ value.p_id +"' onclick='goMarketLike(this)'>" +
+						"<div class='like-img-div'>" +
+						"<img class='like-img' src='" + value.img_path + "' width='150' height='150'>" +
+						"</div>"+
+						
+						"<div class='blog_list'>" +
+						"<a>" +value.p_name + "</a><br>" +
+						"<a>" +value.p_price + " 원</a>" +
+						"</div>" +
+						"</td>"
+					);
+			});
+			}
+		}
+	});
+	
+}
+
+//찜한상품, 주문상품 마켓 상세 페이지로 이동
+function goMarketLike(object) {
+	var p_id = $(object).attr('id');
+	location.href = 'goProductPage.do?p_id='+p_id;
+}
+
+//주문한 상품 목록
+function marketOrderList() {
+	$.ajax({
+		url:"marketOrderList.do",
+		type:"post",
+		dataType:"json",
+		success:function(data) {
+			let list = data;
+			
+			if(list == 0){
+				$('.bought_product').append(
+						"<div class='no_order_list'>" +
+						"<a>주문한 상품이 없습니다.</a>" +
+						"</div>"
+					);
+			}else{
+			$(list).each(function(key, value) {
+				$('.market_order_list').append(
+						"<td>" +
+						"<div class='list_div' id='"+ value.p_id +"' onclick='goMarketLike(this)'>" +
+						"<div class='like-img-div'>" +
+						"<img class='like-img' src='" + value.img_path + "' width='150' height='150'>" +
+						"</div>"+
+						
+						"<div class='order_list'>" +
+						"<a>" +value.p_name + "</a><br>" +
+						"<a>" +value.price + " 원</a>" +
+						"</div>" +
+						"</div>" +
+						"<input type='button' value='리뷰 작성' onclick='reviewModalIn()'>"+
+						"</td>"
+					);
+			});
+			}
+		}
+	});
+	
+}
+
+//리뷰..
+function registReview() {
+	$.ajax({
+		url:"marketOrderList.do",
+		type:"post",
+		dataType:"json",
+		success:function(data) {
+			let list = data;
+			
+			if(list == 0){
+				$('.bought_product').append(
+						"<div class='no_order_list'>" +
+						"<a>주문한 상품이 없습니다.</a>" +
+						"</div>"
+					);
+			}else{
+			$(list).each(function(key, value) {
+				$('.review').append(
+						
+						"<form action='' method='post' class='review_form'>"+
+						"<div class='review_product'>"+
+						"<span>상품이름: </span>"+
+						"</div>"+
+						
+						"<div class='review_content'>"+
+						"<span>내용: </span>"+
+						"<textarea rows='7' cols='60'></textarea>"+
+						"</div>"+
+						
+						"<div class='review_btn'>"+
+						"<input type='submit' vlaue='작성'>"+
+						"<input type='button' vlaue='취소' onclick='reviewModalOut();'>"+
+						"</div>"+
+						
+						"</form>"
+					);
+			});
+			}
+		}
+	});
+	
+}
+
+//리뷰 모달창
+function reviewModalIn(object) {
+	$(".review_wrap1").fadeIn();
+}
+
+function reviewModalOut(object) {
+	$(".review_wrap1").fadeOut();
+}
+
+
 </script>
 
 <body>
@@ -265,10 +464,8 @@ function goBlogLike(object) {
                 <a>내가 좋아한 EatDagram</a>
             </div>
             <div class="blog_like_wrap">
-            <div class="blog_like">
-
-          </div>
-        </div>
+           		<div class="blog_like"></div>
+        	</div>
           
           <div class="headline3">
             <a>찜한 상품</a>
@@ -279,37 +476,7 @@ function goBlogLike(object) {
                 <tr>
                     <col width="200px">
                 </tr>
-                <tr>
-                    <td>
-                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
-                        <div class="market_list" onclick="alert('마켓 게시물 이동')">
-                            <a>전복죽전복죽전복죽전복죽전복죽전복죽전복죽전복죽</a><br>
-                            <a>23,000원</a>
-                        </div>
-                        </td>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a>
-                    </td>
-                    
-                </tr>  
+                <tr class="market_like_list"></tr>  
               </table>
           </div>
         </div>
@@ -323,59 +490,21 @@ function goBlogLike(object) {
                 <tr>
                     <col width="200px">
                 </tr>
-                <tr>
-                    <td>
-                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
-                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
-                            <a>전복죽전복죽전복죽전복죽전복죽전복죽전복죽전복죽</a><br>
-                            <a>23,000원</a><br>
-                            <input type="button" value="리뷰 작성" onclick="#">
-                        </div>
-                        </td>
-                    </td>
-                    <td>
-                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
-                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
-                            <a>전복죽</a><br>
-                            <a>23,000원</a><br>
-                            <input type="button" value="리뷰 작성" onclick="#">
-                        </div>
-                    </td>
-                    <td>
-                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
-                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
-                            <a>전복죽</a><br>
-                            <a>23,000원</a><br>
-                            <input type="button" value="리뷰 작성" onclick="#">
-                        </div>
-                    </td>
-                    <td>
-                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
-                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
-                            <a>전복죽</a><br>
-                            <a>23,000원</a><br>
-                            <input type="button" value="리뷰 작성" onclick="#">
-                        </div>
-                    </td>
-                    <td>
-                        <a href="#"><img src="resources/images/food1.jpg" width="150" height="150"></a>
-                        <div class="bought_list" onclick="alert('마켓 게시물 이동')">
-                            <a>전복죽</a><br>
-                            <a>23,000원</a><br>
-                            <input type="button" value="리뷰 작성" onclick="#">
-                        </div>
-                    </td>
-                    <td>
-                        <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                        <a>전복죽</a><br>
-                        <a>23,000원</a><br>
-                        <input type="button" value="리뷰 작성" onclick="#">
-                    </td>
-                    
-                </tr>  
+                <tr class="market_order_list"></tr>  
               </table>
           </div>
         </div>
+		
+		<div class="review_wrap1" style="z-index: 1;">
+			<div class="review_wrap">
+				<div class="review">
+					
+
+				</div>
+			</div>
+		</div>
+
+
 
         </div>
        

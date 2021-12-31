@@ -10,6 +10,9 @@ import com.project.eatda.dao.MemberDao;
 import com.project.eatda.dao.MypageDao;
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderProductDto;
+import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 
 @Service
@@ -34,6 +37,18 @@ public class MypageBizImpl implements MypageBiz{
 	@Override
 	public List<BlogDto> blogLikeList(String user_id) {
 		return mypageDao.blogLikeList(user_id);
+	}
+
+	//주문한 상품
+	@Override
+	public List<OrderProductDto> marketOrderList(String user_id) {
+		return mypageDao.marketOrderList(user_id);
+	}
+
+	//리뷰작성
+	@Override
+	public int registReview(ReviewDto dto) {
+		return mypageDao.registReview(dto);
 	}
 
 }
