@@ -124,7 +124,7 @@
 }
 
 .blog-detail__top-txt h2{
-  margin-left: 350px;
+  margin-left: 20px;
   font-size: 15px;
 }
 
@@ -139,8 +139,8 @@
     <!-- main img -->
     <div class="blog-detail__top blog__top">
       <div class="blog-detail__top-txt blog__top-txt">
-        <h1>eat다 블로그</h1>
-        <h2>eatDa Blog</h2>
+        <h1>eat다 그램</h1>
+				<h2>eatDagram</h2>
       </div>
     </div>
 
@@ -151,18 +151,19 @@
           <h2>${dto.blog_title}</h2>
         </div>
 				
-				<div class="detail-article__blog-count">
-					<span>조회수&nbsp;&nbsp;</span>${dto.blog_count}
-				</div>
-        <!-- buttons -->
-        <div class="detail-article__btn">
-       	 	<span>작성자&nbsp;&nbsp;&nbsp;${dto.user_id}</span><span><fmt:formatDate pattern="yyyy-MM-dd a hh:mm" value="${dto.regdate}"/></span>
-          <input type="button" value="목록" onclick="location.href='blog.do'">
-          <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
-          <input type="button" value="삭제" onclick="blogDelete(${dto.blog_no})">
-        </div>
-      </div>
-
+				<div class="detail-article__undertitle">
+					<div class="detail-article__blog-count">
+						<span>조회수&nbsp;&nbsp;${dto.blog_count}</span>
+					</div>
+	        <!-- buttons -->
+	        <div class="detail-article__btn">
+	       	 	<span>작성자&nbsp;&nbsp;&nbsp;${dto.user_id}&nbsp;님</span><span><fmt:formatDate pattern="yyyy-MM-dd a hh:mm" value="${dto.regdate}"/></span>
+	          <input type="button" value="목록" onclick="location.href='blog.do'">
+	          <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
+	          <input type="button" value="삭제" onclick="blogDelete(${dto.blog_no})">
+	        </div>
+	      </div>
+			</div>
       <!-- content -->
       <div class="detail-article__content">
         <img width="600px" src="${dto.blog_img}">
