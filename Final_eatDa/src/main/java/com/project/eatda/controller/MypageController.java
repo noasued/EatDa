@@ -17,7 +17,9 @@ import com.project.eatda.biz.MypageBiz;
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.BlogLikeDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderProductDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 import com.project.eatda.dto.UserDto;
 
@@ -92,7 +94,36 @@ public class MypageController {
 		return list;
 	}
 	
+	//주문한 상품
+	@RequestMapping(value="marketOrderList.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<OrderProductDto> marketOrderList(HttpServletRequest requset){
+		logger.info("marketOrderList");
+		UserDto user = getLoginUser(requset);
+		
+		List<OrderProductDto> list = mypageBiz.marketOrderList(user.getUser_id());
+		
+		return list;
+	}
 	
+	//리뷰 작성
+		@RequestMapping("registReview.do")
+		@ResponseBody
+		public String registReview(ReviewDto dto) {
+			logger.info("registReview");
+			
+			int res = mypageBiz.registReview(dto);
+			
+			if(res>0) {
+				return "mypage_like.do";
+			}
+			
+			return null;
+		}
+	
+
+
+		
 	
 	
 	public UserDto getLoginUser(HttpServletRequest request) {

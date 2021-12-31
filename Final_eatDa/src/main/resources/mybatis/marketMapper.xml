@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="likeProductList" parameterType="string" resultMap="productMap">
-		SELECT IMG_PATH, P_ID
+		SELECT IMG_PATH, P_ID, P_NAME, P_PRICE
 		FROM PRODUCT
 		JOIN PRODUCT_LIKE USING(P_ID)
 		WHERE USER_ID = #{user_id}

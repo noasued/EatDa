@@ -37,5 +37,19 @@
 		WHERE b.USER_ID = #{user_id}
 	</select>
 	
+	<!-- 주문한 상품 -->
+	<select id="marketOrderList" parameterType="string" resultType="orderProductDto">
+		SELECT P_ID, P_NAME, PRICE, IMG_PATH, ORDER_ID
+		FROM E_ORDER
+		JOIN ORDER_PRODUCT USING(ORDER_ID)
+		JOIN PRODUCT USING(P_ID)
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 리뷰 작성 -->
+	<insert id="registReview" parameterType="reviewDto">
+		INSERT INTO REVIEW
+		VALUES(REVIEW_NO_SEQ.NEXTVAL, 'E1', 'P1', #{review_content}, SYSDATE)
+	</insert>
 
 </mapper>

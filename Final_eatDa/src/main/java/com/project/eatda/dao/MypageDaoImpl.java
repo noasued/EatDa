@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderProductDto;
+import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 
 @Repository
@@ -49,6 +52,7 @@ public class MypageDaoImpl implements MypageDao{
 		
 	}
 
+	//블로그 찜
 	@Override
 	public List<BlogDto> blogLikeList(String user_id) {
 		List<BlogDto> blogList = null;
@@ -61,6 +65,36 @@ public class MypageDaoImpl implements MypageDao{
 		}
 		return blogList;
 	}
+
+	//주문한 상품
+	@Override
+	public List<OrderProductDto> marketOrderList(String user_id) {
+		List<OrderProductDto> orderList = null;
+		
+		try {
+			orderList = sqlSession.selectList(NAMESPACE_MYPAGE + "marketOrderList", user_id);
+		} catch (Exception e) {
+			System.out.println("marketOrderList Dao ERROR");
+			e.printStackTrace();
+		}
+		
+		return orderList;
+	}
+
+	//리뷰작성
+	@Override
+	public int registReview(ReviewDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE_MYPAGE + "registReview", dto);
+		} catch (Exception e) {
+			System.out.println("registReview Dao ERROR");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 
 
 	
