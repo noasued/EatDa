@@ -86,7 +86,7 @@
 										"<h3>"+value.blog_title+"</h3>"+
 										"<span>"+value.user_id+"</span>"+
 										"<div class='blog-article__list-title__icons'>"+
-											"<i class='fas fa-heart'>&nbsp;3</i>"+"<i class='fas fa-comment'>&nbsp;2</i>"+
+											"<i class='fas fa-heart'>&nbsp;3</i>"+"<i class='fas fa-comment'>&nbsp;"+value.reply_count+"</i>"+
 										"</div>"+
 									"</div>"+
 									"<div class='blog-article__list-content'>"+
