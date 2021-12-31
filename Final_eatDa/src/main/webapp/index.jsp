@@ -455,11 +455,8 @@ li {
 					</div>
 
 					<div class="col-md-6" style="text-align: left">
-						<p class="title-font"
-							style="margin-left: 10%; margin-bottom: 10px;">가장 사랑받는
-							EatDagram</p>
-						<br> <span class="font-noto-sans sub-title"
-							style="margin-left: 10%; font-size: small;">EatDagram></span>
+						<p class="title-font" style="margin-left: 10%; margin-bottom: 10px;">가장 사랑받는 EatDagram</p>
+						<br> <span class="font-noto-sans sub-title" style="margin-left: 10%; font-size: small;">EatDagram></span>
 					</div>
 				</div>
 			</div>

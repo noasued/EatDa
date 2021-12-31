@@ -70,8 +70,4 @@ public class RecipeBizImpl implements RecipeBiz{
 	public int paging() {
 		return dao.paging();
 	}
-	
-	
-	
-
 }
