@@ -33,7 +33,7 @@
 	<!-- 레시피 추가 -->
 	<insert id="recipeInsert" parameterType="recipeDto">
 		INSERT INTO RECIPE
-		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE);
+		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE)
 	</insert>
 
 	<!-- 레시피 수정 -->
