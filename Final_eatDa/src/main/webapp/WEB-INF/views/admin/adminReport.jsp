@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -225,20 +227,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">OksusuS2</a></td>
-                                            <td>XD</td>
-                                            <td>악플이에요</td>
-                                            <td>메롱</td>
-                                            <td>
-                                                <select id="tmpSelect" name="tmpSelect" onchange="changeSelect(this.form)">
-                                                    <option value="wait">처리 대기</option>
-                                                    <option value="finish">처리 완료</option>
-                                                </select>
-                                            </td>
-                                            <td>1회</td>
-                                        </tr>
+	                                	<c:forEach items="${reportList}" var="dto">
+			                        		<tr>
+			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.report_no}"></td>
+			                                	<td style="vertical-align:middle;"><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.reporter}</a></td>
+			                                    <td style="vertical-align:middle;">${dto.reported}</td>
+			                                    <td style="vertical-align:middle;">${dto.report_content}</td>
+			                                    <td style="vertical-align:middle;">${dto.reply_content}</td>
+			                                    <td style="vertical-align:middle;">
+			                                    	<select id="tmpSelect" name="tmpSelect" onchange="changeSelect(this.form)">
+			                                    		<option value="wait">처리 대기</option>
+			                                    		<option value="finish">처리 완료</option>
+			                                        </select>
+			                                    </td>
+			                                    <td style="vertical-align:middle;">1회</td>
+			                                </tr>
+			                        	</c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>

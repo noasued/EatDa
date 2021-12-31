@@ -8,25 +8,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogReplyDto;
 
 @Controller
-@RequestMapping("/reply/*")
 public class BlogReplyController {
 	private Logger logger = LoggerFactory.getLogger(BlogReplyController.class);
-
+	
 	@Autowired
 	private BlogReplyBiz replyBiz;
 	
 	// 댓글 입력
-	@RequestMapping("reply-insert.do")
+	@RequestMapping("/reply/reply-insert.do")
 	public void insert(@ModelAttribute BlogReplyDto dto, HttpSession session) {
 		String userId = (String) session.getAttribute("userId");
 		dto.setUser_id(userId);
@@ -34,7 +34,7 @@ public class BlogReplyController {
 	}
 	
 	// 댓글 목록(controller 방식)
-//	@RequestMapping("reply-list.do")
+//	@RequestMapping("/reply/reply-list.do")
 //	public ModelAndView list(@RequestParam int blog_no, ModelAndView mav) {
 //		List<BlogReplyDto> list = replyBiz.list(blog_no);
 //		// set view name
@@ -46,16 +46,14 @@ public class BlogReplyController {
 //	}
 	
 	// 댓글 목록 (RestController json방식)
-	@RequestMapping("reply-list.do")
+	@RequestMapping("/reply/reply-list.do")
 	@ResponseBody
 	public List<BlogReplyDto> listJson(@RequestParam int blog_no){
 		List<BlogReplyDto> list = replyBiz.list(blog_no);
 		return list;
 	}
 	
-	
-	
-	
+
 	
 	
 	

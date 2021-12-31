@@ -167,7 +167,7 @@
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <col width="50px"><col width="80px"><col width="100px"><col width="40%"><col width="40%">
+                                    <col width="50px"><col width="50px"><col width="120px"><col width="800px">
                                     <thead>
                                     	<tr></tr>
                                         <tr>
@@ -179,15 +179,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${list}" var="dto">
-	                                        <tr>
-	                                            <td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.blog_no}"></td>
-	                                            <td style="vertical-align:middle;">${dto.blog_no}</td>
-	                                            <td style="vertical-align:middle;">${dto.user_id}</td>
-	                                            <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.blog_title}</a></td>
-	                                            <td style="vertical-align:middle;">${dto.regdate}</td>
-	                                        </tr>
-                                        </c:forEach>
+	                                    <c:forEach items="${list}" var="dto">
+			                            	<tr>
+			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.blog_no}"></td>
+			                                    <td style="vertical-align:middle;">${dto.blog_no}</td>
+			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
+			                                    <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.blog_title}</a></td>
+			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+			                            	</tr>
+		                            	</c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>

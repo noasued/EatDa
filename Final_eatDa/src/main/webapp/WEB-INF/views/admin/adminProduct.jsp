@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -178,41 +180,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td style='vertical-align:middle' ><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href="#"><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>즉석 떡볶이(2인분)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href=""><img src="resources/admin/assets/img/P2.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>오뎅식당 X 부대찌개</td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href=""><img src="resources/admin/assets/img/P3.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>샤브샤브 (2인분)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href=""><img src="resources/admin/assets/img/P4.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>제육볶음(3팩)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href=""><img src="resources/admin/assets/img/P5.jpg" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>덮밥 (1인분)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href=""><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>즉석 떡볶이(2인분)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style='vertical-align:middle'><input type="checkbox" name="chkBtn" id="chk"></td>
-                                            <td><a href=""><img src="resources/admin/assets/img/P1.png" style="width: 20%; height: 20%;"></a></td>
-                                            <td style='vertical-align:middle'>즉석 떡볶이(2인분)</td>
-                                        </tr>
+                                    	<c:forEach items="${productList}" var="dto">
+			                            	<tr>
+			                                	<td style='vertical-align:middle' ><input type="checkbox" name="chkBtn" id="chk" value="${dto.p_id}"></td>
+			                                    <td><a href="#"><img src="${dto.img_path}" style="width: 20%; height: 20%;"></a></td>
+			                                    <td style='vertical-align:middle'>${dto.p_name}</td>
+			                                </tr>
+		                                </c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>
