@@ -9,10 +9,6 @@ a{
   text-decoration: none;
 }
 
-.event-article{
-	height:1100px;
-}
-
 /* write button */
 .event-write-btn{
   text-align:right;
@@ -41,12 +37,10 @@ a{
 .event-article__listbox{
   align-items: center;
   width: 80%;
-  height:910px;
   margin: 20px 14%;
 }
 
 .event-article__list{
-	height:890px;
 	margin-left:50px;
 }
 

@@ -128,7 +128,6 @@ public class RecipeController {
 			return "redirect:recipeDetail.do?recipe_no="+recipe_no;
 		}
 	}
-
 //	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
 //	@ResponseBody
 //	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {

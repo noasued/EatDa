@@ -60,8 +60,7 @@
 	  border: none;
 	  background-position: 0 90%;
 	  margin-top:155px;
-	  
-	}
+}
 
 .recipe_content-category{letter-spacing: 8px;}
 .recipe_content-category label{margin-right: 2%;}	

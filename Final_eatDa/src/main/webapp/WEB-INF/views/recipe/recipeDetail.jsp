@@ -12,16 +12,16 @@
 
 <style type="text/css">
 .recipe_top{
-	width:100%;
-	height:200px;
-	background: url('resources/images/recipe/recipeLogo.png') no-repeat;
-	background-size: cover;
-	overflow: hidden;
-	display: table;
-	border: none;
-	background-position: 0 90%;
-	margin-top:155px;
-	
+   width:100%;
+   height:200px;
+   background: url('resources/images/recipe/recipeLogo.png') no-repeat;
+   background-size: cover;
+   overflow: hidden;
+   display: table;
+   border: none;
+   background-position: 0 90%;
+   margin-top:155px;
+   
 }
 hr{
    border: 10px;
@@ -47,8 +47,8 @@ hr{
    height: 20px;
 }
 .title p{
-	font-size: 13px;
-	margin-bottom: 0;
+   font-size: 13px;
+   margin-bottom: 0;
 }
 .content img{
    margin : 2% 0;
@@ -93,23 +93,23 @@ hr{
 </style>
 <script type="text/javascript">
 function confirmModal(){
-	$(".deleteConfirm_modal").fadeIn();
+   $(".deleteConfirm_modal").fadeIn();
 }
 function confirmModalClose(){
-	$(".deleteConfirm_modal").fadeOut();
+   $(".deleteConfirm_modal").fadeOut();
 }
 
 $(document).ready(function() {
-	$('.full').hide();
+   $('.full').hide();
 });
 
 function empty(){
-	$(".full").show();
-	$(".empty").hide();
+   $(".full").show();
+   $(".empty").hide();
 }
 function full(){
-	$('.full').hide();
-	$(".empty").show();
+   $('.full').hide();
+   $(".empty").show();
 }
 
 </script>
@@ -123,7 +123,7 @@ function full(){
    
    <div class="body">
       <div class="title">
-	     <p>[ ${dto.recipe_category } ]</p>
+        <p>[ ${dto.recipe_category } ]</p>
          <h4 style="text-align:center;">${dto.recipe_title }</h4>
          <div>
             <strong>조회수 ${dto.recipe_count }</strong>
@@ -147,11 +147,11 @@ function full(){
 
 
   <div class="deleteConfirm_modal">
-  	<div class="deleteConfirm_modal_content">
-  	  	<i title="닫기" class="fas fa-times fa-lg" onclick="confirmModalClose()"></i>
-  		<p>삭제하시겠습니까?</p>
-  		<input type="button" value="확인" onclick="location.href='recipeDelete.do?recipe_no=${dto.recipe_no }'">
-  	</div>
+     <div class="deleteConfirm_modal_content">
+          <i title="닫기" class="fas fa-times fa-lg" onclick="confirmModalClose()"></i>
+        <p>삭제하시겠습니까?</p>
+        <input type="button" value="확인" onclick="location.href='recipeDelete.do?recipe_no=${dto.recipe_no }'">
+     </div>
   </div> 
  
    <div id="footer">

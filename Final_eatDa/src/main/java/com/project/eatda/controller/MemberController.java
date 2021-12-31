@@ -114,6 +114,7 @@ public class MemberController {
 				//사용자
 				if(dto2.getUser_role().equals("USER")) {
 					session.setAttribute("member", dto2);
+					session.setAttribute("user_id", dto.getUser_id());
 					mav.setViewName("../../index");
 					mav.addObject("msg", "success");
 				
@@ -145,6 +146,26 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	//회원정보 수정
+	@RequestMapping(value="/memberUpdate.do", method=RequestMethod.POST)
+	public String memberUpdate(UserDto dto, HttpSession session) throws Exception{
+		memberBiz.memberUpdate(dto);
+		session.invalidate();
+		
+		return "../../index"; 
+	}
+	  
+	//회원탈퇴
+	@RequestMapping(value="/memberDelete.do", method=RequestMethod.GET)
+	public String memberDelete(UserDto dto, HttpSession session) throws Exception{
+		memberBiz.memberDelete(dto);
+		session.invalidate();
+		
+		return "../../index";
+	}
+	
+ 
 
 	
 

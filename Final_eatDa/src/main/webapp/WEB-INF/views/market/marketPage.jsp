@@ -8,7 +8,7 @@
 
 
 <style type="text/css">
-span {
+span { 
 	line-height:27px;
 }
 #wrap {
@@ -490,15 +490,6 @@ em {
 			}
 			console.log(product);
 			
-			$.ajax({
-				url: 'directPurchase.do',
-				type: 'post',
-				contentType:"application/json; charset=utf-8",
-				data: JSON.stringify(product),
-				success:function(msg){
-					console.log(msg);	
-				}
-			});
 			location.href = 'makeOrder.do?p_id=' + product.p_id + '&quantity='+product.quantity + '&price=' + product.p_price;
 		};
 	}
@@ -508,7 +499,6 @@ em {
 	<div class="fixed-Banner">
 		<div class="like-title">내가 찜한 상품</div>
 	</div>
-
 
 	<!-- modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

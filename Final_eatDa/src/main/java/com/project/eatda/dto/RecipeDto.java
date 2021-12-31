@@ -13,7 +13,8 @@ public class RecipeDto {
 	private String recipe_count; //조회수
 	private String recipe_img; 
 	private String recipe_enabled; 
-	private Date regdate; //
+	private Date regdate;
+	
 	public RecipeDto() {
 		super();
 	}

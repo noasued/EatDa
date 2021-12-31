@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,15 +16,25 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        <script type="text/javascript">
+        // 게시글 전체 선택 및 해제
         function selectAll(selectAll)  {
         	  const checkboxes 
         	       = document.getElementsByName('chkBtn');
         	  
         	  checkboxes.forEach((checkbox) => {
         	    checkbox.checked = selectAll.checked;
-        	  })
+        	  });
         	}
+        
+		console.log(formatDate(date));
+        
+        // 이벤트 진행 현황
+        function statusUpdate(status){
+        	console.log(status);
+        	
+        	location.href="adminEventStaus.do?status="+status;
+        }
         </script>
         
         <style>
@@ -40,6 +52,55 @@
 				width:80px;
 				height:30px;
 			}
+			/*nav탭 hover 시, content 변경*/
+	        .home:hover span{
+	        	display:none;
+	        }
+	        .home:hover:after{
+	        	content:"관리자 메인";
+	        }
+	        /*게시글 관리*/
+	        .post:hover span{
+	        	display:none;
+	        }
+	        .post:hover:after{
+	        	content:"게시글 관리";
+	        }
+	        /*레시피 관리*/
+	        .recipe:hover span{
+	        	display:none;
+	        }
+	        .recipe:hover:after{
+	        	content:"레시피 관리";
+	        }
+	        /*상품 관리*/
+	        .product:hover span{
+	        	display:none;
+	        }
+	        .product:hover:after{
+	        	content:"상품 관리";
+	        }
+	        /*주문 관리*/
+	        .order:hover span{
+	        	display:none;
+	        }
+	        .order:hover:after{
+	        	content:"주문 관리";
+	        }
+	        /*회원 관리*/
+	        .user:hover span{
+	        	display:none;
+	        }
+	        .user:hover:after{
+	        	content:"회원 관리";
+	        }
+	        /*신고 관리*/
+	        .report:hover span{
+	        	display:none;
+	        }
+	        .report:hover:after{
+	        	content:"신고 관리";
+	        }
 		</style>
     </head>
     <body class="sb-nav-fixed">
@@ -69,39 +130,39 @@
                                 <br>
                                 <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link" href="adminMain.do" style="color: black;">
+                            <a class="nav-link home" href="adminMain.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                HOME
+                                <span>HOME</span>
                             </a>
 
-                            <a class="nav-link" href="adminPostReply.do" style="color: rgb(224, 179, 57);">
+                            <a class="nav-link post" href="adminPostReply.do" style="color: rgb(224, 179, 57);">
                                 <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                Post
+                                <span>Post</span>
                             </a>
 
-                            <a class="nav-link" href="adminRecipe.do" style="color: black;">
+                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
-                                Recipe
+                                <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link" href="adminProduct.do" style="color: black;">
+                            <a class="nav-link product" href="adminProduct.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                                Product
+                                <span>Product</span>
                             </a>
 
-                            <a class="nav-link" href="adminOrder.do" style="color: black;">
+                            <a class="nav-link order" href="adminOrder.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                                Order
+                                <span>Order</span>
                             </a>
 
-                            <a class="nav-link" href="adminUser.do" style="color: black;">
+                            <a class="nav-link user" href="adminUser.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                User
+                                <span>User</span>
                             </a>
 
-                            <a class="nav-link" href="adminReport.do" style="color: black;">
+                            <a class="nav-link report" href="adminReport.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
-                                Report
+                                <span>Report</span>
                             </a>
                         </div>
                     </div>
@@ -114,10 +175,7 @@
                         <h1 class="title_tab"><a href="adminPostReply.do" style="text-decoration: none; color: black;">댓글</a> | <a href="adminPostBlog.do" style="text-decoration: none; color: black;">블로그</a> | <a href="adminPostEvent.do" style="text-decoration: none; color: rgb(224, 179, 57);">이벤트</a></h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                이벤트 관리
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i> 이벤트 관리</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="80px"><col width="60%"><col width="200px"><col width="20%">
@@ -132,24 +190,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>13</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">2022 겨울나기 이벤트 시작</a></td>
-                                            <td>2021.12.05</td>
-                                            <td>
-                                                <select>
-                                                    <option value="wait">대 기</option>
-                                                    <option value="ing">진행중</option>
-                                                    <option value="finish">종 료</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                    	<c:forEach items="${list}" var="dto">
+	                                        <tr>
+	                                            <td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
+	                                            <td style="vertical-align:middle;">${dto.event_no}</td>
+	                                            <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
+	                                            <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+	                                            <td style="vertical-align:middle;">
+	                                                <select onChange="statusUpdate(this.value);">
+	                                                    <option value="1">대 기</option>
+	                                                    <option value="2">진행중</option>
+	                                                    <option value="3">종 료</option>
+	                                                </select>
+	                                            </td>
+	                                        </tr>
+	                                	</c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">	
-                                        	<a class="adm_insert" href="#" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
+                                        	<a class="adm_insert" href="event-write.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
 	                                        <button type="button" onclick="" value="delete">삭 제</button>
                                         </td>
                                     </tr>

@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="market">
-
 	<resultMap id="productMap" type="productDto">
 		<result property="p_id" column="p_id"/>
 		<result property="p_name" column="p_name"/>
@@ -25,6 +24,7 @@
 		<foreach collection="list" index="index" item="p_no" separator="AND">
 			#{p_no}
 		</foreach>
+		ORDER BY P_NO DESC
 	</select>
 	
 	<select id="paging" resultType="int">
@@ -56,7 +56,7 @@
 	
 	<select id="isProduct" parameterType="cartProductDto" resultType="cartProductDto">
 		SELECT * FROM CART_PRODUCT
-		WHERE USER_ID = #{user_id} AND P_ID = #{p_id}
+		WHERE USER_ID = #{user_id} AND P_ID = #{p_id} AND CATEGORY = 'ADMIN'
 	</select>
 	
 	<select id="getReview" parameterType="string" resultType="reviewDto">
@@ -68,7 +68,7 @@
 	</select>
 	
 	<insert id="putShoppingBag" parameterType="cartProductDto">
-		INSERT INTO CART_PRODUCT VALUES(#{user_id},#{p_id},#{cart_count},#{cart_price})
+		INSERT INTO CART_PRODUCT VALUES(#{user_id},#{p_id},#{cart_count},#{cart_price},'NORMAL')
 	</insert>
 	
 	<insert id="likeProductInsert" parameterType="productLikeDto">
@@ -80,15 +80,21 @@
 	</delete>
 	
 	<select id="getCartList" parameterType="cartProductDto" resultType="cartProductDto">
-		SELECT P_ID, CART_COUNT, CART_PRICE, P_NAME, IMG_PATH
+		SELECT P_ID, CART_COUNT, CART_PRICE, P_NAME, IMG_PATH, CATEGORY
 		FROM CART_PRODUCT
 		JOIN PRODUCT USING (P_ID)
-		WHERE USER_ID = #{user_id}
+		WHERE USER_ID = #{user_id} AND CATEGORY = 'NORMAL'
+	</select>
+	
+	<select id="getSubCartList" parameterType="cartProductDto" resultType="cartProductDto">
+		SELECT P_ID, CART_COUNT, CART_PRICE, P_NAME, IMG_PATH, CATEGORY
+		FROM CART_PRODUCT
+		JOIN PRODUCT USING (P_ID)
+		WHERE USER_ID = #{user_id} AND CATEGORY = 'SUBSCRIPTION'
 	</select>
 	
 	<delete id="deleteProductBag" parameterType="cartProductDto">
-		DELETE FROM CART_PRODUCT
-		WHERE P_ID = #{p_id} AND USER_ID = #{user_id}
+		DELETE FROM CART_PRODUCT WHERE P_ID = #{p_id} AND USER_ID = #{user_id} AND CATEGORY = 'NORMAL'
 	</delete>
 	
 	<select id="getCouponList" resultType="couponDto" parameterType="string">
@@ -111,7 +117,7 @@
 	</select>
 	
 	<delete id="deleteCartList" parameterType="string">
-		DELETE FROM CART_PRODUCT WHERE USER_ID = #{user_id}
+		DELETE FROM CART_PRODUCT WHERE USER_ID = #{user_id} AND CATEGORY = 'NORMAL'
 	</delete>
 	
 	<delete id="deleteCoupon" parameterType="orderDto">
@@ -123,7 +129,7 @@
 	</insert>
 	
 	<update id="updateCartList" parameterType="cartProductDto">
-		UPDATE CART_PRODUCT SET CART_COUNT = #{cart_count}, CART_PRICE = #{cart_price} WHERE USER_ID=#{user_id} AND P_ID = #{p_id}
+		UPDATE CART_PRODUCT SET CART_COUNT = #{cart_count}, CART_PRICE = #{cart_price} WHERE USER_ID=#{user_id} AND P_ID = #{p_id} AND CATEGORY = 'NORMAL'
 	</update>
 	
 	<select id="getOrderList" parameterType="string" resultType="orderProductDto">
@@ -133,9 +139,7 @@
 		WHERE ORDER_ID = #{order_id}
 	</select>
 	
-	<delete id="deleteAllCart" parameterType="string">
-		DELETE FROM CART_PRODUCT WHERE USER_ID = #{user_id}
-	</delete>
+	
 	
 	
 	

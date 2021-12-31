@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
 </head>
 <style type="text/css">
@@ -18,7 +19,7 @@
 	position: absolute;
 	flex-direction: column;
 	width: 800px;  
-	margin-top: 20px;
+	margin-top: 180px;
     padding-top: 0;
 }
 
@@ -64,10 +65,12 @@
 .blog_like table tr td .blog_list h3{
     font-size: 14pt;
     font-weight: bold;
+    margin-bottom: 20px;
 
 }
 
 .blog_like table tr td .blog_list a{
+	
     font-size: 0.7rem;
 
 }
@@ -181,7 +184,7 @@ table{
 
 .wrap{
 	width: 100%;
-	height: 1350px;
+	height: 1500px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -197,7 +200,56 @@ table{
 	font-size: 0.7rem;
 	font-weight: bold;
 }
+
+.blog_like_list:hover{
+	cursor:pointer;
+}
 </style>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	blogLike();
+});
+
+function blogLike() {
+	$.ajax({
+		url:"blogLikeList.do",
+		type:"post",
+		dataType:"json",
+		success:function(data) {
+			let list = data;
+			$(list).each(function(key, value) {
+				$('.blog_like').append(
+						"<table class='blog_like_list' id='" + value.blog_no + "' onclick='goBlogLike(this)'>" +
+						"<tr>"+
+						"<td>" +
+						"<div class='like-img-div'>" +
+						"<img id='" + value.blog_no + "' class='like-img' src='" + value.blog_img + "' width='150' height='150'>" +
+						"<a id='" + value.blog_no + "' class='blog_list' value='" + value.blog_title + "'></a>" +
+						"</div>"+
+						"</td>"+
+						
+						"<td>"+
+						"<div class='blog_list'>" +
+						"<h3 id='" + value.blog_no + "'>" +value.blog_title + "</h3>" +
+						"<a id='" + value.blog_no + "'>" +value.blog_content + "</a>" +
+						"</div>" +
+						"</td>"+
+						"</tr>" +
+						"</table>"
+					);
+			});
+		}
+	});
+	
+}
+
+function goBlogLike(object) {
+	var blog_no = $(object).attr('id');
+	location.href = 'blog-detail.do?blog_no='+blog_no;
+}
+</script>
+
 <body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
@@ -210,106 +262,11 @@ table{
                 <hr>
             </div>
             <div class="headline2">
-                <a>내가 좋아한 블로그</a>
+                <a>내가 좋아한 EatDagram</a>
             </div>
             <div class="blog_like_wrap">
             <div class="blog_like">
-                <table width="600px">
-                    <tr>
-                        <col width="150px"> <col width="300px">
-                    </tr>
-                    
-                    <tr onclick="alert('블로그 게시글 이동')">
-                        <td>
-                            <img src="resources/images/food1.jpg" width="150" height="150">
-                        </td>
-                        <td height="150px">
-                            <div class="blog_list">
-                                <h3>블로그의 제목</h3><br>
-                                <a>
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용</a>
-                        </div>
-                        </td>
-                    </tr>
-                    <tr onclick="alert('블로그 게시글 이동')">
-                        <td>
-                            <img src="resources/images/food1.jpg" width="150" height="150">
-                        </td>
-                        <td height="150px">
-                            <div class="blog_list">
-                                <h3>블로그의 제목</h3><br>
-                                <a>
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용</a>
-                        </div>
-                        </td>
-                    </tr>
-                    <tr onclick="alert('블로그 게시글 이동')">
-                        <td>
-                            <img src="resources/images/food1.jpg" width="150" height="150">
-                        </td>
-                        <td height="150px">
-                            <div class="blog_list">
-                                <h3>블로그의 제목</h3><br>
-                                <a>
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용</a>
-                        </div>
-                        </td>
-                    </tr>     
-                    <tr onclick="alert('블로그 게시글 이동')">
-                        <td>
-                            <img src="resources/images/food1.jpg" width="150" height="150">
-                        </td>
-                        <td height="150px">
-                            <div class="blog_list">
-                                <h3>블로그의 제목</h3><br>
-                                <a>
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용</a>
-                        </div>
-                        </td>
-                    </tr> 
-                    <tr onclick="alert('블로그 게시글 이동')">
-                        <td>
-                            <img src="resources/images/food1.jpg" width="150" height="150">
-                        </td>
-                        <td height="150px">
-                            <div class="blog_list">
-                                <h3>블로그의 제목</h3><br>
-                                <a>
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용
-                                    블로그의 내용 블로그의 내용 블로그의 내용 블로그의 내용</a>
-                        </div>
-                        </td>
-                    </tr>   
-                </table>
+
           </div>
         </div>
           

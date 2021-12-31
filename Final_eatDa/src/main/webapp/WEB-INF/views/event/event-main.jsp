@@ -48,11 +48,13 @@ body{
   margin-left: 350px;
   font-size: 15px;
 }
-
+.event-article {
+	height:auto;
+}
 </style>
 <link href="resources/css/event/event-main.css" rel="stylesheet">
 </head>
-<body>
+<body style="margin-top:155px;">
   <div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
@@ -67,7 +69,7 @@ body{
 
     <div class="event-article">
       <div class="event-write-btn">
-        <input type="button" value="글쓰기" onclick="location.href='event-write.do'">
+        <input type="button" value="글쓰기" onclick="location.href='event-writeform.do'">
       </div>
 
       <!-- event list -->
@@ -79,7 +81,7 @@ body{
           		<li>----------- 작성된 글이 없습니다. -----------</li>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${list}" var="dto">
+							<c:forEach items="${list}" var="dto" begin="1" end="9">
 			          <li>
 			            <figure class="event-article__list-img">
 			              <img src="resources/images/event-list.png">
@@ -96,16 +98,6 @@ body{
 	          </c:otherwise>
 					</c:choose>
 
-        </ul>
-
-        <ul class="event-article__paging" id="paging">
-          <li><a href="#"><i class="fas fa-chevron-left fa-sm"></i></a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right fa-sm"></i></a></li>
         </ul>
 
       </div>

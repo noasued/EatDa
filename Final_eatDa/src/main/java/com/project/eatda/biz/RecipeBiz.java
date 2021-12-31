@@ -18,6 +18,8 @@ public interface RecipeBiz {
 	public int updateRecipeCount(int recipe_no);
 	public RecipeDto searchRecipe(String tag); 			
 	public RecipeDto recommandRecipe(String category); 	
+
+  public List<RecipeDto> recipeListHeart(String user_id); 
 	public int paging();	
 	
 }

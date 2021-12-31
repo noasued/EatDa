@@ -108,8 +108,7 @@ function getCartList() {
 		success:function(data){
 			let list = data;
 			$(list).each(function(key, value) {
-				let dp = Number(value.cart_price)*Number($('#coupon-rate').text());
-				console.log(dp);
+				let dp = Number(value.price)*Number($('#coupon-rate').text());
 				$('.container-fluid').eq(2).append(
 						"<div class='row rows-width product-section' style='margin:0px auto;'>" +
 						"<div class='col-md-2 p-img'>" +
@@ -128,12 +127,12 @@ function getCartList() {
 						"<div class='col-md-4 li-div p-price'>" +
 						"<div>" +
 						"<span class='title'>상품 금액 : </span>" +
-						"<span>" + value.price + "</span>" +
+						"<span>&nbsp;&nbsp;" + value.price + "</span>" +
 						"<span>&#8361;</span>" +
 						"</div>" +
 						"<div>" +
 						"<span class='title'>할인 금액 : </span>" +
-						"<span>" + dp + "</span>" +
+						"<span>-" + dp + "</span>" +
 						"<span>&#8361;</span>" +
 						"</div></div></div>"						
 				);
@@ -180,7 +179,6 @@ function deleteCoupon() {
 function goMain() {
 	location.href='index.do';
 }
-//홈으로 버튼이나 배송 확인하기 버튼 눌렀을 때 장바구니에서 상품 삭제해주자.
 	
 	
 </script>
@@ -289,7 +287,7 @@ function goMain() {
             <div class="col-md-2"></div>
             <div class="col-md-8" align="center">
                 <button class="btn btn-primary btn-lg bottm-btn" onclick="goMain()">홈으로</button>
-                <button class="btn btn-primary btn-lg bottm-btn" onclick="deleteCoupon()">배송 확인하기</button>
+                <button class="btn btn-primary btn-lg bottm-btn" onclick="">쇼핑 계속하기</button>
             </div>
             <div class="col-md-2"></div>
         </div>

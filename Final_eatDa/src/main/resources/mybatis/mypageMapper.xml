@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypage">
+
+	<resultMap type="subscriptionDto" id="subscriptionMap">
+		<result property="subscription_id" column="SUBSCRIPTION_ID"/>
+		<result property="user_id" column="USER_ID"/>
+		<result property="subscription_title" column="SUBSCRIPTION_TITLE"/>
+		<result property="subscription_price" column="SUBSCRIPTION_PRICE"/>
+		<result property="subscription_type" column="SUBSCRIPTION_TYPE"/>
+		<result property="subscription_term" column="SUBSCRIPTION_TERM"/>
+	</resultMap>
+
+	<!-- 구독 내역 -->
+	<select id="subscriptionList" resultType="subscriptionDto" parameterType="string">
+		SELECT *
+		FROM SUBSCRIPTION
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 쿠폰함 -->
+	<select id="couponList" resultType="couponDto" parameterType="string">
+		SELECT COUPON_ID, USER_ID, COUPON_NAME, COUPON_DES, COUPON_RATE, COUPON_TERM
+		FROM COUPON_LIST 
+		JOIN COUPON USING(COUPON_ID)
+		WHERE USER_ID = #{user_id}
+	</select>
+	
+	<!-- 블로그 -->
+	<select id="blogLikeList" parameterType="string" resultType="blogDto">
+		SELECT BLOG_NO, BLOG_TITLE, BLOG_CONTENT, BLOG_CONTENT
+		FROM BLOG 
+		JOIN BLOG_LIKE b USING(BLOG_NO)
+		WHERE b.USER_ID = #{user_id}
+	</select>
+	
+
+</mapper>

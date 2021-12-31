@@ -28,7 +28,10 @@
   margin-right: 30px;
   text-align: right;
 }
-
+.detail-article__btn span{
+	margin-right: 20px;
+	font:italic 13px "Fira Sans", serif;
+}
 input{
   font-size:14px;
   border-radius: 2px;

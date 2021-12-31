@@ -11,18 +11,20 @@ public class EventDto {
 	private String event_content;
 	private String event_img;
 	private Date regdate;
+	private String status;
 	
 	public EventDto() {
 		super();
 	}
 
-	public EventDto(int event_no, String event_title, String event_content, String event_img, Date regdate) {
+	public EventDto(int event_no, String event_title, String event_content, String event_img, Date regdate,String status) {
 		super();
 		this.event_no = event_no;
 		this.event_title = event_title;
 		this.event_content = event_content;
 		this.event_img = event_img;
 		this.regdate = regdate;
+		this.status = status;
 	}
 	
 	public int getEvent_no() {
@@ -55,10 +57,17 @@ public class EventDto {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
 		return "EventDto [event_no=" + event_no + ", event_title=" + event_title + ", event_content=" + event_content
-				+ ", event_img=" + event_img + ", regdate=" + regdate + "]";
+				+ ", event_img=" + event_img + ", regdate=" + regdate +", status=" + status + "]";
 	}
 }
