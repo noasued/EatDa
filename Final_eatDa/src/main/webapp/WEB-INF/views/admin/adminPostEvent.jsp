@@ -190,7 +190,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${list}" var="dto">
+                                    	<c:forEach items="${eventList}" var="dto">
 	                                        <tr>
 	                                            <td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
 	                                            <td style="vertical-align:middle;">${dto.event_no}</td>

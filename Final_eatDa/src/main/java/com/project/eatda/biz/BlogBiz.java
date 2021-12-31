@@ -16,4 +16,7 @@ public interface BlogBiz {
 	public int delete(int blog_no);
 
 	public int selectBlogNo(String blog_title);
+	
+	/* 관리자 블로그 리스트 (전체 조회) */
+	public List<BlogDto> adminBlogList();
 }

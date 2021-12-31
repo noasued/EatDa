@@ -55,4 +55,11 @@ public class BlogBizImpl implements BlogBiz{
 		System.out.println("delete biz");
 		return dao.delete(blog_no);
 	}
+	
+	/* 관리자 블로그 리스트 (전체 조회) */
+	@Override
+	public List<BlogDto> adminBlogList(){
+		System.out.println("[error] : 확인");
+		return dao.adminBlogList();
+	}
 }
