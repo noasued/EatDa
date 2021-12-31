@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -37,7 +38,7 @@
         	}
 
         	function selectAll(selectAll)  {
-        	  const checkboxes 
+        		const checkboxes 
         	     = document.getElementsByName('chkBtn');
         	  
         	  checkboxes.forEach((checkbox) => {
@@ -290,75 +291,31 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                        <tr>
-	                                            <td><input type="checkbox" name="RowCheck" value="${list.no }"></td>
-	                                            <td>B213G64</td>
-	                                            <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문인</a></td>
-	                                            <td>2021.12.05</td>
-	                                            <td>010-1234-5678</td>
-	                                            <td>
-	                                                <select>
-	                                                    <option value="a">주문 완료</option>
-	                                                    <option value="b">상품 준비중</option>
-	                                                    <option value="c">배송지 출발</option>
-	                                                    <option value="d">배송중</option>
-	                                                    <option value="e">배송 완료</option>
-	                                                </select>
-	                                            </td>
-	                                            <td>
-	                                                <select>
-	                                                    <option value="">결제 대기</option>
-	                                                    <option value="">결제 완료</option>
-	                                                    <option value="">결제 취소</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td><input type="checkbox" name="chkBtn"></td>
-	                                            <td>B213G64</td>
-	                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">주문자</a></td>
-	                                            <td>2021.12.05</td>
-	                                            <td>010-1234-5678</td>
-	                                            <td>
-	                                                <select>
-	                                                    <option value="a">주문 완료</option>
-	                                                    <option value="b">상품 준비중</option>
-	                                                    <option value="c">배송지 출발</option>
-	                                                    <option value="d">배송중</option>
-	                                                    <option value="e">배송 완료</option>
-	                                                </select>
-	                                            </td>
-	                                            <td>
-	                                                <select>
-	                                                    <option value="">결제 대기</option>
-	                                                    <option value="">결제 완료</option>
-	                                                    <option value="">결제 취소</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td><input type="checkbox" name="chkBtn"></td>
-	                                            <td>A546</td>
-	                                            <td><a onclick="popupOpen();" class="popUpOpen" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">옥수수</a></td>
-	                                            <td>2021.12.05</td>
-	                                            <td>010-1234-5678</td>
-	                                            <td>
-	                                                <select>
-	                                                    <option value="a">주문 완료</option>
-	                                                    <option value="b">상품 준비중</option>
-	                                                    <option value="c">배송지 출발</option>
-	                                                    <option value="d">배송중</option>
-	                                                    <option value="e">배송 완료</option>
-	                                                </select>
-	                                            </td>
-	                                            <td>
-	                                                <select>
-	                                                    <option value="">결제 대기</option>
-	                                                    <option value="">결제 완료</option>
-	                                                    <option value="">결제 취소</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
+		                                    <c:forEach items="${orderList}" var="dto">
+				                            	<tr>
+				                                	<td><input type="checkbox" name="RowCheck" value="${dto.order_id}"></td>
+				                                    <td>${dto.order_id}</td>
+				                                    <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.user_name}</a></td>
+				                                    <td>${dto.order_date}</td>
+				                                    <td>${dto.user_phone}</td>
+				                                    <td>
+				                                    	<select>
+				                                        	<option value="a">주문 완료</option>
+				                                            <option value="b">상품 준비중</option>
+				                                            <option value="c">배송지 출발</option>
+				                                            <option value="d">배송중</option>
+				                                            <option value="e">배송 완료</option>
+				                                        </select>
+				                                    </td>
+				                                    <td>
+				                                    	<select>
+				                                        	<option value="">결제 대기</option>
+				                                            <option value="">결제 완료</option>
+				                                            <option value="">결제 취소</option>
+				                                    	</select>
+				                                	</td>
+				                        		</tr>
+			                            	</c:forEach>
 	                                    </tbody>
 	                                    <tr></tr>
 	                                    <tr>

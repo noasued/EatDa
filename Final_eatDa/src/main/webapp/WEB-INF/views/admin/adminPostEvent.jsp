@@ -190,21 +190,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${eventList}" var="dto">
-	                                        <tr>
-	                                            <td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
-	                                            <td style="vertical-align:middle;">${dto.event_no}</td>
-	                                            <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
-	                                            <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
-	                                            <td style="vertical-align:middle;">
-	                                                <select onChange="statusUpdate(this.value);">
-	                                                    <option value="1">대 기</option>
-	                                                    <option value="2">진행중</option>
-	                                                    <option value="3">종 료</option>
-	                                                </select>
-	                                            </td>
-	                                        </tr>
-	                                	</c:forEach>
+	                                    <c:forEach items="${eventList}" var="dto">
+			                            	<tr>
+			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
+			                                    <td style="vertical-align:middle;">${dto.event_no}</td>
+			                                    <td style="vertical-align:middle;"><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
+			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+			                                    <td style="vertical-align:middle;">
+			                                    	<select onChange="statusUpdate(this.value);">
+			                                        	<option value="1">대 기</option>
+			                                            <option value="2">진행중</option>
+			                                            <option value="3">종 료</option>
+			                                    	</select>
+			                                	</td>
+			                            	</tr>
+			                        	</c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>

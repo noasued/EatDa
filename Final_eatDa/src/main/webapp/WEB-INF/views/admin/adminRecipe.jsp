@@ -170,7 +170,7 @@
                             <div class="card-header"><i class="fas fa-table me-1"></i> 레시피 관리</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <col width="50px"><col width="80px"><col width="60%"><col width="200px">
+                                    <col width="50px"><col width="50px"><col width="700px"><col width="150px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
@@ -181,14 +181,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${recipeList}" var="dto">
-	                                        <tr>
-	                                            <td><input type="checkbox" name="chkBtn" value="${dto.recipe_no}"></td>
-	                                            <td>${dto.recipe_no}</td>
-	                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.recipe_title}</a></td>
-	                                            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
-	                                        </tr>
-	                                	</c:forEach>        
+	                                    <c:forEach items="${recipeList}" var="dto">
+				                            <tr>
+				                                <td><input type="checkbox" name="chkBtn" value="${dto.recipe_no}"></td>
+				                                <td>${dto.recipe_no}</td>
+				                                <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.recipe_title}</a></td>
+				                                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+				                            </tr>
+				                        </c:forEach> 
                                     </tbody>
                                     <tr></tr>
                                     <tr>

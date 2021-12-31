@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -160,21 +163,19 @@
                         <h1 class="title_tab"><a href="adminPostReply.do" style="text-decoration: none; color: rgb(224, 179, 57);">댓글</a> | <a href="adminPostBlog.do" style="text-decoration: none; color: black;">블로그</a> | <a href="adminPostEvent.do" style="text-decoration: none; color: black;">이벤트</a></h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                댓글 관리
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i>댓글 관리</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <col width="50px"><col width="100px"><col width="40%"><col width="40%"><col width="200px">
+                                    <col width="50px"><col width="50px"><col width="100px"><col width="700px"><col width="150px"><col width="150px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
                                             <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
+                                            <th>NO</th>
                                             <th>I  D</th>
-                                            <th>게시글 제목</th>
                                             <th>댓 글</th>
                                             <th>작 성 일</th>
+                                            <th>수 정 일</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -185,87 +186,20 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 1</a></td>
-                                            <td><a href="">a</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 2</a></td>
-                                            <td><a href="">b</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 3</a></td>
-                                            <td><a href="">c</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 4</a></td>
-                                            <td><a href="">d</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 5</a></td>
-                                            <td><a href="">e</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 6</a></td>
-                                            <td><a href="">f</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 7</a></td>
-                                            <td><a href="">g</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 8</a></td>
-                                            <td><a href="">h</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 9</td>
-                                            <td><a href="">i</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 10</a></td>
-                                            <td><a href="">j</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" name="chkBtn"></td>
-                                            <td>OksusuS2</td>
-                                            <td><a href="#" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">콘치즈 11</a></td>
-                                            <td><a href="">k</a></td>
-                                            <td>2021.12.03</td>
-                                        </tr>
+	                                    <c:forEach items="${replyList}" var="dto">
+			                            	<tr>
+			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.reply_no}"></td>
+			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
+			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
+			                                    <td style="vertical-align:middle;"><a href="">${dto.reply_content}</a></td>
+			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></td>
+			                        		</tr>
+		                            	</c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>
-                                        <td colspan="5">
+                                        <td colspan="7">
                                             <button type="button" onclick="" value="delete">삭 제</button>
                                         </td>
                                     </tr>
