@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="admin">
+
+	<!-- Admin Product -->
+	<resultMap type="productDto" id="productMap">
+		<result property="p_id" column="P_ID" />
+		<result property="img_path" column="IMG_PATH" />
+		<result property="p_name" column="P_NAME" />
+	</resultMap>
+	
+	<select id="adminProductList" parameterType="list" resultMap="productMap">
+		SELECT * FROM PRODUCT
+		ORDER BY P_NO DESC
+	</select>
+	
+	<!-- Admin User -->
+	<resultMap type="userDto" id="userMap">
+		<result property="user_id" column="USER_ID" />
+		<result property="user_name" column="USER_NAME" />
+		<result property="user_nickname" column="USER_NICKNAME" />
+		<result property="user_phone" column="USER_PHONE" />
+		<result property="user_addr" column="USER_ADDR" />
+		<result property="user_email" column="USER_EMAIL" />
+		<result property="user_role" column="USER_ROLE" />
+		<result property="user_penalty" column="USER_PENALTY" />
+		<result property="user_enable" column="USER_ENABLE" />
+		<result property="user_mailing" column="USER_MAILING" />
+		<result property="user_img" column="USER_IMG" />
+	</resultMap>
+	
+		
+	<select id="userList" parameterType="list" resultMap="userMap">
+		SELECT * FROM E_USER
+		ORDER BY USER_ID DESC
+	</select>
+
+	<!-- Admin Report -->
+	<resultMap type="reportDto" id="reportMap">
+		<result property="report_no" column="REPORT_NO" />
+		<result property="reporter" column="REPORTER" />
+		<result property="reported" column="REPORTED" />
+		<result property="reply_no" column="REPLY_NO" />
+		<result property="report_date" column="REPORT_DATE" />
+		<result property="report_status" column="REPORT_STATUS" />
+		<result property="report_content" column="REPORT_CONTENT" />
+	</resultMap>
+	
+	<select id="adminReportList" parameterType="list" resultMap="reportMap">
+		SELECT * FROM REPORT
+		ORDER BY REPORT_NO DESC
+	</select>
+	
+
+</mapper>
