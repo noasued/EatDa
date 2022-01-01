@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.eatda.dto.MbtiDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.RecipeDto;
 
@@ -39,6 +40,19 @@ public class CommonDaoImpl implements CommonDao{
 			for (int i = 0; i < 3; i++) {
 				list.add(temp.get(i));
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<MbtiDto> getMbtiProduct(String m_name) {
+		List<MbtiDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(COMMON_NAMESPACE+"getMbtiProduct", m_name);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
