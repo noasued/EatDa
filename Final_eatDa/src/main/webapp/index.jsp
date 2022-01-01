@@ -175,7 +175,7 @@ li {
 
 </style>
 
-<title>Insert title here</title>
+<title>행복을 함께 나누다 EatDa</title>
 
 <script type="text/javascript">
 	$(document).ready( function() {

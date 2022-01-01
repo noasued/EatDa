@@ -261,10 +261,9 @@ function movePage(object) {
 	let pageid = $(object).attr('id');
 	takeProduct(page);
 	
-	console.log($('.active'));
 	$('.active').removeClass('active');
 	document.getElementById(pageid).className += 'active';
-	console.log(document.getElementById(pageid));
+	$(window).scrollTop(0);
 }
 
 let presentPage = Number($('.active').text());
@@ -280,6 +279,7 @@ function leftPaging() {
 		$('.active').prev().addClass('active');
 		$('.active').eq(1).removeClass('active');
 	}
+	$(window).scrollTop(0);
 }
 
 function rightPaging() {
@@ -292,6 +292,7 @@ function rightPaging() {
 		$('.active').next().addClass('active');
 		$('.active').eq(0).removeClass('active');
 	}
+	$(window).scrollTop(0);
 }
 </script>
 
