@@ -172,6 +172,21 @@ li {
 .recent-text {
 	letter-spacing: 0.5px; font-size: 15px; margin-bottom: 90%;
 }
+.recipe-no {
+	display:none;
+}
+.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover {
+	cursor:pointer;
+}
+.card-img-top {
+	width:100%;
+	height:100%;
+}
+.card-img-div {
+	width:100%;
+	height:55%;
+	margin: 15px 0;
+}
 
 </style>
 
@@ -199,8 +214,6 @@ li {
 			$('.banner').animate({opacity : 1}, 800);
 				index++;
 		}, 12000);
-		
-		
 		
 		//좌 우 버튼 클릭
 		$('.product-btn:eq(0)').click(function() {
@@ -234,13 +247,14 @@ li {
 		$(temp).each(function(key, value) {
 			$('.product-section').append(
 				"<div class='card p-card'>" +
+				"<span class='p-id' style='display:none;'>" + value.p_id + "</span>" +
 				"<span class='p-key' style='display:none;'>" + key + "</span>" +
-				"<div style='margin: 15px 0'>" +
-				"<img class='card-img-top' src=" + value.img_path + ">" +
+				"<div class='card-img-div'>" +
+				"<img onclick='goProductPage(this)' class='card-img-top' src=" + value.img_path + ">" +
 				"</div>" +
 				"<div class='card-body'>" +
 				"<h6 class='card-subtitle mb-2 text-muted'>" + value.p_short_desc + "</h6>" +
-				"<h5 class='card-title'>" + value.p_name + "</h5>" + 
+				"<h5 onclick='goProductPage(this)' class='card-title'>" + value.p_name + "</h5>" + 
 				"<p class='card-text'>" +
 				"<span>" + value.p_price + "</span><span>원</span>" +
 				"</p>" +
@@ -264,13 +278,14 @@ li {
 			$('.p-card:last').remove();
 			$('.product-section').prepend(
 					"<div class='card p-card'>" +
+					"<span class='p-id' style='display:none;'>" + product.p_id + "</span>" +
 					"<span class='p-key' style='display:none;'>" + getKey + "</span>" +
-					"<div style='margin: 15px 0'>" +
-					"<img class='card-img-top' src=" + product.img_path + ">" +
+					"<div class='card-img-div'>" +
+					"<img onclick='goProductPage(this)' class='card-img-top' src=" + product.img_path + ">" +
 					"</div>" +
 					"<div class='card-body'>" +
 					"<h6 class='card-subtitle mb-2 text-muted'>" + product.p_short_desc + "</h6>" +
-					"<h5 class='card-title'>" + product.p_name + "</h5>" + 
+					"<h5 onclick='goProductPage(this)' class='card-title'>" + product.p_name + "</h5>" + 
 					"<p class='card-text'>" +
 					"<span>" + product.p_price + "</span><span>원</span>" +
 					"</p>" +
@@ -290,13 +305,14 @@ li {
 			$('.p-card:eq(0)').remove();
 			$('.product-section').append(
 					"<div class='card p-card'>" +
+					"<span class='p-id' style='display:none;'>" + product.p_id + "</span>" +
 					"<span class='p-key' style='display:none;'>" + getKey + "</span>" +
-					"<div style='margin: 15px 0'>" +
-					"<img class='card-img-top' src=" + product.img_path + ">" +
+					"<div class='card-img-div'>" +
+					"<img onclick='goProductPage(this)' class='card-img-top' src=" + product.img_path + ">" +
 					"</div>" +
 					"<div class='card-body'>" +
 					"<h6 class='card-subtitle mb-2 text-muted'>" + product.p_short_desc + "</h6>" +
-					"<h5 class='card-title'>" + product.p_name + "</h5>" + 
+					"<h5 onclick='goProductPage(this)' class='card-title'>" + product.p_name + "</h5>" + 
 					"<p class='card-text'>" +
 					"<span>" + product.p_price + "</span><span>원</span>" +
 					"</p>" +
@@ -307,28 +323,38 @@ li {
 		}
 	}
 	
+	function goProductPage(object) {
+		let p_id = $(object).parent().siblings('.p-id').text();
+		location.href='goProductPage.do?p_id=' + p_id;
+	}
+	
 	function getRecentRecipe() {
 		$.ajax({
 			url:"getRecentRecipe.do",
 			type:"post",
 			dataType:"json",
 			success:function(data) {
-				console.log(data);
 				$(data).each(function(key, value) {
 					$('.rec-recipe').append(
 						"<div class='col-md-3'>" +
 						"<div class='card' style='height: 380px;'>" +
+						"<div class='recipe-no'>" + value.recipe_no + "</div>" +
 						"<div style='margin: 15px 0'>" +
-						"<img class='card-img-top' src='" + value.recipe_img + "'>" +
+						"<img onclick='goRecipeDetail(this)' class='card-img-top' src='" + value.recipe_img + "'>" +
 						"</div>" +
 						"<div class='card-body'>" +
-						"<h5 class='card-title'>" + value.recipe_title + "</h5>" +
-						"<p class='card-text'>" + value.recipe_content + "</p>" +
+						"<h5 onclick='goRecipeDetail(this)' class='card-title'>" + value.recipe_title + "</h5>" +
+						"<p onclick='goRecipeDetail(this)' class='card-text recipe-text'>" + value.recipe_content + "</p>" +
 						"</div></div></div>"
 					);
 				});
 			}
 		});
+	}
+	
+	function goRecipeDetail(object) {
+		let recipe_no = Number($(object).parent().siblings('.recipe-no').text());
+		location.href = 'recipeDetail.do?recipe_no=' + recipe_no;
 	}
 		
 </script>
@@ -359,7 +385,7 @@ li {
 						<div class="card-body" align="right">
 							<h5 class="title-font recent-title">요즘 계절에 알맞은 레시피</h5>
 							<p class="card-text recent-text">현재 계절에 알맞은 음식들의 레시피를 EatDa에서 준비해드렸어요.</p>
-							<span class="font-noto-sans sub-title">레시피 보러가기></span>
+							<span onclick="location.href='recipeList.do'" class="font-noto-sans sub-title">레시피 보러가기></span>
 						</div>
 					</div>
 				</div>
@@ -374,8 +400,7 @@ li {
 					<p class="title-font"
 						style="margin-right: 10%; margin-bottom: 10px;">지금 가장 사랑받는 레시피</p>
 					<br>
-					<span class="font-noto-sans sub-title"
-						style="margin-right: 10%; font-size: small;">Recipe></span>
+					<span onclick="location.href='recipeList.do'" class="font-noto-sans sub-title" style="margin-right: 10%;">Recipe></span>
 				</div>
 				<div class="col-md-6">
 					<ul class="list-base">
