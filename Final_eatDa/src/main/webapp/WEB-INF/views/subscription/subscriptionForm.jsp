@@ -75,7 +75,7 @@
 <div class="container" style="padding-left:5%;">
 	<div class="input-form-backgroud row">
 		<div class="input-form col-md-12 mx-auto">
-			<form class="validation-form" style="padding-left:2%;" novalidate>
+			<form class="validation-form" style="padding-left:2%;" novalidate action="subFinish.do">
 				<div class="container px-5 my-5 px-5 justify-content-flex-start">
 					<h1 style="text-align:center;">${type} 신청</h1> <br>	
 					<label for="sub_type" style="font-weight: bold; font-size: 20pt; color:rgb(70, 70, 70);">구독 유형</label><br><br>  
@@ -115,14 +115,14 @@
 					<div class="row gx-5">
 						<div id="contentForm">
 							<div class="form-floating mb-3">
-								<textarea rows="3" cols="120" id="vertical" style="height: 10rem; white-space: pre-line; margin-top: 3%;" class="form-control" id="message" type="text" placeholder="못먹는 음식 또는 음식 알러지 등에 대해 작성해주세요.
+								<textarea rows="3" cols="120" id="vertical" style="height: 10rem; white-space: pre-line; margin-top: 3%;" class="form-control" id="message" name="msg" type="text" placeholder="못먹는 음식 또는 음식 알러지 등에 대해 작성해주세요.
 									예시) 저는 오이를 싫어합니다. 오이가 들어가있지 않은 밀키트로 배송해주세요."></textarea>
                             </div>
                         </div>
 					</div>
 			</div>
           <div class="mb-4">
-	          <button class="btn btn-warning btn-lg btn-block" type="submit" onclick="" style="font-size:20pt;">구독 신청</button>
+	          <button class="btn btn-warning btn-lg btn-block" type="submit" style="font-size:20pt;">구독 신청</button>
 	          <button class="btn btn-secondary btn-md btn-block" type="button" onclick="location.href='subMain.do'" style="font-size:15pt;">취 소</button>
           </div>
         </form>
