@@ -149,7 +149,8 @@ li {
 	width: 20%;
 	height: 500px;
 	float: left;
-	margin: 0 1%
+	margin: 0 1%;
+	box-shadow:1px 1px 20px 1px rgb(143, 135, 135);
 }
 .product-btn:hover {
 	cursor:pointer;
@@ -193,14 +194,11 @@ li {
 <title>행복을 함께 나누다 EatDa</title>
 
 <script type="text/javascript">
-	$(document).ready( function() {
+	$(document).ready(function() {
 		let list = getMarketProduct();
 		let index = 2;
 		
-		//최신 레시피 불러오기
 		getRecentRecipe();
-		
-		//market Product
 		makeProductSection(list);
 		
 		//배너 사진 변경
@@ -224,7 +222,7 @@ li {
 		});
 	});
 	
-	function getMarketProduct() {
+	const getMarketProduct = () => {
 		var list;
 		$.ajax({
 			url:"getMarketData.do",
@@ -238,7 +236,7 @@ li {
 		return list;
 	}
 	
-	function makeProductSection(list) {
+	const makeProductSection = (list) => {
 		let temp = new Array();
 		for (var i = 0; i < 4; i++) {
 			temp.push(list[i]);
@@ -265,7 +263,7 @@ li {
 		});
 	}
 	
-	function productSwitchBtn(list, direction) {
+	const productSwitchBtn = (list, direction) => {
 		let getKey;
 		let product;
 		
@@ -323,12 +321,12 @@ li {
 		}
 	}
 	
-	function goProductPage(object) {
+	const goProductPage = (object) => {
 		let p_id = $(object).parent().siblings('.p-id').text();
 		location.href='goProductPage.do?p_id=' + p_id;
 	}
 	
-	function getRecentRecipe() {
+	const getRecentRecipe = () => {
 		$.ajax({
 			url:"getRecentRecipe.do",
 			type:"post",
@@ -352,11 +350,11 @@ li {
 		});
 	}
 	
-	function goRecipeDetail(object) {
+	const goRecipeDetail = (object) => {
 		let recipe_no = Number($(object).parent().siblings('.recipe-no').text());
 		location.href = 'recipeDetail.do?recipe_no=' + recipe_no;
 	}
-		
+	
 </script>
 
 </head>
