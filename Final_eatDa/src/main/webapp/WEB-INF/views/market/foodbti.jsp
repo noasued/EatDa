@@ -130,7 +130,8 @@
         margin:15px 0; height:50%;
     }
     .p-card {
-        height:420px; width:70%; margin:0 auto;
+        height:430px; width:60%; margin:0 auto;
+        box-shadow:1px 1px 30px 1px rgb(143, 135, 135);
     }
     .card-title:hover, .img-div:hover {
     	cursor:pointer;
