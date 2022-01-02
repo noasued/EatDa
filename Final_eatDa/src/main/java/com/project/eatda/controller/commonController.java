@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.CommonBiz;
+import com.project.eatda.dto.MbtiDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.RecipeDto;
 
@@ -28,6 +29,12 @@ public class commonController {
 		return "../../index";
 	}
 	
+	@RequestMapping("/foodbti.do")
+	public String goFoodbti() {
+		logger.info("foodbti");
+		return "/market/foodbti";
+	}
+	
 	@RequestMapping(value="/getMarketData.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<ProductDto> getMarketData() {
@@ -38,7 +45,6 @@ public class commonController {
 		for (int i = 9; i < list.size(); i++) {
 			tempList.add(list.get(i));
 		}
-		
 		return tempList;
 	}
 	
@@ -53,6 +59,21 @@ public class commonController {
 			if (temp.length() > 30) {
 				list.get(i).setRecipe_content(temp.substring(0, 60)+"...");
 			}
+		}
+		return list;
+	}
+	
+	@RequestMapping(value="/getMbtiProduct.do", method=RequestMethod.GET) 
+	@ResponseBody
+	public List<MbtiDto> getMbtiProduct(String m_name) {
+		logger.info("getMbtiProduct, m_name: "+ m_name);
+		List<MbtiDto> list = commonBiz.getMbtiProduct(m_name);
+		
+		String desc = list.get(0).getP_description();
+		
+		if (desc.length() > 60) {
+			desc = desc.substring(0,57) + "...";
+			list.get(0).setP_description(desc);
 		}
 		
 		return list;

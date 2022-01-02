@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Gaegu:wght@700&family=IBM+Plex+Sans+KR:wght@200&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
     
 <style type="text/css">
-    html, body {
+ html, body {
         width: 100%;
         height:100%;
         margin:0;
@@ -61,7 +61,7 @@
         font-weight: bold;
     }
     .question-box {
-        width:80%;
+        width:90%;
         margin:0 auto;
         height:90%;
         padding:2%;
@@ -94,12 +94,53 @@
         font-size: x-large;
         color: rgb(143, 135, 135);
     }
+
+    .btn-start-div {
+        height:10%;
+    }
+
+    /**/
+    .after-text {
+        margin-top: 20px;
+        font-size: large;
+        color: #615c5c;
+        font-weight: 700;
+    }
+
+    .after-content {
+        height:95%;
+    }
+
+    .after-body {
+        height:22%;
+        margin: 5% auto;
+    }
+
+    .after-paging {
+        width:80%;
+        margin:0 auto;
+        margin-top: 30px;
+        text-align: right;
+        height: 5%;
+    }
+    .rec-img {
+        width:90%; height:100%; border-radius:10px;
+    }
+    .img-div {
+        margin:15px 0; height:50%;
+    }
+    .p-card {
+        height:420px; width:70%; margin:0 auto;
+    }
+    .card-title:hover, .img-div:hover {
+    	cursor:pointer;
+    }
 </style>
 <script type="text/javascript">
     var count = 0;
     var array = [];
     var questionArray = [
-        '로제 떡볶이나 느끼한 오일 파스타 먹을바에 8천원이면 든든하게 배 채울수 있는 국밥이지!',
+        '식당에 들어가서 앉았는데 벨을 눌러도, 5분을 앉아있어도 직원이 안온다. 이때 큰 소리로 주문할 수 있다.',
         '저기압 일 땐 고기앞으로, 기분이 고기압일 땐 고기앞으로.',
         '하루 3끼 내 밥상에 육류가 없으면 하루종일 기분이 좋지 않다.',
         '스트레스를 받으면 뭐 먹을지 고민하는 편이다.',
@@ -112,22 +153,23 @@
 
     function response(value) {
         let nowPage = Number(document.getElementsByClassName('now-page')[0].innerText)+1;
+        let mbti = '';
         count += value;
 
         //mbti 정하는 로직
         if ((nowPage-1)%2 == 0) {
             switch (nowPage-1) {
                 case 1,2 : 
-                    count>1?array.push('E'):array.push('I'); //외향 내향
+                    count>1?array.push('E'):array.push('I');
                     break;
                 case 3,4 : 
-                    count>1?array.push('M'):array.push('V'); //고기 야채
+                    count>1?array.push('M'):array.push('V');
                     break;
                 case 5,6 : 
-                    count>1?array.push('W'):array.push('S'); //일부분
+                    count>1?array.push('W'):array.push('S');
                     break;
                 case 7,8 :
-                    count>1?array.push('A'):array.push('P'); //수동 적극
+                    count>1?array.push('A'):array.push('P');
                     break;
             }
             count = 0;
@@ -162,26 +204,94 @@
             
             //완료 시
             setTimeout(function() {
-                var mbti = '';
                 for (var i = 0; i < 4; i++) {
                     mbti += array[i];
                 }
-
-                $('.content-div').html(
-                    '<div>당신의 성향은 \'' + mbti + '\'입니다.</div>'
-                );
+                afterTest(mbti);
             },2000);
-            //성향에 따른 마켓 상품 추천까지 해야함.
-
         }
     }
+
+    function afterTest(mbti) {
+        console.log('afterTest.mbti:'+mbti);
+        $.ajax({
+        	url:"getMbtiProduct.do?m_name="+mbti,
+        	type:"get",
+        	dataType:"json",
+        	success:function(data) {
+        		$(data).each(function(key, value) {
+			        $('.content-div').html(
+			            "<div class='after-content'>" +
+			                "<div class='after-paging' align='right'>" +
+			                    "<span style='font-size:medium'>EatDa 이달의 컨텐츠!</span><br>" +
+			                "</div>" +
+			                "<div class='question-box'>" +
+			                    "<div class='after-body'>" +
+			                        "<div class='question gaegu' style='margin-top: 20px;'>" +
+			                            "당신의 성향은 '" + value.m_name + "' 입니다." +
+			                        "</div>" +
+			                        "<div class='after-text gaegu'>" +
+			                            "<span style='font-size:medium;'>" + value.m_content + "</span><br>" +
+			                            "<span>당신에게 어울리는 음식은...</span>" +
+			                        "</div>" +
+			                    "</div>" +
+			                    "<div class='card p-card' align='left'>" +
+			                    	"<div style='display:none' class='p-id'>" + value.p_id + "</div>" +
+			                        "<div class='img-div' align='center'>" +
+			                            "<img onclick='goProductPage(this)' src='" + value.img_path + "' class='card-img-top rec-img'>" +
+			                        "</div>" +
+			                        "<div class='card-body'>" +
+			                            "<h6 class='card-subtitle mb-2 text-muted'>" + value.p_short_desc + "</h6>" +
+			                            "<h5 class='card-title' onclick='goProductPage(this)'>" + value.p_name + "</h5>" +
+			                            "<p class='card-text'>" +
+			                                "<span>" + value.p_price + "</span><span>원</span>" +
+			                            "</p>" +
+			                            "<p class='card-text'>" + value.p_description + "</p>" +
+			                        "</div>" +
+			                    "</div>" +
+			                "</div>" +
+			            "</div>"
+			        );
+        		});
+        	}
+        });
+    }
+    function goProductPage(object) {
+    	let p_id = $(object).parent().siblings('.p-id').text();
+		location.href='goProductPage.do?p_id=' + p_id;
+    } 
+
+    function start() {
+        $('.content-div').html(
+            '<div class="content">' +
+                '<div class="paging" align="right">' +
+                    '<span class="now-page">1</span>' +
+                    '<span>/ 8</span>' +
+                '</div>' +
+                '<div class="question-box">' +
+                    '<div class="question-div">' +
+                        '<span class="gaegu">STEP.</span>&nbsp;&nbsp;' +
+                        '<span class="now-page gaegu">1</span>' +
+                        '<div class="question gaegu">' +
+                            '식당에서 밑반찬을 다 먹었을 때 셀프바가 있는지 먼저 살펴보는 편이다.' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="btn-div d-grid gap-3 col-9 mx-auto">' +
+                '<button class="btn btn-outline-info q-btn" onclick="response(1)">정말 그렇다</button>' +
+                '<button class="btn btn-outline-danger q-btn" onclick="response(0)">전혀 아니다</button>' +
+            '</div>'
+        );
+    }
+
 </script>
 </head>
 <body>
-	<div class="header container-fluid" style="width:100%;">
+    <div class="header container-fluid" style="width:100%;">
         <div class="row">
             <div class="col-md-6 header-col" style="padding-left: 5%;">
-                <span class="head-title main">EatDa</span>
+                <span class="head-title main" onclick="location.href='index.do'">EatDa</span>
             </div>
             <div class="col-md-6 header-col" style="padding-right: 5%;" align="right">
                 <span class="head-title" onclick="location.reload()">Replay</span>
@@ -194,22 +304,21 @@
             <div class="col-md-6 content-div">
                 <div class="content">
                     <div class="paging" align="right">
-                        <span class="now-page">1</span>
-                        <span>/ 8</span>
+                        <span style="font-size:medium">EatDa 이달의 컨텐츠!</span><br>
                     </div>
                     <div class="question-box">
                         <div class="question-div">
-                            <span class="gaegu">STEP.</span>&nbsp;&nbsp;
-                            <span class="now-page gaegu">1</span>
                             <div class="question gaegu">
-                                국밥을 먹을 때 깍두기 리필을 걱정하지 않고 바로 외칠 수 있다.
+                                이번 주말은 어떤 음식을 즐겨볼까?
+                            </div>
+                            <div class="question gaegu">
+                                내 성향 테스트해보고 추천 메뉴도 알아보자!
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="btn-div d-grid gap-3 col-9 mx-auto">
-                    <button class="btn btn-outline-info q-btn" onclick="response(1)">정말 그렇다</button>
-                    <button class="btn btn-outline-danger q-btn" onclick="response(0)">전혀 아니다</button>
+                <div class="btn-start-div d-grid col-10 mx-auto">
+                    <button class="btn btn-outline-warning q-btn" onclick="start()">음BTI 검사하기</button>
                 </div>
             </div>
         </div>
