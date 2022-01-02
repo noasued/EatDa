@@ -28,4 +28,7 @@ String NAMESPACE_MYPAGE = "mypage.";
 	//리뷰작성
 	public int registReview(ReviewDto dto);
 	
+	//리뷰 폼
+	public OrderProductDto reviewForm(String order_id);
+	
 }

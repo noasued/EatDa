@@ -262,7 +262,6 @@ $(document).ready(function() {
 	blogLike();
 	marketLike();
 	marketOrderList();
-	registReview();
 });
 
 //블로그 찜 목록
@@ -384,7 +383,7 @@ function marketOrderList() {
 						"<a>" +value.price + " 원</a>" +
 						"</div>" +
 						"</div>" +
-						"<input type='button' value='리뷰 작성' onclick='reviewModalIn()'>"+
+						"<input type='button' id='" + value.order_id + "' value='리뷰 작성' onclick='reviewModalIn(this)'>"+
 						"</td>"
 					);
 			});
@@ -394,57 +393,14 @@ function marketOrderList() {
 	
 }
 
-//리뷰..
-function registReview() {
-	$.ajax({
-		url:"marketOrderList.do",
-		type:"post",
-		dataType:"json",
-		success:function(data) {
-			let list = data;
-			
-			if(list == 0){
-				$('.bought_product').append(
-						"<div class='no_order_list'>" +
-						"<a>주문한 상품이 없습니다.</a>" +
-						"</div>"
-					);
-			}else{
-			$(list).each(function(key, value) {
-				$('.review').append(
-						
-						"<form action='' method='post' class='review_form'>"+
-						"<div class='review_product'>"+
-						"<span>상품이름: </span>"+
-						"</div>"+
-						
-						"<div class='review_content'>"+
-						"<span>내용: </span>"+
-						"<textarea rows='7' cols='60'></textarea>"+
-						"</div>"+
-						
-						"<div class='review_btn'>"+
-						"<input type='submit' vlaue='작성'>"+
-						"<input type='button' vlaue='취소' onclick='reviewModalOut();'>"+
-						"</div>"+
-						
-						"</form>"
-					);
-			});
-			}
-		}
-	});
-	
-}
 
 //리뷰 모달창
 function reviewModalIn(object) {
-	$(".review_wrap1").fadeIn();
+	var order_id = $(object).attr('id');
+	alert(order_id);
+	location.href = 'reviewForm.do?order_id='+order_id;
 }
 
-function reviewModalOut(object) {
-	$(".review_wrap1").fadeOut();
-}
 
 
 </script>
@@ -494,15 +450,6 @@ function reviewModalOut(object) {
               </table>
           </div>
         </div>
-		
-		<div class="review_wrap1" style="z-index: 1;">
-			<div class="review_wrap">
-				<div class="review">
-					
-
-				</div>
-			</div>
-		</div>
 
 
 
