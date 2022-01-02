@@ -167,11 +167,17 @@ body {
 				<ul class="header-ul">
 					<li class="nav-menu"><a class="header-a" href="marketMain.do">마켓</a></li>
 					<li class="nav-menu"><a class="header-a" href="recipeList.do">레시피</a></li>
+					<li class="nav-menu"><a class="header-a" href="foodbti.do">컨텐츠</a>
+						<ul class="sub-menu">
+							<li><a class="header-a" href="foodbti.do">음BTI</a></li>
+						</ul>
+					</li>
 					<li class="nav-menu"><a class="header-a" href="blog.do">잇다그램</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="blog.do">EatDagram</a></li>
 							<li><a class="header-a" href="event.do">이벤트</a></li>
-						</ul></li>
+						</ul>
+					</li>
 					<li class="nav-menu"><a class="header-a" href="subMain.do">정기구독</a></li>
 					<li class="nav-menu"><a class="header-a" href="#">마이페이지</a>
 						<ul class="sub-menu">
@@ -182,7 +188,8 @@ body {
 							<li><a class="header-a" href="mypage_like.do">찜목록</a></li>
 							<li><a class="header-a"
 								href="mypage_couponList.do?user_id=${member.user_id }">쿠폰함</a></li>
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<div class="col-sm-3" align="right" style="padding: 20px 6% 0 0;">

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.CommonDao;
+import com.project.eatda.dto.MbtiDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.RecipeDto;
 
@@ -23,6 +24,11 @@ public class CommonBizImpl implements CommonBiz{
 	@Override
 	public List<RecipeDto> getRecentRecipe() {
 		return dao.getRecentRecipe();
+	}
+
+	@Override
+	public List<MbtiDto> getMbtiProduct(String m_name) {
+		return dao.getMbtiProduct(m_name);
 	}
 	
 }

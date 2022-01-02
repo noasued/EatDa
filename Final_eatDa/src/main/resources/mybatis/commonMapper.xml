@@ -11,5 +11,11 @@
 	 <select id="getRecentRecipe" resultType="recipeDto">
 	 	SELECT * FROM RECIPE ORDER BY REGDATE DESC
 	 </select>
-	
+	 
+	 <select id="getMbtiProduct" parameterType="string" resultType="mbtiDto">
+	 	SELECT M_NAME, M_CONTENT, P_ID, P_NAME, P_SHORT_DESC, P_DESCRIPTION, IMG_PATH, P_PRICE
+		FROM MBTI
+		JOIN PRODUCT ON (REC_PRODUCT = P_ID)
+		WHERE M_NAME = #{m_name}
+	 </select>
 </mapper>
