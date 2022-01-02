@@ -5,15 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style type="text/css">
-	/* body 최소 크기, 마진 0 지정 */
-	body {
-		min-width:1400px; 
-		height:auto;
-	}
-</style>
-
 	<style type="text/css">
+		body {
+			min-width:1400px; 
+			height:auto;
+		}
+		
         .rows-width {
             width: 70%;
             height: auto;
@@ -34,9 +31,6 @@
             font-size: large;
         }
 
-        /*
-            주문한 수량에 맞게 height 조절되어야함
-        */
         .title-section {
             margin-top: 5%;
             padding: 10px;
@@ -89,15 +83,16 @@
         .p-img {
         	padding: 20px;
         }
-
     </style>
 
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function() {
-	getCartList();
-	deleteCartList();
-	deleteCoupon();
+	window.setTimeout(function() {
+		getCartList();
+		deleteCartList();
+		deleteCoupon();
+	},1000);
 });
 
 function getCartList() {
@@ -154,7 +149,6 @@ function deleteCartList() {
 	});
 }
 
-//쿠폰 삭제 체크
 function deleteCoupon() {
 	console.log($('#coupon-id').text());
 	let coupon_id = {
@@ -175,19 +169,16 @@ function deleteCoupon() {
 	});
 }
 
-	
-function goMain() {
-	location.href='index.do';
+function goMain(command) {
+	location.href=command+'.do';
 }
-	
-	
+
 </script>
 </head>
 <body style="margin-top:200px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
-
 	<!-- description part -->
     <div class="container-fluid">
         <div class="row rows-width first-section" style="margin:0px auto; margin-top: 5%;">
@@ -211,7 +202,6 @@ function goMain() {
             </div>
         </div>
     </div>
-
 
     <!-- product part -->
     <div class="container-fluid">
@@ -286,8 +276,8 @@ function goMain() {
         <div class="row rows-width btn-part" style="margin:30px auto 100px;">
             <div class="col-md-2"></div>
             <div class="col-md-8" align="center">
-                <button class="btn btn-primary btn-lg bottm-btn" onclick="goMain()">홈으로</button>
-                <button class="btn btn-primary btn-lg bottm-btn" onclick="">쇼핑 계속하기</button>
+                <button class="btn btn-primary btn-lg bottm-btn" onclick="goMain('index')">홈으로</button>
+                <button class="btn btn-primary btn-lg bottm-btn" onclick="goMain('marketMain')">쇼핑 계속하기</button>
             </div>
             <div class="col-md-2"></div>
         </div>
@@ -296,7 +286,5 @@ function goMain() {
     <div id="footer">
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-
-
 </body>
 </html>

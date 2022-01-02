@@ -84,12 +84,6 @@
     #m-check:hover, #choice-delete:hover, #right-Button:hover, #left-Button:hover, #subDev, #norDev {
         cursor: pointer;
     }
-</style>
-
-<style type="text/css">
-    /*
-        product row css
-    */
     .product-img {
         width: 90px;
         height: 90px;
@@ -145,8 +139,6 @@
     .sub-col-price {
     	margin-left:40%;
     }
-</style>
-<style type="text/css">
     .title {
         padding-top: 30px;
         padding-bottom: 10px;
@@ -253,21 +245,15 @@
 		totalPrice = 0;
 	}
 	
-	//멀티버튼 메서드
 	function pushMulti() {
-		// 1. 이미지를 바꿔줘야함
-		// 2. 전체선택을 클릭하면 밑에 이미지들도 다 체크모양으로 바뀌어야함
 		let src = $('#m-check').attr('src');
 		
-		
 		if (src == 'resources/images/market/check.png') {
-			//미체크 상태
 			$('#m-check').attr('src','resources/images/market/full-check.png');
 			$('input:checkbox[name="checkbox"]').each(function() {
 				this.checked=true;
 			});
 		} else {
-			//체크된 상태
 			$('#m-check').attr('src','resources/images/market/check.png');	
 			$('input:checkbox[name="checkbox"]').each(function() {
 				this.checked=false;
@@ -275,8 +261,6 @@
 		}
 	}
 	
-	//선택삭제 메서드
-	//
 	function choiceDelete() {
 		let array = new Array();
 		console.log($('now-tab').children('input:checkbox[name="checkbox"]:checked'));
@@ -315,7 +299,6 @@
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(data),
 			success:function(msg) {
-				//삭제완료.
 				alert('선택하신 상품을 장바구니에서 제거했습니다.');
 			}
 		});
@@ -375,9 +358,6 @@
 			
 		}
 	}
-	//하나의 컨트롤러에서 처리하자. 커맨드 처럼 넣어서
-	//버튼 누르면 비워주
-	//구독상품 배송 관련
 	
 	function makeSubDelivery() {
 		$.ajax({
@@ -414,7 +394,6 @@
 			}
 		});
 	}
-	
 	
 	function subDelivery() {
 		$('#norDev').removeClass('now-tab');
