@@ -149,7 +149,8 @@ li {
 	width: 20%;
 	height: 500px;
 	float: left;
-	margin: 0 1%
+	margin: 0 1%;
+	box-shadow:1px 1px 20px 1px rgb(143, 135, 135);
 }
 .product-btn:hover {
 	cursor:pointer;
