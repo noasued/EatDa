@@ -177,7 +177,7 @@
                                 <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link product" href="adminProduct.do" style="color: black;">
+                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 <span>Product</span>
                             </a>
@@ -207,10 +207,7 @@
                         <h1 class="title_tab">신고 관리</h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                신고 관리
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i> 신고 관리</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <col width="1%">
@@ -255,9 +252,6 @@
                         </div>
                     </div>
                 </main>
-                <footer class="">
-                    
-                </footer>
             </div>
         </div>
         

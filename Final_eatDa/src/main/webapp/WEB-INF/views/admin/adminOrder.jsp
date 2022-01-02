@@ -241,7 +241,7 @@
                                 <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link product" href="adminProduct.do" style="color: black;">
+                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 <span>Product</span>
                             </a>
@@ -329,9 +329,6 @@
                         </div>
                     </div>
                 </main>
-                <footer class=""> 
-                    
-                </footer>
             </div>
         </div>
         
