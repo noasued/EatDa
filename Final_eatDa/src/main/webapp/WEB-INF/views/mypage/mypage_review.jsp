@@ -16,10 +16,12 @@
 	flex-direction: column;
 	width: 800px;
     margin-top: 180px;  
+    align-items: center;
 }
 
 .headline{
 	margin-top: 0px;
+	text-align: center;
 }
 
 .headline a{
@@ -36,8 +38,18 @@
 	justify-content: center;
 }
 
+.review_form{
+	margin-top: 50px;
+	margin-left: 130px;
+	align-items: center;
+}
+
+.form{
+	width: 600px;
+}
+
 .review_form th{
-    text-align: left;
+    text-align: center;
     vertical-align: top;
     width: 100px;
     height: 40px;
@@ -48,6 +60,41 @@
 .review_form td{
     vertical-align: top;
 }
+
+.regist_btn{
+	text-align: center;
+	margin-top: 40px;
+}
+
+.review_form td a{
+	font-size: 0.7rem;
+}
+
+.review_form td textarea{
+	padding: 15px;
+	resize: none;
+	font-size: 0.8rem;
+}
+
+.submit_btn{
+    border: none;
+    border-radius: 4px;
+    width: 75px;
+    height: 30px;
+    background-color: #ffe084;
+    color: white;
+    font-weight: bold;
+}
+
+.delete_btn{
+    border: none;
+    border-radius: 4px;
+    width: 75px;
+    height: 30px;
+    background-color: rgb(134, 134, 132);
+    color: white;
+    font-weight: bold;
+    }
 </style>
 <body>
 	<div id="header">
@@ -61,7 +108,7 @@
             </div>
             
             <div class="review_form">
-            <form action="registReview.do" method="post">
+            <form action="registReview.do" method="post" class="form">
             <input type="hidden" name="order_id" value="${dto.order_id }">
             <input type="hidden" name="p_id" value="${dto.p_id }">
                 <table width="550px">

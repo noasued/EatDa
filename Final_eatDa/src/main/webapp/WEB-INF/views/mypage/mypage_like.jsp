@@ -423,7 +423,7 @@ function reviewForm(object) {
         <div class="headline4">
             <a>주문한 상품</a><br>
             <a href="marketOrderList2.do?user_id=${member.user_id }" id="link_order_list">>>주문내역 보기</a>
-          </div>
+         </div>
           <div class="bought_product_wrap">
           <div class="bought_product" style="overflow-x: auto; overflow-y: hidden;">
               <table width="600px">

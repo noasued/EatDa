@@ -22,10 +22,43 @@
 	position: absolute;
 	flex-direction: column;
 	align-items: center;
+	margin-top: 200px;
 	width: 800px;  
-	margin-top: 160px;
 }
 
+.order_info_list_wrap{ 
+    display: flex;
+    position: absolute;
+	flex-direction: column;
+    width: 800px;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.order_info_list{
+    display: flex;
+	flex-direction: column;
+    width: 800px;
+    height: 300px;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    overflow-y: scroll;
+}
+
+.order_info_list::-webkit-scrollbar{
+    width: 6px;
+}
+
+.order_info_list::-webkit-scrollbar-thumb{
+    background-color: #ffe084;
+    border-radius: 10px;
+}
+
+.headline{
+	width: 800px;
+	text-align: center;
+}
 .headline a{
 	font-size: 22pt;
     font-weight: bold;
@@ -34,21 +67,34 @@
 table{
     margin-top: 10px;
     align-items: center;
+    text-align: center;
 }
+
+table td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 0.8rem;
+
+}
+
+#order_id{
+	color:#ffe084;
+	font-weight: bold;
+}
+
+tbody tr:nth-child(2n) {
+    background-color: white;
+  }
 
 
 .wrap{
 	width: 100%;
-	height: 1500px;
+	height: 700px;
 	display: flex;
-	align-items: center;
 	justify-content: center;
 }
 
-table tr td{
-    text-align: center;
-    padding: 15px;
-}
+
 
 
 
@@ -74,9 +120,9 @@ table tr td{
         
         <div class="order_info_list_wrap">
           <div class="order_info_list" >
-              <table width="600px" border="1">
+              <table width="750px">
                 <tr>
-                    <col width="100px"><col width="300px"><col width="200px">
+                    <col width="50px"><col width="400px"><col width="300px">
                 </tr>
                 <tr>
                 	<th>NO</th>
@@ -87,7 +133,7 @@ table tr td{
                 <c:forEach items="${list }" var="dto">
 			       <tr>
 			       	 <td>1</td>
-			         <td>${dto.order_id }</td>
+			         <td id="order_id">${dto.order_id }</td>
 			         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.order_date}"/></td>
 			      </tr>
 		        </c:forEach>
