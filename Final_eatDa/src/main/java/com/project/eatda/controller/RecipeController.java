@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.eatda.biz.RecipeBiz;
 import com.project.eatda.dto.RecipeDto;
+import com.project.eatda.dto.RecipePageBaseDto;
+import com.project.eatda.dto.RecipePageDto;
 
 @Controller
 public class RecipeController {
@@ -28,12 +30,15 @@ public class RecipeController {
 	}
 	
 	@RequestMapping("/recipeListTest.do")
-	public String recipeListTest(Model model,String searchType, String keyword) {
-		logger.info("RECIPE SEARCH LIST");
+	public String recipeListTest(Model model, RecipePageBaseDto rpbdto) {
+		logger.info("RECIPE LIST TEST");
 		
-		model.addAttribute("list", biz.recipeListTest(searchType, keyword));
+		RecipePageDto rpdto = new RecipePageDto(rpbdto, biz.getTotal(rpbdto));
 		
-		return "/recipe/recipeList";
+		model.addAttribute("rpdto", rpdto);
+		model.addAttribute("list", biz.recipeTest(rpbdto));
+		
+		return "/recipe/recipeList_test";
 	}
 	
 	@RequestMapping("/recipeCategory.do")
@@ -43,13 +48,6 @@ public class RecipeController {
 		model.addAttribute("list", biz.recipeCategory(recipe_category));
 		
 		return "/recipe/recipeList";
-	}
-	
-	@RequestMapping("/test2.do")
-	public String test2() {
-		logger.info("test222");
-	
-		return "/recipe/test2";
 	}
 
 	@RequestMapping("/recipeDetail.do")
@@ -68,14 +66,6 @@ public class RecipeController {
 		logger.info("RECIPE INSERT");
 		
 		return "/recipe/recipeInsert";
-	}
-	
-	//서머노트 test
-	@RequestMapping("/test.do")
-	public String test() {
-		logger.info("TETST");
-		
-		return "/recipe/test";
 	}
 	
 	@RequestMapping("/recipeInsertRes.do")
@@ -128,38 +118,8 @@ public class RecipeController {
 			return "redirect:recipeDetail.do?recipe_no="+recipe_no;
 		}
 	}
-//	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
-//	@ResponseBody
-//	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
-//		JsonObject jsonObject = new JsonObject();
-//		
-//        /*
-//		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-//		 */
-//		
-//		// 내부경로로 저장
-//		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-//		String fileRoot = contextRoot+"resources/images/recipe/";
-//		
-//		String originalFileName = multipartFile.getOriginalFilename();	//원본 파일명
-//		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-//		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-//		
-//		File targetFile = new File(fileRoot + savedFileName);	
-//		try {
-//			InputStream fileStream = multipartFile.getInputStream();
-//			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-//			jsonObject.addProperty("url", "/summernote/resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-//			jsonObject.addProperty("responseCode", "success");
-//				
-//		} catch (IOException e) {
-//			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-//			jsonObject.addProperty("responseCode", "error");
-//			e.printStackTrace();
-//		}
-//		String a = jsonObject.toString();
-//		return a;
-//	}
+	
+
 
 
 }
