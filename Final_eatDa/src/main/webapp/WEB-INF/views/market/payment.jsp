@@ -4,299 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript">
-		function getCoupon_id(){
-			let rate = $('#coupon-list').val();
-			let coupon_id = '';
-			$('option').each(function(){
-				if($(this).val() == rate) {
-					coupon_id = $(this).attr('id');
-				}
-			});
-			return coupon_id;
-		}
-	
-		function progressPay() {
-			const pay_info = {
-					order_code:'O'+ Math.floor(Math.random()*10000+1) + 'C' + Math.floor(Math.random()*10000+1),
-					buyer_name:$('.input').eq(0).val(),
-					buyer_email:$('.input').eq(4).val(),
-					buyer_tel:$('.input').eq(3).val(),
-					buyer_addr:$('.input:eq(1)').val() + ' ' + $('.input:eq(2)').val(),
-					paymentOption:$('input:radio[name="payment"]:checked').val(),
-					order_price:$('.after-price').eq(1).text(),
-					original_price:$('.original-price').eq(0).text(),
-					discount_price:$('.discount-price').text(),
-					coupon_rate:$('#coupon-list').val(),
-					order_message:$('.input').eq(4).val(),
-					coupon_id:getCoupon_id()
-			}
-			console.log(pay_info);
-			
-			for (var i = 0; i < 4; i++) {
-				if($('.input').eq(i).val() == '') {
-					alert('배송 정보를 정확히 입력해주세요.');
-					return;
-				}
-			}
-			
-			if ($('#coupon-list').val() == 'xx') {
-				alert('쿠폰을 선택해주세요.');
-				return;
-			}
-			
-			if (pay_info.paymentOption==null) {
-				alert('결제 방식을 선택해주세요.');
-				return;
-			}
-			
-			if ($('#agreePay').is(':checked') == false) {
-				alert('상품 결제에 동의해주셔야 결제가 가능합니다.');
-				return;
-			}
-			
-			if (pay_info.paymentOption == 'basic') {
-				//무통장 입금
-				alert('무통장 입금을 선택하셨습니다.');
-				afterPayment(pay_info);
-				console.log(pay_info.order_code);
-				location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
-			} else {
-				iamport(pay_info);
-			}
-		}
-		
-		//결제 api
-        function iamport(pay_info) {
-			console.log(pay_info)
-			
-            IMP.init('imp62869817');
-            IMP.request_pay({
-                pg: pay_info.paymentOption,
-                pay_method: 'card',
-                merchant_uid: 'merchant_' + new Date().getTime(),
-                name: pay_info.order_code, 
-                amount: pay_info.order_price, 
-                buyer_email: pay_info.buyer_email,
-                buyer_name: pay_info.buyer_name,
-                buyer_tel: pay_info.buyer_tel,
-                buyer_addr: pay_info.buyer_addr,
-                buyer_postcode: '123-456'
-            }, function(rsp) {
-    		    if (rsp.success) {
-    		    	alert('결제가 완료되었습니다.');
-    		    	//데이터 삽입-> 오더 + 오더 상품까지 데이터 삽입하자.
-    		    	afterPayment(pay_info);
-    		    	location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
-    		    } else {
-    		       	msg += '에러내용 : ' + rsp.error_msg;
-	    		    alert('결제에 실패하였습니다. ');
-    		    }
-    		});
-    	}
-		
-		function afterPayment(pay_info) {
-			//결제 이후 데이터 삽입
-			console.log('afterPayment.pay_info: ' + pay_info);
-			$.ajax({
-				url:"paySuccess.do",
-				type:"post",
-				contentType:"application/json; charset=utf-8",
-				data:JSON.stringify(pay_info),
-				success:function(msg){
-					console.log(msg);	
-				}
-			});
-		}
-    </script>
-    
-	<style type="text/css">
-        body {
-            margin:0;
-            min-width: 1400px;
-        }
-
-        #container {
-            height:auto;
-            margin-bottom: 4%;
-        }
-
-        .rows-info {
-            height:auto; width:80%;
-        }
-        .col-left {
-            height:auto; border-right:1px solid rgb(191, 181, 181);
-        }
-
-        .box-black {
-            box-shadow: 0px 4px 4px -4px black;
-        }
-        .box-gray {
-            box-shadow: 0px 4px 4px -4px gray;
-        }
-        .title-padding {
-            padding:2%;
-        }
-
-        .rows-width {
-            width: 70%;
-            height: 100px;
-            margin:0px auto;
-        }
-        .first-section {
-            margin-top: 80px;
-            text-align: center;
-        }
-        
-        
-        #trans {
-            width:40px;
-            height:40px;
-        }
-        label {
-            margin:1% 1% 1% 2%;
-            font-size: large;
-        }
-    
-        /* 배송 정보 입력 css */
-        #check {
-            margin-left:10px;
-        }
-
-        .input-div-f {
-            padding:5px 5px 5% 5%;
-        }
-
-        .input-div {
-            margin:5px;
-            padding:10px 10px 10px 20px;
-             
-        }
-        .input {
-            width:85%;
-            height:30px;
-            margin-top: 10px;
-            border:0px;
-            border-bottom: 1px rgb(167, 163, 163) solid;
-            text-indent: 10px;
-        }
-        .same-div {
-            margin: 2%;
-            padding-right:7%
-        }
-        .del-input-div {
-            height:50px; padding-left:10px;
-        }
-    
-        .title-box {
-            width:20%; height:40px; float:left; font-size:large; text-align:center; padding-top:5px; border-radius:4px;
-        }
-        .del-second-div {
-            width:80%; float:left; padding-left:14px;
-        }
-    
-        .coupon-div {
-            padding-top:20px; text-align:center;
-        }
-        .coupon-div select {
-            width:60%; height:30px;
-        }
-        .coupon-info {
-            height:100px; padding:0 10px 10px 30px;
-        }
-        .coupon-info-ori {
-            width:40%; height:100%; float:left; text-align:right; padding:40px 20px 0 0; font-weight:bold; font-size:x-large;
-        }
-        .coupon-info-icon {
-            width:10%; float:left; padding-top:38px;
-        }
-        .coupon-info-after {
-            width:40%; height:100%; float:left; padding:40px 0 0 0; font-weight:bold; font-size:x-large;
-        }
-    
-        .product-row {
-            height:120px; padding-bottom:10px;
-        }
-        .p-row-first {
-            width:20%; float:left; height:100%; padding:15px 0 0 15px;
-        }
-        .p-row-first img {
-            width:80%; height:90%; border-radius:5px;
-        }
-        .p-row-second {
-            width:40%; float:left; height:100%; padding: 35px 0 0 15px;
-        }
-        .p-row-third {
-            width:10%; float:left; height:100%; padding:35px 0 0 15px;
-        }
-        .p-row-fourth {
-            width:25%; float:left; height:100%; padding:35px 0 0 10%;
-        }
-        .payment-desc {
-            margin-left: 20px;
-           	text-decoration:none;
-           	color:gray;
-        }
-        .payment-section {
-            padding:10px 0;
-        }
-    
-        .fixed-Banner {
-            position:fixed; width:300px; margin:1%; height:400px;
-            padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-			border: 1px gray solid; z-index:1; background-color:white;
-        }
-        #agreePay {
-            margin-left: 10px;
-        }
-
-        input[type=checkbox]{
-            transform : scale(1.5);
-        }
-        .f-price {
-            box-shadow: 0px 4px 4px -4px gray; padding:4% 0 1% 4%;
-        }
-    
-        .bn-price-sz {
-            height:18%; width:100%;
-        }
-        .bn-price-ml {
-            margin-left:10px
-        }
-        .bn-price-first {
-            margin:10px 0 0 10px;
-        }
-        .agree-label {
-            font-size: small;width:80%;padding-left:10px
-        }
-        .bn-button {
-            padding:20px; text-align:center;
-        }
-        
-        .bn-price-sz .price {
-        	font-size:x-large;
-        	font-weight:bold;
-        	letter-spacing:1px;
-        	line-height:50px;
-        }
-        
-        #address_kakao:hover {
-        	cursor:pointer;
-        }
-        .input-address {
-        	width:50%;
-        	float:left;
-        }
-        .input-subAddress {
-        	margin-left:10px;
-        	width:33%;
-        	float:left;
-        }
-    </style>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="stylesheet" href="resources/css/market/payment.css">
 <title>Insert title here</title>
 </head>
 
@@ -310,7 +21,6 @@ let request = '';
 
 $(document).ready(function() {
 	$('#address_kakao').click(function(){
-		console.log('click address');
 		new daum.Postcode({
             oncomplete: function(data) {
                 document.getElementById("address_kakao").value = data.address;
@@ -336,7 +46,6 @@ $(document).ready(function() {
 		dataType:"json",
 		success:function(data){
 			userData = data;
-			console.log(userData);
 		}
 	});
 	
@@ -390,10 +99,108 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function getCoupon_id(){
+	let rate = $('#coupon-list').val();
+	let coupon_id = '';
+	$('option').each(function(){
+		if($(this).val() == rate) {
+			coupon_id = $(this).attr('id');
+		}
+	});
+	return coupon_id;
+}
+
+function progressPay() {
+	const pay_info = {
+			order_code:'O'+ Math.floor(Math.random()*10000+1) + 'C' + Math.floor(Math.random()*10000+1),
+			buyer_name:$('.input').eq(0).val(),
+			buyer_email:$('.input').eq(4).val(),
+			buyer_tel:$('.input').eq(3).val(),
+			buyer_addr:$('.input:eq(1)').val() + ' ' + $('.input:eq(2)').val(),
+			paymentOption:$('input:radio[name="payment"]:checked').val(),
+			order_price:$('.after-price').eq(1).text(),
+			original_price:$('.original-price').eq(0).text(),
+			discount_price:$('.discount-price').text(),
+			coupon_rate:$('#coupon-list').val(),
+			order_message:$('.input').eq(4).val(),
+			coupon_id:getCoupon_id()
+	}
+	
+	for (var i = 0; i < 4; i++) {
+		if($('.input').eq(i).val() == '') {
+			alert('배송 정보를 정확히 입력해주세요.');
+			return;
+		}
+	}
+	
+	if ($('#coupon-list').val() == 'xx') {
+		alert('쿠폰을 선택해주세요.');
+		return;
+	}
+	
+	if (pay_info.paymentOption==null) {
+		alert('결제 방식을 선택해주세요.');
+		return;
+	}
+	
+	if ($('#agreePay').is(':checked') == false) {
+		alert('상품 결제에 동의해주셔야 결제가 가능합니다.');
+		return;
+	}
+	
+	if (pay_info.paymentOption == 'basic') {
+		//무통장 입금
+		alert('무통장 입금을 선택하셨습니다.');
+		afterPayment(pay_info);
+		location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+	} else {
+		iamport(pay_info);
+	}
+}
+
+//결제 api
+function iamport(pay_info) {
+    IMP.init('imp62869817');
+    IMP.request_pay({
+        pg: pay_info.paymentOption,
+        pay_method: 'card',
+        merchant_uid: 'merchant_' + new Date().getTime(),
+        name: pay_info.order_code, 
+        amount: pay_info.order_price, 
+        buyer_email: pay_info.buyer_email,
+        buyer_name: pay_info.buyer_name,
+        buyer_tel: pay_info.buyer_tel,
+        buyer_addr: pay_info.buyer_addr,
+        buyer_postcode: '123-456'
+    }, function(rsp) {
+	    if (rsp.success) {
+	    	alert('결제가 완료되었습니다.');
+	    	afterPayment(pay_info);
+	    	window.setTimeout(function() {
+		    	location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+	    	},1500);
+	    } else {
+	       	msg += '에러내용 : ' + rsp.error_msg;
+		    alert('결제에 실패하였습니다. ');
+	    }
+	});
+}
+
+function afterPayment(pay_info) {
+	//결제 이후 데이터 삽입
+	console.log('afterPayment.pay_info: ' + pay_info);
+	$.ajax({
+		url:"paySuccess.do",
+		type:"post",
+		contentType:"application/json; charset=utf-8",
+		data:JSON.stringify(pay_info),
+		success:function(msg){
+			console.log(msg);	
+		}
+	});
+}
 </script>
-
-
-
 <body style="margin-top:200px;"> 
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
@@ -548,7 +355,6 @@ $(document).ready(function() {
                 </div>
             </div>
 
-            
             <!-- 우측 결제 배너 -->
             <div class="col-md-4" style="height:30%;">
                 <div class="fixed-Banner">

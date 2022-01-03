@@ -86,9 +86,10 @@
 
 	<!-- main content -->
       <div class="recipe_content-article">
-        <form action="recipeInsertRes.do" method="post">
+        <form action="recipeupdateRes.do" method="post">
+            <input type="hidden" name="recipe_no" value="${dto.recipe_no }">
         	<div class="recipe_content-title">
-				<input type="text" name="recipe_title" id="recipe_title" value="${dto.recipe_title }">          
+				<input type="text" name="recipe_title" value="${dto.recipe_title }">          
 			</div>
 			<div class="recipe_content-category">
 				<strong>CATEGORY&nbsp;|&nbsp;</strong>
@@ -96,11 +97,11 @@
 				<label><input type="radio" name="recipe_category" value="일식" <c:if test="${dto.recipe_category eq '일식'}"> checked </c:if>> 일식</label>
 				<label><input type="radio" name="recipe_category" value="중식" <c:if test="${dto.recipe_category eq '중식'}"> checked </c:if>> 중식</label>
 				<label><input type="radio" name="recipe_category" value="양식" <c:if test="${dto.recipe_category eq '양식'}"> checked </c:if>> 양식</label>
-				<label><input type="radio" name="recipe_category" value="간단식"<c:if test="${dto.recipe_category eq '간단식'}"> checked </c:if>> 간단식</label>
 				<label><input type="radio" name="recipe_category" value="야식" <c:if test="${dto.recipe_category eq '야식'}"> checked </c:if>> 야식</label>
+				<label><input type="radio" name="recipe_category" value="비건" <c:if test="${dto.recipe_category eq '비건'}"> checked </c:if>> 비건</label>
 			</div>
 			<div class="container">
-				<textarea class="summernote" name="editordata">${dto.recipe_content }</textarea>    
+				<textarea class="summernote" name="recipe_content">${dto.recipe_content }</textarea>    
 			</div>
 			<div class="recipe-button ">
 				<input type="submit" value="수정"> &nbsp;&nbsp;&nbsp;

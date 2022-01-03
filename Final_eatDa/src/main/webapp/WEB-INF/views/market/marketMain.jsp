@@ -4,33 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<!-- 부트스트랩 CDN 안쓰시는 아래 두 개 분들은 빼세요 -->
-<link rel="stylesheet" href="resources/css/market/marketMain.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/market/marketMainnew.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&display=swap" rel="stylesheet">
-
 <title>Insert title here</title>
 
 <style type="text/css">
-.pagination a:hover {
-	cursor:pointer; 
-}
-
-.fixed-Banner {
-  right:0px;
-  position:fixed; width:100px; margin:21% 5% 1% 1%; height:250px;
-  padding:10px; box-shadow: 0 5px 5px grey; border-radius: 9px;
-  border: 1px gray solid; overflow:scroll; z-index:1; background-color:white;
-}
-
-.like-img:hover, .product-title:hover, .product-img:hover, .shop-cart:hover {
-  cursor:pointer;
-}
 .banner {
 	background-image: url(resources/images/market/market-banner3.png);
 	background-size: cover;
@@ -41,26 +22,7 @@
 	padding-top: 140px;
 	border-radius: 4px;
 }
-.keyword-tag {
-  width: auto;
-  height: 20px;
-  margin: 0 auto;
-  list-style:none;
-}
-.keyword:hover, .total-keyword:hover {
-	color:black;
-	font-weight:bold;
-}
-.banner-text {
-  font-size: x-large;
-  text-align: center;
-  letter-spacing: 2px;
-  line-height: 30px;
-}
-
 </style>
-
-
 <script type="text/javascript">
 $(document).ready(function() {
 	window.setTimeout(takeProduct(1),3000);
@@ -89,12 +51,9 @@ $(document).ready(function() {
         $('.banner').animate({opacity:1}, 800);
         index++;
     }, 10000);
-    
-});
 
-//검색창에서 엔터키 눌렀을 때
-$(function() {
-	$("#search-bar").on("keydown",function(event) {
+    //검색창에서 엔터키 눌렀을 때
+    $("#search-bar").on("keydown",function(event) {
 		if (event.keyCode == 13) {
 			if (!event.shiftKey) {
 				event.preventDefault();
@@ -104,25 +63,23 @@ $(function() {
 	});
 });
 
-function searchKeyword() {
+const searchKeyword = () => {
 	let keyWord = $('#search-bar').val();
 	hashTagSearch(keyWord);
 	$('#search-bar').val('');
 }
 
 //장바구니에 담기
-function putShoppingBag(object) {
+const putShoppingBag = (object) => {
 	let p_id = $(object).parents('.product-desc').siblings('.hidden').text();
 	let p_name = $(object).parent().siblings('.product-margin:eq(1)').children('span').text();
 	let p_price = $(object).siblings('.product-price').eq(0).text();
-	
 	let data = {
 			"p_id":p_id,
 			"p_price":p_price
 	}
 	
 	if (confirm('선택하신 '+p_name+' 을 장바구니에 담시겠습니까?')) {
-		
 		$.ajax({
 			url: 'putShoppingBag.do',
 			type: 'post',
@@ -135,17 +92,13 @@ function putShoppingBag(object) {
 				} else {
 					alert('상품이 이미 장바구니에 담겨있습니다.');
 				}
-			},
-			error:function(msg) {
-				console.log(msg);
 			}
 		});
 	}
-} 
-
+}
 
 //상품 리스트업 함수
-function takeProduct(num) {
+const takeProduct = (num) => {
 	$('.product-container').html('');
 	let sNum = String(num);
 		
@@ -158,7 +111,6 @@ function takeProduct(num) {
 			let data = list;
 			let idx = 0;
 			let col = 0;
-			
 			$(data).each(function(key, value) {
 				
 				if (idx == 0) {
@@ -220,7 +172,7 @@ function takeProduct(num) {
 }
 
 //페이징 함수
-function pagination() {
+const pagination = () => {
 	let paging = 0;
 	$('.pagination').html('');
 	
@@ -256,7 +208,7 @@ function pagination() {
 }
 
 //페이지 이동할 때 함수
-function movePage(object) {
+const movePage = (object) => {
 	let page = Number($(object).text());
 	let pageid = $(object).attr('id');
 	takeProduct(page);
@@ -266,10 +218,8 @@ function movePage(object) {
 	$(window).scrollTop(0);
 }
 
-let presentPage = Number($('.active').text());
-
 //페이지 << >> 클릭
-function leftPaging() {
+const leftPaging = () => {
 	let prevPage = $('.active').prev().text();
 	
 	if (prevPage == '«') {
@@ -282,7 +232,7 @@ function leftPaging() {
 	$(window).scrollTop(0);
 }
 
-function rightPaging() {
+const rightPaging = () => {
 	let nextPage = $('.active').next().text();
 	
 	if (nextPage == '»') {
@@ -294,9 +244,6 @@ function rightPaging() {
 	}
 	$(window).scrollTop(0);
 }
-</script>
-
-<script type="text/javascript">
 //좋아하는 상품 이미지 가져오기
 //product_like 테이블, product 테이블 조인해서 데이터 가져오면 됨
 function likeProduct() {
@@ -321,12 +268,9 @@ function goLikeProduct(object) {
 	let p_id = $(object).attr('id');
 	location.href = 'goProductPage.do?p_id='+p_id;
 }
-</script>
 
-<script type="text/javascript">
 //키워드 검색
 function hashTagSearch(object) {
-	console.log('hashtagSearch');
 	let tagname = '';
 	let href = '';
 	if ($(object).attr('class')=='keyword') {
@@ -348,7 +292,6 @@ function hashTagSearch(object) {
 			let data = list;
 			let idx = 0;
 			let col = 0;
-			console.log(list.length);
 			
 			if (list.length == 0) {
 				$('.product-container').append(
@@ -448,9 +391,7 @@ function goProductPage(object) {
 	}
 	location.href = 'goProductPage.do?p_id='+productId;
 }
-
 </script>
-
 
 </head>
 <body style="margin-top:150px;">

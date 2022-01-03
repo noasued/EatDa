@@ -46,10 +46,19 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<!-- 리뷰 폼 -->
+	<select id="reviewForm" resultType="orderProductDto" parameterType="string">
+		SELECT P_ID, P_NAME, ORDER_ID, IMG_PATH
+		FROM E_ORDER
+		JOIN ORDER_PRODUCT USING(ORDER_ID)
+		JOIN PRODUCT USING(P_ID)
+		WHERE ORDER_ID = #{order_id}
+	</select>
+	
 	<!-- 리뷰 작성 -->
 	<insert id="registReview" parameterType="reviewDto">
 		INSERT INTO REVIEW
-		VALUES(REVIEW_NO_SEQ.NEXTVAL, 'E1', 'P1', #{review_content}, SYSDATE)
+		VALUES(REVIEW_NO_SEQ.NEXTVAL, #{order_id}, #{p_id}, #{review_content}, SYSDATE)
 	</insert>
 
 </mapper>

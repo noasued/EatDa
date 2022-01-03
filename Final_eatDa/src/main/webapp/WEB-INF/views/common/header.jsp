@@ -166,7 +166,7 @@ body {
 			<div class="col-sm-8 nav-list">
 				<ul class="header-ul">
 					<li class="nav-menu"><a class="header-a" href="marketMain.do">마켓</a></li>
-					<li class="nav-menu"><a class="header-a" href="recipeList.do">레시피</a></li>
+					<li class="nav-menu"><a class="header-a" href="recipeListTest.do">레시피</a></li>
 					<li class="nav-menu"><a class="header-a" href="foodbti.do">컨텐츠</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="foodbti.do">음BTI</a></li>

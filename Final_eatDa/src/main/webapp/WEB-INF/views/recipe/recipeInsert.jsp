@@ -93,11 +93,11 @@
 				<label><input type="radio" name="recipe_category" value="일식"> 일식</label>
 				<label><input type="radio" name="recipe_category" value="중식"> 중식</label>
 				<label><input type="radio" name="recipe_category" value="양식"> 양식</label>
-				<label><input type="radio" name="recipe_category" value="간단식"> 간단식</label>
 				<label><input type="radio" name="recipe_category" value="야식"> 야식</label>
+				<label><input type="radio" name="recipe_category" value="비건"> 비건</label>
 			</div>
 			<div class="container">
-				<textarea class="summernote" name="editordata"></textarea>    
+				<textarea class="summernote" name="recipe_content"></textarea>    
 			</div>
 			<div class="recipe-button ">
 				<input type="submit" value="등록"> &nbsp;&nbsp;&nbsp;
