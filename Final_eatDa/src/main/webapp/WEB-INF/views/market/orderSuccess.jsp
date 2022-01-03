@@ -5,86 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<style type="text/css">
-		body {
-			min-width:1400px; 
-			height:auto;
-		}
-		
-        .rows-width {
-            width: 70%;
-            height: auto;
-            margin:0px auto;
-        }
-
-        .first-section {
-            padding: 3%;
-        }
-        .second-section {
-            background-color:aliceblue;
-            height:20%;
-            border-radius: 3px;
-        }
-
-        .desc {
-            letter-spacing: 2px;
-            font-size: large;
-        }
-
-        .title-section {
-            margin-top: 5%;
-            padding: 10px;
-            height: auto;
-            box-shadow: 0px 4px 4px -4px gray;
-        }
-
-        .payment-section {
-            padding: 10px;
-            padding-top:20px;
-            height: auto;
-            padding-bottom: 0;
-        }
-
-        .bottom-box-shadow {
-            box-shadow: 0px 4px 4px -4px gray;
-        }
-
-        .product-section {
-            height: auto;
-            box-shadow: 0px 4px 4px -4px gray;
-        }
-        .product-img {
-            width: 90%;
-            height: 90%;
-            margin-left:10px;
-        }
-        
-        .title {
-            letter-spacing: 1px;
-            font-size: medium;
-            font-weight: lighter;
-        }
-        
-        .bottm-btn {
-            margin-left: 1%;
-            margin-right: 1%;
-            width:40%;
-        }
-        .li-div div {
-        	margin-top:15px;
-        	padding-left:20px;
-        }
-        .p-price {
-        	padding-top: 10px;
-        }
-        .p-info {
-        	padding-top:10px; padding-left:20px;
-        }
-        .p-img {
-        	padding: 20px;
-        }
-    </style>
-
+<link rel="stylesheet" href="resources/css/market/orderSuccess.css">
 <title>Insert title here</title>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -95,7 +16,7 @@ $(document).ready(function() {
 	},1000);
 });
 
-function getCartList() {
+const getCartList = () => {
 	$.ajax({
 		url:"getOrderList.do",
 		type:"post",
@@ -136,25 +57,20 @@ function getCartList() {
 	});
 }
 
-function deleteCartList() {
+const deleteCartList = () => {
 	$.ajax({
 		url:"deleteCartList.do",
 		type:"post",
 		success:function(msg) {
 			console.log('deleteCartList: ' + msg);
-		},
-		error:function(msg) {
-			console.log(msg);
 		}
 	});
 }
 
-function deleteCoupon() {
-	console.log($('#coupon-id').text());
+const deleteCoupon = () => {
 	let coupon_id = {
 			coupon_id:$('#coupon-id').text()
 	}
-	console.log(coupon_id);
 	$.ajax({
 		url:"deleteCoupon.do",
 		type:"post",
@@ -162,14 +78,11 @@ function deleteCoupon() {
 		data:JSON.stringify(coupon_id),
 		success:function(msg) {
 			console.log('deleteCoupon: ' + msg);
-		},
-		error:function(msg) {
-			console.log(msg);
 		}
 	});
 }
 
-function goMain(command) {
+const goMain = (command) => {
 	location.href=command+'.do';
 }
 

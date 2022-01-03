@@ -6,180 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<style type="text/css">
-    .wrap {
-        height: 100%;
-        margin-top: 50px;
-        margin-bottom: 100px;
-    }
-    .rows-width {
-        width:80%;
-    }
-    .rows-margin {
-    	margin:0 auto;
-    }
-
-    .order-title {
-        height: 15%;
-    }
-
-    .order-middle,
-    .order-middle-second,
-    .order-total {
-        height: 8%;
-        border-bottom: 2px solid black;
-    }
-    .order-product {
-        height: fit-content;
-        border-bottom: 1px solid black;
-    }
-
-    .order-total {
-        height: 15%;
-        padding-bottom:30px;
-    }
-
-    .order-button {
-        text-align: center;
-        height: 30%;
-    }
-
-    .bottom-btn {
-        width: 30%;
-        height: 120%;
-    }
-
-    .order-middle {
-        margin-top: 5%;
-    }
-
-    .order-middle-second {
-        height: 13%;
-    }
-
-    .order-middle-second-col {
-        padding-top: 20px;
-        padding-bottom: 10px;
-        font-size: larger;
-    }
-
-    .order-table-column {
-        width: 30%;
-        height: 70%;
-        float: left;
-        text-align: center;
-        font-size: x-large;
-    }
-
-    #m-check {
-        width: 20px;
-        height: 20px;
-    }
-    .check-img {
-    	width: 18px;
-    	height:18px;
-    }
-
-    #m-check:hover, #choice-delete:hover, #right-Button:hover, #left-Button:hover, #subDev, #norDev {
-        cursor: pointer;
-    }
-    .product-img {
-        width: 90px;
-        height: 90px;
-    }
-    .start-row {
-        width: 100%;
-        height: 100px;
-        border-bottom: 1px solid black;
-    }
-
-    .left-col {
-        height: 100%;
-        float: left;
-    }
-
-    .left-col-check {
-        padding-top: 34px;
-        float: left;
-    }
-
-    .left-col-img {
-        float: left;
-        margin-left: 25px;
-        padding-top: 4px;
-    }
-
-    .left-col-title {
-        color: rgb(135, 130, 130);
-        padding-top: 35px;
-        padding-left: 40px;
-        float: left;
-    }
-
-    .right-col {
-        height: 100%;
-        float: left;
-        padding-left: 40px
-    }
-
-    .right-col-quantity {
-        padding-top: 33px;
-        padding-left: 30px;
-        font-size: larger;
-        float: left;
-    }
-
-    .right-col-price {
-        padding-top: 33px;
-        margin-left: 30%;
-        font-size: larger;
-        float: left
-    }
-    .sub-col-price {
-    	margin-left:40%;
-    }
-    .title {
-        padding-top: 30px;
-        padding-bottom: 10px;
-        padding-left: 30px;
-    }
-
-    .title-process {
-        padding-top: 50px;
-        padding-bottom: 10px;
-        text-align: right;
-    }
-
-    .title-process-span {
-        font-size: large;
-        letter-spacing: 1px;
-    }
-
-    .title-process-span-bold {
-        color: rgb(142, 142, 82);
-    }
-
-    .division-col {
-        border-right: 1px solid;
-    }
-
-    .now-tab {
-        font-weight: bold;
-    }
-
-    .desc-order {
-        padding-top: 10px; text-align: right; font-size:small;
-    }
-
-    .order-total-desc {
-        font-size:large; font-weight:bold; text-align:center; padding-top:10px;
-    }
-    .order-total-price {
-        font-size:xx-large; font-weight:bold; text-align:center; padding-top:10px;
-    }
-    
-</style>
+<link rel="stylesheet" href="resources/css/market/shoppingBag.css">
 
 <script type="text/javascript">
 	let price = 0;
@@ -202,7 +29,7 @@
 		$('#totalPrice').text(totalPrice);
 	}
 	
-	function leftButton(object) {
+	const leftButton = (object) => {
 		let quantity = $(object).siblings('.quantity').text();
 		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
 		
@@ -217,7 +44,7 @@
 		}
 	}
 	
-	function rightButton(object) {
+	const rightButton = (object) => {
 		let quantity = $(object).siblings('.quantity').text();
 		price = Number($(object).parent().siblings('.right-col-price').children().eq(0).text());
 		
@@ -232,7 +59,7 @@
 		}
 	}
 	
-	function calcTotal() {
+	const calcTotal = () => {
 		let length = $('.start-row').length;
 		
 		for (var i = 0; i < length; i++) {
@@ -243,9 +70,9 @@
 		$('#totalPrice').text('');
 		$('#totalPrice').text(totalPrice);
 		totalPrice = 0;
-	}
+	}	
 	
-	function pushMulti() {
+	const pushMulti = () => {
 		let src = $('#m-check').attr('src');
 		
 		if (src == 'resources/images/market/check.png') {
@@ -261,7 +88,7 @@
 		}
 	}
 	
-	function choiceDelete() {
+	const choiceDelete = () => {
 		let array = new Array();
 		console.log($('now-tab').children('input:checkbox[name="checkbox"]:checked'));
 		if($('.now-tab').text() == '일반배송' && $('input:checkbox[name="checkbox"]:checked').length == 0) {
@@ -307,13 +134,10 @@
 			this.checked=false;
 		});
 	}
-	function goMarketMain() {
-		location.href='marketMain.do';
-	}
 	
-	function makeOrder() {
+	const makeOrder = () => {
 		let product = document.getElementsByClassName('start-row');
-		
+
 		if (product.length == 0) {
 			alert('장바구니에 담긴 상품이 없습니다.');
 			return;
@@ -321,18 +145,6 @@
 		
 		if (confirm('위 상품들을 주문하시겠습니까?')) {
 			let array = new Array();
-			/*
-			var idx = 0;
-			$('.p-id').each(function() {
-				let data = {
-					p_id:$(this).text(),
-					quantity:$('.quantity').eq(idx).text(),
-					price:$('.each-price').eq(idx).text()
-				}
-				array.push(data);
-				idx++;
-			});
-			*/
 			$('.category').each(function() {
 				console.log($(this).text());
 				let data = {
@@ -353,13 +165,13 @@
 				}
 			});
 			
-			location.href='makeOrder.do';
-			
-			
+			window.setTimeout(function() {
+				location.href='makeOrder.do';
+			},1000);
 		}
 	}
 	
-	function makeSubDelivery() {
+	const makeSubDelivery = () => {
 		$.ajax({
 			url:"getCartProduct.do?command=SUBSCRIPTION",
 			type:"get",
@@ -395,7 +207,7 @@
 		});
 	}
 	
-	function subDelivery() {
+	const subDelivery = () => {
 		$('#norDev').removeClass('now-tab');
 		$('#subDev').addClass('now-tab');
 		$('#totalPrice').css("display","none");
@@ -410,7 +222,7 @@
 		});
 	}
 	
-	function normalDelivery() {
+	const normalDelivery = () => {
 		$('#norDev').addClass('now-tab');
 		$('#subDev').removeClass('now-tab');
 		$('.sub-price').css("display","none");
@@ -425,6 +237,10 @@
 		});
 	}
 	
+	const goMarketMain = () => {
+		location.href='marketMain.do';
+	}
+
 </script>
 </head>
 
