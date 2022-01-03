@@ -222,38 +222,14 @@ table{
 	font-size: 0.8rem;
 }
 
-.review_wrap1{
-	position:fixed;
-  	width:100%;
-  	height:100%;
-  	background: rgba(0,0,0,0.6);
-  	top:0;
- 	left:0;
-  	display:none;
-  	z-index:1;
+#link_order_list{
+	text-decoration: none;
+	font-size: 0.8rem;
+	color: gray;
 }
 
-.review_wrap{
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.review{
-	width: 500px;
-	height: 330px;
-	display: flex;
-	position: relative;
-	flex-direction: column;
-	border: none;
-	border-radius: 10px;
-	margin-bottom: 20px;
-    background-color: #FAEED2;
-    text-align: center;
-    justify-content: center;
-    
+#link_order_list:hover{
+	color: blue;
 }
 </style>
 <script type="text/javascript">
@@ -383,7 +359,7 @@ function marketOrderList() {
 						"<a>" +value.price + " 원</a>" +
 						"</div>" +
 						"</div>" +
-						"<input type='button' id='" + value.order_id + "' value='리뷰 작성' onclick='reviewModalIn(this)'>"+
+						"<input type='button' id='" + value.order_id + "' value='리뷰 작성' onclick='reviewForm(this)'>"+
 						"</td>"
 					);
 			});
@@ -394,11 +370,18 @@ function marketOrderList() {
 }
 
 
-//리뷰 모달창
-function reviewModalIn(object) {
+//리뷰작성 -> 리뷰
+function reviewForm(object) {
 	var order_id = $(object).attr('id');
-	alert(order_id);
-	location.href = 'reviewForm.do?order_id='+order_id;
+    var p_id = $(object).siblings('.list_div').attr('id');
+    var p_name = $(object).siblings('.list_div').children('.order_list').children('a').eq(0).text();
+    var img_path = $(object).siblings('.list_div').children('.like-img-div').children('.like-img').attr('src');
+    
+    console.log(img_path);
+    console.log(p_id);
+    console.log(p_name);
+    
+	location.href = 'reviewForm.do?order_id=' + order_id + '&p_id=' + p_id + '&p_name=' + p_name + '&img_path=' + img_path;
 }
 
 
@@ -438,7 +421,8 @@ function reviewModalIn(object) {
         </div>
 
         <div class="headline4">
-            <a>주문한 상품</a>
+            <a>주문한 상품</a><br>
+            <a href="marketOrderList2.do?user_id=${member.user_id }" id="link_order_list">>>주문내역 보기</a>
           </div>
           <div class="bought_product_wrap">
           <div class="bought_product" style="overflow-x: auto; overflow-y: hidden;">

@@ -6,12 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.project.eatda.dao.MemberDao;
 import com.project.eatda.dao.MypageDao;
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.OrderProductDto;
-import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 
@@ -44,6 +43,12 @@ public class MypageBizImpl implements MypageBiz{
 	public List<OrderProductDto> marketOrderList(String user_id) {
 		return mypageDao.marketOrderList(user_id);
 	}
+	
+	//주문내역
+		@Override
+		public List<OrderDto> marketOrderList2(OrderDto dto) {
+			return mypageDao.marketOrderList2(dto);
+		}
 
 	//리뷰작성
 	@Override
@@ -51,9 +56,5 @@ public class MypageBizImpl implements MypageBiz{
 		return mypageDao.registReview(dto);
 	}
 
-	@Override
-	public OrderProductDto reviewForm(String order_id) {
-		return mypageDao.reviewForm(order_id);
-	}
 
 }
