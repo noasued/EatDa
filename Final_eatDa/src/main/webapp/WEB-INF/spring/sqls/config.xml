@@ -21,6 +21,8 @@
   		<typeAlias type="com.project.eatda.dto.BlogReplyDto" alias="replyDto"/>
   		<typeAlias type="com.project.eatda.dto.ReportDto" alias="reportDto" />  
   		<typeAlias type="com.project.eatda.dto.OrderAdminDto" alias="orderAdminDto" />		
+  		<typeAlias type="com.project.eatda.dto.RecipePageBaseDto" alias="recipePageBaseDto"/>  	
+  		<typeAlias type="com.project.eatda.dto.RecipePageDto" alias="recipePageDto"/>  	  		
   	</typeAliases>
   	<mappers>
   		<mapper resource="/mybatis/mapper.xml"/>

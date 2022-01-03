@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.RecipeDao;
 import com.project.eatda.dto.RecipeDto;
+import com.project.eatda.dto.RecipePageBaseDto;
 
 @Service
 public class RecipeBizImpl implements RecipeBiz{
@@ -44,11 +45,6 @@ public class RecipeBizImpl implements RecipeBiz{
 		
 		return dao.recipeCategory(recipe_category);
 	}
-	@Override
-	public List<RecipeDto> recipeListTest(String searchType, String keyword){
-		return dao.recipeListTest(searchType, keyword);
-	}
-
 
 	@Override
 	public int updateRecipeCount(int recipe_no) {
@@ -70,4 +66,15 @@ public class RecipeBizImpl implements RecipeBiz{
 	public int paging() {
 		return dao.paging();
 	}
+
+	@Override
+	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto) {
+		return dao.recipeTest(rpbdto);
+	}
+
+	@Override
+	public int getTotal(RecipePageBaseDto rpbdto) {
+		return dao.getTotal(rpbdto);
+	}
+
 }
