@@ -320,11 +320,10 @@ public class MarketController {
 		return "/market/orderSuccess";
 	}
 	
-	@RequestMapping(value="/getOrderList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/getOrderList.do", method=RequestMethod.GET)
 	@ResponseBody
-	public List<OrderProductDto> getOrderList(HttpServletRequest request) {
-		logger.info("getOrderList");
-		String order_id = marketBiz.getOrder(getLoginUser(request).getUser_id()).getOrder_id();
+	public List<OrderProductDto> getOrderList(HttpServletRequest request, String order_id) {
+		logger.info("getOrderList, order_id: " + order_id);
 		List<OrderProductDto> order_list = marketBiz.getOrderList(order_id);
 		return order_list;
 	}

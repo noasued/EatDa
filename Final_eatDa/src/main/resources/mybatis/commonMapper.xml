@@ -28,4 +28,9 @@
 		FROM (SELECT * FROM RECIPE ORDER BY RECIPE_COUNT DESC)
 		WHERE 4 > ROWNUM
 	 </select>
+	 
+	 <select id="getOrderDto" resultType="orderDto">
+	 	SELECT * FROM E_ORDER
+		WHERE ORDER_ID = #{order_id} AND USER_ID = #{user_id}
+	 </select>
 </mapper>

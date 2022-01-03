@@ -77,7 +77,7 @@ table td{
 
 }
 
-#order_id{
+.order_id{
 	color:#ffe084;
 	font-weight: bold;
 }
@@ -93,7 +93,9 @@ tbody tr:nth-child(2n) {
 	display: flex;
 	justify-content: center;
 }
-
+.order_id:hover{
+	cursor:pointer;
+}
 
 
 
@@ -102,7 +104,9 @@ tbody tr:nth-child(2n) {
 </style>
 
 <script type="text/javascript">
-
+	const goOrderSuccess = (order_id) => {
+		location.href = 'goOrderSuccess.do?order_id=' + order_id;
+	}
 </script>
 
 <body>
@@ -130,10 +134,10 @@ tbody tr:nth-child(2n) {
                 	<th>주문 날짜</th>
                 </tr>
                 
-                <c:forEach items="${list }" var="dto">
+                <c:forEach items="${list}" var="dto" varStatus="index">
 			       <tr>
-			       	 <td>1</td>
-			         <td id="order_id">${dto.order_id }</td>
+			       	 <td>${index.index}</td>
+			         <td class="order_id" onclick="goOrderSuccess('${dto.order_id}')">${dto.order_id }</td>
 			         <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.order_date}"/></td>
 			      </tr>
 		        </c:forEach>
