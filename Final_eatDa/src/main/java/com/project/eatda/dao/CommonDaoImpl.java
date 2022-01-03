@@ -72,6 +72,19 @@ public class CommonDaoImpl implements CommonDao{
 		}
 		return list;
 	}
+
+	@Override
+	public List<RecipeDto> getLovingRecipe() {
+		List<RecipeDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(COMMON_NAMESPACE+"getLovingRecipe");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 }

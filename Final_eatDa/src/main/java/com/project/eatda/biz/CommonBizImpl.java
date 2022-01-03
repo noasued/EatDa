@@ -36,5 +36,10 @@ public class CommonBizImpl implements CommonBiz{
 	public List<BlogDto> getPopularBlog() {
 		return dao.getPopularBlog();
 	}
+
+	@Override
+	public List<RecipeDto> getLovingRecipe() {
+		return dao.getLovingRecipe();
+	}
 	
 }

@@ -17,4 +17,6 @@ public interface CommonDao {
 	public List<MbtiDto> getMbtiProduct(String m_name);
 	
 	public List<BlogDto> getPopularBlog();
+	
+	public List<RecipeDto> getLovingRecipe();
 }

@@ -97,4 +97,44 @@ public class commonController {
 		}
 		return list;
 	}
+	
+	@RequestMapping(value="/getLovingRecipe.do", method=RequestMethod.POST) 
+	@ResponseBody
+	public List<RecipeDto> getLovingRecipe() {
+		//리스트 가져와서 3개로 나눠서 리턴
+		//logger.info("getLovingRecipe");
+		List<RecipeDto> list = commonBiz.getLovingRecipe();
+		
+		for (int i = 0; i < list.size(); i++) {
+			String temp = list.get(i).getRecipe_content();
+			if (temp.length() > 30) {
+				list.get(i).setRecipe_content(temp.substring(0, 60)+"...");
+			}
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
