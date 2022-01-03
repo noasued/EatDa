@@ -3,6 +3,7 @@ package com.project.eatda.dao;
 import java.util.List;
 
 import com.project.eatda.dto.RecipeDto;
+import com.project.eatda.dto.RecipePageBaseDto;
 
 
 public interface RecipeDao {
@@ -15,9 +16,12 @@ public interface RecipeDao {
 	public int recipeDelete(int recipe_no); 
 	
 	public List<RecipeDto> recipeCategory(String recipe_category); //레시피 카테고리 클릭 시 
-	public List<RecipeDto> recipeListTest(String searchType, String keyword);
 	public int recipeCount(int recipe_no);
 	public RecipeDto searchRecipe(String tag); 			
 	public RecipeDto recommandRecipe(String category); 	
 	public int paging();
+
+	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto);
+	public int getTotal(RecipePageBaseDto rpbdto);
+
 }

@@ -3,6 +3,7 @@ package com.project.eatda.biz;
 import java.util.List;
 
 import com.project.eatda.dto.RecipeDto;
+import com.project.eatda.dto.RecipePageBaseDto;
 
 
 public interface RecipeBiz {
@@ -12,11 +13,14 @@ public interface RecipeBiz {
 	public int recipeInsert(RecipeDto dto); 			
 	public int recipeUpdate(RecipeDto dto);				
 	public int recipeDelete(int recipe_no); 	
+	
 	public List<RecipeDto> recipeCategory(String recipe_category);
-	public List<RecipeDto> recipeListTest(String searchType, String keyword); //검색테스트
 	public int updateRecipeCount(int recipe_no);
 	public RecipeDto searchRecipe(String tag); 			
 	public RecipeDto recommandRecipe(String category); 	
 	public int paging();	
+	
+	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto);
+	public int getTotal(RecipePageBaseDto rpbdto);
 	
 }

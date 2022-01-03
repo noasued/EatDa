@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.RecipeDto;
+import com.project.eatda.dto.RecipePageBaseDto;
 
 @Repository
 public class RecipeDaoImpl implements RecipeDao{
@@ -101,25 +102,6 @@ public class RecipeDaoImpl implements RecipeDao{
 	}
 
 	@Override
-	public List<RecipeDto> recipeListTest(String searchType, String keyword){
-		
-		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
-		
-		try {
-			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeSearch",map);
-		} catch (Exception e) {
-			System.out.println("error : recipeList");
-			e.printStackTrace();
-		}
-		
-		return rec_list;
-	}
-
-	@Override
 	public int recipeCount(int recipe_no) {
 		int res = 0;
 		
@@ -146,5 +128,34 @@ public class RecipeDaoImpl implements RecipeDao{
 	public int paging() {
 		return 0;
 	}
+
+	@Override
+	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto) {
+		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
+		
+		try {
+			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"getList",rpbdto);
+		} catch (Exception e) {
+			System.out.println("error : getList");
+			e.printStackTrace();
+		}
+				
+		return rec_list;	
+	}
+
+	@Override
+	public int getTotal(RecipePageBaseDto rpbdto) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE_RECIPE+"getTotal",rpbdto);
+		} catch (Exception e) {
+			System.out.println("error : total");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 	
 }

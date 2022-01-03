@@ -63,24 +63,34 @@
 		WHERE RECIPE_CATEGORY = #{recipe_category}  
 	</select>
 
-	<!-- 검색 -->
-	<select id="recipeSearch" parameterType="map" resultType="map">
-		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
-		FROM RECIPE
-		<choose>
-			<when test="#{searchType}.equals('title')">
-				WHERE RECIPE_TITLE LIKE %'||#{keyword}||'%' 
-			</when>
-			<when test="#{searchType}.equals('content')">
-				WHERE RECIPE_CONTENT LIKE %'||#{keyword}||'%'
-			</when>
-			<when test="#{searchType}.equals('titcon')">
-				WHERE RECIPE_TITLE LIKE CONCAT%'||#{keyword}||'%'
-				AND RECIPE_CONTENT LIKE CONCAT%'||#{keyword}||'%'
-			</when>
-			<otherwise>
-			</otherwise>
-		</choose>
-		ORDER BY RECIPE_NO DESC
+	<!-- 페이징 -->
+	<select id="getList" parameterType="list" resultMap="recipeMap">
+		<![CDATA[
+			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE
+			FROM (	SELECT ROWNUM RN, A.*
+					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+							FROM RECIPE
+							WHERE	
+		]]>					
+							<if test="searchType == 'title'">RECIPE_TITLE LIKE '%'||#{keyword}||'%'</if>
+							<if test="searchType == 'content'">RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+							<if test="searchType == 'titcon'">RECIPE_TITLE LIKE '%'||#{keyword}||'%' OR RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+							<if test="searchType == null or searchType == '' ">1 = 1</if> 
+		<![CDATA[
+							ORDER BY RECIPE_NO DESC ) A )
+			 WHERE RN > (#{pageNum} - 1) * #{amount} AND RN <= #{pageNum} * #{amount}
+		]]>
 	</select>
+	<!-- 전체페이지수-->
+	<select id="getTotal" resultType="Integer">
+		SELECT COUNT(*) AS TOTAL
+		FROM RECIPE
+		WHERE	<if test="searchType == 'title'">RECIPE_TITLE LIKE '%'||#{keyword}||'%'</if>
+				<if test="searchType == 'content'">RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+				<if test="searchType == 'titcon'">RECIPE_TITLE LIKE '%'||#{keyword}||'%' OR RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+				<if test="searchType == null or searchType == '' ">1 = 1</if> 
+	</select>
+	
+	<!-- 검색 -->
+	
 </mapper>
