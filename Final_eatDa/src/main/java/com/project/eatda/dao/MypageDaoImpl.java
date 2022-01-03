@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.OrderProductDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReviewDto;
@@ -80,6 +81,20 @@ public class MypageDaoImpl implements MypageDao{
 		
 		return orderList;
 	}
+	
+	//주문내역
+	@Override
+	public List<OrderDto> marketOrderList2(OrderDto dto) {
+		List<OrderDto> orderList = new ArrayList<OrderDto>();
+		
+		try {
+			orderList = sqlSession.selectList(NAMESPACE_MYPAGE + "marketOrderList2", dto);
+		} catch (Exception e) {
+			System.out.println("marketOrderList2 Dao ERROR");
+			e.printStackTrace();
+		} 
+		return orderList;
+	}
 
 	//리뷰작성
 	@Override
@@ -95,18 +110,6 @@ public class MypageDaoImpl implements MypageDao{
 		return res;
 	}
 
-	@Override
-	public OrderProductDto reviewForm(String order_id) {
-		OrderProductDto dto = null;
-		
-		try {
-			dto = sqlSession.selectOne(NAMESPACE_MYPAGE + "reviewForm", order_id);
-		} catch (Exception e) {
-			System.out.println("reviewForm Dao ERROR");
-			e.printStackTrace();
-		}
-		return dto;
-	}
 
 
 

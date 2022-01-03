@@ -17,13 +17,15 @@ public class BlogReplyBizImpl implements BlogReplyBiz{
 	// 댓글 목록
 	@Override
 	public List<BlogReplyDto> list(int blog_no) {
+		System.out.println("[biz] reply list");
 		return replyDao.list(blog_no);
 	}
 	
 	// 댓글 작성
 	@Override
-	public void insert(BlogReplyDto dto) {
-		replyDao.insert(dto);
+	public int insert(BlogReplyDto dto) {
+		System.out.println("[biz] reply insert");
+		return replyDao.insert(dto);
 	}
 
 	// 댓글 수정

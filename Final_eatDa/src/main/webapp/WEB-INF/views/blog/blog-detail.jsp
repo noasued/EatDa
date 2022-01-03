@@ -6,6 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
+
+<link href="resources/css/blog/blog-detail.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<style type="text/css">
+.blog-detail__top{
+  width:100%;
+  height:300px;
+  background: url('resources/images/blog-detail.png') no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: table;
+  border: none;
+  background-position: 20% 30%;
+}
+
+.blog-detail__top-txt{
+  color:white;
+  opacity: 0.6;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.blog-detail__top-txt h1, .blog-detail__top-txt h2{
+  display: inline;
+}
+
+.blog-detail__top-txt h1{
+  font-weight: 700;
+  font-size:120px;
+  height:100px;
+  line-height: 90px;
+}
+
+.blog-detail__top-txt h2{
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
 	  $(function(){
@@ -30,6 +69,7 @@
 	
 	  });
 	  
+	  //게시글 삭제
 		function blogDelete(blog_no){
 		  var chk = confirm("정말 삭제하시겠습니까?");
 		  if(chk){
@@ -37,10 +77,29 @@
 		  }
 		}
 		
+		// 댓글 입력 버튼
+		function replySubmit(){
+			var reply_content = $("#reply_content").val();
+			var blog_no = "${dto.blog_no}";
+			var param = "reply_content="+reply_content+"&blog_no="+blog_no;
+			$.ajax({
+				type: "post",
+				url: "reply-insert.do",
+				data: param,
+				success: function(data){
+					alert("댓글이 등록되었습니다.");
+					replyList();
+				}
+			});
+			console.log(param);
+		}
+		
+		
 		// 댓글 목록
 		function replyList(){
 			$.ajax({
 				type: "get",
+				contentType: "application/json",
 				url: "reply-list.do?blog_no=${dto.blog_no}",
 				success: function(result){
 					console.log(result);
@@ -91,45 +150,6 @@
 			return strDate;
 		}
 	</script>
-<link href="resources/css/blog/blog-detail.css" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-<style type="text/css">
-.blog-detail__top{
-  width:100%;
-  height:300px;
-  background: url('resources/images/blog-detail.png') no-repeat;
-  background-size: cover;
-  overflow: hidden;
-  display: table;
-  border: none;
-  background-position: 20% 30%;
-}
-
-.blog-detail__top-txt{
-  color:white;
-  opacity: 0.6;
-  display: table-cell;
-  vertical-align: bottom;
-}
-
-.blog-detail__top-txt h1, .blog-detail__top-txt h2{
-  display: inline;
-}
-
-.blog-detail__top-txt h1{
-  font-weight: 700;
-  font-size:120px;
-  height:100px;
-  line-height: 90px;
-}
-
-.blog-detail__top-txt h2{
-  margin-left: 20px;
-  font-size: 15px;
-}
-
-</style>
-
 </head>
 <body style="margin-top:155px;">
 	<div id="header">
@@ -183,8 +203,8 @@
         <!-- insert reply -->
         <div class="detail-article__reply-input">
           <form name="replyForm" action="" method="post">
-            <textarea path="reply" name="reply" placeholder="댓글을 입력하세요."></textarea>
-            <input type="submit" title="댓글 입력" class="reply-submitbtn" value="&#xf4ad" >
+            <textarea id="reply_content" name="reply_content" placeholder="댓글을 작성해주세요."></textarea>
+            <input type="button" id="replyBtn" title="댓글 입력" class="reply-submitbtn" value="&#xf4ad" onclick="replySubmit()" >
           </form>
         </div>
         
@@ -192,7 +212,9 @@
         <div class="detail-article__reply-list">
           <h4>댓글 목록<i class="fas fa-comment-dots"></i></h4>
           
-          <div id="reply-list"></div>
+          <div id="reply-list">
+          	<!-- 댓글 목록 출력 -->
+          </div>
           
         </div>
        

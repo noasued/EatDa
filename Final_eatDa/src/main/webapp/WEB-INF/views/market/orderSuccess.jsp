@@ -17,9 +17,10 @@ $(document).ready(function() {
 });
 
 const getCartList = () => {
+	let order_id = document.getElementById('order-id').innerText;
 	$.ajax({
-		url:"getOrderList.do",
-		type:"post",
+		url:"getOrderList.do?order_id="+order_id,
+		type:"get",
 		dataType:"json",
 		success:function(data){
 			let list = data;
@@ -105,6 +106,7 @@ const goMain = (command) => {
                 <div style="display:none;" id="coupon-id">${order.coupon_id}</div>
                 <div style="display:none;" id="coupon-rate">${order.coupon_rate}</div>
                 <div style="display:none;" id="user-id">${order.user_id}</div>
+                <div style="display:none;" id="order-id">${order.order_id}</div>
             </div>
         </div>
 
