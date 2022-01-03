@@ -120,6 +120,14 @@ public class MypageController {
 			
 			return null;
 		}
+		
+	
+	@RequestMapping("reviewForm.do")
+	public String reviewForm(Model model, String order_id) {
+		model.addAttribute("dto", mypageBiz.reviewForm(order_id));
+		
+		return "/mypage/mypage_review";
+	}
 	
 
 
