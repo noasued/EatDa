@@ -34,6 +34,5 @@
   		<mapper resource="/mybatis/recipeMapper.xml"/>  
   		<mapper resource="/mybatis/mypageMapper.xml"/>  
   		<mapper resource="/mybatis/adminMapper.xml" />
-  		<mapper resource="/mybatis/subscriptionMapper.xml" />
   	</mappers>
   </configuration>

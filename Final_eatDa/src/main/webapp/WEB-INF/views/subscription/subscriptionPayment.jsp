@@ -455,26 +455,27 @@ $(document).ready(function() {
                 </div>
                 <!-- 주문 상품 정보 -->
                 <div class="box-black">
-				<c:forEach var="dto" items="${list}">
-                    <!-- 상품 한 줄 // 수정 //cartProductDto-->
+                    <!-- 상품 한 줄 -->
                     <div class="box-gray product-row">
                         <div class="p-row-first">
-                            <img src="${dto.}">
+                            <span>${subscription_title}</span>
                         </div>
                         <div class="p-row-second">
-                            <span>${dto.p_name}</span>
+                            <span>${user_id}</span>
                         </div>
                         <div class="p-row-third">
-                            <span>${dto.cart_count}</span>
-                            <span>개</span>
+                            <span>${subscription_term}</span>
                         </div>
                         <div class="p-row-fourth">
-                            <span class="cart-price">${dto.cart_price}</span>
+                            <span class="cart-price">${price}</span>
                             <span>&#8361;</span>
+                        </div>
+                        <div class="p-row-fifth">
+                            <span class="cart-price">${subscription_type}</span>
                         </div>
                     </div>
                     <!-- 상품 한 줄 끝 -->
-				</c:forEach>                   
+				     <div>요청사항 : ${msg}</div>    
                 </div>
 
                 <!-- 쿠폰 적용 섹션 -->
