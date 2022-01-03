@@ -63,7 +63,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	takeProduct(1);
+	window.setTimeout(takeProduct(1),3000);
 	pagination();
 	likeProduct();
 	
@@ -457,12 +457,10 @@ function goProductPage(object) {
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
-
 	<!-- 본문 작성 -->
 	<div class="fixed-Banner">
 		<div class="like-title">내가 찜한 상품</div>
 	</div>
-
 	<div class="container" style="height: fit-content;">
 		<!-- 베너 -->
 		<div class="row" style="margin-top: 10px;">
@@ -475,7 +473,6 @@ function goProductPage(object) {
 				</div>
 			</div>
 		</div>
-
 		<!-- 태그 -->
 		<div class="row">
 			<ul class="keyword-tag" style="margin: 0 auto; width: auto;">
@@ -492,15 +489,10 @@ function goProductPage(object) {
 				<li><span class="keyword" onclick="hashTagSearch(this)">#스페인</span></li>
 			</ul>
 		</div>
-
 		<hr id="horizontal">
-
-		
-
 		<div class="product-container">
 		<!-- 상품 리스트 -->
 		</div>
-
 		<div class="row" style="margin: 0 auto;">
 			<!--페이징 구현-->
 			<!-- 현재 페이지는 class='active' -->
@@ -510,12 +502,10 @@ function goProductPage(object) {
 				</div>
 			</div>
 		</div>
-		
 	</div>
 
 	<div id="footer">
 		<%@ include file="../common/footer.jsp"%>
 	</div>
-
 </body>
 </html>

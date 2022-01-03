@@ -138,9 +138,9 @@
     }
 </style>
 <script type="text/javascript">
-    var count = 0;
-    var array = [];
-    var questionArray = [
+    let count = 0;
+    let array = [];
+    const questionArray = [
         '식당에 들어가서 앉았는데 벨을 눌러도, 5분을 앉아있어도 직원이 안온다. 이때 큰 소리로 주문할 수 있다.',
         '저기압 일 땐 고기앞으로, 기분이 고기압일 땐 고기앞으로.',
         '하루 3끼 내 밥상에 육류가 없으면 하루종일 기분이 좋지 않다.',
@@ -151,26 +151,25 @@
     ];
     //페이지 진행 2배수마다 배열 채워주고
     //8페이지 끝나고 9페이지로 넘어갈 때 mbti 완성해서 페이지에 뿌려줘야함
-
-    function response(value) {
+	
+    const response = (value) => {
         let nowPage = Number(document.getElementsByClassName('now-page')[0].innerText)+1;
         let mbti = '';
         count += value;
 
-        //mbti 정하는 로직
         if ((nowPage-1)%2 == 0) {
             switch (nowPage-1) {
                 case 1,2 : 
-                    count>1?array.push('E'):array.push('I');
+                    count>=1?array.push('E'):array.push('I');
                     break;
                 case 3,4 : 
-                    count>1?array.push('M'):array.push('V');
+                    count>=1?array.push('M'):array.push('V');
                     break;
                 case 5,6 : 
-                    count>1?array.push('W'):array.push('S');
+                    count>=1?array.push('W'):array.push('S');
                     break;
                 case 7,8 :
-                    count>1?array.push('A'):array.push('P');
+                    count>=1?array.push('A'):array.push('P');
                     break;
             }
             count = 0;
@@ -203,7 +202,6 @@
                 '</div>'
             );
             
-            //완료 시
             setTimeout(function() {
                 for (var i = 0; i < 4; i++) {
                     mbti += array[i];
@@ -212,9 +210,8 @@
             },2000);
         }
     }
-
-    function afterTest(mbti) {
-        console.log('afterTest.mbti:'+mbti);
+    
+    const afterTest = (mbti) => {
         $.ajax({
         	url:"getMbtiProduct.do?m_name="+mbti,
         	type:"get",
@@ -257,12 +254,13 @@
         	}
         });
     }
-    function goProductPage(object) {
+    
+    const goProductPage = (object) => {
     	let p_id = $(object).parent().siblings('.p-id').text();
 		location.href='goProductPage.do?p_id=' + p_id;
-    } 
-
-    function start() {
+    }
+    
+    const start = () => {
         $('.content-div').html(
             '<div class="content">' +
                 '<div class="paging" align="right">' +
