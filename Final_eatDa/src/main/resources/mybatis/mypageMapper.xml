@@ -46,6 +46,13 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<!-- 주문내역 -->
+	<select id="marketOrderList2" parameterType="string" resultType="orderDto">
+		SELECT ORDER_ID, ORDER_DATE
+		FROM E_ORDER
+		WHERE USER_ID = #{user_id}
+	</select>
+	
 	<!-- 리뷰 작성 -->
 	<insert id="registReview" parameterType="reviewDto">
 		INSERT INTO REVIEW
