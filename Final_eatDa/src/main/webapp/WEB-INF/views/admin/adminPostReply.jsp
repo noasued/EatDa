@@ -133,7 +133,7 @@
                                 <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link product" href="adminProduct.do" style="color: black;">
+                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 <span>Product</span>
                             </a>
@@ -191,7 +191,7 @@
 			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.reply_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
 			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
-			                                    <td style="vertical-align:middle;"><a href="">${dto.reply_content}</a></td>
+			                                    <td style="vertical-align:middle;"><a href="" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></td>
 			                        		</tr>
@@ -208,9 +208,6 @@
                         </div>
                     </div>
                 </main>
-                <footer class="">
-                    
-                </footer>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -134,7 +133,7 @@
                                 <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link product" href="adminProduct.do" style="color: rgb(224, 179, 57);">
+                            <a class="nav-link product" href="adminProductList.do" style="color: rgb(224, 179, 57);">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 <span>Product</span>
                             </a>
@@ -164,35 +163,38 @@
                         <h1 class="title_tab">상품 관리</h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                상품 리스트
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i> 상품 리스트</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <col width="50px"><col width="60%"><col width="30%">
+                                    <col width="50px"><col width="100px"><col width="200px"><col width="500px"><col width="150px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
-                                            <th>상품 이미지</th>
+                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>                                            
+                                            <th>p_id</th>
+                                            <th>카테고리</th>
                                             <th>상품명</th>
+                                            <th>상품 이미지</th>
+                                            <th>상품 가격</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     	<c:forEach items="${productList}" var="dto">
 			                            	<tr>
 			                                	<td style='vertical-align:middle' ><input type="checkbox" name="chkBtn" id="chk" value="${dto.p_id}"></td>
-			                                    <td><a href="#"><img src="${dto.img_path}" style="width: 20%; height: 20%;"></a></td>
+			                                    <td style='vertical-align:middle'>${dto.p_id}</td>
+			                                    <td style='vertical-align:middle'>${dto.p_category}</td>
 			                                    <td style='vertical-align:middle'>${dto.p_name}</td>
+			                                    <td><a href="location.href='p_insert.do?command=p_id'"><img src="${dto.img_path}" style="width: 20%; height: 20%;"></a></td>
+			                                	<td style='vertical-align:middle'>${dto.p_price} 원</td>
 			                                </tr>
 		                                </c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <a class="adm_insert" href="adminProductInsert.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
-	                                        <button type="button" onclick="" value="delete">삭 제</button>
+                                            <a class="adm_insert" href="adminProductWriteForm.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
+	                                        <button type="button" onclick="location.href='adminProductDelete.do'" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -200,9 +202,6 @@
                         </div>
                     </div>
                 </main>
-                <footer class="">
-                    
-                </footer>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

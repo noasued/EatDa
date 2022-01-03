@@ -131,7 +131,7 @@
                                 <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link product" href="adminProduct.do" style="color: black;">
+                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 <span>Product</span>
                             </a>
@@ -161,10 +161,7 @@
                         <h1 class="title_tab"><a href="adminPostReply.do" style="text-decoration: none; color: black;">댓글</a> | <a href="adminPostBlog.do" style="text-decoration: none; color: rgb(224, 179, 57);">블로그</a> | <a href="adminPostEvent.do" style="text-decoration: none; color: black;">이벤트</a></h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                블로그 관리
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i> 블로그 관리</div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="50px"><col width="120px"><col width="800px">
@@ -200,9 +197,6 @@
                         </div>
                     </div>
                 </main>
-                <footer class="">
-                    
-                </footer>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

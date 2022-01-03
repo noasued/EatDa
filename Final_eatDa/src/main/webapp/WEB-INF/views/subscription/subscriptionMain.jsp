@@ -15,9 +15,7 @@
         <link rel="stylesheet" href="resources/subscription/css/subscriptionModal_style.css"><!-- Modal css -->
         
         <style>
-        	header{
-        		margin-top:9%;
-        	}
+        	header{margin-top:9%;}
             .tiledBackground{
                 background-image: url(resources/subscription/assets/image/kitchen1.jpg);
                 background-size: 1200px 600px;
@@ -88,7 +86,7 @@
 				    <p class="title">구독하면 무엇이 좋은가요?</p>
 				    <div class="modal-content">
 				    	구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.<br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.<br>
-				    	<b>첫 번째</b>, 밀키트와 함께 만들어 먹을 수 있는 특별한 레시피를 이메일로 발송해드립니다.<br><b>두 번째</b>, 구독 이외의 밀키트 구매 시, 할인 혜택을 받으실 수 있습니다.<br><b>세 번째</b>맛있는 밀키트를 일주일에 한 번씩 꼬박꼬박 받아보실 수 있습니다!<br>
+				    	<b>첫 번째</b>, 밀키트와 함께 만들어 먹을 수 있는 특별한 레시피를 이메일로 발송해드립니다.<br><b>두 번째</b>, 밀키트 구매 시, 할인 쿠폰을 받으실 수 있습니다.<br><b>세 번째</b>맛있는 밀키트를 일주일에 한 번씩 꼬박꼬박 받아보실 수 있습니다!<br>
 				    </div>
 				  </div>
 				  
@@ -96,7 +94,9 @@
 				    <a href="javascript:;" class="close">X</a>
 				    <p class="title">F A Q</p>
 				    <div class="modal-content">
-				    	<b>Q1.</b>이미 구독을 신청했는데 구독 기간이 끝나기 전에 구독을 또 신청할 수 있나요?<br>&nbsp;&nbsp;<b>A1.</b>구독 기간이 끝나고 새로운 구독을 신청하실 수 있습니다.<br>
+				    	<b>Q1.</b>이미 구독을 신청했는데 구독 기간이 끝나기 전에 구독을 또 신청할 수 있나요?<br>&nbsp;&nbsp;<b>A1.</b>구독 기간이 끝나고 새로운 구독을 신청하실 수 있습니다.<br><br>
+				    	<b>Q2.</b>주간 구독과 일반 주문의 다른 점이 있나요?<br><b>A2.</b>주간 구독,일반 주문 모두 밀키트가 배송되지만 주간 구독은 이메일 수신에 동의하셨을 경우 이메일로 레시피를 받아보실 수 있습니다.<br><br>
+				    	<b>Q3.</b><br><b>A3.</b><br>
 				    </div>
 				  </div>
 			</div>	  
@@ -117,12 +117,11 @@
                                 <div class="mb-3"><span class="display-4 fw-bold">8,000</span><span class="text-muted">/￦</span></div><br>
 	                                <ul class="list-unstyled mb-4">
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i><strong>1 week 1 mealkit</strong></ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>밀키트 한 번 발송</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>좋아요</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>일주일에 한 번 발송</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>저렴한 가격!</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>일반 구독과 다르게</ol>
+	                                    <ol class="mb-2">&nbsp;&nbsp;&nbsp;&nbsp;특별한 레시피와 함께 밀키트를!</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i><strong>체험용</strong>으로 추천해요:-)</ol>
 	                                </ul>
 	                                <br>
                                 <div class="d-grid"><a class="btn btn-primary" href="subForm.do?type=weekly">주간구독 신청</a></div>
@@ -138,11 +137,10 @@
 	                                <ul class="list-unstyled mb-4">
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i><strong>1 month 4 mealkit</strong></ol>
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>한 달간 매 주 밀키트 발송</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>한 달동안 편하게 밀키트를 !</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>주간 구독이 짧다면? <strong>월간 구독!</strong></ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>한 달동안 편하게 밀키트를</ol>
+	                                    <ol class="mb-2">&nbsp;&nbsp;&nbsp;&nbsp;제공받을 수 있습니다.</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i><strong>입문용</strong>으로 추천해요:-)</ol>
 	                                </ul>
 	                                <br>
                                 <div class="d-grid"><a class="btn btn-primary" href="subForm.do?type=monthly">월간구독 신청</a></div>
@@ -158,11 +156,10 @@
 	                                <ul class="list-unstyled mb-4">
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i><strong>1 quarter 12 mealkit</strong></ol>
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>3개월 간 매 주 밀키트 발송</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>맘 편히 밀키트를 즐겨요!</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
-	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>아주 좋아요</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>할인된 가격!</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>매번 결제하기 번거로우시죠?</ol>
+	                                    <ol class="mb-2">&nbsp;&nbsp;&nbsp;&nbsp;맘 편히 밀키트를 즐겨요.</ol>
+	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>번거로우신 분들께 추천해요:-)</ol>
 	                                </ul>
 	                                <br>
                                 <div class="d-grid"><a class="btn btn-primary" href="subForm.do?type=quarterly">분기구독 신청</a></div>
