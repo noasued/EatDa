@@ -18,4 +18,8 @@
 		JOIN PRODUCT ON (REC_PRODUCT = P_ID)
 		WHERE M_NAME = #{m_name}
 	 </select>
+	 
+	 <select id="getPopularBlog" resultType="blogDto">
+	 	SELECT * FROM BLOG ORDER BY REGDATE
+	 </select>
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.CommonBiz;
+import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.MbtiDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.RecipeDto;
@@ -76,6 +77,24 @@ public class commonController {
 			list.get(0).setP_description(desc);
 		}
 		
+		return list;
+	}
+	
+	@RequestMapping(value="/getPopularBlog.do", method=RequestMethod.POST) 
+	@ResponseBody
+	public List<BlogDto> getPopularBlog() {
+		logger.info("getPopularBlog");
+		List<BlogDto> temp = commonBiz.getPopularBlog();
+		List<BlogDto> list = new ArrayList<BlogDto>();
+		
+		for (int i = 0; i < 3; i++) {
+			list.add(temp.get(i));
+			
+			if (list.get(i).getBlog_content().length() > 40) {
+				String s = list.get(i).getBlog_content().substring(0, 40) + "....";
+				list.get(i).setBlog_content(s);
+			}
+		}
 		return list;
 	}
 }
