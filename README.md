@@ -10,4 +10,5 @@
   <li><h4>img,css,js 파일은 반드시 main - webapp - resources 폴더에 넣어주세요.</h4></li>
   <li><h4> ex) 경로설정 : resources/css/styles.css </h4></li>
   <li><h4>1.01v  -- 12/15(수)<h4></li>
+  <li><h4>1.02v  -- 12/31(금)<h4></li>
 </ul>

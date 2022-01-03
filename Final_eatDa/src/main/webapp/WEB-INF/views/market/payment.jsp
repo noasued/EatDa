@@ -217,7 +217,6 @@
             width:40%; height:100%; float:left; padding:40px 0 0 0; font-weight:bold; font-size:x-large;
         }
     
-        /*상품 한 줄 css*/
         .product-row {
             height:120px; padding-bottom:10px;
         }
@@ -296,7 +295,6 @@
         	width:33%;
         	float:left;
         }
-        
     </style>
 
 <title>Insert title here</title>
@@ -581,7 +579,6 @@ $(document).ready(function() {
 
         </div>
     </div>
-	
 	
 	<div id="footer">
 		<%@ include file="../common/footer.jsp"%>
