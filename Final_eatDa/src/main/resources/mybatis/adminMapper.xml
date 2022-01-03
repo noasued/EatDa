@@ -20,17 +20,41 @@
 		ORDER BY REPLY_NO DESC
 	</select>
 	
+	<delete id="adminReplyDelete" parameterType="int">
+		DELETE FROM BLOG_REPLY WHERE REPLY_NO=#{reply_no}
+	</delete>
+	
 	<!-- Admin Product -->
 	<resultMap type="productDto" id="productMap">
 		<result property="p_id" column="P_ID" />
-		<result property="img_path" column="IMG_PATH" />
 		<result property="p_name" column="P_NAME" />
+		<result property="img_path" column="IMG_PATH" />
+		<result property="p_price" column="P_PRICE"/>		
 	</resultMap>
 	
 	<select id="adminProductList" parameterType="list" resultMap="productMap">
 		SELECT * FROM PRODUCT
-		ORDER BY P_NO DESC
+		ORDER BY P_ID DESC
 	</select>
+	
+	<select id="selectPid" parameterType="String" resultType="productDto">
+		SELECT P_ID FROM PRODUCT WHERE P_NAME=#{p_name}
+	</select>
+	
+	<insert id="productInsert" parameterType="productDto">
+		INSERT INTO PRODUCT
+		VALUES(PRODUCT_SEQ.NEXTVAL,#{p_name},#{img_path},#{p_price})	
+	</insert>
+	
+	<update id="productUpdate" parameterType="productDto">
+		UPDATE PRODUCT
+		SET P_CATEGORY=#{p_category}, P_NAME=#{p_name}, IMG_PATH=#{img_path}, P_PRICE=#{p_price}
+		WHERE P_ID=#{p_id}
+	</update>
+	
+	<delete id="productDelete" parameterType="int">
+		DELETE FROM PRODUCT WHERE P_ID=#{p_id}
+	</delete>
 	
 	
 	<!-- Admin Order -->
@@ -42,13 +66,15 @@
 		<result property="shipping_status" column="SHIPPING_STATUS" />
 		<result property="order_status" column="ORDER_STATUS" />
 	</resultMap>
-	
 		
 	<select id="adminOrderList" parameterType="list" resultMap="orderAdminMap">
 		SELECT * FROM ORDER_ADMIN
 		ORDER BY ORDER_ID DESC
 	</select>
 	
+	<delete id="adminOrderDelete" parameterType="int">
+		DELETE FROM ORDER_ADMIN WHERE ORDER_ID=#{order_id}
+	</delete>
 	
 	<!-- Admin User -->
 	<resultMap type="userDto" id="userMap">
@@ -68,8 +94,12 @@
 	
 		
 	<select id="adminUserList" parameterType="list" resultMap="userMap">
-		SELECT * FROM E_USER
+		SELECT * FROM E_USER ORDER BY USER_ID DESC
 	</select>
+	
+	<delete id="adminUserDelete" parameterType="int">
+		DELETE FROM E_USER WHERE USER_ID=#{user_id}
+	</delete>
 
 	<!-- Admin Report -->
 	<resultMap type="reportDto" id="reportMap">
@@ -87,5 +117,15 @@
 		ORDER BY REPORT_NO DESC
 	</select>
 	
+	<!-- Penalty +1 -->
+	<update id="repoertCount" parameterType="int">
+		UPDATE REPORT R, E_USER U
+		SET USER_PENALTY = USER_PENALTY +1
+		WHERE REPORT_NO = #{report_no}
+	</update>
+	
+	<delete id="adminReportDelete" parameterType="int">
+		DELETE FROM REPORT WHERE REPORT_NO=#{report_no}
+	</delete>
 
 </mapper>
