@@ -125,6 +125,9 @@
 .recommend-menu .list-base {
 	margin-left: 15%;
 }
+.list-base {
+	width:90%;
+}
 
 .recommend-menu {
 	margin-bottom: 0px;
@@ -164,9 +167,8 @@ li {
 	cursor:pointer;
 }
 
-/*  */
 .subSection-img {
-	background-image: url(resources/images/main-subSection.png);
+	background-image: url(resources/images/sub-envelope.jpeg);
 	background-size: cover;
 	background-repeat: none;
 }
@@ -184,7 +186,7 @@ li {
 .recipe-no {
 	display:none;
 }
-.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover, .heart:hover {
+.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover, .heart:hover, .a-tag:hover, .thumbnail:hover, .subSection-img:hover {
 	cursor:pointer;
 }
 .card-img-top {
@@ -206,7 +208,7 @@ li {
 	padding-left:3%;width:100%; height:20%; font-size:large; color:gray;
 }
 .pop-content {
-	width:100%; height:80%; padding:5px; letter-spacing:1px;
+	margin-top:10px;width:100%; height:80%; padding:5px; letter-spacing:1px;
 }
 
 .item-img {
@@ -228,6 +230,16 @@ li {
 		getRecentRecipe();
 		makeProductSection(list);
 		getPopularBlog();
+		getLovingRecipe();
+		
+		window.setInterval(function() {
+			$('.list-item').eq(0).animate({opacity:0},800);
+			$('.list-item').eq(1).animate({opacity:0},1200);
+			$('.list-item').eq(2).animate({opacity:0},1600);
+			window.setTimeout(function(){
+				getLovingRecipe();
+			},1800)
+		},9000);
 		
 		//배너 사진 변경
 		window.setInterval(function() {
@@ -379,7 +391,14 @@ li {
 	}
 	
 	const goRecipeDetail = (object) => {
-		let recipe_no = Number($(object).parent().siblings('.recipe-no').text());
+		let recipe_no = 0;
+		
+		if ($(object).attr('class') == 'a-tag') {
+			recipe_no = Number($(object).parents('.item-title').siblings('.recipe-no').text());
+		} else {
+			recipe_no = Number($(object).parent().siblings('.recipe-no').text());
+		}
+		
 		location.href = 'recipeDetail.do?recipe_no=' + recipe_no;
 	}
 	
@@ -413,6 +432,37 @@ li {
 								"</div>" +
 							"</div>" +
 						"</li>"
+					);
+				});
+			}
+		});
+	}
+	
+	const getLovingRecipe = () => {
+		$.ajax({
+			url:"getLovingRecipe.do",
+			type:"post",
+			dataType:"json",
+			success:function(data) {
+				$('.list-base:eq(0)').html('');
+				$(data).each(function(key, value) {
+					$('.list-base:eq(0)').append(
+							"<li class='list-item'>" +
+								"<div class='item-inner'>" +
+									"<div class='recipe-no'>" + value.recipe_no + "</div>" +
+									"<div class='item-img'>" +
+										"<img class='thumbnail' onclick='goRecipeDetail(this)' src=" + value.recipe_img + ">" +
+									"</div>" +
+									"<div class='item-title'>" +
+										"<div class='pop-title'>" +
+											"<a class='a-tag' onclick='goRecipeDetail(this)'>" + value.recipe_title + "</a>" +									
+										"</div>" +
+										"<div class='pop-content'>" +
+											"<a class='a-tag' onclick='goRecipeDetail(this)'>" + value.recipe_content + "</a>" +
+										"</div>" +
+									"</div>" +
+								"</div>" +
+							"</li>"
 					);
 				});
 			}
@@ -468,43 +518,7 @@ li {
 				</div>
 				<div class="col-md-6">
 					<ul class="list-base">
-
-						<li class="list-item">
-							<div class="item-inner">
-								<div class="item-img">
-									<img class="thumbnail"
-										src="resources/images/recipe/eggroll.png">
-								</div>
-								<div class="item-title">
-									<a class="a-tag" href="#">계란말이계란말이계란말이</a>
-								</div>
-							</div>
-						</li>
-
-						<li class="list-item">
-							<div class="item-inner">
-								<div class="item-img">
-									<img class="thumbnail"
-										src="resources/images/recipe/eggroll.png">
-								</div>
-								<div class="item-title">
-									<a class="a-tag" href="#">소스말이 소스말이 소스말</a>
-								</div>
-							</div>
-						</li>
-
-						<li class="list-item">
-							<div class="item-inner">
-								<div class="item-img">
-									<img class="thumbnail"
-										src="resources/images/recipe/eggroll.png">
-								</div>
-								<div class="item-title">
-									<a class="a-tag" href="#">롤케익롤케익 롤케익 롤케익</a>
-								</div>
-							</div>
-						</li>
-
+						<!-- 조회수 기반 -->
 					</ul>
 				</div>
 			</div>
@@ -550,11 +564,11 @@ li {
 							<p class="card-text" style="letter-spacing: 0.5px; font-size: 15px; margin-bottom: 80%;">
 								바쁜 일상에 치여 집에서 식탁의 행복을 누리지 못하는 여러분들을 위한 선물
 							</p>
-							<span class="font-noto-sans sub-title">구독 서비스 보러가기></span>
+							<span class="font-noto-sans sub-title" onclick="location.href='subMain.do'">구독 서비스 보러가기></span>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-7 subSection-img"></div>
+				<div class="col-md-7 subSection-img" onclick="location.href='subMain.do'"></div>
 			</div>
 		</div>
 

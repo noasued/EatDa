@@ -1,5 +1,6 @@
 package com.project.eatda.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.MypageBiz;
 import com.project.eatda.dto.BlogDto;
-import com.project.eatda.dto.BlogLikeDto;
 import com.project.eatda.dto.CouponDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.OrderProductDto;
-import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 import com.project.eatda.dto.UserDto;
@@ -64,6 +64,12 @@ public class MypageController {
 		return "/mypage/mypage_coupon";
 	}	
 	
+	@RequestMapping("/mypage_order_list.do")
+	public String mypageOrderList() {
+		System.out.println("mypage_orderList page");
+		return "/mypage/mypage_order_list";
+	}
+	
 	//구독내역
 	@RequestMapping("mypage_subscription_list.do")
 	public String subscriptionList(Model model, SubscriptionDto dto) {
@@ -106,30 +112,39 @@ public class MypageController {
 		return list;
 	}
 	
-	//리뷰 작성
-		@RequestMapping("registReview.do")
-		@ResponseBody
-		public String registReview(ReviewDto dto) {
-			logger.info("registReview");
+	//주문 내역
+	@RequestMapping(value="marketOrderList2.do", method=RequestMethod.GET)
+	public String marketOrderList2(Model model, OrderDto dto){
+		logger.info("marketOrderList2");
+		model.addAttribute("list", mypageBiz.marketOrderList2(dto));
 			
-			int res = mypageBiz.registReview(dto);
-			
-			if(res>0) {
-				return "mypage_like.do";
-			}
-			
-			return null;
-		}
-		
+		return "/mypage/mypage_order_list";
+	}
 	
+	//리뷰 작성
+	@RequestMapping("registReview.do")
+	@ResponseBody
+	public String registReview(ReviewDto dto) {
+		logger.info("registReview");
+			
+		int res = mypageBiz.registReview(dto);
+			
+		if(res>0) {
+			return "mypage_like.do";
+		}
+			
+		return null;
+	}
+		
+	//리뷰 작성폼
 	@RequestMapping("reviewForm.do")
-	public String reviewForm(Model model, String order_id) {
-		model.addAttribute("dto", mypageBiz.reviewForm(order_id));
+	public String reviewForm(Model model, OrderProductDto dto) {
+		logger.info("registForm");
+		model.addAttribute("dto", dto);
 		
 		return "/mypage/mypage_review";
 	}
 	
-
 
 		
 	

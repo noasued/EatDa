@@ -26,9 +26,10 @@ public class BlogReplyController {
 	private BlogReplyBiz replyBiz;
 	
 	// 댓글 입력
-	@RequestMapping("/reply/reply-insert.do")
+	@RequestMapping("reply-insert.do")
 	public void insert(@ModelAttribute BlogReplyDto dto, HttpSession session) {
-		String userId = (String) session.getAttribute("userId");
+		logger.info("[controller] reply insert");
+		String userId = (String) session.getAttribute("user_id");
 		dto.setUser_id(userId);
 		replyBiz.insert(dto);
 	}
@@ -46,9 +47,10 @@ public class BlogReplyController {
 //	}
 	
 	// 댓글 목록 (RestController json방식)
-	@RequestMapping("/reply/reply-list.do")
+	@RequestMapping("reply-list.do")
 	@ResponseBody
-	public List<BlogReplyDto> listJson(@RequestParam int blog_no){
+	public List<BlogReplyDto> list(@RequestParam int blog_no){
+		logger.info("[controller] reply list of blog : "+blog_no);
 		List<BlogReplyDto> list = replyBiz.list(blog_no);
 		return list;
 	}
