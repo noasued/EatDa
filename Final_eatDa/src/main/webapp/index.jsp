@@ -95,9 +95,10 @@
 	background-color: #ffe38f;
 }
 
-.list_img, .thumbnail {
+.thumbnail {
 	width: 100px;
 	height: 100px;
+	border-radius:15px 5px 5px 15px;
 }
 
 .heart {
@@ -108,10 +109,17 @@
 .item-inner {
 	display: flex;
 	width: 100%;
+	/*border:1px solid gray;*/
+	box-shadow:1px 1px 10px 1px rgb(143, 135, 135);
+	border-radius:15px;
 }
 
 .item-title, .item-heart {
 	margin: 1% 5% 0% 5%;
+}
+.item-heart {
+	width: 5%;
+	text-align:center;
 }
 
 .recommend-menu .list-base {
@@ -176,7 +184,7 @@ li {
 .recipe-no {
 	display:none;
 }
-.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover {
+.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover, .heart:hover {
 	cursor:pointer;
 }
 .card-img-top {
@@ -187,6 +195,25 @@ li {
 	width:100%;
 	height:55%;
 	margin: 15px 0;
+}
+.popular-text {
+	margin-right: 10%;
+	margin-bottom:0px;
+	font-size:15px;
+	letter-spacing:1px;
+}
+.pop-title {
+	padding-left:3%;width:100%; height:20%; font-size:large; color:gray;
+}
+.pop-content {
+	width:100%; height:80%; padding:5px; letter-spacing:1px;
+}
+
+.item-img {
+	width:20%;
+}
+.item-title {
+	width:75%;
 }
 
 </style>
@@ -200,6 +227,7 @@ li {
 		
 		getRecentRecipe();
 		makeProductSection(list);
+		getPopularBlog();
 		
 		//배너 사진 변경
 		window.setInterval(function() {
@@ -355,6 +383,43 @@ li {
 		location.href = 'recipeDetail.do?recipe_no=' + recipe_no;
 	}
 	
+	
+	//인기 eatdagram 가져오기 하트 구현되면 하트순으로 바꿔줘야함
+	const getPopularBlog = () => {
+		$.ajax({
+			url:"getPopularBlog.do",
+			type:"post",
+			dataType:"json",
+			success:function(data) {
+				console.log(data);
+				$(data).each(function(kay, value) {
+					$('.list-base:eq(1)').append(
+						"<li class='list-item'>" +
+							"<div class='item-inner'>" +
+								"<div class='item-img'>" +
+									"<img class='thumbnail' src=" + value.blog_img + ">" +
+								"</div>" +
+								"<div class='item-title'>" +
+									"<div class='pop-title'>" +
+										"<a class='a-tag' href='#'>" + value.blog_title + "</a>" +									
+									"</div>" +
+									"<div class='pop-content'>" +
+										"<a class='a-tag' href='#'>" + value.blog_content + "</a>" +
+									"</div>" +
+								"</div>" +
+								"<div class='item-heart' style='margin-top:5%;'>" +
+									"<span>40</span>" +
+									"<img class='heart' src='resources/images/recipe/heart.png'>" +
+								"</div>" +
+							"</div>" +
+						"</li>"
+					);
+				});
+			}
+		});
+	}
+	
+	
 </script>
 
 </head>
@@ -395,8 +460,9 @@ li {
 		<div class="search-rank block" style="margin-bottom: 2%;">
 			<div class="row" style="">
 				<div class="col-md-6 new-title" style="text-align: right;">
-					<p class="title-font"
-						style="margin-right: 10%; margin-bottom: 10px;">지금 가장 사랑받는 레시피</p>
+					<p class="title-font" style="margin-right: 10%; margin-bottom: 10px;">지금 가장 사랑받는 레시피</p><br>
+					<p class="font-noto-sans popular-text">지금 이 순간 여러분들에게 가장 사랑받는 레시피를 찾아봤어요</p>
+					<p class="font-noto-sans popular-text" style="margin-bottom:25%;">오늘의 레시피를 통해서 함께 행복을 나눠봐요</p>
 					<br>
 					<span onclick="location.href='recipeList.do'" class="font-noto-sans sub-title" style="margin-right: 10%;">Recipe></span>
 				</div>
@@ -497,59 +563,14 @@ li {
 		<div class="recommend-menu block" style="">
 			<div class="row">
 				<div class="col-md-6">
-					<ul class="list-base">
-
-						<li class="list-item">
-							<div class="item-inner">
-								<div class="item-img">
-									<img class="thumbnail"
-										src="resources/images/recipe/eggroll.png">
-								</div>
-								<div class="item-title">
-									<a class="a-tag" href="#">계란말이계란말이계란말이계란말이계란말이계란말이</a>
-								</div>
-								<div class="item-heart">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</div>
-							</div>
-						</li>
-
-						<li class="list-item">
-							<div class="item-inner">
-								<div class="item-img">
-									<img class="thumbnail"
-										src="resources/images/recipe/eggroll.png">
-								</div>
-								<div class="item-title">
-									<a class="a-tag" href="#">계란말이계란말이계란말이계란말이계란말이계란말이</a>
-								</div>
-								<div class="item-heart">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</div>
-							</div>
-						</li>
-
-						<li class="list-item">
-							<div class="item-inner">
-								<div class="item-img">
-									<img class="thumbnail"
-										src="resources/images/recipe/eggroll.png">
-								</div>
-								<div class="item-title">
-									<a class="a-tag" href="#">계란말이계란말이계란말이계란말이계란말이계란말이</a>
-								</div>
-								<div class="item-heart">
-									<img class="heart" src="resources/images/recipe/heart.png">
-								</div>
-							</div>
-						</li>
-
-					</ul>
+					<ul class="list-base"></ul>
 				</div>
-
 				<div class="col-md-6" style="text-align: left">
 					<p class="title-font" style="margin-left: 10%; margin-bottom: 10px;">가장 사랑받는 EatDagram</p>
-					<br> <span class="font-noto-sans sub-title" style="margin-left: 10%;">EatDagram></span>
+					<p style="margin:0 0 0 10%" class="popular-text">여러분만의 경험을 공유해보세요</p>
+					<p style="margin:0 0 20% 10%" class="popular-text">세상에서 단 하나뿐인 레시피를 공유하면서 이벤트까지 응모해봐요.</p>
+					<br>
+					<span class="font-noto-sans sub-title" style="margin-left: 10%;" onclick="location.href='blog.do'">EatDagram></span>
 				</div>
 			</div>
 		</div>
