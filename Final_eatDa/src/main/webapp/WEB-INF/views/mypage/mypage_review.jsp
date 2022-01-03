@@ -37,17 +37,17 @@
 }
 
 .review_form th{
-        text-align: left;
-        vertical-align: top;
-        width: 100px;
-        height: 40px;
-        font-size: 0.8rem;
-   		font-weight: 600;
-    }
+    text-align: left;
+    vertical-align: top;
+    width: 100px;
+    height: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
     
-    .review_form td{
-        vertical-align: top;
-    }
+.review_form td{
+    vertical-align: top;
+}
 </style>
 <body>
 	<div id="header">

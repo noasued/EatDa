@@ -95,18 +95,6 @@ public class MypageDaoImpl implements MypageDao{
 		return res;
 	}
 
-	@Override
-	public OrderProductDto reviewForm(String order_id) {
-		OrderProductDto dto = null;
-		
-		try {
-			dto = sqlSession.selectOne(NAMESPACE_MYPAGE + "reviewForm", order_id);
-		} catch (Exception e) {
-			System.out.println("reviewForm Dao ERROR");
-			e.printStackTrace();
-		}
-		return dto;
-	}
 
 
 

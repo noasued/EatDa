@@ -123,8 +123,9 @@ public class MypageController {
 		
 	
 	@RequestMapping("reviewForm.do")
-	public String reviewForm(Model model, String order_id) {
-		model.addAttribute("dto", mypageBiz.reviewForm(order_id));
+	public String reviewForm(Model model, OrderProductDto dto) {
+		logger.info("registForm");
+		model.addAttribute("dto", dto);
 		
 		return "/mypage/mypage_review";
 	}

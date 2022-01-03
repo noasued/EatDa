@@ -51,9 +51,5 @@ public class MypageBizImpl implements MypageBiz{
 		return mypageDao.registReview(dto);
 	}
 
-	@Override
-	public OrderProductDto reviewForm(String order_id) {
-		return mypageDao.reviewForm(order_id);
-	}
 
 }

@@ -27,7 +27,5 @@ public interface MypageBiz {
 	public int registReview(ReviewDto dto);
 
 	
-	public OrderProductDto reviewForm(String order_id);
-	
 }
  
