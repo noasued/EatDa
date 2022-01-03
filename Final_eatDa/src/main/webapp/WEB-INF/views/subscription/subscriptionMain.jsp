@@ -158,7 +158,7 @@
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>3개월 간 매 주 밀키트 발송</ol>
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>할인된 가격!</ol>
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>매번 결제하기 번거로우시죠?</ol>
-	                                    <ol class="mb-2">&nbsp;&nbsp;&nbsp;&nbsp;맘 편히 밀키트를 즐겨요.</ol>
+	                                    <ol class="mb-2">&nbsp;&nbsp;&nbsp;&nbsp;맘 편히 밀키트를 받아보세요.</ol>
 	                                    <ol class="mb-2"><i class="bi bi-check text-primary"></i>번거로우신 분들께 추천해요:-)</ol>
 	                                </ul>
 	                                <br>
