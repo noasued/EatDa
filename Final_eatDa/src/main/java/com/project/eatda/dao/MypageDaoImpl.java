@@ -110,8 +110,6 @@ public class MypageDaoImpl implements MypageDao{
 		return res;
 	}
 
-	
-
 
 
 

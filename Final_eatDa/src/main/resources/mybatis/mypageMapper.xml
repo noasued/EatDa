@@ -51,6 +51,7 @@
 		SELECT ORDER_ID, ORDER_DATE
 		FROM E_ORDER
 		WHERE USER_ID = #{user_id}
+		ORDER BY ORDER_DATE DESC
 	</select>
 	
 	<!-- 리뷰 작성 -->

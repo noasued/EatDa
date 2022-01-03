@@ -1,5 +1,6 @@
 package com.project.eatda.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -112,30 +113,30 @@ public class MypageController {
 	}
 	
 	//주문 내역
-		@RequestMapping(value="marketOrderList2.do", method=RequestMethod.GET)
-		public String marketOrderList2(Model model, OrderDto dto){
-			logger.info("marketOrderList2");
-			model.addAttribute("list", mypageBiz.marketOrderList2(dto));
+	@RequestMapping(value="marketOrderList2.do", method=RequestMethod.GET)
+	public String marketOrderList2(Model model, OrderDto dto){
+		logger.info("marketOrderList2");
+		model.addAttribute("list", mypageBiz.marketOrderList2(dto));
 			
-			return "/mypage/mypage_order_list";
-		}
+		return "/mypage/mypage_order_list";
+	}
 	
 	//리뷰 작성
-		@RequestMapping("registReview.do")
-		@ResponseBody
-		public String registReview(ReviewDto dto) {
-			logger.info("registReview");
+	@RequestMapping("registReview.do")
+	@ResponseBody
+	public String registReview(ReviewDto dto) {
+		logger.info("registReview");
 			
-			int res = mypageBiz.registReview(dto);
+		int res = mypageBiz.registReview(dto);
 			
-			if(res>0) {
-				return "mypage_like.do";
-			}
-			
-			return null;
+		if(res>0) {
+			return "mypage_like.do";
 		}
+			
+		return null;
+	}
 		
-	
+	//리뷰 작성폼
 	@RequestMapping("reviewForm.do")
 	public String reviewForm(Model model, OrderProductDto dto) {
 		logger.info("registForm");
@@ -144,7 +145,6 @@ public class MypageController {
 		return "/mypage/mypage_review";
 	}
 	
-
 
 		
 	

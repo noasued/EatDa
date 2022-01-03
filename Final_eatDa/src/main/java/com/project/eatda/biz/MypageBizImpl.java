@@ -45,16 +45,17 @@ public class MypageBizImpl implements MypageBiz{
 	}
 	
 	//주문내역
-		@Override
-		public List<OrderDto> marketOrderList2(OrderDto dto) {
-			return mypageDao.marketOrderList2(dto);
-		}
+	@Override
+	public List<OrderDto> marketOrderList2(OrderDto dto) {
+		return mypageDao.marketOrderList2(dto);
+	}
 
 	//리뷰작성
 	@Override
 	public int registReview(ReviewDto dto) {
 		return mypageDao.registReview(dto);
 	}
+
 
 
 }

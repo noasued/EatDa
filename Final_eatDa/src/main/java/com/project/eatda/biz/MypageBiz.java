@@ -29,6 +29,5 @@ public interface MypageBiz {
 	//리뷰 작성
 	public int registReview(ReviewDto dto);
 
-	
 }
  

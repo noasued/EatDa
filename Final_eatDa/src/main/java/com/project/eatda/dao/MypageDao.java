@@ -30,6 +30,5 @@ String NAMESPACE_MYPAGE = "mypage.";
 	
 	//리뷰작성
 	public int registReview(ReviewDto dto);
-
 	
 }
