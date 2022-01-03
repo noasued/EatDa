@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.project.eatda.dao.CommonDao;
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.MbtiDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.RecipeDto;
 
@@ -40,6 +41,11 @@ public class CommonBizImpl implements CommonBiz{
 	@Override
 	public List<RecipeDto> getLovingRecipe() {
 		return dao.getLovingRecipe();
+	}
+
+	@Override
+	public OrderDto getOrderDto(OrderDto dto) {
+		return dao.getOrderDto(dto);
 	}
 	
 }

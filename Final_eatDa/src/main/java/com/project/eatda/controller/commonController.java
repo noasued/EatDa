@@ -3,10 +3,13 @@ package com.project.eatda.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.eatda.biz.CommonBiz;
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.MbtiDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.RecipeDto;
+import com.project.eatda.dto.UserDto;
 
 @Controller
 public class commonController {
@@ -114,7 +119,19 @@ public class commonController {
 		return list;
 	}
 	
-	
+	@RequestMapping("/goOrderSuccess.do")
+	public String goOrderSuccess(Model model, String order_id, HttpServletRequest request) {
+		logger.info("goOrderSuccess, order_id : " + order_id);
+		UserDto user = (UserDto)request.getSession().getAttribute("member");
+		OrderDto order = new OrderDto();
+		order.setUser_id(user.getUser_id());
+		order.setOrder_id(order_id);
+		
+		OrderDto dto = commonBiz.getOrderDto(order);
+		
+		model.addAttribute("order", dto);
+		return "/market/orderSuccess";
+	}
 	
 	
 	
