@@ -12,6 +12,7 @@ public interface CommonBiz {
 	public List<ProductDto> getMarketData();
 	
 	public List<RecipeDto> getRecentRecipe();
+	public List<RecipeDto> getLovingRecipe();
 	
 	public List<MbtiDto> getMbtiProduct(String m_name);
 	

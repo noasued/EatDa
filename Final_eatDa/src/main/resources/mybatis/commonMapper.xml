@@ -22,4 +22,10 @@
 	 <select id="getPopularBlog" resultType="blogDto">
 	 	SELECT * FROM BLOG ORDER BY REGDATE
 	 </select>
+	 
+	 <select id="getLovingRecipe" resultType="recipeDto">
+	 	SELECT RECIPE_COUNT, RECIPE_NO, RECIPE_TITLE, RECIPE_CONTENT, RECIPE_IMG
+		FROM (SELECT * FROM RECIPE ORDER BY RECIPE_COUNT DESC)
+		WHERE 4 > ROWNUM
+	 </select>
 </mapper>
