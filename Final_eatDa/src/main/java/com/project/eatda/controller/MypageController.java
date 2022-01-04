@@ -19,6 +19,8 @@ import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.OrderProductDto;
+import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.RecipeDto;
 import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 import com.project.eatda.dto.UserDto;
@@ -79,6 +81,16 @@ public class MypageController {
 		return "/mypage/mypage_subscription";
 	}
 	
+	//구독상품
+	@RequestMapping(value="/getMarketProduct.do", method=RequestMethod.POST) 
+	@ResponseBody
+	public List<ProductDto> getMarketProduct() {
+		logger.info("getMarketProduct");
+		List<ProductDto> list = mypageBiz.getMarketProduct();
+		
+		return list;
+	}
+	
 	//쿠폰함
 	@RequestMapping("mypage_couponList.do")
 	public String couponList(Model model, CouponDto dto){
@@ -123,17 +135,18 @@ public class MypageController {
 	
 	//리뷰 작성
 	@RequestMapping("registReview.do")
-	@ResponseBody
 	public String registReview(ReviewDto dto) {
 		logger.info("registReview");
 			
 		int res = mypageBiz.registReview(dto);
 			
 		if(res>0) {
-			return "mypage_like.do";
+			return "/mypage/mypage_like";
+		}else {
+			return null;
 		}
 			
-		return null;
+		
 	}
 		
 	//리뷰 작성폼

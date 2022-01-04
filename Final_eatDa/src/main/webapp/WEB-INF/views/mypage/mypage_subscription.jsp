@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
 </head>
 <style type="text/css">
@@ -108,9 +109,28 @@ hr{
         width: 150px;
     }
 
+	.alter_product_pic{
+        height: 150px;
+        width: 150px;
+        margin-top: 20px;
+    }
 
-    .alter_product_pic{
-        content: url("resources/images/food1.jpg");
+    .alter_product_pic1{
+        content: url("resources/images/sub_food2.png");
+        height: 150px;
+        width: 150px;
+        margin-top: 20px;
+    }
+    
+    .alter_product_pic2{
+        content: url("resources/images/sub_food3.png");
+        height: 150px;
+        width: 150px;
+        margin-top: 20px;
+    }
+    
+    .alter_product_pic3{
+        content: url("resources/images/sub_food4.png");
         height: 150px;
         width: 150px;
         margin-top: 20px;
@@ -131,15 +151,15 @@ hr{
     }
 
     .alter_product_name1 a{
-        margin-left: 60px;
+        margin-left: 50px;
     }
 
     .alter_product_name2 a{
-        margin-left: 130px;
+        margin-left: 110px;
     }
 
     .alter_product_name3 a{
-        margin-left: 130px;
+        margin-left: 100px;
     }
     
     .no_subscription{
@@ -152,6 +172,37 @@ hr{
 	font-size: 0.8rem;
 	}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		getMarketProduct();
+	});
+
+	const getMarketProduct = () => {
+		$.ajax({
+			url:"getMarketProduct.do",
+			type:"post",
+			dataType:"json",
+			success:function(data) {
+				$(data).each(function(key, value) {
+					$('.rec-recipe').append(
+						"<td>" +
+						"<img class='alter_product_pic' src='" + value.img_path +"'"+
+						"<input type='radio' name='alter_product' value='food1' id='" + value.p_id +"'>"+
+						"<label for='"+ value.p_id + "' content='url(" + value.img_path + ")'></label> &nbsp;"+
+						"<br>"+
+						"<span class='alter_product_name1'> <a>"+value.p_name+"</a></span>" +
+						"</td>"
+					);
+				});
+			}
+		});
+	}
+	
+	
+	function submitBtn(){
+		alert("신청이 완료되었습니다.");		
+	}
+</script>
 <body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
@@ -164,12 +215,11 @@ hr{
                 <hr>
             </div>
             <c:choose>
-            		<c:when test="${dto != null }">
+            		<c:when test="${dto != null}">
             <div class="headline2">
                 <a>구독 내역</a>
             </div>
             <div class="subscription_info">
-            <form action="" method="post">
                 <table width="760px">
                     <tr>
                         <col width="120px"> <col width="500px">
@@ -186,40 +236,63 @@ hr{
                         <th>결제 금액</th>
                         <td><a>${dto.subscription_price } 원</a></td>
                     </tr>
-                    <tr>
-                        <th>배송 예정 상품</th>
-                        <td>
-                            <div class="delivery_product">
-                            <img src="resources/images/food1.jpg" width="150" height="150"><br>
-                            <a>전복죽</a>
-                        </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>대체 상품</th>
-                        <td>
-                            <input type="radio" name="alter_product" value="food1" id="food1" checked="checked">
-                            <label for="food1" class="alter_product_pic"></label> &nbsp;
-                            <input type="radio" name="alter_product" value="food2" id="food2">
-                            <label for="food2" class="alter_product_pic"></label> &nbsp;
-                            <input type="radio" name="alter_product" value="food3" id="food3">
-                            <label for="food3" class="alter_product_pic"></label>
-                            <br>
-                            <span class="alter_product_name1">
-                                <a>전복죽</a>
-                            </span>
-                            <span class="alter_product_name2">
-                                <a>전복죽</a>
-                            </span>
-                            <span class="alter_product_name3">
-                                <a>전복죽</a>
-                            </span>
-                        </td>
-                    </tr> 
+                    
+                   	<c:choose>
+                    <c:when test="${dto.subscription_type == '제철구독' }">
+	                    <tr>
+	                        <th>배송 예정 상품</th>
+	                        <td>
+	                            <div class="delivery_product">
+		                            <img src="resources/images/sub_food1.png" width="150" height="150"><br>
+		                            <a>이달의 샐러드</a>
+	                        	</div>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>대체 상품</th>
+	                        <td>
+	                            <input type="radio" name="alter_product" value="food1" id="food1" checked="checked">
+	                            <label for="food1" class="alter_product_pic1"></label> &nbsp;
+	                            <input type="radio" name="alter_product" value="food2" id="food2">
+	                            <label for="food2" class="alter_product_pic2"></label> &nbsp;
+	                            <input type="radio" name="alter_product" value="food3" id="food3">
+	                            <label for="food3" class="alter_product_pic3"></label>
+	                            <br>
+	                            <span class="alter_product_name1">
+	                                <a>샤인마토</a>
+	                            </span>
+	                            <span class="alter_product_name2">
+	                                <a>미니 월남쌈</a>
+	                            </span>
+	                            <span class="alter_product_name3">
+	                                <a>한끼 당근</a>
+	                            </span>
+	                        </td>
+	                    </tr> 
+                    </c:when>
+                    
+                    <c:otherwise>
+                    	<tr>
+	                        <th>배송 예정 상품</th>
+	                        <td>
+	                            <div class="delivery_product">
+		                            <img src="resources/images/sub_food1.png" width="150" height="150"><br>
+		                            <a>이달의 샐러드</a>
+	                        	</div>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>대체 상품</th>
+	                        <td class="rec-recipe"></td>
+	                    </tr>
+                    </c:otherwise>
+                    
+                    </c:choose>
+                    
                     <tr>
                     	<td colspan="2">
                     		<div class="regist_btn">
-                                <input type="submit" class="submit_btn" value="수정 신청">
+                                <input type="button" class="submit_btn" value="수정 신청" onclick="submitBtn();">
                             </div>
                     	</td>
                     </tr>    
@@ -228,12 +301,11 @@ hr{
                 <c:otherwise>
                 	<div class="no_subscription">
 	                	<a>구독중인 상품이 없습니다.</a> &nbsp;
-	                	<a href="#">구독 신청하기</a>
+	                	<a href="subMain.do">구독 신청하기</a>
                 	</div>
                 </c:otherwise>
                 </c:choose>
                     
-            </form>
           </div>
         </div>
     </div>
