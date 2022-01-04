@@ -257,6 +257,11 @@ public class MarketController {
 			//장바구니 비우고 그냥 하나만 처넣자~ 그게 답이다.
 			CartProductDto cp = new CartProductDto(getLoginUser(request).getUser_id(),p_id, Integer.parseInt(quantity), Integer.parseInt(price), null, null, "NORMAL");
 			cart = marketBiz.directPurchase(cp);
+			
+			while(true) {
+				List<CartProductDto> temp = marketBiz.getCartList(getLoginUser(request).getUser_id());
+				if (temp.get(0).getP_id().equals(cp.getP_id())) {break;}
+			}
 		}
 		
 		model.addAttribute("list", cart);
