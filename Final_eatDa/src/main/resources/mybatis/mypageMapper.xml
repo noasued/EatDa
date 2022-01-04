@@ -21,6 +21,11 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<!-- 구독 상품 변경 -->
+	<select id="getMarketProduct" resultType="productDto">
+	 	SELECT * FROM PRODUCT ORDER BY P_NO DESC
+	 </select>
+	
 	<!-- 쿠폰함 -->
 	<select id="couponList" resultType="couponDto" parameterType="string">
 		SELECT COUPON_ID, USER_ID, COUPON_NAME, COUPON_DES, COUPON_RATE, COUPON_TERM
@@ -59,5 +64,7 @@
 		INSERT INTO REVIEW
 		VALUES(REVIEW_NO_SEQ.NEXTVAL, #{order_id}, #{p_id}, #{review_content}, SYSDATE)
 	</insert>
+	
+	
 
 </mapper>
