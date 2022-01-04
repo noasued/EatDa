@@ -154,7 +154,9 @@ function progressPay() {
 		alert('무통장 입금을 선택하셨습니다.');
 		afterPayment(pay_info);
 		deleteCoupon();
-		location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+		window.setTimeout(function(){
+			location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+		},1000);
 	} else {
 		iamport(pay_info);
 	}
