@@ -12,7 +12,7 @@ $(document).ready(function() {
 	window.setTimeout(function() {
 		getCartList();
 		deleteCartList();
-		deleteCoupon();
+		//deleteCoupon();
 	},1000);
 });
 
@@ -68,6 +68,7 @@ const deleteCartList = () => {
 	});
 }
 
+/*
 const deleteCoupon = () => {
 	let coupon_id = {
 			coupon_id:$('#coupon-id').text()
@@ -82,6 +83,7 @@ const deleteCoupon = () => {
 		}
 	});
 }
+*/
 
 const goMain = (command) => {
 	location.href=command+'.do';

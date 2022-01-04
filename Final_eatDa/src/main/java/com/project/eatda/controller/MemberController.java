@@ -94,7 +94,8 @@ public class MemberController {
 	//회원가입
 	@RequestMapping(value="/memberRegist.do", method=RequestMethod.POST)
 	public String memberRegistPOST(UserDto dto) throws Exception {
-		logger.info("memberRegist");		
+		logger.info("memberRegist");
+		dto.setUser_img(randomPic());
 		memberBiz.memberRegist(dto);
 		
 		return "../../index";
@@ -163,6 +164,14 @@ public class MemberController {
 		session.invalidate();
 		
 		return "../../index";
+	}
+	
+	public String randomPic() {
+		int rNum = (int)(Math.random()*10 + 1);
+		StringBuilder name = new StringBuilder("profile");
+		
+		name.append(rNum);
+		return name.toString();
 	}
 	
  

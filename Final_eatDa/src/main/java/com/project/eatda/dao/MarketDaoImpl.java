@@ -332,11 +332,8 @@ public class MarketDaoImpl implements MarketDao {
 			//2. 데이터 cart에 insert
 			res += sqlSession.insert(NAMESPACE_MARKET+"putShoppingBag", dto);
 			System.out.println("second res: " + res);
-			if (res != 2) {
-				throw new Exception("res != 2");
-			} else {
-				list = sqlSession.selectList(NAMESPACE_MARKET+"getCartList", dto);
-			}
+			
+			list = sqlSession.selectList(NAMESPACE_MARKET+"getCartList", dto);
 		} catch (Exception e) {
 			System.out.println("getOrderList DAO ERROR");
 			e.printStackTrace();

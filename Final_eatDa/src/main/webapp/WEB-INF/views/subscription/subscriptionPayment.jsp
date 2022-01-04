@@ -221,7 +221,7 @@
             height:120px; padding-bottom:10px;
         }
         .p-row-first {
-            width:20%; float:left; height:100%; padding:15px 0 0 15px;
+            width:20%; float:left; height:100%; padding:35px 0 0 15px;
         }
         .p-row-first img {
             width:80%; height:90%; border-radius:5px;
@@ -295,6 +295,10 @@
         	width:33%;
         	float:left;
         }
+        .subs-text {
+        	font-size:larger;
+        	letter-spacing:1px;
+        }
     </style>
 
 <title>Insert title here</title>
@@ -322,6 +326,8 @@ $(document).ready(function() {
 	
 	//가격 정보 뿌려주기
 	$('.cart-price').each(function() {
+		console.log(Number($(this).text()));
+		console.log($(this));
 		originalPrice += Number($(this).text());
 	});
 	$('.original-price').each(function() {
@@ -458,24 +464,21 @@ $(document).ready(function() {
                     <!-- 상품 한 줄 -->
                     <div class="box-gray product-row">
                         <div class="p-row-first">
-                            <span>${subscription_title}</span>
+                            <span class="subs-text">${subscription_type}</span>
                         </div>
                         <div class="p-row-second">
-                            <span>${user_id}</span>
+                        	<div class="subs-text">요청사항 : ${msg} </div>
                         </div>
                         <div class="p-row-third">
-                            <span>${subscription_term}</span>
+                            <span class="subs-text">${subscription_term}</span>
                         </div>
                         <div class="p-row-fourth">
-                            <span class="cart-price">${price}</span>
+                            <span class="subs-text cart-price">${price}</span>
                             <span>&#8361;</span>
-                        </div>
-                        <div class="p-row-fifth">
-                            <span class="cart-price">${subscription_type}</span>
                         </div>
                     </div>
                     <!-- 상품 한 줄 끝 -->
-				     <div>요청사항 : ${msg}</div>    
+				     
                 </div>
 
                 <!-- 쿠폰 적용 섹션 -->

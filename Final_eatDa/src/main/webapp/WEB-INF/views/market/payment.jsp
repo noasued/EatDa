@@ -153,10 +153,29 @@ function progressPay() {
 		//무통장 입금
 		alert('무통장 입금을 선택하셨습니다.');
 		afterPayment(pay_info);
-		location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+		deleteCoupon();
+		window.setTimeout(function(){
+			location.href = 'orderSuccess.do?order_id='+pay_info.order_code;
+		},1000);
 	} else {
 		iamport(pay_info);
 	}
+}
+
+const deleteCoupon = () => {
+	let coupon_id = {
+			coupon_id:getCoupon_id()
+	}
+	console.log(coupon_id);
+	$.ajax({
+		url:"deleteCoupon.do",
+		type:"post",
+		contentType:"application/json; charset=utf-8",
+		data:JSON.stringify(coupon_id),
+		success:function(msg) {
+			console.log('deleteCoupon: ' + msg);
+		}
+	});
 }
 
 //결제 api
