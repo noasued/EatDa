@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			"/foodbti.do","/getMarketData.do","/getRecentRecipe.do","/getMbtiProduct.do","/getPopularBlog.do","/getLovingRecipe.do",
 			"/product.do","/paging.do","/hashTagSearch.do","/searching.do","/goProductPage.do","/marketMain.do","/getReview.do",
 			"/takeBlog.do","/blog-paging.do","/blog.do","/blog-search.do","/blog-detail.do","reply-list.do","/event.do","/event-detail.do",
-			"/recipeList.do","/recipeListTest.do","/recipeCategory.do","/recipeDetail.do"
+			"/recipeList.do","/recipeListTest.do","/recipeCategory.do","/recipeDetail.do","/subMain.do","/reply-list.do"
 	};
 	
 	public String[] productPage = {

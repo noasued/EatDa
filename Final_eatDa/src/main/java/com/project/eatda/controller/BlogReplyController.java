@@ -30,6 +30,7 @@ public class BlogReplyController {
 	@Autowired
 	private BlogBiz blogBiz;
 	
+
 	@RequestMapping(value="/reply-insert.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<BlogReplyDto> insert(@RequestBody String param, HttpServletRequest request) {
