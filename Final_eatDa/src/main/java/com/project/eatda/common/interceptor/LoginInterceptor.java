@@ -18,8 +18,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 			"/recipeList.do","/recipeListTest.do","/recipeCategory.do","/recipeDetail.do"
 	};
 	
+	public String[] productPage = {
+			"/putShoppingBag.do","/likeProductInsert.do","/directPurchase.do","/makeOrder.do","/goShoppingBag.do"
+	};
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		/*
+		System.out.println("prevpage:"+request.getHeader("referer"));
+		System.out.println("uri:"+request.getRequestURI()); //현재 URI
+		*/
+		String prevURI = request.getHeader("referer").substring(28, request.getHeader("referer").length());//이전 command
+		
 		if (request.getSession().getAttribute("member") != null) {
 			return true;
 		} 
@@ -31,7 +41,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		
 		if (request.getSession().getAttribute("member") == null) {
-			jsResponse("index.do","Please Log in!", response);
+			String uri = "";
+			for (String str : productPage) {
+				if (request.getRequestURI().contains(str)) {
+					uri = prevURI;
+				} else {
+					uri = "index.do";
+				}
+			} 
+			jsResponse(uri,"You need to Login first!", response);
 		}
 		return false;
 		
