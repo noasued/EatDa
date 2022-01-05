@@ -43,8 +43,9 @@ public class BlogReplyBizImpl implements BlogReplyBiz{
 	
 	// 댓글 삭제
 	@Override
-	public void delete(int reply_no) {
-		replyDao.delete(reply_no);
+	public int delete(int reply_no) {
+		System.out.println("delete reply biz");
+		return replyDao.delete(reply_no);
 	}
 
 

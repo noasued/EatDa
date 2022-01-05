@@ -97,6 +97,11 @@
 					$("#user_id_update").val(user_id);
 					$("#reply_content_update").val(reply_content);
 		    	
+					console.log(blog_no);
+					console.log(reply_no);
+					console.log(user_id);
+					console.log(reply_content);
+					
 		    });
 		    
 		  });
@@ -111,9 +116,10 @@
 				
 				let blog_no = $("#blog_no").val();
 				let reply_no = $("#reply_no").val();
-				var reply_content = $("textarea#reply_content").val();
-				var usr_id = $("#user_id").val();
+				var reply_content = $("textarea#reply_content_update").val();
+				var usr_id = $("#user_id_update").val();
 				var updatedate = changeDate(new Date());
+				var param_update = "blog_no="+blog_no+"&reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id;
 				
 				console.log(blog_no);
 				console.log(reply_no);
@@ -121,24 +127,52 @@
 				console.log(user_id);
 				console.log(updatedate);
 				
-				location.href="reply-update.do?reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id+"&blog_no="+blog_no+"&updatedate="+updatedate;
+				$.ajax({
+					type: "post",
+					url: "reply-update.do",
+					data : param_update,
+					dataType: "text",
+					
+					success: function(result){
+						console.log("result : "+result);
+						if(result == "modSuccess"){
+							alert("댓글이 수정되었습니다.");
+							$(".reply-update__modal").fadeOut();
+							$(data).each(function(key, value) {
+								$('tbody').append(
+									"<tr>" +
+							       "<td class='reply-list__userid'> " +value.user_id + "</td>"+
+							       "<td class='reply-list__reply'>"+
+							         "<p>"+
+							           "<span>"+updatedate+"</span>" +
+							          	"<br>"+
+							           value.reply_content +
+							         	"</p>"+
+							       "</td>"+
+							       "<td class='reply-list__btns'>"+
+							          "<input type='button' title='댓글 수정' name='reply-update-btn' value='&#xf044'>"+
+							          "<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
+							          "<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
+							       "</td>"+
+							     "</tr>"		
+								);					
+								
+							});
+						}
+					}
+				});
 				
-				alert("댓글이 수정되었습니다.");
 			}
 		}
 		
 		// 댓글 삭제
-		function replyDelete(){
-			
-			
+		function replyDelete(reply_no){
+			var chk = confirm("정말 삭제하시겠습니까?");
+			if(chk){
+				location.href='reply-delete.do?reply_no='+reply_no;
+			}
 			
 		}
-		
-		
-		
-		
-		
-		
 		
 		// 날짜 및 시간 출력 포맷 변경
 		function changeDate(date){

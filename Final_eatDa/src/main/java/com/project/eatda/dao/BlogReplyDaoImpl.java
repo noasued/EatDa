@@ -64,8 +64,15 @@ public class BlogReplyDaoImpl implements BlogReplyDao{
 	
 	// 댓글 삭제
 	@Override
-	public void delete(int reply_no) {
-		
+	public int delete(int reply_no) {
+		int res = 0;
+		try {
+			res = sqlSession.delete(REPLY_NAMESPACE+"deleteReply", reply_no);
+		} catch (Exception e) {
+			System.out.println("[error] : delete reply");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 

@@ -40,5 +40,10 @@
 		AND BLOG_NO = #{blog_no}
 	</update>
 	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM BLOG_REPLY 
+		WHERE REPLY_NO=#{reply_no}
+		AND BLOG_NO = #{blog_no}
+	</delete>
 	
 </mapper>
