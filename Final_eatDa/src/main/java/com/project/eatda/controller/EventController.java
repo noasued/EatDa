@@ -1,5 +1,7 @@
 package com.project.eatda.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,25 @@ public class EventController {
 		logger.info("Event delete: event_no -> "+event_no);
 		biz.delete(event_no);
 		return "redirect:event.do";
+	}
+	
+	// 관리자 이벤트 리스트 삭제
+	@RequestMapping(value="/adminEventDelete.do", method=RequestMethod.GET)
+	public String adminReplyDelete(Model model, HttpServletRequest httpServletRequest){
+		System.out.println("admin event delete");
+		
+		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
+		System.out.println(chk);
+		String rss = "";
+		int chk_length = chk.length;
+		System.out.println(chk_length);
+		
+		for(int i = 0; i < chk_length; i++) {
+			System.out.println(chk[i]);
+			biz.delete(Integer.parseInt(chk[i]));
+		}
+		
+		return "redirect:/adminPostEvent.do";
 	}
 
 }
