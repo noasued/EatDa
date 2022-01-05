@@ -9,8 +9,17 @@
 <link rel="stylesheet" href="resources/css/market/marketPage.css">
 </head>
 <script type="text/javascript">
+var img_path = $('#img').attr('src');
+var p_name = $('.title').text();
+var s_desc = $('.short-desc').text();
+var p_description = $('#p-description').text();
+var seller_desc = $('#seller-desc').text();
+var p_amount = $('#p-amount').text();
+var p_cal = $('#p-cal').text();
+
 	$(document).ready(function() {
 		likeProduct();
+		makeReviewTap();
 		let originalPrice = $('#price').text();
 		
 		$('.btn-close').click(function() {
@@ -174,101 +183,71 @@
 			location.href = 'makeOrder.do?p_id=' + product.p_id + '&quantity='+product.quantity + '&price=' + product.p_price;
 		};
 	}
+</script>
+<script type="text/javascript">
+function changeColorBtn() {
+	for (var i = 0; i < 4; i++) {
+		$('.tap-button').eq(i).removeClass('btn-primary').addClass('btn-secondary');
+	}		
+}
+const makeReviewTap = () => {
+	const productId = $('#p-id').text();
+	$('.bottom-section').append(
+			"<div class='review-wrap'>" +
+			"<ul class='review-ul'><li class='li-tag'><div class='review-top'>" +
+			"<span>전체&nbsp;(</span><span id='reviewQuantity'></span><span>)</span>" +
+			"<em>※ 일부 후기는 구매자의 주관적인 소견이며 개인별로 상이할 수 있습니다.</em>" +
+			"</div></li></ul>" +
+			"<ul class='review-ul-body'></ul></div>"
+	);
+	$('.review-wrap').css('display','none');
+	$.ajax({
+		url: "getReview.do",
+		type: "post",
+		data: productId,
+		dataType:"json",
+		success:function(data) {
+			console.log(data);
+			var list = data;
+			$('#reviewQuantity').text(list.length);
+			$(list).each(function(key, value) {
+				console.log(value.p_id);
+				console.log($('.review-ul-body'));
+				$('.review-ul-body').append(
+						"<li class='li-tag'>" +
+						"<div class='review-box'>" +
+						"<div class='profile-img'>" +
+						"<img src='resources/images/userProfile/" + value.user_img + ".png' alt='프로필' class='profile'>" +
+						"</div>" +
+						"<div class='review-text-div'>" +
+						"<span>" + value.review_content + "</span><br>" +
+						"<span>" + value.user_id + "("+ value.user_name + ")</span>&nbsp;&nbsp;&nbsp;&nbsp;" +
+						"<span>작성일 : </span><span>" + value.review_regdate + "</span>" +
+						"</div></div></li>"
+				);
+			});
+		}
+	});
 	
-	var img_path = $('#img').attr('src');
-	var p_name = $('.title').text();
-	var s_desc = $('.short-desc').text();
-	var p_description = $('#p-description').text();
-	var seller_desc = $('#seller-desc').text();
-	var p_amount = $('#p-amount').text();
-	var p_cal = $('#p-cal').text();
-	
-	function changeColorBtn() {
-		for (var i = 0; i < 4; i++) {
-			$('.tap-button').eq(i).removeClass('btn-primary').addClass('btn-secondary');
-		}		
-	}
-	
-	function reviewTap() {
-		changeColorBtn()
-		const productId = $('#p-id').text();
-		$('#reviewButton').removeClass('btn-secondary').addClass('btn-primary');
-		$('.bottom-section').html('');
-		$('.bottom-section').append(
-				"<div class='review-wrap'>" +
-				"<ul class='review-ul'><li class='li-tag'><div class='review-top'>" +
-				"<span>전체(</span><span id='reviewQuantity'></span><span>)</span>" +
-				"<em>※ 일부 후기는 구매자의 주관적인 소견이며 개인별로 상이할 수 있습니다.</em>" +
-				"</div></li></ul>" +
-				"<ul class='review-ul-body'></ul></div>"
-		);
-		$.ajax({
-			url: "getReview.do",
-			type: "post",
-			data: productId,
-			dataType:"json",
-			success:function(data) {
-				console.log(data);
-				var list = data;
-				$('#reviewQuantity').text(list.length);
-				$(list).each(function(key, value) {
-					console.log(value.p_id);
-					console.log($('.review-ul-body'));
-					$('.review-ul-body').append(
-							"<li class='li-tag'>" +
-							"<div class='review-box'>" +
-							"<div class='profile-img'>" +
-							"<img src='resources/images/userProfile/" + value.user_img + ".png' alt='프로필' class='profile'>" +
-							"</div>" +
-							"<div class='review-text-div'>" +
-							"<span>" + value.review_content + "</span><br>" +
-							"<span>" + value.user_id + "("+ value.user_name + ")</span>&nbsp;&nbsp;&nbsp;&nbsp;" +
-							"<span>작성일 : </span><span>" + value.review_regdate + "</span>" +
-							"</div></div></li>"
-					);
-				});
-			}
-		});
-		
-	}
-	
-	function detailTap() {
-		changeColorBtn();
-		$('#detailButton').removeClass('btn-secondary').addClass('btn-primary');
-		$('.bottom-section').html('');
-		$('.bottom-section').append(
-				"<div class='bottom-section>'" +
-				"<div class='changeTap'>" +
-				"<div class='detail-wrap' style='background-image:url("+img_path+"'></div>" +
-				"<div class='desc-wrap bottom-gray' align='center'>" +
-				"<h6 class='product-desc-letter'>"+s_desc+"</h6>" +
-				"<h2 class='product-desc-letter display-6'><b>"+ p_name +"</b></h2>" +
-				"</div>" +
-				"<div class='desc-wrap' align='center'>" +
-				"<span class='product-desc-letter'>'" + p_description + "'</span><br><br>" +
-				"<span class='product-desc-letter'><i style='font-size:larger'>'또한,'</i></span><br><br>" +
-				"<span class='product-desc-letter'>'" + seller_desc + "'</span>" +
-				"</div>" +
-				"<div class='desc-wrap'>" +
-				"<div class='product-desc'>" +
-				"<span class='desc-title'>용&nbsp;&nbsp;&nbsp;량</span>" +
-				"<span class='desc-info'>"+ p_amount +"g</span>" +
-				"</div>" +
-				"<div class='product-desc'>" +
-				"<span class='desc-title'>칼로리</span>" +
-				"<span class='desc-info'>맛있게 먹으면 "+ p_cal +" 칼로리</span>" +
-				"</div>" +
-				"<div class='product-desc'>" +
-				"<span class='desc-title'>원산지</span>" +
-				"<span class='desc-info'>우리집</span>" +
-				"</div></div>" +
-				"<div class='detail-wrap>'"+
-				"</div></div>"
-		);
-	}
-	function ready() {
-		alert('해당 기능은 서비스 준비중 입니다.');
-	}
+}
+
+function reviewTap() {
+	changeColorBtn()
+	const productId = $('#p-id').text();
+	$('#reviewButton').removeClass('btn-secondary').addClass('btn-primary');
+	$('.changeTap').css('display','none');
+	$('.review-wrap').css('display','block');
+}
+
+function detailTap() {
+	changeColorBtn();
+	$('#detailButton').removeClass('btn-secondary').addClass('btn-primary');
+	$('.review-wrap').css('display','none');
+	$('.changeTap').css('display','block');
+}
+function ready() {
+	alert('해당 기능은 서비스 준비중 입니다.');
+}
 </script>
 
 <body style="margin: 0; min-width: 1400px; margin-top:180px;">
