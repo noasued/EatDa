@@ -131,33 +131,33 @@
 		
 		// 수정 버튼 클릭 -> 모달창 띄우기
 		function openUpdateModal(object){
-			var reply_no = $(object).parent().siblings(".reply-list__userid").children("#reply_no").text();
-			console.log("reply_no: "+reply_no);
-			$(".reply-update__modal").fadeIn( function(){
+			var seq = $(object).siblings("#index").val();
+			var reply_no = $(object).parent().siblings(".reply-index").children("#reply_each_no").text();
+			$('#reply_no').val(reply_no);
+			$(".reply-update__modal").fadeIn(function(){
 		    	//모달창 띄워지며 안에 댓글 내용 가져옴
-		    	let blog_no = $("#blog_no").val();
+		    		let blog_no = $("#blog_no").val();
 					let reply_no = $("#reply_no").val();
-					var user_id = $(".reply-list__userid").val();
-					/* var reply_content = $("#reply_list_content").text(); 
+					var user_id = $(".reply-list__userid").eq(seq).text();
+					var reply_content = $("#reply_list_content").text();
 					$("#reply_no").val(reply_no);
-					$("#user_id_update").val(user_id);*/
+					$("#user_id_update").val(user_id);
 					$("#reply_content_update").val(reply_content);
+					
 		    });
 		}
 		
-		function replyUpdate(blog_no, reply_no, user_id){
+		function replyUpdate(blog_no, user_id){
 			if(confirm("댓글을 수정하시겠습니까?")){
-				
-				var reply_content = $("textarea#reply_content_update").val();
-				var updatedate = changeDate(new Date());
+				let blog_no = $("#blog_no").val();
+				let reply_no = $("#reply_no").val();
+				let user_id = $("#user_id_update").val();
+				var reply_content = $("#reply_content_update").val();
 				var param_update = "blog_no="+blog_no+"&reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id;
 				
-				console.log(blog_no);
-				console.log(reply_no);
-				console.log(reply_content);
-				console.log(user_id);
-				console.log(updatedate);
+				console.log("param_update:"+param_update);
 				
+				/*
 				$.ajax({
 					type: "get",
 					url: "reply-update.do?"+param_update,
@@ -186,10 +186,11 @@
 							     "</tr>"		
 								);					
 								
-							}); */
+							}); 
 						}
 					}
 				});
+				*/
 				
 			}
 		}
@@ -342,9 +343,8 @@
             <tbody>
 	            <c:forEach var="reply" items="${list}" varStatus="status">
 					    <tr>
-					      <td class="reply-list__userid">${reply.user_id}
-					      	<span style="display:none;" id="reply_no">${reply.reply_no}</span>
-					      </td>
+					      <td class="reply-index" style="display:none;"><span id="reply_each_no">${reply.reply_no}</span></td>
+					      <td class="reply-list__userid">${reply.user_id}</td>
 					      <td class="reply-list__reply">
 					        <div>
 					          <span><fmt:formatDate pattern="yyyy-MM-dd a hh:mm" value="${reply.regdate}"/></span>
@@ -374,8 +374,8 @@
 			<i title="창 닫기" class="fas fa-times fa-lg"></i>
 			<h5>댓글 수정</h5>
 	    <form name="reply_update" method="post" id="reply_update_form">
-	        <input type="hidden" id="reply_no" name="reply_no" value="${reply.reply_no}">
-	        <input type="hidden" id="user_id_update" name="user_id" value="${reply.user_id}">
+	        <input type="hidden" id="reply_no" name="reply_no">
+	        <input type="hidden" id="user_id_update" name="user_id">
 	        <input type="hidden" id="blog_no" name="blog_no" value="${dto.blog_no}">
 	          	
 	        <textarea id="reply_content_update" name="reply_content_update" >${reply.reply_content}</textarea>
