@@ -216,7 +216,7 @@ li {
 }
 .item-title {
 	width:75%;
-}
+} 
 
 </style>
 
