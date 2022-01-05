@@ -62,33 +62,25 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
+	<update id="likeCheck" parameterType="HashMap">
+		UPDATE BLOG_LIKE
+		SET LIKE_CHECK = LIKE_CHECK +1
+		WHERE USER_ID = #{user_id}
+		AND BLOG_NO = #{blog_no}
+	</update>
+	
+	<update id="likeCheckCancel" parameterType="HashMap">
+		UPDATE BLOG_LIKE
+		SET LIKE_CHECK = 0
+		WHERE USER_ID = #{user_id}
+		AND BLOG_NO = #{blog_no}
+	</update>
+	
+	
 	<!-- Admin Blog -->
 	<select id="adminBlogList" parameterType="list" resultMap="blogMap">
 		SELECT * FROM BLOG
 		ORDER BY BLOG_NO DESC
 	</select>
 	
-	<!-- Reply -->
-	<resultMap type="replyDto" id="replyMap">
-		<result property="reply_no" column="REPLY_NO" />
-		<result property="blog_no" column="BLOG_NO" />
-		<result property="user_id" column="USER_ID"/>
-		<result property="reply_content" column="REPLY_CONTENT"/>
-		<result property="regdate" column="REGDATE"/>
-		<result property="updatedate" column="UPDATEDATE"/>
-	</resultMap>
-	
-	<insert id="insertReply" parameterType="replyDto">
-		INSERT INTO BLOG_REPLY(REPLY_NO, BLOG_NO, USER_ID, REPLY_CONTENT)
-		VALUES(REPLY_NO_SEQ.NEXTVAL, #{blog_no}, 'user1', #{reply_content})
-	</insert>
-	
-	<select id="listReply"  resultType="replyDto">
-		SELECT REPLY_NO, BLOG_NO, REPLY_CONTENT, U.USER_ID, R.REGDATE, R.UPDATEDATE
-		FROM BLOG_REPLY R, E_USER U
-		WHERE R.USER_ID = U.USER_ID AND BLOG_NO=#{blog_no}
-		ORDER BY REPLY_NO
-	</select>
-	
-
 </mapper>

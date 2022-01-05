@@ -1,6 +1,5 @@
 package com.project.eatda.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,18 +21,11 @@ public class MarketDaoImpl implements MarketDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<ProductDto> takeProductList(int num) {
-		//1 : 1 - 9
-		//2 : 10- 18
-		//3 : 19- 27
-		ArrayList<Integer> parameter = new ArrayList<Integer>();
+	public List<ProductDto> takeProductList() {
 		List<ProductDto> list = null;
-	
-		parameter.add((num==1?num:num*9-8));
-		parameter.add((num==1?num*9:num*9));
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE_MARKET+"productList", parameter);
+			list = sqlSession.selectList(NAMESPACE_MARKET+"productList");
 		} catch (Exception e) {
 			System.out.println("takeProductList DAO ERROR");
 			e.printStackTrace();

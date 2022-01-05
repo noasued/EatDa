@@ -114,7 +114,7 @@ public class AdminController {
 	@RequestMapping(value="/adminEventStaus.do",method=RequestMethod.GET)
 	public String updateStatus(EventDto dto) {
 		System.out.println(dto.toString());
-		eventBiz.adminEventStatus(dto);
+		//eventBiz.adminEventStatus(dto);
 		
 		return "redirect:/adminPostEvent.do";
 	}

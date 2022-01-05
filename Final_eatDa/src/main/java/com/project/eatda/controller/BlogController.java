@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.BlogBiz;
+import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogDto;
+import com.project.eatda.dto.BlogReplyDto;
 
 @Controller
 public class BlogController {
@@ -22,6 +24,9 @@ public class BlogController {
 
 	@Autowired
 	private BlogBiz biz;
+	
+	@Autowired
+	private BlogReplyBiz replyBiz;
 	
 	//블로그 리스트 
 	@RequestMapping(value="/takeBlog.do", method=RequestMethod.GET)
@@ -65,21 +70,26 @@ public class BlogController {
 		String search_keyword = keyword.substring(12,keyword.length()-2);
 		System.out.println("controller -> search_keyword: "+search_keyword);
 		List<BlogDto> list = biz.searchBlog(search_keyword);
-		for(BlogDto dto : list) {
-			System.out.println(dto.toString());
-		}
 		return list;
 	}
 
 	// 상세 보기
 	@RequestMapping("/blog-detail.do")
 	public String detail(Model model, int blog_no) {
-		logger.info("Blog detail page");
+		logger.info("Blog detail page,");
 		System.out.println("blog.do: "+blog_no);
 		model.addAttribute("dto", biz.selectOne(blog_no));
+		List<BlogReplyDto> replyDto =  replyBiz.list(blog_no);
+		for(BlogReplyDto dto : replyDto) {
+			System.out.println(dto.toString());
+		}
+		model.addAttribute("list", replyBiz.list(blog_no));
 		return "/blog/blog-detail";
 	}
 
+	
+	
+	
 	// 글 작성 페이지
 	@RequestMapping(value="/blog-writeform.do", method=RequestMethod.GET)
 	public String write() {
