@@ -1,7 +1,10 @@
 package com.project.eatda.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,14 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogReplyDto;
+import com.project.eatda.dto.UserDto;
 
 @Controller
 public class BlogReplyController {
@@ -25,37 +29,46 @@ public class BlogReplyController {
 	@Autowired
 	private BlogReplyBiz replyBiz;
 	
-	// 댓글 입력
-	@RequestMapping("reply-insert.do")
-	public void insert(@ModelAttribute BlogReplyDto dto, HttpSession session) {
-		logger.info("[controller] reply insert");
-		String userId = (String) session.getAttribute("user_id");
-		dto.setUser_id(userId);
-		replyBiz.insert(dto);
-	}
+	@Autowired
+	private BlogBiz blogBiz;
 	
-	// 댓글 목록(controller 방식)
-//	@RequestMapping("/reply/reply-list.do")
-//	public ModelAndView list(@RequestParam int blog_no, ModelAndView mav) {
-//		List<BlogReplyDto> list = replyBiz.list(blog_no);
-//		// set view name
-//		mav.setViewName("blog/reply-list");
-//		// set data send to view
-//		mav.addObject("reply-list",list);
-//		// forward to reply-list.jsp ??
-//		return mav;
-//	}
-	
-	// 댓글 목록 (RestController json방식)
-	@RequestMapping("reply-list.do")
+	@RequestMapping(value="/reply-insert.do", method=RequestMethod.POST) 
 	@ResponseBody
-	public List<BlogReplyDto> list(@RequestParam int blog_no){
-		logger.info("[controller] reply list of blog : "+blog_no);
-		List<BlogReplyDto> list = replyBiz.list(blog_no);
+	public List<BlogReplyDto> insert(@RequestBody String param, HttpServletRequest request) {
+		logger.info("paging, param: " + param);
+
+		String[] temp = param.split("&");
+		
+		String reply_content = temp[0].substring(14, temp[0].length());
+		String blog_no = temp[1].substring(8, temp[1].length());
+		UserDto user = (UserDto)request.getSession().getAttribute("member");
+		
+		BlogReplyDto dto = new BlogReplyDto();
+		dto.setUser_id(user.getUser_id());
+		dto.setBlog_no(Integer.parseInt(blog_no));
+		dto.setReply_content(reply_content);
+		
+		System.out.println(dto.toString());
+		
+		int res = replyBiz.insert(dto);
+		List<BlogReplyDto> list = new ArrayList<BlogReplyDto>();
+		
+		list.add(dto);
+		
 		return list;
 	}
 	
-
+	@RequestMapping(value="/reply-update.do", method=RequestMethod.GET)
+	public String update(Model model, int reply_no) {
+		logger.info("[controller] reply update ");
+		BlogReplyDto dto = replyBiz.selectOne(reply_no);
+		model.addAttribute("dto",dto);
+		System.out.println(dto.toString());
+		
+		replyBiz.update(dto);
+		
+		return "redirect:blog-detail.do?blog_no="+dto.getBlog_no();
+	}
 	
 	
 	

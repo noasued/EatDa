@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.BlogBiz;
+import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogDto;
 
 @Controller
@@ -22,6 +23,9 @@ public class BlogController {
 
 	@Autowired
 	private BlogBiz biz;
+	
+	@Autowired
+	private BlogReplyBiz replyBiz;
 	
 	//블로그 리스트 
 	@RequestMapping(value="/takeBlog.do", method=RequestMethod.GET)
@@ -74,9 +78,10 @@ public class BlogController {
 	// 상세 보기
 	@RequestMapping("/blog-detail.do")
 	public String detail(Model model, int blog_no) {
-		logger.info("Blog detail page");
+		logger.info("Blog detail page,");
 		System.out.println("blog.do: "+blog_no);
 		model.addAttribute("dto", biz.selectOne(blog_no));
+		model.addAttribute("list", replyBiz.list(blog_no));
 		return "/blog/blog-detail";
 	}
 

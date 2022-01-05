@@ -27,17 +27,24 @@ public class BlogReplyBizImpl implements BlogReplyBiz{
 		System.out.println("[biz] reply insert");
 		return replyDao.insert(dto);
 	}
+	
+	
 
 	// 댓글 수정
 	@Override
-	public void update(BlogReplyDto dto) {
-		
+	public BlogReplyDto selectOne(int reply_no) {
+		System.out.println("[biz] reply select one");
+		return replyDao.selectOne(reply_no);
+	}
+	@Override
+	public int update(BlogReplyDto dto) {
+		return replyDao.update(dto);
 	}
 	
 	// 댓글 삭제
 	@Override
 	public void delete(int reply_no) {
-		
+		replyDao.delete(reply_no);
 	}
 
 
