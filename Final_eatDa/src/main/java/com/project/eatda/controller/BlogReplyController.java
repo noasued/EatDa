@@ -47,7 +47,7 @@ public class BlogReplyController {
 //	}
 	
 	// 댓글 목록 (RestController json방식)
-	@RequestMapping("reply-list.do")
+	@RequestMapping("/reply-list.do")
 	@ResponseBody
 	public List<BlogReplyDto> list(@RequestParam int blog_no){
 		logger.info("[controller] reply list of blog : "+blog_no);
