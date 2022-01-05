@@ -138,7 +138,7 @@ public class MemberController {
 	}
 	
 	//로그아웃
-	@RequestMapping("logout.do")
+	@RequestMapping("/logout.do")
 	public ModelAndView logout(HttpSession session) {
 		memberBiz.logout(session);
 		ModelAndView mav = new ModelAndView();
