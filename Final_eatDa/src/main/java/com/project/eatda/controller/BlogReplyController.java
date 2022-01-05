@@ -56,18 +56,20 @@ public class BlogReplyController {
 		
 		return list;
 	}
-	@RequestMapping(value="/reply-update.do", method=RequestMethod.POST) 
+	
+	@RequestMapping(value="/reply-update.do", method=RequestMethod.GET) 
 	@ResponseBody
-	public List<BlogReplyDto> update(@RequestBody String param_update, HttpServletRequest request) {
-		logger.info("update, param: " + param_update);
+	public List<BlogReplyDto> update(@RequestBody String blog_no, String reply_no, String user_id, String reply_content, HttpServletRequest request) {
+		logger.info("update, blog_no: " + blog_no);
+		logger.info("update, reply_no: " + reply_no);
+		logger.info("update, user_id: " + user_id);
+		logger.info("update, reply_content: " + reply_content);
 		
-		String[] temp = param_update.split("&");
-		
-		String blog_no = temp[0].substring(8, temp[0].length());
-		String reply_no = temp[1].substring(9, temp[1].length());
-		String user_id = temp[3].substring(8, temp[3].length());
-
-		String reply_content = temp[2].substring(14, temp[2].length());
+//		String blog_no = temp[0].substring(8, temp[0].length());
+//		String reply_no = temp[1].substring(9, temp[1].length());
+//		String user_id = temp[3].substring(8, temp[3].length());
+//
+//		String reply_content = temp[2].substring(14, temp[2].length());
 		
 		BlogReplyDto dto = new BlogReplyDto();
 		dto.setReply_content(reply_content);
