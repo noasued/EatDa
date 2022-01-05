@@ -40,18 +40,10 @@ body {
 	margin: 0 auto;
 }
 
-.p-img {
-	width: 90%;
-	height: 90%;
-	transition: all 0.2s linear;
-}
+
 
 .p-img:hover {
 	transform: scale(1.2);
-}
-
-.product-img {
-	overflow: hidden;
 }
 
 .short-desc {
@@ -201,9 +193,6 @@ body {
 	font-size: larger;
 }
 
-.pagination a:hover {
-	cursor: pointer;
-}
 
 .fixed-Banner {
 	right: 0px;

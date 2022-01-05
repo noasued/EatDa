@@ -18,12 +18,9 @@
 	</resultMap>
 
 
-	<select id="productList" parameterType="list" resultMap="productMap">
-		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH FROM PRODUCT 
-		WHERE P_NO BETWEEN
-		<foreach collection="list" index="index" item="p_no" separator="AND">
-			#{p_no}
-		</foreach>
+	<select id="productList" resultMap="productMap">
+		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH
+		FROM PRODUCT 
 		ORDER BY P_NO DESC
 	</select>
 	

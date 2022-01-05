@@ -39,9 +39,7 @@ public class MarketController {
 	@ResponseBody
 	public List<ProductDto> takeProductList(@RequestBody String num) {
 		logger.info("takeProductList");
-		
-		int iNum = Integer.parseInt(num.charAt(0)+"");
-		List<ProductDto> list = marketBiz.takeProductList(iNum);
+		List<ProductDto> list = marketBiz.takeProductList();
 		
 		return list;
 	}
