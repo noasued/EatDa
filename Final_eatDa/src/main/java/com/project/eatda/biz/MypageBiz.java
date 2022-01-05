@@ -6,6 +6,7 @@ import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.CouponDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.OrderProductDto;
+import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReviewDto;
 import com.project.eatda.dto.SubscriptionDto;
 
@@ -13,6 +14,9 @@ public interface MypageBiz {
 	
 	//구독내역
 	public SubscriptionDto subscriptionList(SubscriptionDto dto);
+	
+	//구독상품
+	public List<ProductDto> getMarketProduct();
 	
 	//쿠폰함
 	public List<CouponDto> couponList(CouponDto dto);

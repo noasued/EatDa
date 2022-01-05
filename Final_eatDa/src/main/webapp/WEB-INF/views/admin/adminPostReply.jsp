@@ -17,16 +17,36 @@
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-        function selectAll(selectAll)  {
-        	  const checkboxes 
-        	       = document.getElementsByName('chkBtn');
-        	  
-        	  checkboxes.forEach((checkbox) => {
-        	    checkbox.checked = selectAll.checked;
-        	  })
-        	}
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+	     // 전체 선택 및 선택 게시물 삭제
+		    $(function(){
+		    	var chkObj = document.getElementsByName("RowCheck[]");
+		    	var rowCnt = chkObj.length;
+		    	
+		    	$("input[name='allCheck']").click(function(){
+		    		var chk_listArr = $("input[name='RowCheck[]']");
+		    		for(var i = 0 ; i<chk_listArr.length; i++){
+		    			chk_listArr[i].checked = this.checked;
+		    		}
+		    	});
+		    	$("input[name='RowCheck[]']").click(function(){
+		    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
+		    			$("input[name='allCheck']")[0].checked = true;
+		    		}else{
+		    			$("input[name='allCheck']")[0].checked = false;
+		    		}
+		    	});
+		    });
+	     
+		 
+	     function delete_frm(){
+	    	 if(confirm('정말 삭제하시겠습니까?')==true){
+	    		 return true;
+	    	 }else{
+	    		 return false;
+	    	 }
+	     }
         </script>
         
 		<style>
@@ -37,57 +57,53 @@
 				width:80px;
 				height:30px;
 			}
-			a{
-				text-decoration:none;
-			}
+			a{text-decoration:none;}
+			
 			/*nav탭 hover 시, content 변경*/
-	        .home:hover span{
-	        	display:none;
-	        }
-	        .home:hover:after{
-	        	content:"관리자 메인";
-	        }
+	        .home:hover span{display:none;}
+	        .home:hover:after{content:"관리자 메인";}
+	        
 	        /*게시글 관리*/
-	        .post:hover span{
-	        	display:none;
-	        }
-	        .post:hover:after{
-	        	content:"게시글 관리";
-	        }
+	        .post:hover span{display:none;}
+	        .post:hover:after{content:"게시글 관리";}
+	        
 	        /*레시피 관리*/
-	        .recipe:hover span{
-	        	display:none;
-	        }
-	        .recipe:hover:after{
-	        	content:"레시피 관리";
-	        }
+	        .recipe:hover span{display:none;}
+	        .recipe:hover:after{content:"레시피 관리";}
+	        
 	        /*상품 관리*/
-	        .product:hover span{
-	        	display:none;
-	        }
-	        .product:hover:after{
-	        	content:"상품 관리";
-	        }
+	        .product:hover span{display:none;}
+	        .product:hover:after{content:"상품 관리";}
+	        
 	        /*주문 관리*/
-	        .order:hover span{
-	        	display:none;
-	        }
-	        .order:hover:after{
-	        	content:"주문 관리";
-	        }
+	        .order:hover span{display:none;}
+	        .order:hover:after{content:"주문 관리";}
+	        
 	        /*회원 관리*/
-	        .user:hover span{
-	        	display:none;
-	        }
-	        .user:hover:after{
-	        	content:"회원 관리";
-	        }
+	        .user:hover span{display:none;}
+	        .user:hover:after{content:"회원 관리";}
+	        
 	        /*신고 관리*/
-	        .report:hover span{
-	        	display:none;
-	        }
-	        .report:hover:after{
-	        	content:"신고 관리";
+	        .report:hover span{display:none;}
+	        .report:hover:after{content:"신고 관리";}
+	        
+	        /* 게시글 길어질 경우, 한 줄로 표시*/
+	        table { 
+				border-collapse: collapse; 
+				border-spacing: 0;		
+				width: 100%; 
+				table-layout: fixed;
+			}
+
+			td { 
+				overflow:hidden;		/*글자 자르기*/
+				white-space : nowrap;	/*줄바꿈 X*/
+				text-overflow: ellipsis;/*말줄임 표시(...))*/
+			 }
+
+			td.textOverDefault {
+				white-space : normal; /*기본값*/
+				text-overflow: clip; /*기본값*/
 	        }
 		</style>
     </head>
@@ -165,12 +181,13 @@
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table me-1"></i>댓글 관리</div>
                             <div class="card-body">
+                            <form action="adminPostReplyDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="50px"><col width="100px"><col width="700px"><col width="150px"><col width="150px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
+                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
                                             <th>NO</th>
                                             <th>I  D</th>
                                             <th>댓 글</th>
@@ -178,32 +195,26 @@
                                             <th>수 정 일</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td>
-                                                <input type="button" onclick="" value="삭 제">
-                                            </td>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
 	                                    <c:forEach items="${replyList}" var="dto">
 			                            	<tr>
-			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.reply_no}"></td>
+			                                	<td style="width:50px;"><input type="checkbox" name="RowCheck[]" value="${dto.reply_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
 			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
 			                                    <td style="vertical-align:middle;"><a href="" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
-			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></td>
+			                                    <td style="vertical-align:middle; width:150px;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></td>
 			                        		</tr>
 		                            	</c:forEach>
                                     </tbody>
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <button type="button" onclick="" value="delete">삭 제</button>
+                                            <button type="submit" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>
+                              	</form>
                             </div>
                         </div>
                     </div>

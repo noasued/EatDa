@@ -36,6 +36,26 @@ public class MypageDaoImpl implements MypageDao{
 		
 		return dto2;
 	}
+	
+	//구독상품
+	@Override
+	public List<ProductDto> getMarketProduct() {
+		List<ProductDto> temp = null;
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			temp = sqlSession.selectList(NAMESPACE_MYPAGE + "getMarketProduct");
+			
+			for(int i=0; i<3; i++) {
+				list.add(temp.get(i));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 
 	//쿠폰함
 	@Override
@@ -109,6 +129,7 @@ public class MypageDaoImpl implements MypageDao{
 		}
 		return res;
 	}
+
 
 
 
