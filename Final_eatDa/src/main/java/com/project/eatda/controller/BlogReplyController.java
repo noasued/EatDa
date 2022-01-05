@@ -36,10 +36,10 @@ public class BlogReplyController {
 	public List<BlogReplyDto> insert(@RequestBody String param, HttpServletRequest request) {
 		logger.info("paging, param: " + param);
 
-		String[] temp = param.split("&");
+		String[] temp = param.split(",");
 		
-		String reply_content = temp[0].substring(14, temp[0].length());
-		String blog_no = temp[1].substring(8, temp[1].length());
+		String reply_content = temp[0].substring(18, temp[0].length()-1);
+		String blog_no = temp[1].substring(11, temp[1].length()-2);
 		UserDto user = (UserDto)request.getSession().getAttribute("member");
 		
 		BlogReplyDto dto = new BlogReplyDto();
@@ -59,7 +59,7 @@ public class BlogReplyController {
 	
 	@RequestMapping(value="/reply-update.do", method=RequestMethod.GET) 
 	@ResponseBody
-	public List<BlogReplyDto> update(@RequestBody String blog_no, String reply_no, String user_id, String reply_content, HttpServletRequest request) {
+	public List<BlogReplyDto> update(String blog_no, String reply_no, String user_id, String reply_content, HttpServletRequest request) {
 		logger.info("update, blog_no: " + blog_no);
 		logger.info("update, reply_no: " + reply_no);
 		logger.info("update, user_id: " + user_id);
@@ -73,17 +73,14 @@ public class BlogReplyController {
 		
 		BlogReplyDto dto = new BlogReplyDto();
 		dto.setReply_content(reply_content);
-
-//		dto.setBlog_no(Integer.parseInt(blog_no));
-//		dto.setReply_no(Integer.parseInt(reply_no));
-//		dto.setUser_id(user_id);
+		dto.setBlog_no(Integer.parseInt(blog_no));
+		dto.setReply_no(Integer.parseInt(reply_no));
+		dto.setUser_id(user_id);
 		
 		System.out.println(dto.toString());
 		
 		int res = replyBiz.update(dto);
-		List<BlogReplyDto> list = new ArrayList<BlogReplyDto>();
-		
-		list.add(dto);
+		List<BlogReplyDto> list = replyBiz.list(Integer.parseInt(blog_no));
 		
 		return list;
 	}

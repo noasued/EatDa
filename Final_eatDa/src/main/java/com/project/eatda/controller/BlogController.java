@@ -79,11 +79,10 @@ public class BlogController {
 		logger.info("Blog detail page,");
 		System.out.println("blog.do: "+blog_no);
 		model.addAttribute("dto", biz.selectOne(blog_no));
+		
 		List<BlogReplyDto> replyDto =  replyBiz.list(blog_no);
-		for(BlogReplyDto dto : replyDto) {
-			System.out.println(dto.toString());
-		}
-		model.addAttribute("list", replyBiz.list(blog_no));
+		model.addAttribute("list", replyDto);
+		
 		return "/blog/blog-detail";
 	}
 

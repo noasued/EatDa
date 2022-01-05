@@ -23,7 +23,7 @@
 		FROM BLOG_REPLY
 		JOIN E_USER USING(USER_ID)
 		WHERE BLOG_NO = #{blog_no}
-		ORDER BY REPLY_NO
+		ORDER BY REPLY_NO DESC
 	</select>
 	
 	<select id="selectReply" parameterType="int" resultType="replyDto">
