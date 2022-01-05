@@ -143,7 +143,6 @@ hr{
         display: inline-block;
         cursor: pointer;
         line-height: 22px;
-        background: url("resources/images/coupon.jpg");
     }
 
     [type=radio]:checked + label{
@@ -186,9 +185,9 @@ hr{
 				$(data).each(function(key, value) {
 					$('.rec-recipe').append(
 						"<td>" +
-						"<img class='alter_product_pic' src='" + value.img_path +"'"+
-						"<input type='radio' name='alter_product' value='food1' id='" + value.p_id +"'>"+
-						"<label for='"+ value.p_id + "' content='url(" + value.img_path + ")'></label> &nbsp;"+
+						"<input type='radio' name='alter_product' id='" + value.p_id +"'>"+
+						"<label for='"+ value.p_id + "'><img src='" + value.img_path +"' class='alter_product_pic'>"+
+						"</label> &nbsp;&nbsp;"+
 						"<br>"+
 						"<span class='alter_product_name1'> <a>"+value.p_name+"</a></span>" +
 						"</td>"
