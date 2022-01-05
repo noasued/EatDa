@@ -85,6 +85,9 @@ public class BlogController {
 		return "/blog/blog-detail";
 	}
 
+	// heart
+	
+	
 	// 글 작성 페이지
 	@RequestMapping(value="/blog-writeform.do", method=RequestMethod.GET)
 	public String write() {

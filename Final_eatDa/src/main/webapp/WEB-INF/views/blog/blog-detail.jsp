@@ -12,15 +12,42 @@
 	<script type="text/javascript">
 	$(function(){
 		
-	    // 하트 클릭 -> 하트 채워짐
+	    // 하트 클릭
 	    $(".emptyheart").click(function(){
+	      console.log("click heart");
+	      console.log(blog_no);
+	      
+	      /* $.ajax({
+	    	  url: "blog-heart.do",
+	    	  type: "GET",
+	    	  data: {
+	    		  blog_no : blog_no,
+	    		  user_id : '${user_id}'
+	    	  },
+	    	  success: function(){
+	    		  recCount();
+	    	  }
+	      }); */
+	      
 	      $(".fullheart").fadeIn(300);
 	    });
-	    // 다시 클릭 -> 하트 비워짐
-	    $(".fullheart").click(function(){
-	      $(".fullheart").fadeOut(300);
-	    });
 	
+		
+		
+	
+	
+	
+	    // 다시 클릭 -> 하트 비워짐
+	    /* $(".fullheart").click(function(){
+	      $(".fullheart").fadeOut(300);
+	    }); */
+	
+	    
+	    
+	    
+	    
+	    
+	    
 	    // 신고 버튼 클릭 -> 모달창 띄우기
 	    $("#report-btn").click(function(){
 	      $(".reply-report__modal").fadeIn();
@@ -67,7 +94,7 @@
 					         	"</p>"+
 					       "</td>"+
 					       "<td class='reply-list__btns'>"+
-					          "<input type='button' title='댓글 수정' name='reply-update-btn' value='&#xf044'>"+
+					          "<input type='button' title='댓글 수정' name='reply-update-btn' id='update-btn' value='&#xf044'>"+
 					          "<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
 					          "<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
 					       "</td>"+
@@ -138,7 +165,7 @@
 						if(result == "modSuccess"){
 							alert("댓글이 수정되었습니다.");
 							$(".reply-update__modal").fadeOut();
-							$(data).each(function(key, value) {
+							/* $(data).each(function(key, value) {
 								$('tbody').append(
 									"<tr>" +
 							       "<td class='reply-list__userid'> " +value.user_id + "</td>"+
@@ -150,14 +177,14 @@
 							         	"</p>"+
 							       "</td>"+
 							       "<td class='reply-list__btns'>"+
-							          "<input type='button' title='댓글 수정' name='reply-update-btn' value='&#xf044'>"+
+							          "<input type='button' title='댓글 수정' name='reply-update-btn' id='update-btn' value='&#xf044'>"+
 							          "<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
 							          "<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
 							       "</td>"+
 							     "</tr>"		
 								);					
 								
-							});
+							}); */
 						}
 					}
 				});
@@ -167,7 +194,8 @@
 		
 		// 댓글 삭제
 		function replyDelete(reply_no){
-			var chk = confirm("정말 삭제하시겠습니까?");
+			var reply_no = "${reply.reply_no}";
+			var chk = confirm("댓글을 정말 삭제하시겠습니까?");
 			if(chk){
 				location.href='reply-delete.do?reply_no='+reply_no;
 			}
@@ -270,9 +298,11 @@
 
         <!-- click likes area -->
         <div class="detail-article__content-likes">
-          <i class="far fa-heart fa-lg emptyheart"></i>
-          <i class="fas fa-heart fa-lg fullheart"></i>
-          <span class="count-likes">5</span>
+        	<c:if test="${ user_id != null }">
+	          <i class="far fa-heart fa-lg emptyheart"></i>
+	          <i class="fas fa-heart fa-lg fullheart"></i>
+          	<span class="count-likes">5</span>
+          </c:if>
           <h6>마음에 드는 글이었나요? 그렇다면 하트를 눌러주세요 <i class="far fa-hand-point-left fa-sm"></i></h6>
         </div>
       </div>
