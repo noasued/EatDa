@@ -217,7 +217,7 @@ li {
 .item-title {
 	width:75%;
 } 
-
+ 
 </style>
 
 <title>행복을 함께 나누다 EatDa</title>
