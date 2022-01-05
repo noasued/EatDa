@@ -10,14 +10,14 @@
 <title>Welcome to EatDa</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
-	$(function(){
+	/*$(function(){
 		
 	    // 하트 클릭
 	    $(".emptyheart").click(function(){
 	      console.log("click heart");
 	      console.log(blog_no);
 	      
-	      /* $.ajax({
+	      $.ajax({
 	    	  url: "blog-heart.do",
 	    	  type: "GET",
 	    	  data: {
@@ -27,26 +27,16 @@
 	    	  success: function(){
 	    		  recCount();
 	    	  }
-	      }); */
+	      });
 	      
 	      $(".fullheart").fadeIn(300);
 	    });
 	
-		
-		
-	
-	
-	
 	    // 다시 클릭 -> 하트 비워짐
-	    /* $(".fullheart").click(function(){
+	     $(".fullheart").click(function(){
 	      $(".fullheart").fadeOut(300);
-	    }); */
+	    }); 
 	
-	    
-	    
-	    
-	    
-	    
 	    
 	    // 신고 버튼 클릭 -> 모달창 띄우기
 	    $("#report-btn").click(function(){
@@ -57,7 +47,36 @@
 	      $(".reply-report__modal").fadeOut();
 	    });
 	    
-	  });
+	  }); */
+	  
+	  function likeFunction(){
+		  var blog_no = "${dto.blog_no}";
+		  var user_id = "${dto.user_id}";
+		  consol.log("blog_no: "+blog_no+", user_id: "+user_id);
+		  
+		  $.ajax({
+			  url: "blog-like.do",
+			  type: "get",
+			  cache: false,
+			  dataType: "json",
+			  data: 'blog_no='+blog_no+'&user_id='+user_id,
+			  success: function(data){
+				  var msg = '';
+				  var heart = '';
+				  msg += data.msg;
+				  alert(msg);
+				  
+				  if(data.like_check == 0){
+					  heart = "<i class='fas fa-heart fa-lg emptyheart'></i>";
+				  }else{
+					  heart = "<i class='fas fa-heart fa-lg fullheart'></i>";
+				  }
+				  
+				  $('#like_count').html(data.like_count)
+			  }
+			  
+		  });
+	  }
 	  
 	  //게시글 삭제
 		function blogDelete(blog_no){
@@ -109,42 +128,27 @@
 		
 		// 댓글 수정 및 삭제
 		// 댓글 수정
-		$(function(){
-			
-			// 수정 버튼 클릭 -> 모달창 띄우기
-		  $("#update-btn").click(function(){
-		    $(".reply-update__modal").fadeIn( function(){
-		    	
+		
+		// 수정 버튼 클릭 -> 모달창 띄우기
+		function openUpdateModal(object){
+			var reply_no = $(object).parent().siblings(".reply-list__userid").children("#reply_no").text();
+			console.log("reply_no: "+reply_no);
+			$(".reply-update__modal").fadeIn( function(){
 		    	//모달창 띄워지며 안에 댓글 내용 가져옴
 		    	let blog_no = $("#blog_no").val();
 					let reply_no = $("#reply_no").val();
 					var user_id = $(".reply-list__userid").val();
-					var reply_content = $("#reply_list_content").text();
+					/* var reply_content = $("#reply_list_content").text(); 
 					$("#reply_no").val(reply_no);
-					$("#user_id_update").val(user_id);
+					$("#user_id_update").val(user_id);*/
 					$("#reply_content_update").val(reply_content);
-		    	
-					console.log(blog_no);
-					console.log(reply_no);
-					console.log(user_id);
-					console.log(reply_content);
-					
 		    });
-		    
-		  });
-		  // x 버튼 클릭 -> 모달창 fade out
-		  $(".fa-times").click(function(){
-		    $(".reply-update__modal").fadeOut();
-		  });
-		});
+		}
 		
-		function replyUpdate(){
+		function replyUpdate(blog_no, reply_no, user_id){
 			if(confirm("댓글을 수정하시겠습니까?")){
 				
-				let blog_no = $("#blog_no").val();
-				let reply_no = $("#reply_no").val();
 				var reply_content = $("textarea#reply_content_update").val();
-				var usr_id = $("#user_id_update").val();
 				var updatedate = changeDate(new Date());
 				var param_update = "blog_no="+blog_no+"&reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id;
 				
@@ -155,11 +159,9 @@
 				console.log(updatedate);
 				
 				$.ajax({
-					type: "post",
-					url: "reply-update.do",
-					data : param_update,
+					type: "get",
+					url: "reply-update.do?"+param_update,
 					dataType: "text",
-					
 					success: function(result){
 						console.log("result : "+result);
 						if(result == "modSuccess"){
@@ -192,6 +194,18 @@
 			}
 		}
 		
+		
+		$(function(){
+			
+			
+		  
+		  // x 버튼 클릭 -> 모달창 fade out
+		  $(".fa-times").click(function(){
+		    $(".reply-update__modal").fadeOut();
+		  });
+		});
+		
+
 		// 댓글 삭제
 		function replyDelete(reply_no){
 			var reply_no = "${reply.reply_no}";
@@ -298,11 +312,11 @@
 
         <!-- click likes area -->
         <div class="detail-article__content-likes">
-        	<c:if test="${ user_id != null }">
-	          <i class="far fa-heart fa-lg emptyheart"></i>
-	          <i class="fas fa-heart fa-lg fullheart"></i>
-          	<span class="count-likes">5</span>
-          </c:if>
+        	<%-- <c:when test=""> --%>
+	          <i class="far fa-heart fa-lg emptyheart" onclick="likeFunction()"></i>
+	          <!-- <i class="fas fa-heart fa-lg fullheart"></i> -->
+          <%-- </c:when> --%>
+          <span class="count-likes" id="like-count"></span>
           <h6>마음에 드는 글이었나요? 그렇다면 하트를 눌러주세요 <i class="far fa-hand-point-left fa-sm"></i></h6>
         </div>
       </div>
@@ -326,9 +340,11 @@
               <col width="13%"><col width="70%"><col width="15%">
             </colgroup>
             <tbody>
-	            <c:forEach var="reply" items="${list}">
+	            <c:forEach var="reply" items="${list}" varStatus="status">
 					    <tr>
-					      <td class="reply-list__userid">${reply.user_id}</td>
+					      <td class="reply-list__userid">${reply.user_id}
+					      	<span style="display:none;" id="reply_no">${reply.reply_no}</span>
+					      </td>
 					      <td class="reply-list__reply">
 					        <div>
 					          <span><fmt:formatDate pattern="yyyy-MM-dd a hh:mm" value="${reply.regdate}"/></span>
@@ -337,7 +353,8 @@
 					        </div>
 					      </td>
 					      <td class="reply-list__btns">
-					        <input type="button" title="댓글 수정" name="reply-update-btn" id="update-btn" value="&#xf044">
+					      	<input type="hidden" id="index" value="${status.index}">
+					        <input type="button" title="댓글 수정" name="reply-update-btn" id="update-btn" value="&#xf044" onclick="openUpdateModal(this)">
 					        <input type="button" title="댓글 삭제" name="reply-del-btn" value="&#xf2ed" onclick="replyDelete()">
 					        <input type="button" title="댓글 신고" name="reply-report-btn" id="report-btn" value="&#xf1d8">
 					      </td>
@@ -359,7 +376,7 @@
 	    <form name="reply_update" method="post" id="reply_update_form">
 	        <input type="hidden" id="reply_no" name="reply_no" value="${reply.reply_no}">
 	        <input type="hidden" id="user_id_update" name="user_id" value="${reply.user_id}">
-	        <input type="hidden" id="blog_no" name="blog_no" value="${reply.blog_no}">
+	        <input type="hidden" id="blog_no" name="blog_no" value="${dto.blog_no}">
 	          	
 	        <textarea id="reply_content_update" name="reply_content_update" >${reply.reply_content}</textarea>
 	        <input type="button" id="replyUpdateBtn" name="reply-update-submit" title="수정 완료" class="reply-updatebtn" value="&#xf044" onclick="replyUpdate()" >
