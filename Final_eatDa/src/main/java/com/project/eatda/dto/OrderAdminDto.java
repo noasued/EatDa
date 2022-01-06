@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderAdminDto {
 	private String order_id;
-	private String user_name;
+	private String user_id;
 	private Date order_date;
-	private String user_phone;
+	private String order_phone;
 	private String shipping_status;
 	private String order_status;
 	
@@ -17,13 +17,13 @@ public class OrderAdminDto {
 		super();
 	}
 	
-	public OrderAdminDto(String order_id, String user_name, Date order_date, String user_phone, String shipping_status,
+	public OrderAdminDto(String order_id, String user_id, Date order_date, String order_phone, String shipping_status,
 			String order_status) {
 		super();
 		this.order_id = order_id;
-		this.user_name = user_name;
+		this.user_id = user_id;
 		this.order_date = order_date;
-		this.user_phone = user_phone;
+		this.order_phone = order_phone;
 		this.shipping_status = shipping_status;
 		this.order_status = order_status;
 	}
@@ -34,11 +34,11 @@ public class OrderAdminDto {
 	public void setOrder_id(String order_id) {
 		this.order_id = order_id;
 	}
-	public String getUser_name() {
-		return user_name;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public Date getOrder_date() {
 		return order_date;
@@ -46,11 +46,11 @@ public class OrderAdminDto {
 	public void setOrder_date(Date order_date) {
 		this.order_date = order_date;
 	}
-	public String getUser_phone() {
-		return user_phone;
+	public String getOrder_phone() {
+		return order_phone;
 	}
-	public void setUser_phone(String user_phone) {
-		this.user_phone = user_phone;
+	public void setOrder_phone(String order_phone) {
+		this.order_phone = order_phone;
 	}
 	public String getShipping_status() {
 		return shipping_status;
