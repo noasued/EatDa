@@ -118,7 +118,7 @@
 	                <li class="nav-item dropdown">
 	                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black;"><i class="fas fa-user fa-fw" style="color:black;"></i></a>
 	                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                        <li><a class="dropdown-item" href="#!">LogOut</a></li>
+	                        <li><a class="dropdown-item" href="logout.do">LogOut</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -183,7 +183,7 @@
                             <div class="card-body">
                             <form action="adminPostReplyDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
                                 <table id="datatablesSimple">
-                                    <col width="50px"><col width="50px"><col width="100px"><col width="700px"><col width="150px"><col width="150px">
+                                    <col width="50px"><col width="50px"><col width="150px"><col width="770px"><col width="200px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
@@ -192,7 +192,6 @@
                                             <th>I  D</th>
                                             <th>댓 글</th>
                                             <th>작 성 일</th>
-                                            <th>수 정 일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -201,9 +200,8 @@
 			                                	<td style="width:50px;"><input type="checkbox" name="RowCheck[]" value="${dto.reply_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
 			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
-			                                    <td style="vertical-align:middle;"><a href="" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
+			                                    <td style="vertical-align:middle;">${dto.reply_content}</td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
-			                                    <td style="vertical-align:middle; width:150px;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></td>
 			                        		</tr>
 		                            	</c:forEach>
                                     </tbody>

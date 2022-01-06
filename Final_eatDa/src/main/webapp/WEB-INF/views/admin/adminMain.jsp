@@ -16,54 +16,32 @@
         
         <style>
         	/*nav탭 hover 시, content 변경*/
-	        .home:hover span{
-	        	display:none;
-	        }
-	        .home:hover:after{
-	        	content:"관리자 메인";
-	        }
+	        .home:hover span{display:none;}
+	        .home:hover:after{content:"관리자 메인";}
+	        
 	        /*게시글 관리*/
-	        .post:hover span{
-	        	display:none;
-	        }
-	        .post:hover:after{
-	        	content:"게시글 관리";
-	        }
+	        .post:hover span{display:none;}
+	        .post:hover:after{content:"게시글 관리";}
+	        
 	        /*레시피 관리*/
-	        .recipe:hover span{
-	        	display:none;
-	        }
-	        .recipe:hover:after{
-	        	content:"레시피 관리";
-	        }
+	        .recipe:hover span{display:none;}
+	        .recipe:hover:after{content:"레시피 관리";}
+	        
 	        /*상품 관리*/
-	        .product:hover span{
-	        	display:none;
-	        }
-	        .product:hover:after{
-	        	content:"상품 관리";
-	        }
+	        .product:hover span{display:none;}
+	        .product:hover:after{content:"상품 관리";}
+	        
 	        /*주문 관리*/
-	        .order:hover span{
-	        	display:none;
-	        }
-	        .order:hover:after{
-	        	content:"주문 관리";
-	        }
+	        .order:hover span{display:none;}
+	        .order:hover:after{content:"주문 관리";}
+	        
 	        /*회원 관리*/
-	        .user:hover span{
-	        	display:none;
-	        }
-	        .user:hover:after{
-	        	content:"회원 관리";
-	        }
+	        .user:hover span{display:none;}
+	        .user:hover:after{content:"회원 관리";}
+	        
 	        /*신고 관리*/
-	        .report:hover span{
-	        	display:none;
-	        }
-	        .report:hover:after{
-	        	content:"신고 관리";
-	        }	  
+	        .report:hover span{display:none;}
+	        .report:hover:after{content:"신고 관리";}
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -77,7 +55,7 @@
 	                <li class="nav-item dropdown">
 	                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black;"><i class="fas fa-user fa-fw" style="color:black;"></i></a>
 	                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                        <li><a class="dropdown-item" href="#!">LogOut</a></li>
+	                        <li><a class="dropdown-item" href="logout.do">LogOut</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -108,7 +86,7 @@
                                 <span>Recipe</span>
                             </a>
 
-                            <a class="nav-link product" href="adminProduct.do" style="color: black;">
+                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
                                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
                                 <span>Product</span>
                             </a>
@@ -197,9 +175,6 @@
                         </div>
                     </div>    
                 </main>
-                <footer class="">
-                    
-                </footer>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

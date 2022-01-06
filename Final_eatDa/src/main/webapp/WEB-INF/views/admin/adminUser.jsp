@@ -150,7 +150,7 @@
 			<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;"><i class="fas fa-user fa-fw" style="color: black;"></i></a>
-					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="#!">LogOut</a></li>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="logout.do">LogOut</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -204,7 +204,7 @@
 										<tr>
 											<td><input type="checkbox" name="RowCheck[]" value="${dto.user_id}"></td>
 											<td>${dto.user_id}</td>
-											<td><a href="adminUserModal.do" id="modal" style="text-decoration: none; color: rgb(90, 197, 108); font-weight: bold;">${dto.user_name}</a></td>
+											<td><a href="adminUserModal.do" id="modal" style="text-decoration: none; color: rgb(90, 197, 108); font-weight: bold; cursor:pointer;">${dto.user_name}</a></td>
 											<td>${dto.user_email}</td>
 											<td>${dto.user_phone}</td>
 											<td>
