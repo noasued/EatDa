@@ -150,7 +150,7 @@ public class AdminController {
 	public String adminProductUpdate(ProductDto dto, RedirectAttributes rttr) {
 		System.out.println("product write page - post");
 		System.out.println(dto.toString());
-		adminBiz.adminProductUpdate(dto);
+		//adminBiz.adminProductUpdate(dto);
 		
 		rttr.addFlashAttribute("insert_result", dto.getP_id());
 		
@@ -223,7 +223,7 @@ public class AdminController {
 	@RequestMapping("/adminUserModal.do")
 	public String adminUserModal(Model model, int user_no) {
 		System.out.println("adminUserModal");
-		model.addAttribute("userModal", adminBiz.adminUserModal(user_no));
+		//model.addAttribute("userModal", adminBiz.adminUserModal(user_no));
 
 		return "/admin/adminUser";
 	}
