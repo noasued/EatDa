@@ -72,7 +72,8 @@
                  heart = "<i class='fas fa-heart fa-lg fullheart'></i>";
               }
               
-              $('#like_count').html(data.like_count)
+              $('#like_count').html(data.like_count);
+              $('#like_check').html(data.like_check);
            }
            
         });
@@ -311,10 +312,10 @@
 
         <!-- click likes area -->
         <div class="detail-article__content-likes">
-           <%-- <c:when test=""> --%>
+          <c:when test="${user_id != null }">
              <i class="far fa-heart fa-lg emptyheart" onclick="likeFunction()"></i>
-             <!-- <i class="fas fa-heart fa-lg fullheart"></i> -->
-          <%-- </c:when> --%>
+             <i class="fas fa-heart fa-lg fullheart"></i>
+          </c:when>
           <span class="count-likes" id="like-count"></span>
           <h6>마음에 드는 글이었나요? 그렇다면 하트를 눌러주세요 <i class="far fa-hand-point-left fa-sm"></i></h6>
         </div>
