@@ -101,7 +101,7 @@ public class BlogController {
 	public String like(int blog_no, HttpSession session) {
 		logger.info("[controller] blog like");
 		String user_id = (String)session.getAttribute("user_id");
-//		JSONObject obj = new JSONObject();
+//		JSONObject obj = new JSONObject();    있어도 되는지 아닌지 모르겠어서 우선 주석, 사용하려면 pom.xml에 추가하거나 jar파일 넣어야 
 		
 		ArrayList<String> msgs = new ArrayList<String>();
 		HashMap<String,Object> hashMap = new HashMap<String,Object>();
