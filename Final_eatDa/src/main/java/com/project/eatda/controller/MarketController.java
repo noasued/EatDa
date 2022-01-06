@@ -95,6 +95,9 @@ public class MarketController {
 		ProductDto dto = marketBiz.getProduct(p_id);
 		model.addAttribute("product",dto);
 		
+		List<ReviewDto> list = marketBiz.getReview(p_id);
+		model.addAttribute("list",list);
+		
 		return "/market/marketPage";
 	}
 	
@@ -134,6 +137,7 @@ public class MarketController {
 		return "/market/marketMain";
 	}
 	
+	/*
 	@RequestMapping(value="/getReview.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<ReviewDto> getReview(@RequestBody String p_id) {
@@ -142,6 +146,7 @@ public class MarketController {
 		List<ReviewDto> list = marketBiz.getReview(p_id.substring(0, p_id.length()-1));
 		return list;
 	}
+	*/
 	
 	@RequestMapping(value="/likeProductInsert.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -303,10 +308,10 @@ public class MarketController {
 			System.out.println(order.getPay_option());
 			if(order.getPay_option().equals("무통장")) {
 				System.out.println("무통장.");
-				int rest = adminBiz.adminOrderInsert(order);
+				//int rest = adminBiz.adminOrderInsert(order);
 			}else {
 				System.out.println("다른결제.");
-				int rest = adminBiz.adminOrderInsert2(order);
+				//int rest = adminBiz.adminOrderInsert2(order);
 			}
 		}
 		
