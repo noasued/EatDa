@@ -1,5 +1,8 @@
 package com.project.eatda.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BlogLikeDto {
 	private int like_no;
 	private int blog_no;

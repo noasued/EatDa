@@ -62,20 +62,6 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
-	<update id="likeCheck" parameterType="HashMap">
-		UPDATE BLOG_LIKE
-		SET LIKE_CHECK = LIKE_CHECK +1
-		WHERE USER_ID = #{user_id}
-		AND BLOG_NO = #{blog_no}
-	</update>
-	
-	<update id="likeCheckCancel" parameterType="HashMap">
-		UPDATE BLOG_LIKE
-		SET LIKE_CHECK = 0
-		WHERE USER_ID = #{user_id}
-		AND BLOG_NO = #{blog_no}
-	</update>
-	
 	
 	<!-- Admin Blog -->
 	<select id="adminBlogList" parameterType="list" resultMap="blogMap">

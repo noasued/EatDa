@@ -1,9 +1,13 @@
 package com.project.eatda.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.BlogBiz;
+import com.project.eatda.biz.BlogLikeBiz;
 import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogDto;
+import com.project.eatda.dto.BlogLikeDto;
 import com.project.eatda.dto.BlogReplyDto;
 
 @Controller
@@ -27,8 +33,13 @@ public class BlogController {
 	@Autowired
 	private BlogBiz biz;
 	
+	//reply
 	@Autowired
 	private BlogReplyBiz replyBiz;
+	
+	//like
+	@Autowired
+	private BlogLikeBiz likeBiz;
 	
 	//블로그 리스트 
 	@RequestMapping(value="/takeBlog.do", method=RequestMethod.GET)
@@ -88,6 +99,22 @@ public class BlogController {
 		return "/blog/blog-detail";
 	}
 
+	// 하트 클릭
+	@RequestMapping(value="blog-like.do", method=RequestMethod.GET, produces="text/plain; charset=UTF-8")
+	public String like(int blog_no, HttpSession session) {
+		logger.info("[controller] blog like");
+		String user_id = (String)session.getAttribute("user_id");
+//		JSONObject obj = new JSONObject();    있어도 되는지 아닌지 모르겠어서 우선 주석, 사용하려면 pom.xml에 추가하거나 jar파일 넣어야 
+		
+		ArrayList<String> msgs = new ArrayList<String>();
+		HashMap<String,Object> hashMap = new HashMap<String,Object>();
+		hashMap.put("blog_no", blog_no);
+		hashMap.put("user_id", user_id);
+		BlogLikeDto likeDto = likeBiz.read(hashMap);
+		
+		
+		return null;
+	}
 	
 	
 	
