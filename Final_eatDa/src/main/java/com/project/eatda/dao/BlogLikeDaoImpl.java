@@ -1,7 +1,5 @@
 package com.project.eatda.dao;
 
-import java.util.HashMap;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,47 +11,32 @@ public class BlogLikeDaoImpl implements BlogLikeDao{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int count(int blog_no) {
+		int likeCount = 0;
+		try {
+			likeCount = sqlSession.selectOne(BLOGLIKE_NAMESPACE+"countLike", blog_no);
+			System.out.println("like count dao!");
+		} catch (Exception e) {
+			System.out.println("[error] like count dao");
+			e.printStackTrace();
+		}
+		return likeCount;
+	}
+
+	@Override
+	public int clickLike(BlogLikeDto likeDto) {
+		int click = 0;
+		try {
+			click = sqlSession.insert(BLOGLIKE_NAMESPACE+"clickLike",likeDto);
+			System.out.println("click like dao!");
+		} catch (Exception e) {
+			System.out.println("[error] click like dao");
+			e.printStackTrace();
+		}
+		return click;
+	}
 	
-	@Override
-	public int countLike(HashMap hashMap) {
-		int count = sqlSession.selectOne(BLOGLIKE_NAMESPACE+"countLike", hashMap);
-		return count;
-	}
-
-	@Override
-	public int create(HashMap hashMap) {
-		int count = sqlSession.insert(BLOGLIKE_NAMESPACE+"create",hashMap);
-		return count;
-	}
-
-	@Override
-	public int like_check(HashMap hashMap) {
-		int count = sqlSession.update(BLOGLIKE_NAMESPACE+"like_check",hashMap);
-		return count;
-	}
-
-	@Override
-	public int like_check_cancel(HashMap hashMap) {
-		int count = sqlSession.update(BLOGLIKE_NAMESPACE+"like_check_cancel",hashMap);
-		return count;
-	}
-
-	@Override
-	public BlogLikeDto read(HashMap hashMap) {
-		BlogLikeDto likeDto = sqlSession.selectOne(BLOGLIKE_NAMESPACE+"read",hashMap);
-		return likeDto;
-	}
-
-	@Override
-	public int deletebyBlogno(int blog_no) {
-		int count = sqlSession.delete(BLOGLIKE_NAMESPACE+"deletebyBlogno",blog_no);
-		return count;
-	}
-
-	@Override
-	public int deletebyUserid(String user_id) {
-		int count = sqlSession.delete(BLOGLIKE_NAMESPACE+"deletebyUserid",user_id);
-		return count;
-	}
 
 }

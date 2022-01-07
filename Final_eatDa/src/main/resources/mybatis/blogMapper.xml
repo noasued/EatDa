@@ -38,7 +38,11 @@
 	</select>
 	
 	<select id="blogDetail" resultType="blogDto" parameterType="int">
-		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
+		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, 
+						(SELECT COUNT(*) AS CNT
+							FROM BLOG_LIKE
+							WHERE BLOG_NO=#{blog_no}) AS BLOG_LIKE,
+					 BLOG_IMG, REGDATE
 		FROM BLOG
 		WHERE BLOG_NO = #{blog_no}
 	</select>
@@ -61,6 +65,7 @@
 	<delete id="blogDelete" parameterType="int">
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
+	
 	
 	
 	<!-- Admin Blog -->

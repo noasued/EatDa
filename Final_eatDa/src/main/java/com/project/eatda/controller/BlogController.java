@@ -100,58 +100,6 @@ public class BlogController {
 		return "/blog/blog-detail";
 	}
 
-	// 하트 클릭
-	@RequestMapping(value="blog-like.do", method=RequestMethod.GET, produces="text/plain; charset=UTF-8")
-	public String like(int blog_no, HttpSession session) {
-		logger.info("[controller] blog like");
-		String user_id = (String)session.getAttribute("user_id");
-		
-		ArrayList<String> msgs = new ArrayList<String>();
-		HashMap<String,Object> hashMap = new HashMap<String,Object>();
-		hashMap.put("blog_no", blog_no);
-		hashMap.put("user_id", user_id);
-		BlogLikeDto likeDto = likeBiz.read(hashMap);
-		
-		BlogDto blogDto = biz.selectOne(blog_no);
-		int like_cnt = blogDto.getBlog_like();
-		int like_check = 0;
-		like_check = likeDto.getLike_check();
-		
-		if(likeBiz.countLike(hashMap)==0) {
-			likeBiz.create(hashMap);
-		}
-		
-		if(like_check == 0) {
-			msgs.add("좋아요");
-			likeBiz.like_check(hashMap);
-			like_check++;
-			like_cnt++;
-			biz.like_cnt_up(blog_no);
-		} else {
-			msgs.add("좋아요 취소");
-			likeBiz.like_check_cancel(hashMap);
-			like_check--;
-			like_cnt--;
-			biz.like_cnt_down(blog_no);
-		}
-		
-		/* 얘네를 어떻게 해야할까....
-		 * 
-		obj.put("boardno", liketoVO.getBoardno());
-	    obj.put("like_check", like_check);
-	    obj.put("like_cnt", like_cnt);
-	    obj.put("msg", msgs);
-	    
-	    return obj.toJSONString();  
-		 
-		*/
-		
-		
-		return null;
-	}
-	
-	
-	
 	// 글 작성 페이지
 	@RequestMapping(value="/blog-writeform.do", method=RequestMethod.GET)
 	public String write() {

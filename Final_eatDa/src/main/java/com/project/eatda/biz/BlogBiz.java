@@ -17,8 +17,6 @@ public interface BlogBiz {
 
 	public int selectBlogNo(String blog_title);
 	
-	public int like_cnt_up(int blog_no);
-	public int like_cnt_down(int blog_no);
 	
 	/* 관리자 블로그 리스트 (전체 조회) */
 	public List<BlogDto> adminBlogList();
