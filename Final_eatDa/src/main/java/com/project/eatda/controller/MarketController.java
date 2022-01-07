@@ -91,6 +91,9 @@ public class MarketController {
 		ProductDto dto = marketBiz.getProduct(p_id);
 		model.addAttribute("product",dto);
 		
+		List<ReviewDto> list = marketBiz.getReview(p_id);
+		model.addAttribute("list",list);
+		
 		return "/market/marketPage";
 	}
 	
@@ -130,6 +133,7 @@ public class MarketController {
 		return "/market/marketMain";
 	}
 	
+	/*
 	@RequestMapping(value="/getReview.do", method=RequestMethod.POST)
 	@ResponseBody
 	public List<ReviewDto> getReview(@RequestBody String p_id) {
@@ -138,6 +142,7 @@ public class MarketController {
 		List<ReviewDto> list = marketBiz.getReview(p_id.substring(0, p_id.length()-1));
 		return list;
 	}
+	*/
 	
 	@RequestMapping(value="/likeProductInsert.do", method=RequestMethod.POST)
 	@ResponseBody
