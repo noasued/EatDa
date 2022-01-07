@@ -28,8 +28,14 @@
 	<resultMap type="productDto" id="productMap">
 		<result property="p_id" column="P_ID" />
 		<result property="p_name" column="P_NAME" />
+		<result property="p_short_desc" column="P_SHORT_DESC" />
+		<result property="p_price" column="P_PRICE"/>
+		<result property="p_description" column="P_DESCRIPTION" />
+		<result property="p_cal" column="P_CAL" />
+		<result property="p_amount" column="P_AMOUNT" />
+		<result property="seller_desc" column="SELLER_DESC" />		
 		<result property="img_path" column="IMG_PATH" />
-		<result property="p_price" column="P_PRICE"/>		
+		<result property="p_no" column="P_NO" />
 	</resultMap>
 	
 	<select id="adminProductList" parameterType="list" resultMap="productMap">
@@ -41,21 +47,26 @@
 		SELECT P_ID FROM PRODUCT WHERE P_NAME=#{p_name}
 	</select>
 	
-	<insert id="productInsert" parameterType="productDto">
+	<insert id="adminProductInsert" parameterType="productDto">
 		INSERT INTO PRODUCT
-		VALUES(PRODUCT_SEQ.NEXTVAL,#{p_name},#{img_path},#{p_price})	
+		VALUES(#{p_id},#{p_name},#{p_short_desc},#{p_price},#{p_description},#{p_cal},#{p_amount},#{seller_desc},#{img_path},#{p_no})	
 	</insert>
 	
-	<update id="productUpdate" parameterType="productDto">
+	<update id="adminProductUpdate" parameterType="productDto">
 		UPDATE PRODUCT
-		SET P_CATEGORY=#{p_category}, P_NAME=#{p_name}, IMG_PATH=#{img_path}, P_PRICE=#{p_price}
+		SET P_NAME=#{p_name}, IMG_PATH=#{img_path}, P_PRICE=#{p_price}
 		WHERE P_ID=#{p_id}
 	</update>
 	
-	<delete id="productDelete" parameterType="int">
+	<delete id="adminProductDelete" parameterType="String">
 		DELETE FROM PRODUCT WHERE P_ID=#{p_id}
 	</delete>
 	
+	<select id="getLastProductNum" resultType="productDto">
+		SELECT P_NO
+		FROM (SELECT * FROM PRODUCT ORDER BY P_NO DESC)
+		WHERE 2>ROWNUM
+	</select>	
 	
 	<!-- Admin Order -->
 	<resultMap type="orderAdminDto" id="orderAdminMap">
@@ -68,11 +79,30 @@
 	</resultMap>
 		
 	<select id="adminOrderList" parameterType="list" resultMap="orderAdminMap">
-		SELECT * FROM ORDER_ADMIN
-		ORDER BY ORDER_ID DESC
+		SELECT *
+		FROM ORDER_ADMIN A JOIN E_ORDER E
+		ON A.ORDER_ID = E.ORDER_ID
+		ORDER BY A.ORDER_ID DESC
 	</select>
 	
-	<delete id="adminOrderDelete" parameterType="int">
+	<select id="orderSelectOne" resultType="orderAdminDto" parameterType="int">
+		SELECT ORDER_ID,USER_NAME,ORDER_DATE,USER_PHONE,SHIPPING_STATUS,ORDER_STATUS
+		FROM ORDER_ADMIN A JOIN E_ORDER E
+		ON A.ORDER_ID = E.ORDER_ID
+		WHERE ORDER_ID = #{order_id}
+	</select>
+	
+	<insert id="adminOrderInsert" parameterType="orderDto">
+		INSERT INTO ORDER_ADMIN 
+		VALUES(#{order_id},#{user_id},1,1)
+	</insert>
+	
+	<insert id="adminOrderInsert2" parameterType="orderDto">
+		INSERT INTO ORDER_ADMIN 
+		VALUES(#{order_id},#{user_id},1,2)
+	</insert>
+	
+	<delete id="adminOrderDelete" parameterType="String">
 		DELETE FROM ORDER_ADMIN WHERE ORDER_ID=#{order_id}
 	</delete>
 	
@@ -91,13 +121,12 @@
 		<result property="user_mailing" column="USER_MAILING" />
 		<result property="user_addr_sub" column="USER_ADDR_SUB" />
 	</resultMap>
-	
 		
 	<select id="adminUserList" parameterType="list" resultMap="userMap">
 		SELECT * FROM E_USER ORDER BY USER_ID DESC
 	</select>
 	
-	<delete id="adminUserDelete" parameterType="int">
+	<delete id="adminUserDelete" parameterType="String">
 		DELETE FROM E_USER WHERE USER_ID=#{user_id}
 	</delete>
 

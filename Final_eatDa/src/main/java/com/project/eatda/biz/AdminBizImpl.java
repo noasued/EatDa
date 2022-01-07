@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.AdminDao;
-import com.project.eatda.dao.EventDao;
 import com.project.eatda.dto.BlogReplyDto;
 import com.project.eatda.dto.OrderAdminDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReportDto;
 import com.project.eatda.dto.UserDto;
@@ -31,15 +31,6 @@ public class AdminBizImpl implements AdminBiz{
 			return replyDao.adminReplyDelete(reply_no);
 		}
 		
-	/* 블로그 삭제 */	
-		@Autowired
-		public AdminDao blogDao;
-		
-		@Override
-		public int adminBlogDelete(int blog_no) {
-			return blogDao.adminBlogDelete(blog_no);
-		}
-		
 	/* 상품 리스트 */
 		@Autowired
 		public AdminDao productDao;
@@ -49,30 +40,25 @@ public class AdminBizImpl implements AdminBiz{
 			return productDao.adminProductList();
 		}
 		
-		@Override
-		public String selectPid(String p_id) {
-			return productDao.selectPid(p_id);
-		}
-		
 		// 상품 등록
 		@Override
-		public int p_insert(ProductDto dto) {
-			return productDao.p_insert(dto);
+		public int adminProductInsert(ProductDto dto) {
+			return productDao.adminProductInsert(dto);
 		}
 		
 		// 상품 수정
 		@Override
-		public int p_update(ProductDto dto) {
-			return productDao.p_update(dto);
+		public int adminProductUpdate(ProductDto dto) {
+			return productDao.adminProductUpdate(dto);
 		}
 		
 		// 상품 삭제
 		@Override
-		public int p_delete(String p_id) {
-			return productDao.p_delete(p_id);
+		public int adminProductDelete(String p_id) {
+			return productDao.adminProductDelete(p_id);
 		}
-		
-		
+
+
 	/* 주문 리스트 */
 		@Autowired
 		public AdminDao orderDao;
@@ -80,6 +66,31 @@ public class AdminBizImpl implements AdminBiz{
 		@Override
 		public List<OrderAdminDto> adminOrderList() {
 			return orderDao.adminOrderList();
+		}
+		
+		// 모달 리스트
+		@Override
+		public OrderDto orderSelectOne(String order_id) {
+			return orderDao.orderSelectOne(order_id);
+		}
+		
+		// 주문 추가(무통장입금 : default=결제대기)
+		@Override
+		public int adminOrderInsert(OrderDto dto) {
+			return orderDao.adminOrderInsert(dto);
+		}
+		
+		// 주문 추가(무통장입금 이외 결제 : default=결제완료)
+		@Override
+		public int adminOrderInsert2(OrderDto dto) {
+			return orderDao.adminOrderInsert2(dto);
+		}
+
+		// 주문 리스트 수정
+		@Override
+		public int adminOrderUpdate(OrderAdminDto dto) {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 		
 		// 주문 리스트 삭제
@@ -98,11 +109,15 @@ public class AdminBizImpl implements AdminBiz{
 			return userDao.adminUserList();
 		}
 		
+		@Override
+		public List<UserDto> adminUserModal(int user_no){
+			return userDao.adminUserModal(user_no);
+		}
+		
 		// 회원 리스트 삭제
 		@Override
 		public int adminUserDelete(String user_id) {
-			// TODO Auto-generated method stub
-			return 0;
+			return userDao.adminUserDelete(user_id);
 		}
 	
 	
@@ -117,9 +132,10 @@ public class AdminBizImpl implements AdminBiz{
 		
 		// 신고 리스트 삭제
 		@Override
-		public int adminPostReportDelete(int report_no) {
-			return reportDao.adminPostReportDelete(report_no);
+		public int adminReportDelete(int report_no) {
+			return reportDao.adminReportDelete(report_no);
 		}
+	
 
 
 

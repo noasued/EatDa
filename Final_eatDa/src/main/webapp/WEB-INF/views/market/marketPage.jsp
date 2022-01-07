@@ -19,6 +19,7 @@ var p_cal = $('#p-cal').text();
 
 $(document).ready(function() {
 	likeProduct();
+	makeReviewTap();
 	let originalPrice = $('#price').text();
 	
 	$('.btn-close').click(function() {
@@ -187,7 +188,6 @@ const changeColorBtn = () => {
 		$('.tap-button').eq(i).removeClass('btn-primary').addClass('btn-secondary');
 	}		
 }
-/*
 const makeReviewTap = () => {
 	const productId = $('#p-id').text();
 	$('.bottom-section').append(
@@ -225,7 +225,6 @@ const makeReviewTap = () => {
 	});
 	
 }
-*/
 
 const reviewTap = () => {
 	changeColorBtn()
@@ -364,33 +363,6 @@ const ready = (command) => {
 		</div>
 
 		<div class="bottom-section">
-			<!-- review tap -->
-			<div class='review-wrap' style="display:none;">
-				<ul class='review-ul'>
-					<li class='li-tag'>
-						<div class='review-top'>
-							<span>전체&nbsp;(</span><span id='reviewQuantity'></span>${list.size()}<span>)</span>
-							<em>※ 일부 후기는 구매자의 주관적인 소견이며 개인별로 상이할 수 있습니다.</em>
-						</div>
-					</li>
-				</ul>
-				<ul class='review-ul-body'>
-					<c:forEach var="dto" items="${list}">
-						<li class='li-tag'>
-							<div class='review-box'>
-								<div class='profile-img'>
-									<img src='resources/images/userProfile/${dto.user_img}.png' alt='프로필' class='profile'>
-								</div>
-								<div class='review-text-div'>
-									<span>${dto.review_content}</span><br>
-									<span>${dto.user_id} (${dto.user_name})</span>&nbsp;&nbsp;&nbsp;&nbsp;
-									<span>작성일 : </span><span>${dto.review_regdate}</span>
-								</div>
-							</div>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
 			<!-- 상품정보, 리뷰 default 상품정보 -->
 			<div class="changeTap">
 				<div class="detail-wrap" id="img-path" style="background-image:url(${product.img_path})"></div>
