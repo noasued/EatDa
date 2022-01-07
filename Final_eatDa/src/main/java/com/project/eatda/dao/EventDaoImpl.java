@@ -88,4 +88,20 @@ public class EventDaoImpl implements EventDao{
 		}
 		return res;
 	}
+
+	
+	/* 관리자 이벤트 진행 현황 */
+	@Override
+	public int adminEventStatus(EventDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"adminEventStatus",dto);
+			System.out.println("성공이냐?");
+		} catch (Exception e) {
+			System.out.println("[error] : event status update");
+			e.printStackTrace();
+		}
+		return res;
+	}
 }

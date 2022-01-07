@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -169,6 +172,24 @@ public class BlogController {
 		model.addAttribute("list", biz.adminBlogList());
 		
 		return "/admin/adminPostBlog";
+	}
+	
+	// 관리자 블로그 삭제
+	@RequestMapping(value="/adminBlogDelete.do", method=RequestMethod.GET)
+	public String adminProductDelete(Model model, HttpServletRequest httpServletRequest){
+		System.out.println("admin blog delete");
+		
+		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
+		System.out.println(chk);
+		int chk_l = chk.length;
+		System.out.println(chk_l);
+		
+		for(int i = 0; i < chk_l; i++) {
+			System.out.println(chk[i]);
+			biz.adminBlogDelete(Integer.parseInt(chk[i]));
+		}
+		
+		return "redirect:/adminPostBlog.do";
 	}
 	
 }
