@@ -69,4 +69,8 @@
 		ORDER BY BLOG_NO DESC
 	</select>
 	
+	<delete id="adminBlogDelete" parameterType="int">
+		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
+	</delete>
+	
 </mapper>

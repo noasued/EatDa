@@ -158,5 +158,17 @@ public class BlogDaoImpl implements BlogDao{
 		return adminBlogList;
 	}
 
-	
+	// 관리자 블로그 삭제
+	public int adminBlogDelete(int blog_no) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"adminBlogDelete",blog_no);
+		} catch (Exception e) {
+			System.out.println("[error] : admin blog delete");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

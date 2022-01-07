@@ -13,4 +13,8 @@ public interface EventDao {
 	public int delete(int event_no);
 	
 	public int selectEventNo(String event_title);
+	
+	/* 관리자 이벤트 진행 현황 */
+	public int adminEventStatus(EventDto dto);
+	
 }
