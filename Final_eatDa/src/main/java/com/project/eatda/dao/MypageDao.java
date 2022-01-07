@@ -17,7 +17,10 @@ String NAMESPACE_MYPAGE = "mypage.";
 	//구독내역
 	public SubscriptionDto subscriptionList(SubscriptionDto dto);
 	
-	//구독상품
+	//배송예정상품
+	public List<ProductDto> deliveryProduct();
+	
+	//대체상품
 	public List<ProductDto> getMarketProduct();
 	
 	//쿠폰함

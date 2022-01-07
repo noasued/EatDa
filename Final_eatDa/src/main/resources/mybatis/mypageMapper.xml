@@ -21,6 +21,11 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
+	<!-- 배송 예정 상품 -->
+	<select id="deliveryProduct" resultType="productDto">
+	 	SELECT * FROM PRODUCT ORDER BY P_NO
+	</select>
+	
 	<!-- 구독 상품 변경 -->
 	<select id="getMarketProduct" resultType="productDto">
 	 	SELECT * FROM PRODUCT ORDER BY P_NO DESC

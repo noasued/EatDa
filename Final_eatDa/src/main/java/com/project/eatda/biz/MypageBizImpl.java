@@ -27,7 +27,14 @@ public class MypageBizImpl implements MypageBiz{
 		return mypageDao.subscriptionList(dto);
 	}
 	
-	//구독상품
+	//배송예정상품
+	@Override
+	public List<ProductDto> deliveryProduct() {
+		return mypageDao.deliveryProduct();
+	}
+
+	
+	//대체상품
 	@Override
 	public List<ProductDto> getMarketProduct() {
 		return mypageDao.getMarketProduct();
@@ -63,6 +70,7 @@ public class MypageBizImpl implements MypageBiz{
 		return mypageDao.registReview(dto);
 	}
 
+	
 
 
 
