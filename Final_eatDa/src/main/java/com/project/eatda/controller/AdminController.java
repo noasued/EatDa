@@ -90,6 +90,7 @@ public class AdminController {
 	}
 
 	// 이벤트 status update
+
 //	@RequestMapping(value="/adminEventStaus.do",method=RequestMethod.GET)
 //	public String updateStatus(EventDto dto) {
 //		System.out.println(dto.toString());
@@ -97,6 +98,7 @@ public class AdminController {
 //		
 //		return "redirect:/adminPostEvent.do";
 //	}
+
 
 	/* 레시피 리스트 */
 	@RequestMapping("/adminRecipe.do")

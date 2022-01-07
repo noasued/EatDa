@@ -100,7 +100,7 @@ hr{
     	text-align: right;
     }
 
-    .delivery_product{
+    .delivery_product, .delivery_product2{
         width: 150px;
         text-align: center;
     }
@@ -112,7 +112,6 @@ hr{
 	.alter_product_pic{
         height: 150px;
         width: 150px;
-        margin-top: 20px;
     }
 
     .alter_product_pic1{
@@ -150,7 +149,7 @@ hr{
     }
 
     .alter_product_name1 a{
-        margin-left: 50px;
+         margin-left: 50px;
     }
 
     .alter_product_name2 a{
@@ -174,6 +173,7 @@ hr{
 <script type="text/javascript">
 	$(document).ready(function(){
 		getMarketProduct();
+		deliveryProduct();
 	});
 
 	const getMarketProduct = () => {
@@ -190,6 +190,24 @@ hr{
 						"</label> &nbsp;&nbsp;"+
 						"<br>"+
 						"<span class='alter_product_name1'> <a>"+value.p_name+"</a></span>" +
+						"</td>"
+					);
+				});
+			}
+		});
+	}
+	
+	const deliveryProduct = () => {
+		$.ajax({
+			url:"deliveryProduct.do",
+			type:"post",
+			dataType:"json",
+			success:function(data) {
+				$(data).each(function(key, value) {
+					$('.delivery_product2').append(
+						"<td>"+
+						"<img src='" + value.img_path +"' width='150' height='150'><br>"+
+						"<a>" + value.p_name + "</a>"+
 						"</td>"
 					);
 				});
@@ -273,12 +291,7 @@ hr{
                     <c:otherwise>
                     	<tr>
 	                        <th>배송 예정 상품</th>
-	                        <td>
-	                            <div class="delivery_product">
-		                            <img src="resources/images/sub_food1.png" width="150" height="150"><br>
-		                            <a>이달의 샐러드</a>
-	                        	</div>
-	                        </td>
+	                        <td class="delivery_product2"></td>
 	                    </tr>
 	                    <tr>
 	                        <th>대체 상품</th>

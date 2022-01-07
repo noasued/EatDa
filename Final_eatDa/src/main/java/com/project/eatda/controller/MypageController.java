@@ -81,6 +81,16 @@ public class MypageController {
 		return "/mypage/mypage_subscription";
 	}
 	
+	//배송예정상품
+	@RequestMapping(value="deliveryProduct.do", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ProductDto> deliveryProduct() {
+		logger.info("deliveryProduct");
+		List<ProductDto> list = mypageBiz.deliveryProduct();
+		
+		return list;
+	}
+	
 	//구독상품
 	@RequestMapping(value="/getMarketProduct.do", method=RequestMethod.POST) 
 	@ResponseBody

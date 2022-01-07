@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.codehaus.jackson.map.introspect.AnnotatedParameter;
 import org.springframework.stereotype.Repository;
 
 import com.project.eatda.dto.BlogDto;
@@ -37,7 +38,27 @@ public class MypageDaoImpl implements MypageDao{
 		return dto2;
 	}
 	
-	//구독상품
+	//배송예정상품
+	@Override
+	public List<ProductDto> deliveryProduct() {
+		List<ProductDto> temp = null;
+		List<ProductDto> list = new ArrayList<ProductDto>();
+		
+		try {
+			temp = sqlSession.selectList(NAMESPACE_MYPAGE + "deliveryProduct");
+			
+			for(int i=0; i<1; i++) {
+				list.add(temp.get(i));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("deliveryProduct Dao ERROR");
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	//대체상품
 	@Override
 	public List<ProductDto> getMarketProduct() {
 		List<ProductDto> temp = null;
@@ -129,6 +150,8 @@ public class MypageDaoImpl implements MypageDao{
 		}
 		return res;
 	}
+
+	
 
 
 
