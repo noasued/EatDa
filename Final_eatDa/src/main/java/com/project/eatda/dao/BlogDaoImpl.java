@@ -131,6 +131,20 @@ public class BlogDaoImpl implements BlogDao{
 	}
 
 	
+	@Override
+	public int like_cnt_up(int blog_no) {
+	
+		
+		return 0;
+	}
+	
+	@Override
+	public int like_cnt_down(int blog_no) {
+
+		
+		return 0;
+	}
+	
 	/* 관리자 블로그 리스트(전체 조회) */
 	@Override
 	public List<BlogDto> adminBlogList() {
@@ -143,5 +157,6 @@ public class BlogDaoImpl implements BlogDao{
 		}
 		return adminBlogList;
 	}
+
 	
 }

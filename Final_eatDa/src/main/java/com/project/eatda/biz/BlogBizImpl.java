@@ -56,9 +56,21 @@ public class BlogBizImpl implements BlogBiz{
 		return dao.delete(blog_no);
 	}
 	
+	@Override
+	public int like_cnt_up(int blog_no) {
+		return dao.like_cnt_up(blog_no);
+	}
+	
+	@Override
+	public int like_cnt_down(int blog_no) {
+		return dao.like_cnt_down(blog_no);
+	}
+	
+	
 	/* 관리자 블로그 리스트 (전체 조회) */
 	@Override
 	public List<BlogDto> adminBlogList(){
 		return dao.adminBlogList();
 	}
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,13 +102,46 @@ public class BlogController {
 	public String like(int blog_no, HttpSession session) {
 		logger.info("[controller] blog like");
 		String user_id = (String)session.getAttribute("user_id");
-//		JSONObject obj = new JSONObject();    있어도 되는지 아닌지 모르겠어서 우선 주석, 사용하려면 pom.xml에 추가하거나 jar파일 넣어야 
 		
 		ArrayList<String> msgs = new ArrayList<String>();
 		HashMap<String,Object> hashMap = new HashMap<String,Object>();
 		hashMap.put("blog_no", blog_no);
 		hashMap.put("user_id", user_id);
 		BlogLikeDto likeDto = likeBiz.read(hashMap);
+		
+		BlogDto blogDto = biz.selectOne(blog_no);
+		int like_cnt = blogDto.getBlog_like();
+		int like_check = 0;
+		like_check = likeDto.getLike_check();
+		
+		if(likeBiz.countLike(hashMap)==0) {
+			likeBiz.create(hashMap);
+		}
+		
+		if(like_check == 0) {
+			msgs.add("좋아요");
+			likeBiz.like_check(hashMap);
+			like_check++;
+			like_cnt++;
+			biz.like_cnt_up(blog_no);
+		} else {
+			msgs.add("좋아요 취소");
+			likeBiz.like_check_cancel(hashMap);
+			like_check--;
+			like_cnt--;
+			biz.like_cnt_down(blog_no);
+		}
+		
+		/* 얘네를 어떻게 해야할까....
+		 * 
+		obj.put("boardno", liketoVO.getBoardno());
+	    obj.put("like_check", like_check);
+	    obj.put("like_cnt", like_cnt);
+	    obj.put("msg", msgs);
+	    
+	    return obj.toJSONString();  
+		 
+		*/
 		
 		
 		return null;
