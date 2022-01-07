@@ -261,4 +261,5 @@ public class AdminController {
 		
 		return "redirect:/adminReport.do";
 	}
+	
 }
