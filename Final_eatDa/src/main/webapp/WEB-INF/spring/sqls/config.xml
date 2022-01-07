@@ -12,6 +12,7 @@
   		<typeAlias type="com.project.eatda.dto.OrderProductDto" alias="orderProductDto"/>
   		<typeAlias type="com.project.eatda.dto.CouponDto" alias="couponDto"/>
   		<typeAlias type="com.project.eatda.dto.EventDto" alias="eventDto"/>
+  		<typeAlias type="com.project.eatda.dto.BlogLikeDto" alias="blogLikeDto"/>
   		<typeAlias type="com.project.eatda.dto.BlogDto" alias="blogDto"/>
   		<typeAlias type="com.project.eatda.dto.ProductDto" alias="productDto"/>
   		<typeAlias type="com.project.eatda.dto.CartProductDto" alias="cartProductDto"/>
@@ -30,9 +31,11 @@
   		<mapper resource="/mybatis/commonMapper.xml"/>
   		<mapper resource="/mybatis/marketMapper.xml"/>
   		<mapper resource="/mybatis/blogMapper.xml"/>
+  		<mapper resource="/mybatis/blogLikeMapper.xml"/>
   		<mapper resource="/mybatis/eventMapper.xml"/>
   		<mapper resource="/mybatis/recipeMapper.xml"/>  
   		<mapper resource="/mybatis/mypageMapper.xml"/>  
-  		<mapper resource="/mybatis/adminMapper.xml" />
+  		<mapper resource="/mybatis/adminMapper.xml"/>
+  		<mapper resource="/mybatis/replyMapper.xml"/>
   	</mappers>
   </configuration>

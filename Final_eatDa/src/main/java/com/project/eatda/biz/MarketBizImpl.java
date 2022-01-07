@@ -22,8 +22,8 @@ public class MarketBizImpl implements MarketBiz {
 	private MarketDao marketDao;
 
 	@Override
-	public List<ProductDto> takeProductList(int num) {
-		return marketDao.takeProductList(num);
+	public List<ProductDto> takeProductList() {
+		return marketDao.takeProductList();
 	}
 
 	@Override

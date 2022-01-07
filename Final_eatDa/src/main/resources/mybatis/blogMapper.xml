@@ -38,7 +38,11 @@
 	</select>
 	
 	<select id="blogDetail" resultType="blogDto" parameterType="int">
-		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, BLOG_LIKE, BLOG_IMG, REGDATE
+		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, 
+						(SELECT COUNT(*) AS CNT
+							FROM BLOG_LIKE
+							WHERE BLOG_NO=#{blog_no}) AS BLOG_LIKE,
+					 BLOG_IMG, REGDATE
 		FROM BLOG
 		WHERE BLOG_NO = #{blog_no}
 	</select>
@@ -62,33 +66,16 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
+	
+	
 	<!-- Admin Blog -->
 	<select id="adminBlogList" parameterType="list" resultMap="blogMap">
 		SELECT * FROM BLOG
 		ORDER BY BLOG_NO DESC
 	</select>
 	
-	<!-- Reply -->
-	<resultMap type="replyDto" id="replyMap">
-		<result property="reply_no" column="REPLY_NO" />
-		<result property="blog_no" column="BLOG_NO" />
-		<result property="user_id" column="USER_ID"/>
-		<result property="reply_content" column="REPLY_CONTENT"/>
-		<result property="regdate" column="REGDATE"/>
-		<result property="updatedate" column="UPDATEDATE"/>
-	</resultMap>
+	<delete id="adminBlogDelete" parameterType="int">
+		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
+	</delete>
 	
-	<insert id="insertReply" parameterType="replyDto">
-		INSERT INTO BLOG_REPLY(REPLY_NO, BLOG_NO, USER_ID, REPLY_CONTENT)
-		VALUES(REPLY_NO_SEQ.NEXTVAL, #{blog_no}, 'user1', #{reply_content})
-	</insert>
-	
-	<select id="listReply"  resultType="replyDto">
-		SELECT REPLY_NO, BLOG_NO, REPLY_CONTENT, U.USER_ID, R.REGDATE, R.UPDATEDATE
-		FROM BLOG_REPLY R, E_USER U
-		WHERE R.USER_ID = U.USER_ID AND BLOG_NO=#{blog_no}
-		ORDER BY REPLY_NO
-	</select>
-	
-
 </mapper>

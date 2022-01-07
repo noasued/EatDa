@@ -45,4 +45,10 @@ public class EventBizImpl implements EventBiz{
 		System.out.println("delete biz");
 		return dao.delete(event_no);
 	}
+
+	/* 관리자 이벤트 진행 현황 */
+	@Override
+	public int adminEventStatus(EventDto dto) {
+		return dao.adminEventStatus(dto);
+	}
 }

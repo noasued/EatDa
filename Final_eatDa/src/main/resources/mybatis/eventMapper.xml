@@ -41,4 +41,11 @@
 	<delete id="eventDelete" parameterType="int">
 		DELETE FROM EVENT WHERE EVENT_NO=#{event_no}
 	</delete>
+	
+	<!-- Admin Event Status Update -->
+	<update id="adminEventStatus" parameterType="int">
+		UPDATE EVENT
+		SET STATUS=#{status}
+		WHERE EVENT_NO=#{event_no}
+	</update>
 </mapper>

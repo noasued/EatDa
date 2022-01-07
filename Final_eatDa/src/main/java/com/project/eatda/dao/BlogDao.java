@@ -18,6 +18,10 @@ public interface BlogDao {
 	
 	public int selectBlogNo(String blog_title);
 	
+	
 	/* 관리자 블로그 리스트 (전체 조회) */
 	public List<BlogDto> adminBlogList();
+	
+	// 관리자 블로그 삭제
+	public int adminBlogDelete(int blog_no);
 }

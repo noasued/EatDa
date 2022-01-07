@@ -15,13 +15,14 @@ public class ProductDto {
 	private String p_category;
 	private String img_path;
 	private String seller_desc;
+	private int p_no;
 
 	public ProductDto() {
 		super();
 	}
 
 	public ProductDto(String p_id, String p_name, String p_short_desc, String p_price, String p_description, int p_cal,
-			int p_amount, String p_category, String img_path, String seller_desc) {
+			int p_amount, String p_category, String img_path, String seller_desc, int p_no) {
 		super();
 		this.p_id = p_id;
 		this.p_name = p_name;
@@ -33,6 +34,7 @@ public class ProductDto {
 		this.p_category = p_category;
 		this.img_path = img_path;
 		this.seller_desc = seller_desc;
+		this.p_no = p_no;
 	}
 
 	public String getImg_path() {
@@ -114,12 +116,20 @@ public class ProductDto {
 	public void setP_category(String p_category) {
 		this.p_category = p_category;
 	}
+	
+	public int getP_no() {
+		return p_no;
+	}
+	
+	public void setP_no(int p_no) {
+		this.p_no = p_no;
+	}
 
 	@Override
 	public String toString() {
 		return "ProductDto [p_id=" + p_id + ", p_name=" + p_name + ", p_short_desc=" + p_short_desc + ", p_price="
 				+ p_price + ", p_description=" + p_description + ", p_cal=" + p_cal + ", p_amount=" + p_amount
-				+ ", p_category=" + p_category + ", img_path=" + img_path + ", seller_desc=" + seller_desc + "]";
+				+ ", p_category=" + p_category + ", img_path=" + img_path + ", seller_desc=" + seller_desc + ",p_no="+p_no +"]";
 	}
 
 	

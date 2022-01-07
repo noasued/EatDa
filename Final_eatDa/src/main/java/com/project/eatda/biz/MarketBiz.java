@@ -12,7 +12,7 @@ import com.project.eatda.dto.ReviewDto;
 
 public interface MarketBiz {
 
-	public List<ProductDto> takeProductList(int num);
+	public List<ProductDto> takeProductList();
 
 	public int paging();
 

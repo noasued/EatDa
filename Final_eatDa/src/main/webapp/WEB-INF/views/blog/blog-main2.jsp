@@ -86,7 +86,7 @@
 										"<h3>"+value.blog_title+"</h3>"+
 										"<span>"+value.user_id+"</span>"+
 										"<div class='blog-article__list-title__icons'>"+
-											"<i class='fas fa-heart'>&nbsp;3</i>"+"<i class='fas fa-comment'>&nbsp;"+value.reply_count+"</i>"+
+											"<i class='fas fa-heart'>&nbsp;"+value.blog_like+"</i>"+"<i class='fas fa-comment'>&nbsp;"+value.reply_count+"</i>"+
 										"</div>"+
 									"</div>"+
 									"<div class='blog-article__list-content'>"+
@@ -202,7 +202,7 @@
 									"<h3>"+value.blog_title+"</h3>"+
 									"<span>"+value.user_id+"</span>"+
 									"<div class='blog-article__list-title__icons'>"+
-									"<i class='fas fa-heart'>&nbsp;3</i>"+"<i class='fas fa-comment'>&nbsp;"+value.reply_count+"</i>"+
+									"<i class='fas fa-heart'>&nbsp;"+value.blog_like+"</i>"+"<i class='fas fa-comment'>&nbsp;"+value.reply_count+"</i>"+
 									"</div>"+
 								"</div>"+
 								"<div class='blog-article__list-content'>"+

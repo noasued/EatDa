@@ -11,7 +11,7 @@ public class BlogDto {
 	private String blog_title;		// 게시글 제목
 	private String blog_content;		// 게시글 내용
 	private int blog_count;			// 게시글 조회수
-	private int blog_like;			// 게시글 좋아요 갯
+	private int blog_like;			// 게시글 좋아요 갯수
 	private String blog_img;			// 게시글 이미지( 썸머노트 해결후 컬럼 삭제 예상 )
 	private Date regdate;			// 게시글 작성일자
 	private int reply_count;		// 게시글 댓글 수 ( 2021 12 30 추가 )

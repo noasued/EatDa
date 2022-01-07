@@ -53,18 +53,17 @@ public class AdminController {
 		return "/admin/adminPostReply";
 	}
 	
-	/* 게시글 댓글  선택 삭제 */
+	// 댓글 삭제
 	@RequestMapping(value="/adminPostReplyDelete.do", method=RequestMethod.GET)
 	public String adminReplyDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin reply delete");
 		
 		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
 		System.out.println(chk);
-		String rss = "";
-		int chk_l = chk.length;
-		System.out.println(chk_l);
+		int chk_length = chk.length;
+		System.out.println(chk_length);
 		
-		for(int i = 0; i < chk_l; i++) {
+		for(int i = 0; i < chk_length; i++) {
 			System.out.println(chk[i]);
 			adminBiz.adminReplyDelete(Integer.parseInt(chk[i]));
 		}
@@ -80,26 +79,6 @@ public class AdminController {
 
 		return "/admin/adminPostBlog";
 	}
-	
-	/* 블로그 선택 삭제 */
-	@RequestMapping(value="/adminBlogDelete.do", method=RequestMethod.GET)
-	public String adminBlogDelete(Model model, HttpServletRequest httpServletRequest){
-		System.out.println("admin blog delete");
-		
-		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
-		System.out.println(chk);
-		String rss = "";
-		int chk_l = chk.length;
-		System.out.println(chk_l);
-		
-		for(int i = 0; i < chk_l; i++) {
-			System.out.println(chk[i]);
-			adminBiz.adminBlogDelete(Integer.parseInt(chk[i]));
-		}
-		
-		return "redirect:/adminPostBlog.do";
-	}
-
 
 	/* 이벤트 리스트 */
 	@RequestMapping("/adminPostEvent.do")
@@ -111,13 +90,15 @@ public class AdminController {
 	}
 
 	// 이벤트 status update
-	@RequestMapping(value="/adminEventStaus.do",method=RequestMethod.GET)
-	public String updateStatus(EventDto dto) {
-		System.out.println(dto.toString());
-		//eventBiz.adminEventStatus(dto);
-		
-		return "redirect:/adminPostEvent.do";
-	}
+
+//	@RequestMapping(value="/adminEventStaus.do",method=RequestMethod.GET)
+//	public String updateStatus(EventDto dto) {
+//		System.out.println(dto.toString());
+//		//eventBiz.adminEventStatus(dto);
+//		
+//		return "redirect:/adminPostEvent.do";
+//	}
+
 
 	/* 레시피 리스트 */
 	@RequestMapping("/adminRecipe.do")
@@ -128,24 +109,6 @@ public class AdminController {
 		return "/admin/adminRecipe";
 	}
 	
-	// 레시피 삭제
-	/*
-	 * @RequestMapping(value="/adminRecipeDelete.do", method=RequestMethod.GET)
-	 * public String adminRecipeDelete(Model model, HttpServletRequest
-	 * httpServletRequest){ System.out.println("admin blog delete");
-	 * 
-	 * String[] chk = httpServletRequest.getParameterValues("RowCheck[]");
-	 * System.out.println(chk); String rss = ""; int chk_l = chk.length;
-	 * System.out.println(chk_l);
-	 * 
-	 * for(int i = 0; i < chk_l; i++) { System.out.println(chk[i]);
-	 * adminBiz.adminRecipeDelete(Integer.parseInt(chk[i])); }
-	 * 
-	 * return "redirect:/adminPostBlog.do";
-	 
-	}*/
-	
-
 	/* 상품 리스트 */
 	@RequestMapping("/adminProductList.do")
 	public String adminProductList(Model model) {
@@ -155,44 +118,53 @@ public class AdminController {
 		return "/admin/adminProductList";
 	}
 
-	// 상품 등록 페이지
-	@RequestMapping("/adminProductWriteForm.do")
-	public String p_write() {
+	// 상품 등록 버튼 클릭 시, writeForm으로 페이지 이동
+	@RequestMapping("/adminProductWrite.do")
+	public String adminProductWrite() {
 		System.out.println("admin product write");
 		
 		return "/admin/adminProductWrite";
 	}
 	
-	// 상품 등록 후 리스트
-	@RequestMapping("/adminProductWrite.do")
-	public String p_insert(ProductDto dto, RedirectAttributes rttr) {
-		System.out.println("product write page - post");
+	// 상품 등록
+	@RequestMapping("/adminProductInsert.do")
+	public String adminProductInsert(ProductDto dto,Model model) {
+		System.out.println("product insert");
 		System.out.println(dto.toString());
-		adminBiz.p_insert(dto);
+		adminBiz.adminProductInsert(dto);
 		
-		rttr.addFlashAttribute("insert_result", dto.getP_id());
+		model.addAttribute("insert_result", dto.getP_id());
 		
-		return "redirect:/admin/adminProductList";
+		return "redirect:/adminProductList.do";
 	}
 
 	
-	// 상품 수정 페이지
-	@RequestMapping("p_update.do")
-	public int p_update(ProductDto dto) {
+	// 상품 수정
+	@RequestMapping("adminProductUpdate.do")
+	public String adminProductUpdate(Model model, String p_id) {
+		System.out.println("admin product update");
 		
-		return 0;
+		return "/admin/adminProductUpdate";
 	}
 	
-	// 상품 삭제 페이지
-	@RequestMapping("adminProductDelete.do")
-	public String p_delete(String p_id) {
+	// 상품 삭제
+	@RequestMapping("/adminProductDelete.do")
+	public String adminProductDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin product delete");
-		adminBiz.p_delete(p_id);
-		return "redirect:adminProductList.do";
+		
+		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
+		System.out.println(chk);
+		int chk_l = chk.length;
+		System.out.println(chk_l);
+		
+		for(int i = 0; i < chk_l; i++) {
+			System.out.println(chk[i]);
+			adminBiz.adminProductDelete(chk[i]);
+		}
+		
+		return "redirect:/adminProductList.do";
 	}
 
-	
-	
 	/* 주문 리스트 */
 	@RequestMapping(value="/adminOrder.do", method=RequestMethod.GET)
 	public String adminOrder(Model model) {
@@ -203,20 +175,23 @@ public class AdminController {
 	}
 	
 	// 주문 삭제
-	/*
-	 * @RequestMapping(value="/adminOrderDelete.do", method=RequestMethod.GET)
-	 * public String adminOrderDelete(Model model, HttpServletRequest
-	 * httpServletRequest){ System.out.println("admin blog delete");
-	 * 
-	 * String[] chk = httpServletRequest.getParameterValues("RowCheck[]");
-	 * System.out.println(chk); String rss = ""; int chk_l = chk.length;
-	 * System.out.println(chk_l);
-	 * 
-	 * for(int i = 0; i < chk_l; i++) { System.out.println(chk[i]);
-	 * adminBiz.adminOrderDelete(Integer.parseInt(chk[i])); }
-	 * 
-	 * return "redirect:/adminPostBlog.do"; }
-	 */
+	 @RequestMapping(value="/adminOrderDelete.do", method=RequestMethod.GET)
+	 public String adminOrderDelete(Model model, HttpServletRequest httpServletRequest){ 
+		System.out.println("admin blog delete");
+		
+	 	String[] chk = httpServletRequest.getParameterValues("RowCheck[]");
+	 	System.out.println(chk); 
+	 	int chk_l = chk.length;
+	 	System.out.println(chk_l);
+	  
+		for(int i = 0; i < chk_l; i++) { 
+			System.out.println(chk[i]);
+		 	adminBiz.adminOrderDelete(chk[i]); 
+		 }
+	 
+	 return "redirect:/adminOrder.do"; 
+	 }
+
 	/* 회원 리스트 */
 	@RequestMapping("/adminUser.do")
 	public String adminUser(Model model) {
@@ -226,11 +201,40 @@ public class AdminController {
 		return "/admin/adminUser";
 	}
 	
-	@RequestMapping("/adminUpdateUserEnable.do")
-	public int updateUserEnable(Model model, String user_id) {
-		System.out.println("update user enable");
+//	// 회원 정보 모달 
+//	@RequestMapping("/adminUserModal.do")
+//	public String adminUserModal(Model model, int user_no) {
+//		System.out.println("adminUserModal");
+//		model.addAttribute("userModal", adminBiz.adminUserModal(user_no));
+//
+//		return "/admin/adminUser";
+//	}
+	
+//	// 회원 활성화 여부 update
+//	@RequestMapping("/adminUpdateUserEnable.do")
+//	public int updateUserEnable(Model model, String user_id) {
+//		System.out.println("update user enable");
+//		
+//		return 0;
+//	}
+	
+	// 회원 삭제
+	@RequestMapping("/adminUserDelete.do")
+	public String adminUserDelete(Model model, HttpServletRequest httpServletRequest){ 
+		System.out.println("admin user delete");
 		
-		return 0;
+		String[] chk = httpServletRequest.getParameterValues("RowCheck[]");
+ 			System.out.println(chk); 
+ 			int chk_l = chk.length;
+ 			System.out.println(chk_l);
+  
+ 		for(int i = 0; i < chk_l; i++) { 
+ 			System.out.println(chk[i]);
+ 			adminBiz.adminUserDelete(chk[i]); 
+	 }
+ 
+	 return "redirect:/adminUser.do"; 
+	 
 	}
 
 	/* 신고 리스트 */
@@ -242,22 +246,22 @@ public class AdminController {
 		return "/admin/adminReport";
 	}
 	
-	/* 신고 삭제 */
-	@RequestMapping(value="/adminPostReportDelete.do", method=RequestMethod.GET)
-	public String adminPostReportDelete(Model model, HttpServletRequest httpServletRequest){
-		System.out.println("admin reply delete");
+	// 신고 삭제 
+	@RequestMapping(value="/adminReportDelete.do", method=RequestMethod.GET)
+	public String adminReportDelete(Model model, HttpServletRequest httpServletRequest){
+		System.out.println("admin report delete");
 		
 		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
 		System.out.println(chk);
-		String rss = "";
 		int chk_l = chk.length;
 		System.out.println(chk_l);
 		
 		for(int i = 0; i < chk_l; i++) {
 			System.out.println(chk[i]);
-			adminBiz.adminPostReportDelete(Integer.parseInt(chk[i]));
+			adminBiz.adminReportDelete(Integer.parseInt(chk[i]));
 		}
 		
-		return "redirect:/adminPostReply.do";
+		return "redirect:/adminReport.do";
 	}
+	
 }

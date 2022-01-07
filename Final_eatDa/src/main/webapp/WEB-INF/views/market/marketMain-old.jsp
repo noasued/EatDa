@@ -22,32 +22,10 @@
 	padding-top: 140px;
 	border-radius: 4px;
 }
-.product-img {
-	width:100%;
-	height:60%;
-	overflow: hidden;
-}
-
-.p-img {
-	width: 95%;
-	height: 95%;
-	border-radius:4px;
-	transition: all 0.2s linear;
-}
-.product-card {
-	box-shadow: 0px 4px 4px -4px gray;
-	width: 26%;
-	height:100%;
-	float: left;
-	margin: 0 auto;
-}
 </style>
 <script type="text/javascript">
-let productList;
-let tagList;
-
 $(document).ready(function() {
-	productList = takeProduct();
+	window.setTimeout(takeProduct(1),3000);
 	pagination();
 	likeProduct();
 	
@@ -119,22 +97,78 @@ const putShoppingBag = (object) => {
 	}
 }
 
-//전체 상품 가져오기
-const takeProduct = () => {
-	let list;
+//상품 리스트업 함수
+const takeProduct = (num) => {
 	$('.product-container').html('');
+	let sNum = String(num);
 		
 	$.ajax({
 		url: "product.do",
 		type: "post",
-		async: false,
+		data: sNum,
 		dataType: "json",
-		success:function(data) {
-			list = data;
-			makeProductPage(list, 1);
+		success:function(list) {
+			let data = list;
+			let idx = 0;
+			let col = 0;
+			$(data).each(function(key, value) {
+				
+				if (idx == 0) {
+					$('.product-container').append(
+							"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
+							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
+							"<div class='product-img' align='center'>" +
+							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
+							"</div>" +
+							"<div class='product-desc'>" +
+							"<div class='product-margin'>" +
+							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin'>" +
+							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+							"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+							"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					);
+					idx++;
+					
+				} else {
+					$('.product-col').eq(col).append(
+							"<div class='product-card' style='margin: 0 2%;'>" +
+							"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
+							"<div class='product-img' align='center'>" +
+							"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
+							"</div>" +
+							"<div class='product-desc'>" +
+							"<div class='product-margin'>" +
+							"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin'>" +
+							"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
+							"</div>" +
+							"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+							"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+							"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
+							"</div>" +
+							"</div>" +
+							"</div>"	
+					);
+					
+					if (idx != 2) {
+						idx++;
+					} else if (idx == 2) {
+						col++;
+						idx = 0;
+					}
+				} 
+			});
 		}
 	});
-	return list;
 }
 
 //페이징 함수
@@ -168,26 +202,30 @@ const pagination = () => {
 			$('.pagination').append(
 				"<a id='right-paging' onclick='rightPaging()''>&raquo;</a>"		
 			);
+			
 		}
 	});
 }
 
+//페이지 이동할 때 함수
 const movePage = (object) => {
 	let page = Number($(object).text());
 	let pageid = $(object).attr('id');
-	makeProductPage(productList,page);
+	takeProduct(page);
 	
 	$('.active').removeClass('active');
 	document.getElementById(pageid).className += 'active';
 	$(window).scrollTop(0);
 }
 
+//페이지 << >> 클릭
 const leftPaging = () => {
 	let prevPage = $('.active').prev().text();
+	
 	if (prevPage == '«') {
 		return;
 	} else {
-		makeProductPage(productList,prevPage);
+		takeProduct(prevPage);
 		$('.active').prev().addClass('active');
 		$('.active').eq(1).removeClass('active');
 	}
@@ -196,80 +234,16 @@ const leftPaging = () => {
 
 const rightPaging = () => {
 	let nextPage = $('.active').next().text();
+	
 	if (nextPage == '»') {
 		return;
 	} else {
-		makeProductPage(productList,nextPage);
+		takeProduct(nextPage);
 		$('.active').next().addClass('active');
 		$('.active').eq(0).removeClass('active');
 	}
 	$(window).scrollTop(0);
 }
-
-const makeProductPage = (list, page) => {
-	let firstProduct = Number(page)*9-9;
-	let idx = 0;
-	let col = 0;
-	$('.product-container').html('');
-	
-	for (let i = firstProduct; i < list.length; i++) {
-		if (i == firstProduct+9) {break;}
-		if (idx == 0) {
-			$('.product-container').append(
-					"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
-					"<div class='product-card' style='margin: 0 2%;'>" +
-					"<div class='hidden' style='opacity:0;'>"+ list[i].p_id +"</div>" +
-					"<div class='product-img' align='center'>" +
-					"<img src='"+ list[i].img_path +"' class='p-img' onclick='goProductPage(this)'>" +
-					"</div>" +
-					"<div class='product-desc'>" +
-					"<div class='product-margin'>" +
-					"<span class='short-desc'>" + list[i].p_short_desc + "</span><br>" +
-					"</div>" +
-					"<div class='product-margin'>" +
-					"<span class='product-title' onclick='goProductPage(this)'>" + list[i].p_name + "</span><br>" +
-					"</div>" +
-					"<div class='product-margin' style='margin-top:5px; margin-bottom: 15px;'>" +
-					"<span class='product-price'>" + list[i].p_price + "</span><span class='product-price'>원</span>" +
-					"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
-					"</div>" +
-					"</div>" +
-					"</div>"
-			);
-			idx++;
-			
-		} else {
-			$('.product-col').eq(col).append(
-					"<div class='product-card' style='margin: 0 2%;'>" +
-					"<div class='hidden' style='opacity:0;'>"+ list[i].p_id +"</div>" +
-					"<div class='product-img' align='center'>" +
-					"<img src='"+ list[i].img_path +"' class='p-img' onclick='goProductPage(this)'>" +
-					"</div>" +
-					"<div class='product-desc'>" +
-					"<div class='product-margin'>" +
-					"<span class='short-desc'>" + list[i].p_short_desc + "</span><br>" +
-					"</div>" +
-					"<div class='product-margin'>" +
-					"<span class='product-title' onclick='goProductPage(this)'>" + list[i].p_name + "</span><br>" +
-					"</div>" +
-					"<div class='product-margin' style='margin-top:5px; margin-bottom: 15px;'>" +
-					"<span class='product-price'>" + list[i].p_price + "</span><span class='product-price'>원</span>" +
-					"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
-					"</div>" +
-					"</div>" +
-					"</div>"	
-			);
-			
-			if (idx != 2) {
-				idx++;
-			} else if (idx == 2) {
-				col++;
-				idx = 0;
-			}
-		}
-	}
-}
-
 //좋아하는 상품 이미지 가져오기
 //product_like 테이블, product 테이블 조인해서 데이터 가져오면 됨
 function likeProduct() {
@@ -313,8 +287,11 @@ function hashTagSearch(object) {
 		data: JSON.stringify(tagname),
 		contentType: 'application/json; charset=utf-8',
 		success:function(list) {
-			$('.pagination').html('');
 			$('.product-container').html('');
+			$('.pagination').html('');
+			let data = list;
+			let idx = 0;
+			let col = 0;
 			
 			if (list.length == 0) {
 				$('.product-container').append(
@@ -325,14 +302,68 @@ function hashTagSearch(object) {
 						"</div></div></div>"
 				);
 			} else {
-				makeProductPage(list, 1);
+				$(data).each(function(key, value) {
+					if (idx == 0) {
+						$('.product-container').append(
+								"<div class='row product-section'>" + "<div class='col-md-12 product-col'>" +
+								"<div class='product-card' style='margin: 0 2%;'>" +
+								"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
+								"<div class='product-img' align='center'>" +
+								"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
+								"</div>" +
+								"<div class='product-desc'>" +
+								"<div class='product-margin'>" +
+								"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin'>" +
+								"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+								"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+								"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
+								"</div>" +
+								"</div>" +
+								"</div>"
+						);
+						idx++;
+						
+					} else {
+						$('.product-col').eq(col).append(
+								"<div class='product-card' style='margin: 0 2%;'>" +
+								"<div class='hidden' style='opacity:0;'>"+ value.p_id +"</div>" +
+								"<div class='product-img' align='center'>" +
+								"<img src='"+ value.img_path +"' class='p-img' onclick='goProductPage(this)'>" +
+								"</div>" +
+								"<div class='product-desc'>" +
+								"<div class='product-margin'>" +
+								"<span class='short-desc'>" + value.p_short_desc + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin'>" +
+								"<span class='product-title' onclick='goProductPage(this)'>" + value.p_name + "</span><br>" +
+								"</div>" +
+								"<div class='product-margin' style='margin-top: 20px; margin-bottom: 15px;'>" +
+								"<span class='product-price'>" + value.p_price + "</span><span class='product-price'>원</span>" +
+								"<img src='resources/images/market/shop.png' class='shop-cart' onclick='putShoppingBag(this)'>" +
+								"</div>" +
+								"</div>" +
+								"</div>"	
+						);
+						
+						if (idx != 2) {
+							idx++;
+						} else if (idx == 2) {
+							col++;
+							idx = 0;
+						}
+					}
+				});
 			}
 		}
 	});
 }
 
 function totalProduct() {
-	makeProductPage(productList, 1)
+	takeProduct(1);
 	pagination();
 }
 

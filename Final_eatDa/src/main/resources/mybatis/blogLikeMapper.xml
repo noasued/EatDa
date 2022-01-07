@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="like">
+	<resultMap type="blogLikeDto" id="blogLikeMap">
+		<result property="blog_no" column="BLOG_NO" />
+		<result property="user_id" column="USER_ID"/>
+	</resultMap>
+	
+	<!-- Blog Like -->
+	<select id="countLike" parameterType="int" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM BLOG_LIKE
+		WHERE BLOG_NO=#{blog_no}
+	</select>
+	
+	<insert id="clickLike" parameterType="blogLikeDto">
+		INSERT INTO BLOG_LIKE(BLOG_NO, USER_ID)
+		VALUES(#{blog_no}, #{user_id})
+	</insert>
+	
+</mapper>

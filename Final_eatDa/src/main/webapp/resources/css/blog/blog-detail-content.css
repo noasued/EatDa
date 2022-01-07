@@ -89,6 +89,11 @@ input{
   margin-left: 25px;
 }
 
+/* .detail-article__content-likes a {
+	text-decoration: none;
+	color: rgb(255, 119, 95);
+} */
+
 .detail-article__content-likes i, .detail-article__content-likes h6{
   display: inline-block;
 }

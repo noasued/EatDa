@@ -1,8 +1,15 @@
 package com.project.eatda.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+
+
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.BlogBiz;
+import com.project.eatda.biz.BlogLikeBiz;
+import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogDto;
+import com.project.eatda.dto.BlogLikeDto;
+import com.project.eatda.dto.BlogReplyDto;
 
 @Controller
 public class BlogController {
@@ -22,6 +33,14 @@ public class BlogController {
 
 	@Autowired
 	private BlogBiz biz;
+	
+	//reply
+	@Autowired
+	private BlogReplyBiz replyBiz;
+	
+	//like
+	@Autowired
+	private BlogLikeBiz likeBiz;
 	
 	//블로그 리스트 
 	@RequestMapping(value="/takeBlog.do", method=RequestMethod.GET)
@@ -65,18 +84,19 @@ public class BlogController {
 		String search_keyword = keyword.substring(12,keyword.length()-2);
 		System.out.println("controller -> search_keyword: "+search_keyword);
 		List<BlogDto> list = biz.searchBlog(search_keyword);
-		for(BlogDto dto : list) {
-			System.out.println(dto.toString());
-		}
 		return list;
 	}
 
 	// 상세 보기
 	@RequestMapping("/blog-detail.do")
 	public String detail(Model model, int blog_no) {
-		logger.info("Blog detail page");
+		logger.info("Blog detail page,");
 		System.out.println("blog.do: "+blog_no);
 		model.addAttribute("dto", biz.selectOne(blog_no));
+		
+		List<BlogReplyDto> replyDto =  replyBiz.list(blog_no);
+		model.addAttribute("list", replyDto);
+		
 		return "/blog/blog-detail";
 	}
 
@@ -134,6 +154,24 @@ public class BlogController {
 		model.addAttribute("list", biz.adminBlogList());
 		
 		return "/admin/adminPostBlog";
+	}
+	
+	// 관리자 블로그 삭제
+	@RequestMapping(value="/adminBlogDelete.do", method=RequestMethod.GET)
+	public String adminProductDelete(Model model, HttpServletRequest httpServletRequest){
+		System.out.println("admin blog delete");
+		
+		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
+		System.out.println(chk);
+		int chk_l = chk.length;
+		System.out.println(chk_l);
+		
+		for(int i = 0; i < chk_l; i++) {
+			System.out.println(chk[i]);
+			biz.adminBlogDelete(Integer.parseInt(chk[i]));
+		}
+		
+		return "redirect:/adminPostBlog.do";
 	}
 	
 }
