@@ -11,42 +11,33 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 public class LoginInterceptor implements HandlerInterceptor {
-	/*
-	public String[] permitCommand = {
-			"/index.do", "/idCheck.do","/regist_form.do","/emailCheck.do","/memberRegist.do","/loginCheck.do",
-			"/foodbti.do","/getMarketData.do","/getRecentRecipe.do","/getMbtiProduct.do","/getPopularBlog.do","/getLovingRecipe.do",
-			"/product.do","/paging.do","/hashTagSearch.do","/searching.do","/goProductPage.do","/marketMain.do","/getReview.do",
-			"/takeBlog.do","/blog-paging.do","/blog.do","/blog-search.do","/blog-detail.do","reply-list.do","/event.do","/event-detail.do",
-			"/recipeList.do","/recipeListTest.do","/recipeCategory.do","/recipeDetail.do","/subMain.do","/reply-list.do"
-	};
-	*/
 	
-	public List<String> permitCommand = Arrays.asList("/index.do", "/idCheck.do","/regist_form.do","/emailCheck.do","/memberRegist.do","/loginCheck.do",
+	public final static List<String> PERMITCOMMAND = Arrays.asList("/index.do", "/idCheck.do","/regist_form.do","/emailCheck.do","/memberRegist.do","/loginCheck.do",
 			"/foodbti.do","/getMarketData.do","/getRecentRecipe.do","/getMbtiProduct.do","/getPopularBlog.do","/getLovingRecipe.do",
 			"/product.do","/paging.do","/hashTagSearch.do","/searching.do","/goProductPage.do","/marketMain.do","/getReview.do",
 			"/takeBlog.do","/blog-paging.do","/blog.do","/blog-search.do","/blog-detail.do","reply-list.do","/event.do","/event-detail.do",
 			"/recipeList.do","/recipeListTest.do","/recipeCategory.do","/recipeDetail.do","/subMain.do","/reply-list.do");
 	
-	public List<String> productPage = Arrays.asList("/putShoppingBag.do","/likeProductInsert.do","/directPurchase.do","/makeOrder.do","/goShoppingBag.do");
+	public final static List<String> PRODUCTPAGE = Arrays.asList("/putShoppingBag.do","/likeProductInsert.do","/directPurchase.do","/makeOrder.do","/goShoppingBag.do");
 	
-	/*
-	public String[] productPage = {
-			"/putShoppingBag.do","/likeProductInsert.do","/directPurchase.do","/makeOrder.do","/goShoppingBag.do"
-	};
-	*/
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		/*
+		System.out.println("prevpage:"+request.getHeader("referer"));
+		System.out.println("uri:"+request.getRequestURI()); //현재 URI
+		*/
 		String prevURI = request.getHeader("referer").substring(28, request.getHeader("referer").length());//이전 command
 		String uri = request.getRequestURI().substring(6,request.getRequestURI().length());
+		//System.out.println(uri);
 		
-		if (permitCommand.contains(uri) || request.getSession().getAttribute("member") != null) {
+		if (PERMITCOMMAND.contains(uri) || request.getSession().getAttribute("member") != null) {
 			return true;
 		}
 		
 		if (request.getSession().getAttribute("member") == null) {
 			String goURI = "";
-			if (productPage.contains(uri)) {
+			if (PRODUCTPAGE.contains(uri)) {
 				goURI = prevURI;
 			} else {
 				goURI = "index.do";
