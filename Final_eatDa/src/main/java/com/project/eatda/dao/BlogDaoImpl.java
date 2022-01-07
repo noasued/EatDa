@@ -143,6 +143,7 @@ public class BlogDaoImpl implements BlogDao{
 		}
 		return adminBlogList;
 	}
+
 	// 관리자 블로그 삭제
 	public int adminBlogDelete(int blog_no) {
 		int res = 0;
@@ -155,4 +156,5 @@ public class BlogDaoImpl implements BlogDao{
 		}
 		return res;
 	}
+
 }

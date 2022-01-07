@@ -23,7 +23,4 @@ public interface RecipeBiz {
 	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto);
 	public int getTotal(RecipePageBaseDto rpbdto);
 	
-	/* admin Recipe delete */
-	public int adminRecipeDelete(int parseInt);
-	
 }

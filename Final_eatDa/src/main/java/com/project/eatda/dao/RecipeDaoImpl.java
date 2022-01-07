@@ -156,22 +156,6 @@ public class RecipeDaoImpl implements RecipeDao{
 		}
 		return res;
 	}
-	
-	
-	
-	/* adminRecipeDelete */
-	public int adminRecipeDelete(int recipe_no) {
-		int res = 0;
-		
-		try {
-			res = sqlSession.delete(NAMESPACE_RECIPE+"adminRecipeDelete",recipe_no);
-		} catch (Exception e) {
-			System.out.println("[error] : admin recipe delete");
-			e.printStackTrace();
-		}
-		
-		return res;
-	}
 
 	
 }

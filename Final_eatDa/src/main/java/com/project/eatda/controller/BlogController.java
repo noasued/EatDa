@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
 
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,25 +100,6 @@ public class BlogController {
 		return "/blog/blog-detail";
 	}
 
-	// 하트 클릭
-	@RequestMapping(value="blog-like.do", method=RequestMethod.GET, produces="text/plain; charset=UTF-8")
-	public String like(int blog_no, HttpSession session) {
-		logger.info("[controller] blog like");
-		String user_id = (String)session.getAttribute("user_id");
-//		JSONObject obj = new JSONObject();    있어도 되는지 아닌지 모르겠어서 우선 주석, 사용하려면 pom.xml에 추가하거나 jar파일 넣어야 
-		
-		ArrayList<String> msgs = new ArrayList<String>();
-		HashMap<String,Object> hashMap = new HashMap<String,Object>();
-		hashMap.put("blog_no", blog_no);
-		hashMap.put("user_id", user_id);
-		BlogLikeDto likeDto = likeBiz.read(hashMap);
-		
-		
-		return null;
-	}
-	
-	
-	
 	// 글 작성 페이지
 	@RequestMapping(value="/blog-writeform.do", method=RequestMethod.GET)
 	public String write() {

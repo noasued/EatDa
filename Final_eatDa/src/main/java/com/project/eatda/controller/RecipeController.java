@@ -1,8 +1,6 @@
 package com.project.eatda.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,24 +118,6 @@ public class RecipeController {
 			return "redirect:recipeDetail.do?recipe_no="+recipe_no;
 		}
 	}
-	
-	@RequestMapping("/adminRecipeDelete.do")
-	public String adminReplyDelete(Model model, HttpServletRequest httpServletRequest){
-		System.out.println("admin recipe delete");
-		
-		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
-		System.out.println(chk);
-		String rss = "";
-		int chk_length = chk.length;
-		System.out.println(chk_length);
-		
-		for(int i = 0; i < chk_length; i++) {
-			System.out.println(chk[i]);
-			biz.adminRecipeDelete(Integer.parseInt(chk[i]));
-		}
-		
-		return "redirect:/adminRecipe.do";
-	} 
 	
 
 

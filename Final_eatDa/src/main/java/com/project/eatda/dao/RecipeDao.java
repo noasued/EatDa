@@ -24,6 +24,4 @@ public interface RecipeDao {
 	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto);
 	public int getTotal(RecipePageBaseDto rpbdto);
 
-	/* adminRecipeDelete */
-	public int adminRecipeDelete(int recipe_no);
 }

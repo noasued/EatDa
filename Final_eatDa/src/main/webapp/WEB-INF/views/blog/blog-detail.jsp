@@ -50,33 +50,24 @@
      }); */
      
      function likeFunction(){
-        var blog_no = "${dto.blog_no}";
-        var user_id = "${dto.user_id}";
+        let blog_no = "${dto.blog_no}";
+        let user_id = "${dto.user_id}"; //로그인한 사용자 아이디.. 작성자 아님.
         consol.log("blog_no: "+blog_no+", user_id: "+user_id);
+        let pageUrl = "blog-detail.do?blog_no="+blog_no;
         
         $.ajax({
-           url: "blog-like.do",
-           type: "get",
-           cache: false,
-           dataType: "json",
-           data: 'blog_no='+blog_no+'&user_id='+user_id,
-           success: function(data){
-              var msg = '';
-              var heart = '';
-              msg += data.msg;
-              alert(msg);
-              
-              if(data.like_check == 0){
-                 heart = "<i class='fas fa-heart fa-lg emptyheart'></i>";
-              }else{
-                 heart = "<i class='fas fa-heart fa-lg fullheart'></i>";
-              }
-              
-              $('#like_count').html(data.like_count);
-              $('#like_check').html(data.like_check);
-           }
+        	url: "blog-like.do",
+          type: "get",
+          cache: false,
+          dataType: "json",
+          data: 'blog_no='+blog_no+'&user_id='+user_id,
+          success: function(data){
+			     	document.location = pageUrl;
+           	$('#like_count').html(data.like_count);
+          }
            
         });
+       
      }
      
      //게시글 삭제
@@ -312,11 +303,9 @@
 
         <!-- click likes area -->
         <div class="detail-article__content-likes">
-          <c:when test="${user_id != null }">
              <i class="far fa-heart fa-lg emptyheart" onclick="likeFunction()"></i>
              <i class="fas fa-heart fa-lg fullheart"></i>
-          </c:when>
-          <span class="count-likes" id="like-count"></span>
+          <span class="count-likes" id="like-count">${dto.blog_like}</span>
           <h6>마음에 드는 글이었나요? 그렇다면 하트를 눌러주세요 <i class="far fa-hand-point-left fa-sm"></i></h6>
         </div>
       </div>

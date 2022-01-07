@@ -76,10 +76,5 @@ public class RecipeBizImpl implements RecipeBiz{
 	public int getTotal(RecipePageBaseDto rpbdto) {
 		return dao.getTotal(rpbdto);
 	}
-	
-	/* admin recipe delete */
-	public int adminRecipeDelete(int recipe_no) {
-		return dao.adminRecipeDelete(recipe_no);
-	}
 
 }
