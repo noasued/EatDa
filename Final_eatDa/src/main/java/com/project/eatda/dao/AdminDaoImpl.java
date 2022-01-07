@@ -7,9 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.BlogReplyDto;
 import com.project.eatda.dto.OrderAdminDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReportDto;
 import com.project.eatda.dto.UserDto;
@@ -33,7 +33,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminReplyList;
 	}
 	
-	/* 댓글 삭제*/
+	/* 댓글 삭제 */
 	@Override
 	public int adminReplyDelete(int reply_no) {
 		int res = 0;
@@ -42,20 +42,6 @@ public class AdminDaoImpl implements AdminDao{
 			res = sqlSession.delete(NAMESPACE+"adminReplyDelete",reply_no);
 		} catch (Exception e) {
 			System.out.println("[error] : admin reply delete");
-			e.printStackTrace();
-		}
-		return res;
-	}
-	
-	/* 블로그 삭제 */
-	@Override
-	public int adminBlogDelete(int blog_no) {
-		int res = 0;
-		
-		try {
-			res = sqlSession.delete(NAMESPACE+"adminBlogDelete",blog_no);
-		} catch (Exception e) {
-			System.out.println("[error] : admin blog delete");
 			e.printStackTrace();
 		}
 		return res;
@@ -75,27 +61,17 @@ public class AdminDaoImpl implements AdminDao{
 		return adminProductList;
 	}
 	
-	@Override
-	public String selectPid(String p_id) {
-		ProductDto dto = null;
-		
-		try {
-			dto=sqlSession.selectOne(NAMESPACE+"selectPid",p_id);
-		} catch (Exception e) {
-			System.out.println("[error] : selectPid");
-			e.printStackTrace();
-		}
-		return dto.getP_id();
-		
-	}
-	
 	// 상품 등록
 	@Override
-	public int p_insert(ProductDto dto) {
+	public int adminProductInsert(ProductDto dto) {
 		int res = 0;
 		
+		ProductDto temp = sqlSession.selectOne(NAMESPACE+"getLastProductNum");
+		String p_id = "P"+temp.getP_no();
+		dto.setP_id(p_id);
+		
 		try {
-			res = sqlSession.insert(NAMESPACE+"productInsert",dto);
+			res = sqlSession.insert(NAMESPACE+"adminProductInsert",dto);
 		} catch (Exception e) {
 			System.out.println("[error] : product insert");
 			e.printStackTrace();
@@ -105,11 +81,11 @@ public class AdminDaoImpl implements AdminDao{
 	
 	// 상품 수정
 	@Override
-	public int p_update(ProductDto dto) {
+	public int adminProductUpdate(ProductDto dto) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.insert(NAMESPACE+"productUpdate",dto);
+			res = sqlSession.insert(NAMESPACE+"adminProductUpdate",dto);
 		} catch (Exception e) {
 			System.out.println("[error] : product update");
 			e.printStackTrace();
@@ -119,11 +95,11 @@ public class AdminDaoImpl implements AdminDao{
 	
 	// 상품 삭제
 	@Override
-	public int p_delete(String p_id) {
+	public int adminProductDelete(String p_id) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE+"productDelete",p_id);
+			res = sqlSession.delete(NAMESPACE+"adminProductDelete",p_id);
 		} catch (Exception e) {
 			System.out.println("[error] : product delete");
 			e.printStackTrace();
@@ -144,6 +120,47 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return adminOrderList;
 	}
+	
+	// 모달 리스트
+	public OrderDto orderSelectOne(String order_id) {
+		OrderDto dto = null;
+		
+		try {
+			dto=sqlSession.selectOne(NAMESPACE+"orderSelectOne",order_id);
+		} catch (Exception e) {
+			System.out.println("[error]: order select one");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	// 주문 추가(무통장입금 : default=결제대기)
+	@Override
+	public int adminOrderInsert(OrderDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"adminOrderInsert",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : order insert");
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	// 주문 추가(무통장입금 이외 결제 : default=결제완료)
+		@Override
+		public int adminOrderInsert2(OrderDto dto) {
+			int res = 0;
+			
+			try {
+				res = sqlSession.insert(NAMESPACE+"adminOrderInsert2",dto);
+			} catch (Exception e) {
+				System.out.println("[error] : order insert");
+				e.printStackTrace();
+			}
+			return res;
+		}
 	
 	// 주문 삭제
 	@Override
@@ -174,10 +191,30 @@ public class AdminDaoImpl implements AdminDao{
 		return adminUserList;
 	}
 	
+	public List<UserDto> adminUserModal(int user_no) {
+		List<UserDto> adminUserModal = new ArrayList<UserDto>();
+		
+		try {
+			adminUserModal = sqlSession.selectList(NAMESPACE+"adminUserModal",user_no);
+		} catch (Exception e) {
+			System.out.println("[error] : admin user modal");
+			e.printStackTrace();
+		}
+		return adminUserModal;
+	}
+	
+	// 회원 삭제
 	@Override
 	public int adminUserDelete(String user_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"adminUserDelete",user_id);
+		} catch (Exception e) {
+			System.out.println("[error] : admin user delete");
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	/* 신고 리스트 */
@@ -195,7 +232,7 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
-	public int adminPostReportDelete(int report_no) {
+	public int adminReportDelete(int report_no) {
 		int res = 0;
 		
 		try {

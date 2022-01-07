@@ -37,13 +37,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		/*
-		System.out.println("prevpage:"+request.getHeader("referer"));
-		System.out.println("uri:"+request.getRequestURI()); //현재 URI
-		*/
 		String prevURI = request.getHeader("referer").substring(28, request.getHeader("referer").length());//이전 command
 		String uri = request.getRequestURI().substring(6,request.getRequestURI().length());
-		//System.out.println(uri);
 		
 		if (permitCommand.contains(uri) || request.getSession().getAttribute("member") != null) {
 			return true;

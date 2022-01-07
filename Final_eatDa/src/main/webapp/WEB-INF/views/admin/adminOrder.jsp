@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,37 +19,37 @@
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
-        function selectAll()  {
-        	  // 전체 체크박스
-        	  const checkboxes 
-        	    = document.querySelectorAll('input[name="chkBtn"]');
-        	  // 선택된 체크박스
-        	  const checked 
-        	    = document.querySelectorAll('input[name="chkBtn"]:checked');
-        	  // select all 체크박스
-        	  const selectAll 
-        	    = document.querySelector('input[name="selectall"]');
-        	  
-        	  if(checkboxes.length === checked.length)  {
-        	    selectAll.checked = true;
-        	  }else {
-        	    selectAll.checked = false;
-        	  }
-
-        	}
-
-        	function selectAll(selectAll)  {
-        		const checkboxes 
-        	     = document.getElementsByName('chkBtn');
-        	  
-        	  checkboxes.forEach((checkbox) => {
-        	    checkbox.checked = selectAll.checked
-        	  })
-        	}
+		     // 전체 선택 및 선택 게시물 삭제
+			    $(function(){
+			    	var chkObj = document.getElementsByName("RowCheck[]");
+			    	var rowCnt = chkObj.length;
+			    	
+			    	$("input[name='allCheck']").click(function(){
+			    		var chk_listArr = $("input[name='RowCheck[]']");
+			    		for(var i = 0 ; i<chk_listArr.length; i++){
+			    			chk_listArr[i].checked = this.checked;
+			    		}
+			    	});
+			    	$("input[name='RowCheck[]']").click(function(){
+			    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
+			    			$("input[name='allCheck']")[0].checked = true;
+			    		}else{
+			    			$("input[name='allCheck']")[0].checked = false;
+			    		}
+			    	});
+			    });
+		
+			     function delete_frm(){
+			    	 if(confirm('정말 삭제하시겠습니까?')==true){
+			    		 return true;
+			    	 }else{
+			    		 return false;
+			    	 }
+			     }
 	        
 		      //Modal 실행
 		        $(function(){
-		        	$("a").click(function(){
+		        	$("#modal").click(function(){
 		        		$(".modal").fadeIn();
 		        	});
 		        });
@@ -63,58 +64,14 @@
 			         $('#myModal').hide();
 			    };
 			    
-			    // 전체 선택 및 선택 게시물 삭제
-			    $(function(){
-			    	var chkObj = document.getElementsByName("RowCheck");
-			    	var rowCnt = chkObj.length;
-			    	
-			    	$("input[name='allCheck']").click(function(){
-			    		var chk_listArr = $("input[name='RowCheck']");
-			    		for(var i = 0 ; i<chk_listArr.length; i++){
-			    			chk_listArr[i].checked = this.checked;
-			    		}
-			    	});
-			    	$("input[name='RowCheck']").click(function(){
-			    		if($("input[name='RowCheck']:checked").length == rowCnt){
-			    			$("input[name='allCheck']")[0].checked = true;
-			    		}else{
-			    			$("input[name='allCheck']")[0].checked = false;
-			    		}
-			    	});
-			    });
-			    
-			    function deleteValue(){
-			    	var url = "delete"; // Controller로 보내고자 하는 url
-			    	var valueArr = new Array();
-			    	var list = $("input[name='RowCheck']");
-			    	for(var i = 0; i<list.length; i++){
-			    		if(list[i].checked){	// 선택이 되어있다면 배열에 값을 저장하기
-			    			valueArr.push(list[i].value);
-			    		}
-			    	}
-			    	if(valueArr.length == 0){
-			    		alert("선택된 글이 없습니다.");
-			    	}
-			    	else{
-			    		var chk = confirm("정말 삭제하시겠습니까?");
-			    		$.ajax({
-			    			url : url,					// 전송 url
-			    			type : 'POST',				// POST 방식
-			    			traditional : true,
-			    			data : {
-			    				valueArr : valueArr		// 보내고자 하는 data 변수 설정
-			    			},
-			    			success : function(jdata){
-			    				if(jdata = 1){
-			    					alert("성공적으로 삭제되었습니다.");
-			    					location.replace("list")	//list로 페이지 새로고침하기
-			    				}else{
-			    					alert("삭제에 실패하였습니다.")
-			    				}
-			    			}
-			    		});
-			    	}
-			    }
+			  //게시글 삭제
+				function delete_frm(){
+		    	 if(confirm('정말 삭제하시겠습니까?')==true){
+		    		 return true;
+		    	 }else{
+		    		 return false;
+		    	 }
+		     }
         </script>
         
         <style>
@@ -149,54 +106,32 @@
 	            width: 30%;                          
 	        }
 	        /*nav탭 hover 시, content 변경*/
-	        .home:hover span{
-	        	display:none;
-	        }
-	        .home:hover:after{
-	        	content:"관리자 메인";
-	        }
+	        .home:hover span{display:none;}
+	        .home:hover:after{content:"관리자 메인";}
+	        
 	        /*게시글 관리*/
-	        .post:hover span{
-	        	display:none;
-	        }
-	        .post:hover:after{
-	        	content:"게시글 관리";
-	        }
+	        .post:hover span{display:none;}
+	        .post:hover:after{content:"게시글 관리";}
+	        
 	        /*레시피 관리*/
-	        .recipe:hover span{
-	        	display:none;
-	        }
-	        .recipe:hover:after{
-	        	content:"레시피 관리";
-	        }
+	        .recipe:hover span{display:none;}
+	        .recipe:hover:after{content:"레시피 관리";}
+	        
 	        /*상품 관리*/
-	        .product:hover span{
-	        	display:none;
-	        }
-	        .product:hover:after{
-	        	content:"상품 관리";
-	        }
+	        .product:hover span{display:none;}
+	        .product:hover:after{content:"상품 관리";}
+	        
 	        /*주문 관리*/
-	        .order:hover span{
-	        	display:none;
-	        }
-	        .order:hover:after{
-	        	content:"주문 관리";
-	        }
+	        .order:hover span{display:none;}
+	        .order:hover:after{content:"주문 관리";}
+	        
 	        /*회원 관리*/
-	        .user:hover span{
-	        	display:none;
-	        }
-	        .user:hover:after{
-	        	content:"회원 관리";
-	        }
+	        .user:hover span{display:none;}
+	        .user:hover:after{content:"회원 관리";}
+	        
 	        /*신고 관리*/
-	        .report:hover span{
-	        	display:none;
-	        }
-	        .report:hover:after{
-	        	content:"신고 관리";
-	        }
+	        .report:hover span{display:none;}
+	        .report:hover:after{content:"신고 관리";}
 		</style>
     </head>
     <body class="sb-nav-fixed">
@@ -210,7 +145,7 @@
 	                <li class="nav-item dropdown">
 	                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:black;"><i class="fas fa-user fa-fw" style="color:black;"></i></a>
 	                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                        <li><a class="dropdown-item" href="#!">LogOut</a></li>
+	                        <li><a class="dropdown-item" href="logout.do">LogOut</a></li>
 	                    </ul>
 	                </li>
 	            </ul>
@@ -271,11 +206,9 @@
                         <h1 class="title_tab">주문 관리</h1>
                         <br><br>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>주문 관리
-                            </div>
+                            <div class="card-header"><i class="fas fa-table me-1"></i>주문 관리</div>
                             <div class="card-body">
-                            	<form action="multidelete.jsp" method="post" id="multideleteform">
+                            	<form action="adminOrderDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
 	                                <table id="datatablesSimple">
 	                                    <col width="50px">
 	                                    <thead>
@@ -283,7 +216,7 @@
 	                                        <tr>
 	                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
 	                                            <th>주문번호</th>
-	                                            <th>주문자명</th>
+	                                            <th>주문자 ID</th>
 	                                            <th>주문일자</th>
 	                                            <th>연락처</th>
 	                                            <th>배송 현황</th>
@@ -293,25 +226,25 @@
 	                                    <tbody>
 		                                    <c:forEach items="${orderList}" var="dto">
 				                            	<tr>
-				                                	<td><input type="checkbox" name="RowCheck" value="${dto.order_id}"></td>
+				                                	<td><input type="checkbox" name="RowCheck[]" value="${dto.order_id}"></td>
 				                                    <td>${dto.order_id}</td>
-				                                    <td><a style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.user_name}</a></td>
+				                                    <td><a id="modal" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.user_id}</a></td>
 				                                    <td>${dto.order_date}</td>
-				                                    <td>${dto.user_phone}</td>
+				                                    <td>${dto.order_phone}</td>
 				                                    <td>
 				                                    	<select>
-				                                        	<option value="a">주문 완료</option>
-				                                            <option value="b">상품 준비중</option>
-				                                            <option value="c">배송지 출발</option>
-				                                            <option value="d">배송중</option>
-				                                            <option value="e">배송 완료</option>
+				                                        	<option value="1">주문 완료</option>
+				                                            <option value="2">상품 준비중</option>
+				                                            <option value="3">배송지 출발</option>
+				                                            <option value="4">배송중</option>
+				                                            <option value="5">배송 완료</option>
 				                                        </select>
 				                                    </td>
 				                                    <td>
 				                                    	<select>
-				                                        	<option value="">결제 대기</option>
-				                                            <option value="">결제 완료</option>
-				                                            <option value="">결제 취소</option>
+				                                        	<option value="결제 대기">결제 대기</option>
+				                                            <option value="결제 완료">결제 완료</option>
+				                                            <option value="결제 취소">결제 취소</option>
 				                                    	</select>
 				                                	</td>
 				                        		</tr>
@@ -320,7 +253,7 @@
 	                                    <tr></tr>
 	                                    <tr>
 	                                        <td colspan="7">
-		                                        <button type="button" onclick="deleteValue();" value="delete">삭 제</button>
+		                                        <button type="submit" value="delete">삭 제</button>
 	                                        </td>
 	                                    </tr>
 	                                </table>
@@ -339,7 +272,7 @@
 	      <div class="modal-content">
 	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">주문 내용</span></b></span></p>
 	                <p style="text-align: center; line-height: 1.5;"><br /></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구매자명 : </b></span>주문자</p>
+	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구매자명 : </b></span></p>
 	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주문번호 : </b></span>B213G64</p>
 	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>배송지 주소 : </b></span>경기도 수원시 XXXXXX</p>
 	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
