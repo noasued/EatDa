@@ -200,7 +200,7 @@
 			                                	<td style="width:50px;"><input type="checkbox" name="RowCheck[]" value="${dto.reply_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
 			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
-			                                    <td style="vertical-align:middle;">${dto.reply_content}</td>
+			                                    <td style="vertical-align:middle;"><a href="blog-detail.do?blog_no=${dto.blog_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
 			                        		</tr>
 		                            	</c:forEach>

@@ -1,124 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin_Product_Insert</title>
-    
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-    	// 상품 등록 유효성 검사 (등록 버튼 클릭이벤트 발생하면 form1 안의 값들을 유효성검사를 한 뒤에 서버로 전송)
-    	$(document).ready(function(){
-    		$("#addBtn").click(function(){
-    			var p_name = $("#p_name").val();
-    			var p_description = $("#p_description").val();
-    			var p_price = $("#p_price").val();
-    			var img_path = $("#img_path").val();
-    			
-    			if(p_name==""){
-    				alert("상품명을 입력해주세요");
-    				p_name.focus();
-    			}else if(p_category==""){
-    				alert("카테고리를 입력해주세요");
-    				p_description.focus();
-    			}else if(p_description==""){
-    				alert("상품 설명을 입력해주세요");
-    				p_description.focus();
-    			}else if(p_price==""){
-    				alert("상품 가격을 입력해주세요");
-    				p_price.focus();
-    			}else if(img_path==""){
-    				alert("상품 이미지를 등록해주세요");
-    				img_path.focus();
-    			}
-    			
-    			// 상품 정보 전송
-    			document.form1.action ="${path}/admin/adminProductWrite.do";
-    			document.form1.submit();
-    		});
-    	});
-    </script>
-    
-    <style>
-        .p_insertForm{
-            margin-left: 25%;
-			margin-top:12%;
+<meta charset="UTF-8">
+<title>Welcome to EatDa</title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <link href="resources/admin/css/write.css" rel="stylesheet">
+  <style type="text/css">
+  	#p_category{
+	    width: 200px;
+	    height: 30px;
+	    padding-left: 10px;
+	    font-size: 14px;
+	    margin-left: 10%;
+  	}
+	#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
+	    width: 840px;
+	    height: 40px;
+	    padding-left: 10px;
+	    font-size: 16px;
+	    margin-left: 10%;
+	    margin-top:2%;
+    }
+  	.product-write__top h2{ display: inline;}
+
+	.product-write__top-txt h2{
+		margin-left: 20px;
+		font-size: 15px;
+	}
+		@font-face {
+			font-family: 'Nanum Gothic', serif; 
+			src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('opentype');
 		}
-        .p_insertContent{margin-left: 5%;}
-        form > table{
-        	border-collapse:separate;
-        	border-spacing:0 20px;
-        }
-        th, td{padding:10px}
-		button{
-			float:right;
-			border : none;
-			margin-right:2%;
-			width:80px;
-			height:30px;
+		@font-face {
+	    font-family: 'MaruBuri';
+	    font-weight: 400;
+    	font-style: normal;
+	    src: url('https://cdn.jsdelivr.net/gh/webfontworld/naver/MaruBuri-Regular.woff2') format('woff2');
 		}
-    </style>
+  </style>
+  
+  <!-- summernote -->
+	<link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet">  
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	
 </head>
-<body>
-	<div id="header">
-		<%@ include file="../common/header.jsp"%>
-	</div>
-    <div class="p_insertForm">
-        <h3>상품 등록</h3><br>
-	    <div class="p_insertContent">
-		    <form id="form1" name="form1" enctype="multipart/form-data" method="post">
-		        <table>
-		        	<tfoot>
-		        		<td colspan="7">
-		                    <button type="button" value="cancle" onclick="location.href='adminProduct.do'">취 소</button>
-		                    <button type="button" id="addBtn" value="insert" onclick="" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</button>
-		                </td>
-		        	</tfoot>
-		        	<tbody>
-		        		<c:forEach items="${productList}" var="dto">
-				            <tr>
-				                <th>상품명</th>
-				                <td><input type="text" id="p_name" name="p_name" placeholder="상품명을 작성해주세요" autofocus></td>
-				            </tr>
-				            <tr>
-				            	<th>카테고리</th>
-				            	<td>
-				            		<select>
-				            			<option selected>${dto.p_category}</option>
-				            			<option>한식</option>
-				            			<option>양식</option>
-				            			<option>중식</option>
-				            			<option>일식</option>
-				            			<option>비건</option>
-				            			<option>고기만</option>
-				            			<option>해산물</option>
-				            			<option>스페인</option>
-				            		</select>
-				            	</td>
-				            </tr>
-				            <tr>
-				                <th>상품 상세 설명</th>
-				                <td><textarea rows="15" cols="80" id="p_description" name="p_description" value="${dto.p_description }"></textarea></td>
-				            </tr>
-				            <tr>
-				                <th>상품 가격</th>
-				                <td><input type="text" name="p_price" id="p_price" value="${dto.p_price }"></td>
-				            </tr>
-				            <tr>
-				                <th>첨부파일</th>
-				                <td><input type="file"><input type="button" value="삭 제"></td>
-				            </tr>
-			            </c:forEach>
-		            </tbody>
-		        </table>
-			</form>
-		</div>
-	</div>    
+<body style="margin-top:155px;">
+  <main class="write">
+    <div class="write__content">
+      <div class="write__content-title">
+        <h2>상품 등록</h2>
+      </div>
+	<!-- article -> summernote -->
+      <div class="write__content-article">
+        <form action="adminProductInsert.do" id="chkFrm" name="chkFrm" onsubmit="return check_frm();">
+	          	<select id="p_category" name="p_category" style="display:block;">
+			          <option selected>--카테고리 선택--</option>
+			          <option>한식</option>
+			          <option>양식</option>
+			          <option>중식</option>
+			          <option>일식</option>
+			          <option>비건</option>
+			          <option>고기만</option>
+			          <option>해산물</option>
+			          <option>스페인</option>
+			    </select><br>
+	          	<input type="text" name="p_name" id="p_name" placeholder="상품명을 입력하세요."><br>
+	          	<input type="text" name="p_short_desc" id="p_short_desc" placeholder="간략한 설명을 입력하세요."><br>
+	          	<input type="text" name="seller_desc" id="seller_desc" placeholder="seller_desc">
+				<textarea class="summernote" id="summernote" name="p_description"></textarea>
+				<input type="text" name="p_price" id="p_price" placeholder="상품 가격을 입력하세요."><br>
+				<input type="text" name="p_cal" id="p_cal" placeholder="상품의 칼로리를 입력하세요."><br>
+				<input type="text" name="p_amount" id="p_amount" placeholder="상품의 gram(그램)을 입력하세요."> 
+			<div class="product-write__content-article__btns">
+				<input type="submit" name="write-submit-btn" value="등 록">
+				<input type="button" name="write-cancel-btn" value="취 소" onclick="location.href='adminProductList.do'">
+        	</div>
+        </form>
+      </div>
+    </div>
+  </main>
+  
+	<!-- summernote -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<!--  include summernote-ko-KR -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
+  <script type="text/javascript">
+	function check_frm(){
+	    	 if(confirm('작성하신 상품을 등록하시겠습니까?')==true){
+	    		 return true;
+	    	 }else{
+	    		 return false;
+	    	 }
+	     }
+	
+	// summernote
+	$(document).ready(function() {
+		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
+		$('#summernote').summernote({
+			  lang: "ko-KR",								
+			  fontNames: fontList,
+			  fontNamesIgnoreCheck: fontList,
+				// 추가한 폰트사이즈
+			  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			  height: 350,									// 에디터 높이
+        	  width: 840,									  // 에디터 넓이
+			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+        	  tabsize: 2,
+			  placeholder: '상품 설명을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	
+        	  prettifyHtml:false,
+				
+			  toolbar: [
+			    // 글꼴 설정
+			    ['font', ['fontname','fontsize']],
+			    ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
+			    ['style', ['style']],
+			    ['highlight', ['highlight']],
+			    ['paragraph', ['paragraph','height','ul', 'ol']],
+			    // 그림첨부, 링크만들기
+			    ['insert',['table','hr','link','picture']],
+			    //이모지
+			    ['misc', ['emoji']]
+			  ],
+			  
+			  popover: {
+				  image: [
+				    ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+				    ['float', ['floatLeft', 'floatRight', 'floatNone']],
+				    ['remove', ['removeMedia']],
+				    ['custom', ['imageTitle']],
+				  ]
+				},
+				
+		});
+	});
+
+	</script>
+	
 </body>
 </html>

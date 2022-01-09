@@ -2,11 +2,21 @@ package com.project.eatda.biz;
 
 import java.util.List;
 
+import javax.activation.FileDataSource;
+import javax.inject.Inject;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.AdminDao;
 import com.project.eatda.dto.BlogReplyDto;
+import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.OrderAdminDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
@@ -16,6 +26,9 @@ import com.project.eatda.dto.UserDto;
 @Service
 public class AdminBizImpl implements AdminBiz{
 
+	@Inject
+	JavaMailSender mailSender;	
+	
 	/* 댓글 리스트 */
 		@Autowired
 		public AdminDao replyDao;
@@ -64,7 +77,7 @@ public class AdminBizImpl implements AdminBiz{
 		public AdminDao orderDao;
 		
 		@Override
-		public List<OrderAdminDto> adminOrderList() {
+		public List<OrderDto> adminOrderList() {
 			return orderDao.adminOrderList();
 		}
 		
@@ -118,6 +131,28 @@ public class AdminBizImpl implements AdminBiz{
 		@Override
 		public int adminUserDelete(String user_id) {
 			return userDao.adminUserDelete(user_id);
+		}
+		
+		// 이메일
+		public void sendMail(EmailDto dto) {
+			try {
+				// 이메일 객체
+				MimeMessage msg = this.mailSender.createMimeMessage();
+
+				// 받는 사람 설정(수신자)
+				msg.addRecipient(RecipientType.TO, new InternetAddress(dto.getReceiveMail()));
+				//보내는 사람 (발신자 이메일 주소 + 이름)
+				msg.addFrom(new InternetAddress[] { new InternetAddress(dto.getSenderMail(), dto.getSenderName()) });
+				// 이메일 제목과 본문내용 (인코딩)
+				msg.setSubject(dto.getSubject(), "utf-8");
+				msg.setText(dto.getMessage(), "utf-8");
+				
+				// 이메일 보내기
+				mailSender.send(msg);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	
 	

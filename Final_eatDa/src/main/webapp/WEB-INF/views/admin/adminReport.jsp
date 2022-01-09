@@ -46,16 +46,21 @@
 	    	 }
 	     }
         
-        //Modal 실행
-	        $(function(){
-	        	$("#modal").click(function(){
-	        		$(".modal").fadeIn();
-	        	});
-	        });
-	        
-	        $(".modal-content").click(function(){
-	        	$(".modal").fadeOut();
-	        });
+	   //Modal 실행
+	       function modal(id){
+	    	   $(".modal").fadeIn();
+	       }
+	
+	    // Modal 값 띄우기
+	        function PopupInfo(clicked_element) {
+	        	var row_td = clicked_element.getElementsByTagName("td");
+	        	var modal = document.getElementById("modal_admin_report");
+	        	   
+	        	document.getElementById("reporter").innerHTML = row_td[2].innerHTML;
+	        	document.getElementById("reported").innerHTML = row_td[3].innerHTML;
+	        	document.getElementById("report_content").innerHTML = row_td[4].innerHTML;
+	        	document.getElementById("reply_content").innerHTML = row_td[4].innerHTML;
+	        }
 	
 	        
 		//Modal Close 기능
@@ -66,64 +71,19 @@
         </script>
         
         <style>
-			button{
+			#delBtn{
 				float:right;
 				border : none;
 				margin-right:1%;
 				width:80px;
 				height:30px;
 			}
-            
-	        /* Modal (background) */
-	        .modal {
-	            display: none; /* Hidden by default */
-	            position: fixed; /* Stay in place */
-	            z-index: 1; /* Sit on top */
-	            left: 0;
-	            top: 0;
-	            width: 100%; /* Full width */
-	            height: 100%; /* Full height */
-	            overflow: auto; /* Enable scroll if needed */
-	            background-color: rgb(0,0,0); /* Fallback color */
-	            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	        }
-	    
-	        /* Modal Content/Box */
-	        .modal-content {
-	            background-color: #fefefe;
-	            margin: 15% auto; /* 15% from the top and centered */
-	            padding: 20px;
-	            border: 1px solid #888;
-	            width: 30%; /* Could be more or less, depending on screen size */                          
-	        }
 			
-			/*nav탭 hover 시, content 변경*/
-	        .home:hover span{display:none;}
-	        .home:hover:after{content:"관리자 메인";}
-	        
-	        /*게시글 관리*/
-	        .post:hover span{display:none;}
-	        .post:hover:after{content:"게시글 관리";}
-	        
-	        /*레시피 관리*/
-	        .recipe:hover span{display:none;}
-	        .recipe:hover:after{content:"레시피 관리";}
-	        
-	        /*상품 관리*/
-	        .product:hover span{display:none;}
-	        .product:hover:after{content:"상품 관리";}
-	        
-	        /*주문 관리*/
-	        .order:hover span{display:none;}
-	        .order:hover:after{content:"주문 관리";}
-	        
-	        /*회원 관리*/
-	        .user:hover span{display:none;}
-	        .user:hover:after{content:"회원 관리";}
-	        
-	        /*신고 관리*/
-	        .report:hover span{display:none;}
-	        .report:hover:after{content:"신고 관리";}
+			.btn{
+				align-items:center;
+				border:0;
+				outline:0;
+			}
         </style>
     </head>
     
@@ -154,40 +114,13 @@
                                 <br>
                                 <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link home" href="adminMain.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                <span>HOME</span>
-                            </a>
-
-                            <a class="nav-link post" href="adminPostReply.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                <span>Post</span>
-                            </a>
-
-                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
-                                <span>Recipe</span>
-                            </a>
-
-                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                                <span>Product</span>
-                            </a>
-
-                            <a class="nav-link order" href="adminOrder.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                                <span>Order</span>
-                            </a>
-
-                            <a class="nav-link user" href="adminUser.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                <span>User</span>
-                            </a>
-
-                            <a class="nav-link report" href="adminReport.do" style="color: rgb(224, 179, 57);">
-                                <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
-                                <span>Report</span>
-                            </a>
+                            <a class="nav-link home" href="adminMain.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a> 
+							<a class="nav-link post" href="adminPostReply.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
+							<a class="nav-link recipe" href="adminRecipe.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div> <span>Recipe</span></a>
+							<a class="nav-link product" href="adminProductList.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div><span>Product</span></a> 
+							<a class="nav-link order" href="adminOrder.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div><span>Order</span></a> 
+							<a class="nav-link user" href="adminUser.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a> 
+							<a class="nav-link report" href="adminReport.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
                         </div>
                     </div>
                 </nav>
@@ -203,7 +136,7 @@
                             <div class="card-body">
                             <form action="adminPostRortDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
                                 <table id="datatablesSimple">
-                                    <col width="1%">
+                                    <col width="50px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
@@ -216,23 +149,22 @@
                                             <th class="col-md-1">패널티</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="admin_report">
 	                                	<c:forEach items="${reportList}" var="dto">
-			                        		<tr>
+			                        		<tr onclick="PopupInfo(this)">
 			                                	<td style="vertical-align:middle;"><input type="checkbox" name="RowCheck[]" value="${dto.report_no}"></td>
 			                                	<td style="vertical-align:middle;"><a id="modal" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.reporter}</a></td>
 			                                    <td style="vertical-align:middle;">${dto.reported}</td>
 			                                    <td style="vertical-align:middle; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${dto.report_content}</td>
 			                                    <td style="vertical-align:middle;">${dto.reply_content}</td>
 			                                    <td style="vertical-align:middle;">
-			                                    	<select id="tmpSelect" name="tmpSelect" onchange="changeSelect(this.form)">
-			                                    		<option value="wait">처리 대기</option>
-			                                    		<option value="finish">처리 완료</option>
-			                                        </select>
+			                                    		<button type="button" class="btn" id="btn" value="1">처리 완료</button>
 			                                    </td>
 			                                    <td style="vertical-align:middle;">
-													<button class="btn btn-success" onclick="deleteNotify('${list.NOTIFYID}','${list.NONNOTIFYID}','${list.NCONTENT}');">경미</button> &nbsp; 
-									                <button data-toggle="modal" data-target="#insertBlack"  data-notifyid="${list.NOTIFYID }" data-nonnotifyid="${list.NONNOTIFYID }" data-ncontent="${list.NCONTENT }" class="btn btn-danger">블랙</button>
+			                                    	<select>
+			                                    		<option value="1" selected>처리 대기</option>
+			                                    		<option value="2">처리 완료</option>
+			                                    	</select>
 												</td>
 			                                </tr>
 			                        	</c:forEach>
@@ -240,7 +172,7 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <button type="submit" value="delete">삭 제</button>
+                                            <button type="submit" id="delBtn" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -251,29 +183,30 @@
                 </main>
             </div>
         </div>
-        
-        <!-- Modal -->
+	    
+	    <!-- Modal -->
         <div id="myModal" class="modal">
- 
 	      <!-- Modal content -->
-	      <div class="modal-content">
-	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">신고 내용</span></b></span></p>
-	                <p style="text-align: center; line-height: 1.5;"><br /></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고인 ID : </b></span>OksusuS2</p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고 대상 ID : </b></span>XD</p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고 내용 : </b></span>기분이 나빠요.</p>
-	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>신고 댓글 : </b></span>메롱</p>
-	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
-	                <p style="text-align: left; line-height: 1.5;"><br /></p>
-	                <p><br /></p>
-	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">
-	                <span class="pop_bt" style="font-size: 13pt;" >
-	                     닫기
-	                </span>
-	            </div>
-	      </div>
-	 
+	      <div class="modal-content" id="modal_admin_report">
+	      	<div>
+	      		<label style="font-weight:bold;">신고인 ID</label>
+	      		<p class="w3-input w3-border" id="reporter"></p>
+	      	</div>
+	      	<div>
+	            <label style="font-weight:bold;">신고 대상 ID</label>
+	            <p class="w3-input w3-border" id="reported">
+            </div>
+            <div>
+	            <label style="font-weight:bold;">신고 내용</label>
+	            <p class="w3-input w3-border" id="report_content">
+            </div>
+            <div>
+	            <label style="font-weight:bold;">신고 댓글</label>
+	            <p class="w3-input w3-border" id="reply_content">
+            </div>
+            
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</div>
+         </div>
 	    </div>
 
 

@@ -69,41 +69,41 @@
 	</select>	
 	
 	<!-- Admin Order -->
-	<resultMap type="orderAdminDto" id="orderAdminMap">
+	<resultMap type="OrderDto" id="orderMap">
 		<result property="order_id" column="ORDER_ID" />
-		<result property="user_name" column="USER_NAME" />
+		<result property="user_id" column="USER_ID" />
 		<result property="order_date" column="ORDER_DATE" />
-		<result property="user_phone" column="USER_PHONE" />
+		<result property="order_addr" column="USER_PHONE" />
+		<result property="order_name" column="ORDER_NAME" />
+		<result property="order_phone" column="ORDER_PHONE" />
+		<result property="order_message" column="ORDER_MESSAGE" />
+		<result property="order_price" column="ORDER_PRICE" />
+		<result property="pay_option" column="PAY_OPTION" />
+		<result property="original_price" column="ORIGINAL_PRICE" />
+		<result property="discount_price" column="DICSOUNT_PRICE" />
+		<result property="coupon_rate" column="COUPON_RATE" />
+		<result property="coupon_id" column="COUNPON_ID" />
 		<result property="shipping_status" column="SHIPPING_STATUS" />
 		<result property="order_status" column="ORDER_STATUS" />
 	</resultMap>
 		
-	<select id="adminOrderList" parameterType="list" resultMap="orderAdminMap">
-		SELECT *
-		FROM ORDER_ADMIN A JOIN E_ORDER E
-		ON A.ORDER_ID = E.ORDER_ID
-		ORDER BY A.ORDER_ID DESC
-	</select>
-	
-	<select id="orderSelectOne" resultType="orderAdminDto" parameterType="int">
-		SELECT ORDER_ID,USER_NAME,ORDER_DATE,USER_PHONE,SHIPPING_STATUS,ORDER_STATUS
-		FROM ORDER_ADMIN A JOIN E_ORDER E
-		ON A.ORDER_ID = E.ORDER_ID
-		WHERE ORDER_ID = #{order_id}
+	<select id="adminOrderList" parameterType="list" resultMap="orderMap">
+		SELECT * FROM E_ORDER
+		ORDER BY ORDER_ID DESC
 	</select>
 	
 	<insert id="adminOrderInsert" parameterType="orderDto">
-		INSERT INTO ORDER_ADMIN 
+		INSERT INTO E_ORDER
 		VALUES(#{order_id},#{user_id},1,1)
 	</insert>
 	
 	<insert id="adminOrderInsert2" parameterType="orderDto">
-		INSERT INTO ORDER_ADMIN 
+		INSERT INTO E_ORDER
 		VALUES(#{order_id},#{user_id},1,2)
 	</insert>
 	
 	<delete id="adminOrderDelete" parameterType="String">
-		DELETE FROM ORDER_ADMIN WHERE ORDER_ID=#{order_id}
+		DELETE FROM E_ORDER WHERE ORDER_ID=#{order_id}
 	</delete>
 	
 	<!-- Admin User -->

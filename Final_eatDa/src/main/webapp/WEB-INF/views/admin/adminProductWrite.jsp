@@ -11,7 +11,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
-  <link href="resources/admin/css/product-write.css" rel="stylesheet">
+  <link href="resources/admin/css/write.css" rel="stylesheet">
   <style type="text/css">
   	#p_category{
 	    width: 200px;
@@ -28,14 +28,8 @@
 	    margin-left: 10%;
 	    margin-top:2%;
     }
-    
   	.product-write__top h2{ display: inline;}
-	.product-write__top-txt h1{
-		  font-weight: 700;
-		  font-size:120px;
-		  height:100px;
-		  line-height: 90px;
-	}
+
 	.product-write__top-txt h2{
 		margin-left: 20px;
 		font-size: 15px;
@@ -58,13 +52,13 @@
 	
 </head>
 <body style="margin-top:155px;">
-  <main class="product-write">
-    <div class="product-write__content">
-      <div class="product-write__content-title">
+  <main class="write">
+    <div class="write__content">
+      <div class="write__content-title">
         <h2>상품 등록</h2>
       </div>
 	<!-- article -> summernote -->
-      <div class="product-write__content-article">
+      <div class="write__content-article">
         <form action="adminProductInsert.do" id="chkFrm" name="chkFrm" onsubmit="return check_frm();">
 	          	<select id="p_category" name="p_category" style="display:block;">
 			          <option selected>--카테고리 선택--</option>

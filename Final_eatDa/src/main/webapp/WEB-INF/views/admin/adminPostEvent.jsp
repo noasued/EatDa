@@ -52,55 +52,6 @@
 				width:80px;
 				height:30px;
 			}
-			/*nav탭 hover 시, content 변경*/
-	        .home:hover span{
-	        	display:none;
-	        }
-	        .home:hover:after{
-	        	content:"관리자 메인";
-	        }
-	        /*게시글 관리*/
-	        .post:hover span{
-	        	display:none;
-	        }
-	        .post:hover:after{
-	        	content:"게시글 관리";
-	        }
-	        /*레시피 관리*/
-	        .recipe:hover span{
-	        	display:none;
-	        }
-	        .recipe:hover:after{
-	        	content:"레시피 관리";
-	        }
-	        /*상품 관리*/
-	        .product:hover span{
-	        	display:none;
-	        }
-	        .product:hover:after{
-	        	content:"상품 관리";
-	        }
-	        /*주문 관리*/
-	        .order:hover span{
-	        	display:none;
-	        }
-	        .order:hover:after{
-	        	content:"주문 관리";
-	        }
-	        /*회원 관리*/
-	        .user:hover span{
-	        	display:none;
-	        }
-	        .user:hover:after{
-	        	content:"회원 관리";
-	        }
-	        /*신고 관리*/
-	        .report:hover span{
-	        	display:none;
-	        }
-	        .report:hover:after{
-	        	content:"신고 관리";
-	        }
 		</style>
     </head>
     <body class="sb-nav-fixed">

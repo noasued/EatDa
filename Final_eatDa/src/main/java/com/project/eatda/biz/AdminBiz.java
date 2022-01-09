@@ -3,6 +3,7 @@ package com.project.eatda.biz;
 import java.util.List;
 
 import com.project.eatda.dto.BlogReplyDto;
+import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.OrderAdminDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
@@ -23,7 +24,7 @@ public interface AdminBiz {
 	public int adminProductDelete(String p_id);
 	
 	/* 주문 리스트 */
-	public List<OrderAdminDto> adminOrderList();
+	public List<OrderDto> adminOrderList();
 	public OrderDto orderSelectOne(String order_id);
 
 	public int adminOrderInsert(OrderDto order);
@@ -35,6 +36,9 @@ public interface AdminBiz {
 	public List<UserDto> adminUserList();
 	public List<UserDto> adminUserModal(int user_no);
 	public int adminUserDelete(String user_id);
+	
+	//이메일
+	public void sendMail(EmailDto dto);
 	
 	/* 신고 리스트 */
 	public List<ReportDto> adminReportList();

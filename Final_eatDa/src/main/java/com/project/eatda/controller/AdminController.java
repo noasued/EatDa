@@ -1,26 +1,28 @@
 package com.project.eatda.controller;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.eatda.biz.AdminBiz;
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.biz.EventBiz;
 import com.project.eatda.biz.RecipeBiz;
-import com.project.eatda.dto.EventDto;
+import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.ProductDto;
 
 @Controller
 public class AdminController {
+	
+	@Inject
+	AdminBiz emailService;
 	
 	@Autowired
 	AdminBiz adminBiz;
@@ -201,15 +203,6 @@ public class AdminController {
 		return "/admin/adminUser";
 	}
 	
-//	// 회원 정보 모달 
-//	@RequestMapping("/adminUserModal.do")
-//	public String adminUserModal(Model model, int user_no) {
-//		System.out.println("adminUserModal");
-//		model.addAttribute("userModal", adminBiz.adminUserModal(user_no));
-//
-//		return "/admin/adminUser";
-//	}
-	
 //	// 회원 활성화 여부 update
 //	@RequestMapping("/adminUpdateUserEnable.do")
 //	public int updateUserEnable(Model model, String user_id) {
@@ -236,6 +229,29 @@ public class AdminController {
 	 return "redirect:/adminUser.do"; 
 	 
 	}
+	
+	// 이메일 보내기
+	@RequestMapping("emailWrite.do")
+	public String emailWrite() {
+		return "/admin/adminEmailWrite";
+	}
+	
+	@RequestMapping("send.do")
+		public String send(@ModelAttribute EmailDto dto, Model model) {
+		
+		try {
+			emailService.sendMail(dto);
+			System.out.println("이메일이 발송되었습니다.");
+			model.addAttribute("message","이메일이 발송되었습니다.");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message","이메일 발송 실패");
+		}
+			return "/admin/adminEmailWrite";
+			
+		}
+	
 
 	/* 신고 리스트 */
 	@RequestMapping(value="/adminReport.do", method=RequestMethod.GET)

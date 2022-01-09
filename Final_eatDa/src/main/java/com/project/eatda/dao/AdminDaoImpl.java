@@ -109,8 +109,8 @@ public class AdminDaoImpl implements AdminDao{
 	
 	/* 주문 리스트 */
 	@Override
-	public List<OrderAdminDto> adminOrderList() {
-		List<OrderAdminDto> adminOrderList = new ArrayList<OrderAdminDto>();
+	public List<OrderDto> adminOrderList() {
+		List<OrderDto> adminOrderList = new ArrayList<OrderDto>();
 		
 		try {
 			adminOrderList = sqlSession.selectList(NAMESPACE+"adminOrderList");

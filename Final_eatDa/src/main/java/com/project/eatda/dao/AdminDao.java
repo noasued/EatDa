@@ -24,7 +24,7 @@ public interface AdminDao {
 	public int adminProductDelete(String p_id);
 	
 	/* 주문 리스트 */
-	public List<OrderAdminDto> adminOrderList();
+	public List<OrderDto> adminOrderList();
 	public OrderDto orderSelectOne(String order_id);
 	
 	public int adminOrderInsert(OrderDto dto);
