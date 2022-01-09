@@ -8,15 +8,30 @@
 	</resultMap>
 	
 	<!-- Blog Like -->
+	<!-- SELECT BLOG_LIKE FROM BLOG WHERE BLOG_NO = #{blog_no} -->
 	<select id="countLike" parameterType="int" resultType="int">
 		SELECT COUNT(*) AS CNT
 		FROM BLOG_LIKE
 		WHERE BLOG_NO=#{blog_no}
 	</select>
 	
-	<insert id="clickLike" parameterType="blogLikeDto">
-		INSERT INTO BLOG_LIKE(BLOG_NO, USER_ID)
-		VALUES(#{blog_no}, #{user_id})
+	<update id="clickLike" parameterType="blogDto">
+		UPDATE BLOG
+		SET BLOG_LIKE = #{blog_like}
+		WHERE BLOG_NO = #{blog_no}
+		AND USER_ID = #{user_id}
+	</update>
+	
+	<select id="flagLikeUser" parameterType="blogLikeDto">
+		SELECT * FROM BLOG_LIKE WHERE BLOG_NO = #{blog_no} AND USER_ID = #{user_id}
+	</select>
+	
+	<insert id="insertBlogLikeUser" parameterType="blogLikeDto">
+		INSERT INTO BLOG_LIKE VALUES(#{blog_no}, #{user_id})
 	</insert>
+	
+	<delete id="deleteBlogLikeUser" parameterType="blogLikeDto">
+		DELETE FROM BLOG_LIKE WHERE BLOG_NO = #{blog_no} AND USER_ID = #{user_id}
+	</delete>
 	
 </mapper>

@@ -1,15 +1,10 @@
 package com.project.eatda.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 
-
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +21,7 @@ import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.BlogLikeDto;
 import com.project.eatda.dto.BlogReplyDto;
+import com.project.eatda.dto.UserDto;
 
 @Controller
 public class BlogController {
@@ -92,14 +88,51 @@ public class BlogController {
 	public String detail(Model model, int blog_no) {
 		logger.info("Blog detail page,");
 		System.out.println("blog.do: "+blog_no);
-		model.addAttribute("dto", biz.selectOne(blog_no));
+		BlogDto dto = biz.selectOne(blog_no);
+		System.out.println(dto.toString());
+		model.addAttribute("dto", dto);
 		
 		List<BlogReplyDto> replyDto =  replyBiz.list(blog_no);
 		model.addAttribute("list", replyDto);
 		
 		return "/blog/blog-detail";
 	}
+	
+	// 하트 클릭
+	@RequestMapping(value="/blog-like.do", method=RequestMethod.GET)
+	public String clickLike(int blog_no, String user_id, int like_count, HttpServletRequest request) {
+		logger.info("blog_no: "+blog_no+", user_id: "+user_id+", like_count"+like_count);
+		BlogDto blogDto = new BlogDto();
+		blogDto.setBlog_no(blog_no);
+		blogDto.setUser_id(user_id);
+		blogDto.setBlog_like(like_count);
+		System.out.println(blogDto.toString());
+		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		BlogLikeDto like = new BlogLikeDto(blog_no, dto.getUser_id());
+		
+		int res = likeBiz.clickLike(blogDto, like);
+		
+		return res>0?"true":"false";
+	}
+	
+	//하트 취소
+	@RequestMapping(value="/blog-unlike.do", method=RequestMethod.GET)
+	public String clickUnLike(int blog_no, String user_id, int like_count, HttpServletRequest request) {
+		logger.info("blog_no: "+blog_no+", user_id: "+user_id+", like_count"+like_count);
+		BlogDto blogDto = new BlogDto();
+		blogDto.setBlog_no(blog_no);
+		blogDto.setUser_id(user_id);
+		blogDto.setBlog_like(like_count);
+		System.out.println(blogDto.toString());
+		UserDto dto = (UserDto)request.getSession().getAttribute("member");
+		BlogLikeDto like = new BlogLikeDto(blog_no, dto.getUser_id());
+		
+		int res = likeBiz.clickUnLike(blogDto, like);
+		
+		return res>0?"true":"false";
+	}
 
+	
 	// 글 작성 페이지
 	@RequestMapping(value="/blog-writeform.do", method=RequestMethod.GET)
 	public String write() {
