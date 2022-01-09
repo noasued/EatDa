@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String p_id = request.getParameter("p_id");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -162,7 +165,7 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <a class="adm_insert" href="adminProductWrite.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
+                                            <a class="adm_insert" href="adminProductWrite.do?p_id=${p_id}" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
 	                                        <button type="submit" value="delete">삭 제</button>
                                         </td>
                                     </tr>

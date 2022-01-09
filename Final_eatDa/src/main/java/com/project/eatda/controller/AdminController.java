@@ -16,7 +16,9 @@ import com.project.eatda.biz.BlogReplyBiz;
 import com.project.eatda.biz.EventBiz;
 import com.project.eatda.biz.RecipeBiz;
 import com.project.eatda.dto.EmailDto;
+import com.project.eatda.dto.EventDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.UserDto;
 
 @Controller
 public class AdminController {
@@ -41,10 +43,16 @@ public class AdminController {
 	
 	/* 관리자 메인 */
 	@RequestMapping("/adminMain.do")
-	public String admin1() {
+	public String admin1(Model model) {
 		System.out.println("adminMain");
+		
+		model.addAttribute("newBlogCount",blogBiz.newAdminBlogCount());
+		model.addAttribute("blogCount",blogBiz.adminBlogCount());
+		
 		return "/admin/adminMain";
 	}
+	
+	
 
 	/* 게시글 댓글 리스트 */
 	@RequestMapping(value="/adminPostReply.do", method=RequestMethod.GET)
@@ -92,14 +100,16 @@ public class AdminController {
 	}
 
 	// 이벤트 status update
-
-//	@RequestMapping(value="/adminEventStaus.do",method=RequestMethod.GET)
-//	public String updateStatus(EventDto dto) {
-//		System.out.println(dto.toString());
-//		//eventBiz.adminEventStatus(dto);
-//		
-//		return "redirect:/adminPostEvent.do";
-//	}
+	@RequestMapping("/adminEventStaus.do")
+	public String updateStatus(EventDto dto, String status, int e_no) {
+		System.out.println(e_no);
+		dto.setStatus(status);
+		dto.setEvent_no(e_no);
+		System.out.println(dto.toString());
+		eventBiz.adminEventStatus(dto);
+		
+		return "redirect:/adminPostEvent.do";
+	}
 
 
 	/* 레시피 리스트 */
@@ -203,13 +213,20 @@ public class AdminController {
 		return "/admin/adminUser";
 	}
 	
-//	// 회원 활성화 여부 update
-//	@RequestMapping("/adminUpdateUserEnable.do")
-//	public int updateUserEnable(Model model, String user_id) {
-//		System.out.println("update user enable");
-//		
-//		return 0;
-//	}
+	// 회원 활성화 여부 update
+	@RequestMapping("/adminUserUpdate.do")
+	public String adminUserUpdate(UserDto dto, String user_enable, String user_id) {
+		System.out.println("update user enable");
+		System.out.println(user_enable);
+		System.out.println(user_id);
+		
+		dto.setUser_enable(user_enable);
+		dto.setUser_id(user_id);
+		System.out.println(dto.toString());
+		adminBiz.adminUserUpdate(dto);
+		
+		return "redirect:/adminUser.do";
+	}
 	
 	// 회원 삭제
 	@RequestMapping("/adminUserDelete.do")

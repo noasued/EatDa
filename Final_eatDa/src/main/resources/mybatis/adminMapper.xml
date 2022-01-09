@@ -4,7 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="admin">
-
+	<!-- Admin Main -->
+	
+	
 	<!-- Admin Reply -->
 	<resultMap type="replyDto" id="replyMap">
 		<result property="reply_no" column="REPLY_NO" />
@@ -39,8 +41,7 @@
 	</resultMap>
 	
 	<select id="adminProductList" parameterType="list" resultMap="productMap">
-		SELECT * FROM PRODUCT
-		ORDER BY P_ID DESC
+		SELECT * FROM PRODUCT ORDER BY P_NO DESC
 	</select>
 	
 	<select id="selectPid" parameterType="String" resultType="productDto">
@@ -126,6 +127,11 @@
 		SELECT * FROM E_USER ORDER BY USER_ID DESC
 	</select>
 	
+	<update id="adminUserUpdate" parameterType="userDto">
+		UPDATE E_USER
+		SET USER_ENABLE=#{user_enable}
+		WHERE USER_ID=#{user_id}
+	</update>
 	<delete id="adminUserDelete" parameterType="String">
 		DELETE FROM E_USER WHERE USER_ID=#{user_id}
 	</delete>

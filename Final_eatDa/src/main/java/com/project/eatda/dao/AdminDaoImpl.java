@@ -68,10 +68,15 @@ public class AdminDaoImpl implements AdminDao{
 		
 		ProductDto temp = sqlSession.selectOne(NAMESPACE+"getLastProductNum");
 		String p_id = "P"+temp.getP_no();
+		int p_no = temp.getP_no();
 		dto.setP_id(p_id);
+		dto.setP_no(p_no);
+		
+		System.out.println("dto"+dto);
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"adminProductInsert",dto);
+			System.out.println("res ="+res);
 		} catch (Exception e) {
 			System.out.println("[error] : product insert");
 			e.printStackTrace();
@@ -201,6 +206,20 @@ public class AdminDaoImpl implements AdminDao{
 			e.printStackTrace();
 		}
 		return adminUserModal;
+	}
+	
+	// 회원 활성화 여부 update
+	@Override
+	public int adminUserUpdate(UserDto dto) {
+		int res =0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"adminUserUpdate",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : admin user update");
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	// 회원 삭제

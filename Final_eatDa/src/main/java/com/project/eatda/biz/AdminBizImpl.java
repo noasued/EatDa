@@ -122,9 +122,10 @@ public class AdminBizImpl implements AdminBiz{
 			return userDao.adminUserList();
 		}
 		
+		// 회원 활성화 update
 		@Override
-		public List<UserDto> adminUserModal(int user_no){
-			return userDao.adminUserModal(user_no);
+		public int adminUserUpdate(UserDto dto) {
+			return userDao.adminUserUpdate(dto);
 		}
 		
 		// 회원 리스트 삭제

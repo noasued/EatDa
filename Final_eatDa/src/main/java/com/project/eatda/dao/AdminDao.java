@@ -33,7 +33,7 @@ public interface AdminDao {
 	
 	/* 회원 리스트 */
 	public List<UserDto> adminUserList();
-	public List<UserDto> adminUserModal(int user_no);
+	public int adminUserUpdate(UserDto dto);
 	public int adminUserDelete(String user_id);
 	
 	/* 신고 리스트 */

@@ -48,6 +48,11 @@
 	    	 }
 	     }
 		
+		// 회원 활성화 update
+		function userEnableUpdate(user_enable,user_id){
+			location.href="adminUserUpdate.do?user_enable="+user_enable+"&user_id="+user_id;
+		}
+		
 		//Modal 실행
 	       function modal(id){
 	    	   $(".modal").fadeIn();
@@ -160,9 +165,9 @@
 											<td>${dto.user_email}</td>
 											<td>${dto.user_phone}</td>
 											<td>
-												<select>
-													<option value="1" selected>활성화</option>
-													<option value="2">비활성화</option>
+												<select onChange="userEnableUpdate(this.value,'${dto.user_id}');">
+													<option value="Y" ${dto.user_enable == 'Y' ? "selected":""}>활성화</option>
+													<option value="N" ${dto.user_enable == 'N' ? "selected":""}>비활성화</option>
 												</select>
 											</td>
 										</tr>
