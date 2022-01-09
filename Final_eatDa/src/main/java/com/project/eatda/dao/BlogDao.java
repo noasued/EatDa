@@ -24,4 +24,9 @@ public interface BlogDao {
 	
 	// 관리자 블로그 삭제
 	public int adminBlogDelete(int blog_no);
+	
+	//관리자 블로그 count
+	public int adminBlogCount();
+	
+	public int newAdminBlogCount();
 }
