@@ -17,6 +17,7 @@ import com.project.eatda.biz.EventBiz;
 import com.project.eatda.biz.RecipeBiz;
 import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.EventDto;
+import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.UserDto;
 
@@ -203,6 +204,36 @@ public class AdminController {
 	 
 	 return "redirect:/adminOrder.do"; 
 	 }
+	 
+	// 배송 현황 update
+		@RequestMapping("/shippingStatusUpdate.do")
+		public String shippingStatusUpdate(OrderDto dto, String shipping_status, String order_id) {
+			System.out.println("update shipping status");
+			System.out.println(shipping_status);
+			System.out.println(order_id);
+			
+			dto.setShipping_status(shipping_status);
+			dto.setOrder_id(order_id);
+			System.out.println(dto.toString());
+			adminBiz.shippingStatusUpdate(dto);
+			
+			return "redirect:/adminOrder.do";
+		}
+		
+		// 진행 현황 update
+		@RequestMapping("/orderStatusUpdate.do")
+		public String orderStatusUpdate(OrderDto dto, String order_status, String order_id) {
+			System.out.println("update order_status");
+			System.out.println(order_status);
+			System.out.println(order_id);
+					
+			dto.setOrder_status(order_status);
+			dto.setOrder_id(order_id);
+			System.out.println(dto.toString());
+			adminBiz.orderStatusUpdate(dto);
+					
+			return "redirect:/adminOrder.do";
+		}		
 
 	/* 회원 리스트 */
 	@RequestMapping("/adminUser.do")

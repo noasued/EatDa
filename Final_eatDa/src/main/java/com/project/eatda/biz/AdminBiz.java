@@ -29,7 +29,8 @@ public interface AdminBiz {
 
 	public int adminOrderInsert(OrderDto order);
 	public int adminOrderInsert2(OrderDto order);
-	public int adminOrderUpdate(OrderAdminDto dto);
+	public int shippingStatusUpdate(OrderDto dto);
+	public int orderStatusUpdate(OrderDto dto);
 	public int adminOrderDelete(String order_id);
 
 	/* 회원 리스트 */

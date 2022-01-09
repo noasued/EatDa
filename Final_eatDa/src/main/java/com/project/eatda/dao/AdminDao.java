@@ -29,6 +29,8 @@ public interface AdminDao {
 	
 	public int adminOrderInsert(OrderDto dto);
 	public int adminOrderInsert2(OrderDto dto);
+	public int shippingStatusUpdate(OrderDto dto);
+	public int orderStatusUpdate(OrderDto dto);
 	public int adminOrderDelete(String order_id);
 	
 	/* 회원 리스트 */

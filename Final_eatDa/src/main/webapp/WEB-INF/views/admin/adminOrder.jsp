@@ -39,6 +39,16 @@
 			    	});
 			    });
 	        
+				// 배송 현황 update
+				function shippingStatusUpdate(shipping_status, order_id){
+					location.href="shippingStatusUpdate.do?shipping_status="+shipping_status+"&order_id="+order_id;
+				}
+				
+				// 진행 현황 update
+				function orderStatusUpdate(order_status,order_id){
+					location.href="orderStatusUpdate.do?order_status="+order_status+"&order_id="+order_id;
+				}
+				
 		      //Modal 실행
 		       function modal(id){
 		    	   $(".modal").fadeIn();
@@ -153,19 +163,19 @@
 				                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.order_date}"/></td>
 				                                    <td>${dto.order_phone}</td>
 				                                    <td>
-				                                    	<select>
-				                                        	<option value="1">주문 완료</option>
-				                                            <option value="2">상품 준비중</option>
-				                                            <option value="3">배송지 출발</option>
-				                                            <option value="4">배송중</option>
-				                                            <option value="5">배송 완료</option>
+				                                    	<select onChange="shippingStatusUpdate(this.value,'${dto.order_id}');">
+				                                        	<option value="주문 완료" ${dto.shipping_status == '주문 완료' ? "selected":""}>주문 완료</option>
+				                                            <option value="상품 준비중" ${dto.shipping_status == '상품 준비중' ? "selected":""}>상품 준비중</option>
+				                                            <option value="배송지 출발" ${dto.shipping_status == '배송지 출발' ? "selected":""}>배송지 출발</option>
+				                                            <option value="배송중" ${dto.shipping_status == '배송중' ? "selected":""}>배송중</option>
+				                                            <option value="배송 완료" ${dto.shipping_status == '배송 완료' ? "selected":""}>배송 완료</option>
 				                                        </select>
 				                                    </td>
 				                                    <td>
-				                                    	<select>
-				                                        	<option value="결제 대기">결제 대기</option>
-				                                            <option value="결제 완료">결제 완료</option>
-				                                            <option value="결제 취소">결제 취소</option>
+				                                    	<select onChange="orderStatusUpdate(this.value,'${dto.order_id}');">
+				                                        	<option value="결제 대기" ${dto.order_status == '결제 대기' ? "selected":""}>결제 대기</option>
+				                                            <option value="결제 완료" ${dto.order_status == '결제 완료' ? "selected":""}>결제 완료</option>
+				                                            <option value="결제 취소" ${dto.order_status == '결제 취소' ? "selected":""}>결제 취소</option>
 				                                    	</select>
 				                                	</td>
 				                        		</tr>

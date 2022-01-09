@@ -180,6 +180,34 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return res;
 	}
+	
+	// 배송 현황 update
+		@Override
+		public int shippingStatusUpdate(OrderDto dto) {
+			int res =0;
+			
+			try {
+				res = sqlSession.update(NAMESPACE+"shippingStatusUpdate",dto);
+			} catch (Exception e) {
+				System.out.println("[error] : shipping status update");
+				e.printStackTrace();
+			}
+			return res;
+		}
+		
+	// 진행 현황 update
+		@Override
+		public int orderStatusUpdate(OrderDto dto) {
+			int res =0;
+			
+			try {
+				res = sqlSession.update(NAMESPACE+"orderStatusUpdate",dto);
+			} catch (Exception e) {
+				System.out.println("[error] : order status update");
+				e.printStackTrace();
+			}
+			return res;
+		}		
 
 	
 	/* 회원 리스트 */
@@ -250,6 +278,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminReportList;
 	}
 	
+	// 신고 삭제
 	@Override
 	public int adminReportDelete(int report_no) {
 		int res = 0;

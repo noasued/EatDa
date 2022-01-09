@@ -98,12 +98,16 @@ public class AdminBizImpl implements AdminBiz{
 		public int adminOrderInsert2(OrderDto dto) {
 			return orderDao.adminOrderInsert2(dto);
 		}
-
-		// 주문 리스트 수정
+		
+		// 배송 현황 update
 		@Override
-		public int adminOrderUpdate(OrderAdminDto dto) {
-			// TODO Auto-generated method stub
-			return 0;
+		public int shippingStatusUpdate(OrderDto dto) {
+			return orderDao.shippingStatusUpdate(dto);
+		}
+		
+		// 진행 현황 udpate
+		public int orderStatusUpdate(OrderDto dto) {
+			return orderDao.orderStatusUpdate(dto);
 		}
 		
 		// 주문 리스트 삭제
@@ -111,7 +115,7 @@ public class AdminBizImpl implements AdminBiz{
 		public int adminOrderDelete(String order_id) {
 			return orderDao.adminOrderDelete(order_id);
 		}
-
+		
 		
 	/* 회원 리스트 */	
 		@Autowired

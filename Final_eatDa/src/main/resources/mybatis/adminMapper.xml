@@ -107,6 +107,18 @@
 		DELETE FROM E_ORDER WHERE ORDER_ID=#{order_id}
 	</delete>
 	
+	<update id="shippingStatusUpdate" parameterType="orderDto">
+		UPDATE E_ORDER
+		SET SHIPPING_STATUS=#{shipping_status}
+		WHERE ORDER_ID=#{order_id}
+	</update>
+	
+	<update id="orderStatusUpdate" parameterType="orderDto">
+		UPDATE E_ORDER
+		SET ORDER_STATUS=#{order_status}
+		WHERE ORDER_ID=#{order_id}
+	</update>
+	
 	<!-- Admin User -->
 	<resultMap type="userDto" id="userMap">
 		<result property="user_id" column="USER_ID" />
