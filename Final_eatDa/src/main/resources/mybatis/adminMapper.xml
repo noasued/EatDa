@@ -44,8 +44,10 @@
 		SELECT * FROM PRODUCT ORDER BY P_NO DESC
 	</select>
 	
-	<select id="selectPid" parameterType="String" resultType="productDto">
-		SELECT P_ID FROM PRODUCT WHERE P_NAME=#{p_name}
+	<select id="productSelectOne" parameterType="String" resultType="productDto">
+		SELECT P_ID,P_NAME,P_SHORT_DESC,P_PRICE,P_DESCRIPTION,P_CAL,P_AMOUNT,SELLER_DESC,IMG_PATH,P_NO
+		FROM PRODUCT
+		WHERE P_ID=#{p_id}
 	</select>
 	
 	<insert id="adminProductInsert" parameterType="productDto">

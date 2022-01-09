@@ -53,6 +53,12 @@ public class AdminBizImpl implements AdminBiz{
 			return productDao.adminProductList();
 		}
 		
+		//selectOne
+		@Override
+		public ProductDto selectOne(String p_id) {
+			return productDao.selectOne(p_id);
+		}
+		
 		// 상품 등록
 		@Override
 		public int adminProductInsert(ProductDto dto) {

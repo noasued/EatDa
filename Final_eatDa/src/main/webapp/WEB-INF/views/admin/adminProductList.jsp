@@ -39,6 +39,15 @@
 		    	});
 		    });
 	     
+	     //게시글 수정
+	     function goUpdate(){
+	    	 if(confirm('선택하신 상품을 수정하시겠습니까?')==true){
+	    		 return 'adminProductUpdate.do';
+	    	 }else{
+	    		 return false;
+	    	 }
+	     }
+	     
 		  //게시글 삭제
 			function delete_frm(){
 	    	 if(confirm('정말 삭제하시겠습니까?')==true){
@@ -91,42 +100,15 @@
                             <div class="sb-sidenav-menu-heading">
                                 <img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;">
                                 <br>
-                                <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
+                                <a href="#" style="text-decoration:none; color: black;">${member.user_name} 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link home" href="adminMain.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                <span>HOME</span>
-                            </a>
-
-                            <a class="nav-link post" href="adminPostReply.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                <span>Post</span>
-                            </a>
-
-                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
-                                <span>Recipe</span>
-                            </a>
-
-                            <a class="nav-link product" href="adminProductList.do" style="color: rgb(224, 179, 57);">
-                                <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                                <span>Product</span>
-                            </a>
-
-                            <a class="nav-link order" href="adminOrder.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                                <span>Order</span>
-                            </a>
-
-                            <a class="nav-link user" href="adminUser.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                <span>User</span>
-                            </a>
-
-                            <a class="nav-link report" href="adminReport.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
-                                <span>Report</span>
-                            </a>
+                            <a class="nav-link home" href="adminMain.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a>
+                            <a class="nav-link post" href="adminPostReply.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
+                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div><span>Recipe</span></a>
+                            <a class="nav-link product" href="adminProductList.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div><span>Product</span></a>
+                            <a class="nav-link order" href="adminOrder.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div><span>Order</span></a>
+                            <a class="nav-link user" href="adminUser.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a>
+                            <a class="nav-link report" href="adminReport.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
                         </div>
                     </div>
                 </nav>
@@ -156,7 +138,7 @@
                                     	<c:forEach items="${productList}" var="dto">
 			                            	<tr>
 			                                	<td style='vertical-align:middle' ><input type="checkbox" name="RowCheck[]" value="${dto.p_id}"></td>
-			                                    <td style='vertical-align:middle'><a href="adminProductUpdate.do" style="text-decoration:none; cursor:pointer;">${dto.p_name}</a></td>
+			                                    <td style='vertical-align:middle'><a onclick="return chk_frm();" style="text-decoration:none; cursor:pointer; font-weight:bold;">${dto.p_name}</a></td>
 			                                    <td><a href="goProductPage.do?p_id=${dto.p_id}"><img src="${dto.img_path}" style="width: 20%; height: 20%;"></a></td>
 			                                	<td style='vertical-align:middle'>${dto.p_price} 원</td>
 			                                </tr>
@@ -165,7 +147,7 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <a class="adm_insert" href="adminProductWrite.do?p_id=${p_id}" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
+                                            <a href="adminProductWrite.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
 	                                        <button type="submit" value="delete">삭 제</button>
                                         </td>
                                     </tr>

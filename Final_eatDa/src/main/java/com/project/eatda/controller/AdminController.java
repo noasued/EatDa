@@ -152,12 +152,27 @@ public class AdminController {
 	}
 
 	
-	// 상품 수정
+	// 상품 수정 버튼 클릭 시, updateForm으로 이동
 	@RequestMapping("adminProductUpdate.do")
 	public String adminProductUpdate(Model model, String p_id) {
 		System.out.println("admin product update");
 		
+		model.addAttribute("dto",adminBiz.selectOne(p_id));
+		
 		return "/admin/adminProductUpdate";
+	}
+	
+	// 상품 수정 완료
+	@RequestMapping("/adminProductUpdateRes.do")
+	public String adminProductUpdateRes(ProductDto dto) {
+		System.out.println("product update res");
+		
+		int res = adminBiz.adminProductUpdate(dto);
+		if(res>0) {
+			return "redirect:adminProductList.do";
+		}else {
+			return "redirect:adminProductUpdate.do?p_id="+dto.getP_id();
+		}
 	}
 	
 	// 상품 삭제

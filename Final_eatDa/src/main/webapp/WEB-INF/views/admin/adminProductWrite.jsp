@@ -51,6 +51,7 @@
 		    font-size: 16px;
 		    margin-left: 10%;
 		    margin-top:2%;
+		    resize: vertical;
 		}
   </style>
 </head>

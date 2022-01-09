@@ -18,6 +18,7 @@ public interface AdminBiz {
 	
 	/* 상품 리스트 */
 	public List<ProductDto> adminProductList();
+	public ProductDto selectOne(String p_id);
 
 	public int adminProductInsert(ProductDto dto);
 	public int adminProductUpdate(ProductDto dto);

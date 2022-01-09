@@ -61,6 +61,20 @@ public class AdminDaoImpl implements AdminDao{
 		return adminProductList;
 	}
 	
+	//selectOne
+	@Override
+	public ProductDto selectOne(String p_id) {
+		ProductDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"productSelectOne",p_id);
+		} catch (Exception e) {
+			System.out.println("[error] : product selectOne");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
 	// 상품 등록
 	@Override
 	public int adminProductInsert(ProductDto dto) {
