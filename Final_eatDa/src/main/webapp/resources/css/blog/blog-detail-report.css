@@ -13,12 +13,12 @@
 
 .reply-report__modal-content{
   width:600px; 
-  height:450px;
+  height:500px;
   background:#fff; border-radius:10px;
   position:relative; 
-  top:25%; 
+  top:12%; 
   left:40%;
-  margin-top:-20px; 
+  margin-top:-10px; 
   margin-left:-200px;
   text-align:center;
   box-sizing:border-box; 
@@ -30,9 +30,10 @@
 
 .fa-times{
   float: right;
-  cursor: pointer;
 }
-
+.fa-times:hover{
+	cursor: pointer;
+}
 .reply-report__modal-content h5{
   font-size: 20px;
   font-weight: 500;
@@ -48,18 +49,26 @@
 }
 
 .reply-report__modal-content textarea{
-  resize: none;
-  width:99%;
-  height:110px;
-  padding:10px;
+	resize: none;
+  width:100%;
   border:0.5px solid gainsboro;
   font-size: 14px;
+}
+
+.reply-report__modal-content #report_reply_content{
+  height:80px;
+  padding:10px;
+}
+
+.reply-report__modal-content textarea[name="report"]{
+  height:110px;
+  padding:10px;
 }
 
 .report-submit-btn{
   text-align: center;
 }
-.reply-report__modal-content form input[name="report-title"]{
+.reply-report__modal-content form input[name="report-title"], input[name="user_id"], input[name="reporter_user_id"]{
   width:100%;
   height:30px;
   border:0.5px solid gainsboro;

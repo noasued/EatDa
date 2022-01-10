@@ -10,26 +10,12 @@
 <title>Welcome to EatDa</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script type="text/javascript">
-   /*$(function(){
-
-       // 신고 버튼 클릭 -> 모달창 띄우기
-       $("#report-btn").click(function(){
-         $(".reply-report__modal").fadeIn();
-       });
-       // x 버튼 클릭 -> 모달창 fade out
-       $(".fa-times").click(function(){
-         $(".reply-report__modal").fadeOut();
-       });
-       
-     }); */
-     
      // like 버튼 클릭! (하트 채우기)
      function likeFunction() {
         let blog_no = $('#blog_no').val();
         let user_id = $('#blog_author').text();
         let like_count = Number($('#like-count').text())+1;
         console.log("blog_no: "+blog_no+", user_id: "+user_id);
-        
         $.ajax({
         	url: "blog-like.do?blog_no="+blog_no+"&user_id="+user_id+"&like_count="+like_count,
           type: "GET",
@@ -37,7 +23,6 @@
         });
         $(".fullheart").fadeIn(300);
         $('#like-count').text(Number(like_count));
-       
      }
      
 		// like 버튼 클릭! (하트 비우기)
@@ -45,10 +30,8 @@
     	let blog_no = $('#blog_no').val();
       let user_id = $('#blog_author').text();
       let like_count = Number($('#like-count').text())-1;
-         
       $(".fullheart").fadeOut(300);
       $('#like-count').text(like_count);
-         
 			$.ajax({
       	url: "blog-unlike.do?blog_no="+blog_no+"&user_id="+user_id+"&like_count="+like_count,
       	type: "GET",
@@ -57,155 +40,199 @@
 		}
      
      //게시글 삭제
-      function blogDelete(blog_no){
-        var chk = confirm("정말 삭제하시겠습니까?");
-        if(chk){
-           location.href='blog-delete.do?blog_no='+blog_no;
-        }
-      }
+     function blogDelete(blog_no){
+       var chk = confirm("정말 삭제하시겠습니까?");
+       if(chk){
+         location.href='blog-delete.do?blog_no='+blog_no;
+       }
+     }
       
-      // 댓글 입력 버튼
-      function replySubmit(){
-         var reply_content = $("#reply_content").val();
-         var blog_no = "${dto.blog_no}";
-         var param = {
-        		 "reply_content":reply_content,
-        		 "blog_no":blog_no
-         }
-        	 
-         var regdate = changeDate(new Date());
-         console.log(changeDate(new Date()));
-         
-         $.ajax({
-            type: "post",
-            url: "reply-insert.do",
-            contentType:"application/json; charset=utf-8",
-            data: JSON.stringify(param),
-            success: function(data){
-               console.log(data);
-               alert("댓글이 등록되었습니다.");
-               $(data).each(function(key, value) {
-                  $('tbody').prepend(
-                     "<tr>" +
-                      "<td class='reply-list__userid'> " +value.user_id + "</td>"+
-                      "<td class='reply-list__reply'>"+
-                        "<div>"+
-                          "<span>"+regdate+"</span>" +
-                            "<br>"+
-                          	"<p>"+value.reply_content + "</p>"+
-                           "</div>"+
-                      "</td>"+
-                      "<td class='reply-list__btns'>"+
-                         "<input type='button' title='댓글 수정' name='reply-update-btn' id='update-btn' value='&#xf044' onclick='openUpdateModal(this)'>"+
-                         "<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
-                         "<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
-                      "</td>"+
-                    "</tr>"      
-                  );               
-                  
-               });
-            }
-         });
-         console.log(param);
-      }
-      
-      // 댓글 수정 및 삭제
-      // 댓글 수정
-      
-      // 수정 버튼 클릭 -> 모달창 띄우기
-      function openUpdateModal(object){
-         var seq = $(object).siblings("#index").val();
-         var reply_no = $(object).parent().siblings(".reply-index").children("#reply_each_no").text();
-         $('#reply_no').val(reply_no);
-         $(".reply-update__modal").fadeIn(function(){
-             //모달창 띄워지며 안에 댓글 내용 가져옴
-                let blog_no = $("#blog_no").val();
-               let reply_no = $("#reply_no").val();
-               var user_id = $(".reply-list__userid").eq(seq).text();
-               var reply_content = $(".reply_list_content").eq(seq).text();
-               $("#reply_no").val(reply_no);
-               $("#user_id_update").val(user_id);
-               $("#reply_content_update").val(reply_content);
-          });
-      }
-      
-      function replyUpdate(blog_no, user_id){
-         if(confirm("댓글을 수정하시겠습니까?")){
-            let blog_no = $("#blog_no").val();
-            let reply_no = $("#reply_no").val();
-            let user_id = $("#user_id_update").val();
-            var reply_content = $("#reply_content_update").val();
-            
-            $.ajax({
-               type: "get",
-               url: "reply-update.do?blog_no="+blog_no+"&reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id,
-            	 dataType: "JSON",
-               success: function(data){
-                     alert("댓글이 수정되었습니다.");
-                     $('tbody').html('');
-                     $(".reply-update__modal").fadeOut();
-                     $(data).each(function(key, value) {
-                     $('tbody').append(
-                         "<tr>" +
-                            "<td class='reply-list__userid'> " +value.user_id + "</td>"+
-                            "<td class='reply-list__reply'>"+
-                              "<p>"+
-                                "<span>"+value.updatedate+"</span>" +
-                                  "<br>"+
-                                value.reply_content +
-                                 "</p>"+
-                            "</td>"+
-                            "<td class='reply-list__btns'>"+
-                               "<input type='button' title='댓글 수정' name='reply-update-btn' id='update-btn' value='&#xf044' onclick='openUpdateModal(this)'>"+
-                               "<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
-                               "<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
-                            "</td>"+
-                        "</tr>"      
-                     );               
-                        
-                 });
-               }
+     // 댓글 입력 버튼
+     function replySubmit(){
+       var reply_content = $("#reply_content").val();
+       var blog_no = "${dto.blog_no}";
+       var param = {
+        	"reply_content":reply_content,
+        	"blog_no":blog_no
+       }
+       var regdate = changeDate(new Date());
+       	console.log(changeDate(new Date()));
+        $.ajax({
+          type: "post",
+          url: "reply-insert.do",
+          contentType:"application/json; charset=utf-8",
+          data: JSON.stringify(param),
+          success: function(data){
+            console.log(data);
+            alert("댓글이 등록되었습니다.");
+            $(data).each(function(key, value) {
+              $('tbody').prepend(
+              	"<tr>" +
+                	"<td class='reply-list__userid'> " +value.user_id + "</td>"+
+                 	"<td class='reply-list__reply'>"+
+                  	"<div>"+
+                    	"<span>"+regdate+"</span>" +
+                      "<br>"+
+                      "<p>"+value.reply_content + "</p>"+
+                    "</div>"+
+                  "</td>"+
+                  "<td class='reply-list__btns'>"+
+                  	"<input type='button' title='댓글 수정' name='reply-update-btn' id='update-btn' value='&#xf044' onclick='openUpdateModal(this)'>"+
+                  	"<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
+                  	"<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
+                  "</td>"+
+                "</tr>"      
+              );               
             });
-            
-            
-         }
-      }
-      
-      
-      $(function(){
-         
-         
-        
-        // x 버튼 클릭 -> 모달창 fade out
-        $(".fa-times").click(function(){
-          $(".reply-update__modal").fadeOut();
+          }
         });
+        console.log(param);
+     }
+      
+     // 댓글 수정 및 삭제
+     // 수정 버튼 클릭 -> 모달창 띄우기
+     function openUpdateModal(object){
+       var seq = $(object).siblings("#index").val();
+       var reply_no = $(object).parent().siblings(".reply-index").children("#reply_each_no").text();
+       $('#reply_no').val(reply_no);
+       $(".reply-update__modal").fadeIn(function(){
+         let blog_no = $("#blog_no").val();
+         let reply_no = $("#reply_no").val();
+         var user_id = $(".reply-list__userid").eq(seq).text();
+         var reply_content = $(".reply_list_content").eq(seq).text();
+         $("#reply_no").val(reply_no);
+         $("#user_id_update").val(user_id);
+         $("#reply_content_update").val(reply_content);
+       });
+    }
+      
+    function replyUpdate(blog_no, user_id){
+      if(confirm("댓글을 수정하시겠습니까?")){
+        let blog_no = $("#blog_no").val();
+        let reply_no = $("#reply_no").val();
+        let user_id = $("#user_id_update").val();
+        var reply_content = $("#reply_content_update").val();
+            
+        $.ajax({
+          url: "reply-update.do?blog_no="+blog_no+"&reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id,
+          type: "get",
+          dataType: "JSON",
+          success: function(data){
+          	alert("댓글이 수정되었습니다.");
+          	$('tbody').html('');
+          	$(".reply-update__modal").fadeOut();
+         		$(data).each(function(key, value) {
+          		$('tbody').append(
+              	"<tr>" +
+                	"<td class='reply-list__userid'> " +value.user_id + "</td>"+
+                  "<td class='reply-list__reply'>"+
+                  	"<div>"+
+                    	"<span>"+value.updateDateString+"</span>" +
+                      "<br>"+
+                      "<p class='reply_list_content'>"+value.reply_content +"</p>"+
+                  	"</div>"+
+                  "</td>"+
+               		"<td class='reply-list__btns'>"+
+                  	"<input type='button' title='댓글 수정' name='reply-update-btn' id='update-btn' value='&#xf044' onclick='openUpdateModal(this)'>"+
+                    "<input type='button' title='댓글 삭제' name='reply-del-btn' value='&#xf2ed'>"+
+                    "<input type='button' title='댓글 신고' name='reply-report-btn' id='report-btn' value='&#xf1d8'>"+
+                	"</td>"+
+               	"</tr>"      
+               );               
+            });
+          },
+          error: function(msg){
+          	console.log(msg);
+          }
+        });
+      }
+    }
+      
+    $(function(){
+    	// x 버튼 클릭 -> 모달창 fade out
+    	$(".fa-times").click(function(){
+      	$(".reply-update__modal").fadeOut();
       });
-      
+    });
 
-      // 댓글 삭제
-      function replyDelete(reply_no){
-         var reply_no = "${reply.reply_no}";
-         var chk = confirm("댓글을 정말 삭제하시겠습니까?");
-         if(chk){
-            location.href='reply-delete.do?reply_no='+reply_no;
-         }
-         
-      }
-      
-      // 날짜 및 시간 출력 포맷 변경
-      function changeDate(date){
-         year = date.getFullYear();
-         month = ('0'+(date.getMonth()+1)).slice(-2);
-         day = ('0'+date.getDate()).slice(-2);
-         
-         hour = ('0'+date.getHours()).slice(-2);
-         minute = ('0'+date.getMinutes()).slice(-2);
-         
-         strDate = year+"-"+month+"-"+day+" "+hour+":"+minute;
-         return strDate;
-      }
-      
+    // 댓글 삭제
+		function replyDelete(object){
+    	var blog_no = $("#blog_each_no").text();
+    	var seq = $(object).siblings("#index").val();
+    	var reply_no = $(object).parent().siblings(".reply-index").children("#reply_each_no").text();
+    	console.log("blog_no: "+blog_no);
+    	console.log("seq: "+seq);
+    	console.log("reply_no: "+reply_no);
+    	var chk = confirm("댓글을 정말 삭제하시겠습니까?");
+			if(chk){
+      	$.ajax({
+        	type: "get",
+        	url: "reply-delete.do?blog_no="+blog_no+"&reply_no="+reply_no,
+        	dataType: "text",
+        	success: function(data){
+        		console.log(data);
+          	alert("댓글이 삭제되었습니다.");
+          	$(object).parents('tr').html('');
+          }                   
+      	});
+    	}
+		}
+    
+    //신고
+		// 신고 버튼 클릭 -> 모달창 띄우기
+	  function openReportModal(object){
+		  var seq = $(object).siblings("#index").val();
+	    var reply_no = $(object).parent().siblings(".reply-index").children("#reply_each_no").text();
+	    $('#reply_no').val(reply_no);
+	    
+	  	$(".reply-report__modal").fadeIn(function() {
+	      let blog_no = $("#blog_no").val();
+	      let reply_no = $("#reply_no").val();
+	      var user_id = $(".reply-list__userid").eq(seq).text();
+	      var reply_content = $(".reply_list_content").eq(seq).text();
+	      $("#report_reply_no").val(reply_no);
+	      $("#reported_user_id").val(user_id);
+	      $("#report_reply_content").val(reply_content);
+	    });
+	  }
+		
+	  function reportSubmit(){
+		  if(confirm("신고 내용을 전송하시겠습니까?")){
+		  	let blog_no = $("#blog_no_report").val();
+		  	let reply_no = $("#reply_no").val();
+		  	let user_id = $("#reported_user_id").val();
+		  	var reply_content = $("#report_reply_content").val();
+		            
+		  	$.ajax({
+		    	url: "reply-report.do?blog_no="+blog_no+"&reply_no="+reply_no+"&reply_content="+reply_content+"&user_id="+user_id,
+		    	type: "get",
+		    	dataType: "JSON",
+		    	success: function(data){
+		    		alert("신고가 완료되었습니다.");
+		    	}
+		  	});
+		    alert("신고가 완료되었습니다.");
+		    $(".reply-report__modal").fadeOut();
+		  }
+	  }
+	  
+	  $(function(){
+		  // x 버튼 클릭 -> 모달창 fade out
+		  $(".fa-times").click(function(){
+		  	$(".reply-report__modal").fadeOut();
+		  });
+	  });
+	     
+		// 날짜 및 시간 출력 포맷 변경
+		function changeDate(date){
+    	year = date.getFullYear();
+    	month = ('0'+(date.getMonth()+1)).slice(-2);
+    	day = ('0'+date.getDate()).slice(-2);
+     	hour = ('0'+date.getHours()).slice(-2);
+    	minute = ('0'+date.getMinutes()).slice(-2);
+    	strDate = year+"-"+month+"-"+day+" "+hour+":"+minute;
+    	return strDate;
+		}
       
    </script>
 <link href="resources/css/blog/blog-detail.css" rel="stylesheet">
@@ -266,6 +293,7 @@
         <!-- title -->
         <div class="detail-article__title">
           <h2>${dto.blog_title}</h2>
+          <div class="blog-index" style="display:none;"><span id="blog_each_no">${dto.blog_no}</span></div>
         </div>
             
             <div class="detail-article__undertitle">
@@ -324,14 +352,14 @@
                        <div>
                          <span><fmt:formatDate pattern="yyyy-MM-dd a hh:mm" value="${reply.regdate}"/></span>
                          <br>
-                         <p class="reply_list_content">${reply.reply_content}"</p>
+                         <p class="reply_list_content">${reply.reply_content}</p>
                        </div>
                      </td>
                      <td class="reply-list__btns">
-                        <input type="hidden" id="index" value="${status.index}">
+                       <input type="hidden" id="index" value="${status.index}">
                        <input type="button" title="댓글 수정" name="reply-update-btn" id="update-btn" value="&#xf044" onclick="openUpdateModal(this)">
-                       <input type="button" title="댓글 삭제" name="reply-del-btn" value="&#xf2ed" onclick="replyDelete()">
-                       <input type="button" title="댓글 신고" name="reply-report-btn" id="report-btn" value="&#xf1d8">
+                       <input type="button" title="댓글 삭제" name="reply-del-btn" value="&#xf2ed" onclick="replyDelete(this)">
+                       <input type="button" title="댓글 신고" name="reply-report-btn" id="report-btn" value="&#xf1d8" onclick="openReportModal(this)">
                      </td>
                    </tr>
                    </c:forEach>
@@ -366,6 +394,8 @@
          <i title="창 닫기" class="fas fa-times fa-lg"></i>
          <h5>댓글 신고하기</h5>
          <form action="report-reply" method="post">
+	         <input type="hidden" id="report_reply_no" name="reply_no">
+	         <input type="hidden" id="blog_no_report" name="blog_no" value="${dto.blog_no}">
             <table>
                <colgroup><col width="120px"><col width="350px"></colgroup>
                <tr>
@@ -374,15 +404,15 @@
                </tr>
                <tr>
                   <th>신고자</th>
-                  <td>user_id</td>
+                  <td><input type="text" id="reporter_user_id" name="reporter_user_id" value="${user_id}" readonly></td>
                </tr>
                <tr>
                  <th>신고 대상</th>
-                 <td>user_id2</td>
+                 <td><input type="text" id="reported_user_id" name="user_id" value="${reply.user_id}" readonly></td>
                </tr>
                <tr>
-                 <th>신고 댓글 내용</th>
-                 <td>신고 대상이 작성한 댓글</td>
+                 <th>댓글 내용</th>
+                 <td><textarea id="report_reply_content" name="report_reply_content" readonly>${reply.reply_content }</textarea></td>
                </tr>
                <tr>
                  <th colspan="2">신고 내용</th>
@@ -394,7 +424,7 @@
                </tr>
                <tr>
                  <td colspan="2" class="report-submit-btn">
-                   <input type="submit" title="관리자에게 신고내용 전송" name="report-submit-btn" value="&#xf1d8">
+                   <input type="button" title="관리자에게 신고내용 전송" id="report-submit-btn" name="report-submit-btn" value="&#xf1d8" onclick="reportSubmit()">
                  </td>
                </tr>
             </table>

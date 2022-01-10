@@ -1,6 +1,8 @@
 package com.project.eatda.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.BlogReplyBiz;
-import com.project.eatda.dto.BlogDto;
 import com.project.eatda.dto.BlogReplyDto;
 import com.project.eatda.dto.UserDto;
 
@@ -65,12 +66,6 @@ public class BlogReplyController {
 		logger.info("update, user_id: " + user_id);
 		logger.info("update, reply_content: " + reply_content);
 		
-//		String blog_no = temp[0].substring(8, temp[0].length());
-//		String reply_no = temp[1].substring(9, temp[1].length());
-//		String user_id = temp[3].substring(8, temp[3].length());
-//
-//		String reply_content = temp[2].substring(14, temp[2].length());
-		
 		BlogReplyDto dto = new BlogReplyDto();
 		dto.setReply_content(reply_content);
 		dto.setBlog_no(Integer.parseInt(blog_no));
@@ -82,30 +77,33 @@ public class BlogReplyController {
 		int res = replyBiz.update(dto);
 		List<BlogReplyDto> list = replyBiz.list(Integer.parseInt(blog_no));
 		
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setUpdateDateString(transformDate(list.get(i).getUpdatedate()));
+			System.out.println(list.get(i).toString());
+		}
+		
 		return list;
 	}
+	public String transformDate(Date date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd am HH:mm");
+		if (date == null) {
+			return format.format(new Date());
+		} else {
+			return format.format(date);
+		}
+	}
 	
-//	@RequestMapping(value="/reply-update.do", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String update(Model model, int reply_no) {
-//		logger.info("[controller] reply update ");
-//		BlogReplyDto dto = replyBiz.selectOne(reply_no);
-//		model.addAttribute("dto",dto);
-//		System.out.println(dto.toString());
-//		
-//		replyBiz.update(dto);
-//		
-//		return "redirect:blog-detail.do?blog_no="+dto.getBlog_no();
-//	}
-	
-	// 글 삭제
+	// 댓글 삭제
 	@RequestMapping(value="/reply-delete.do", method=RequestMethod.GET)
-	public String delete(int reply_no) {
-		logger.info("reply delete");
-		replyBiz.delete(reply_no);
+	@ResponseBody
+	public String delete(String blog_no, String reply_no) {
+		logger.info("delete _ blog_no: "+blog_no);
+		logger.info("delete _ reply_no: "+reply_no);
+
+		replyBiz.delete(Integer.parseInt(blog_no), Integer.parseInt(reply_no));
 		
-		BlogReplyDto dto = new BlogReplyDto();
-		return "redirect:blog-detail.do?blog_no"+dto.getBlog_no();
+		System.out.println("detail.do 가기 전 ");
+		return "true";
 	}
 	
 	
