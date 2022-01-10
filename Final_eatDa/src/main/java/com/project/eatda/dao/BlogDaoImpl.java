@@ -156,5 +156,33 @@ public class BlogDaoImpl implements BlogDao{
 		}
 		return res;
 	}
-
+	
+	//관리자 블로그 count
+	public int adminBlogCount() {
+		int count = 0;
+		
+		try {
+			count = sqlSession.selectOne(NAMESPACE+"adminBlogCount");
+			System.out.println(count);
+		} catch (Exception e) {
+			System.out.println("[error] : admin blog count");
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
+	
+	public int newAdminBlogCount() {
+		int count = 0;
+		
+		try {
+			count = sqlSession.selectOne(NAMESPACE+"newAdminBlogCount");
+			System.out.println(count);
+		} catch (Exception e) {
+			System.out.println("[error] : admin blog count");
+			e.printStackTrace();
+		}
+		
+		return count;
+	}
 }

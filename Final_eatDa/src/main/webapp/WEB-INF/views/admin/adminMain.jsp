@@ -14,35 +14,6 @@
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
-        <style>
-        	/*nav탭 hover 시, content 변경*/
-	        .home:hover span{display:none;}
-	        .home:hover:after{content:"관리자 메인";}
-	        
-	        /*게시글 관리*/
-	        .post:hover span{display:none;}
-	        .post:hover:after{content:"게시글 관리";}
-	        
-	        /*레시피 관리*/
-	        .recipe:hover span{display:none;}
-	        .recipe:hover:after{content:"레시피 관리";}
-	        
-	        /*상품 관리*/
-	        .product:hover span{display:none;}
-	        .product:hover:after{content:"상품 관리";}
-	        
-	        /*주문 관리*/
-	        .order:hover span{display:none;}
-	        .order:hover:after{content:"주문 관리";}
-	        
-	        /*회원 관리*/
-	        .user:hover span{display:none;}
-	        .user:hover:after{content:"회원 관리";}
-	        
-	        /*신고 관리*/
-	        .report:hover span{display:none;}
-	        .report:hover:after{content:"신고 관리";}
-        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark alert-warning justify-content-between">
@@ -69,42 +40,15 @@
                             <div class="sb-sidenav-menu-heading">
                                 <a href=""><img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;"></a>
                                 <br>
-                                <a href="#" style="text-decoration:none; color: black; text-align: center;">eatDa_admin 님<br>반갑습니다 : )</a>
+                                <a href="#" style="text-decoration:none; color: black; text-align: center;">${member.user_name} 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link home" href="adminMain.do" style="color: rgb(224, 179, 57);">
-                                <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                <span>HOME</span>
-                            </a>
-
-                            <a class="nav-link post" href="adminPostReply.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                <span>Post</span>
-                            </a>
-
-                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
-                                <span>Recipe</span>
-                            </a>
-
-                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                                <span>Product</span>
-                            </a>
-
-                            <a class="nav-link order" href="adminOrder.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                                <span>Order</span>
-                            </a>
-
-                            <a class="nav-link user" href="adminUser.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                <span>User</span>
-                            </a>
-
-                            <a class="nav-link report" href="adminReport.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
-                                <span>Report</span>
-                            </a>
+                            <a class="nav-link home" href="adminMain.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a>
+                            <a class="nav-link post" href="adminPostReply.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
+                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div><span>Recipe</span></a>
+                            <a class="nav-link product" href="adminProductList.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div><span>Product</span></a>
+                            <a class="nav-link order" href="adminOrder.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div><span>Order</span></a>
+                            <a class="nav-link user" href="adminUser.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a>
+                            <a class="nav-link report" href="adminReport.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
                         </div>
                     </div>
                 </nav>
@@ -119,7 +63,7 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">새 게시물</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="adminPostBlog.do">3 건 / 25 건</a>
+                                        <a class="small text-white stretched-link" href="adminPostBlog.do">${newBlogCount} 건 / ${blogCount} 건</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -156,19 +100,13 @@
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        매출 통계
-                                    </div>
+                                    <div class="card-header"><i class="fas fa-chart-area me-1"></i>매출 통계</div>
                                     <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        회원 수
-                                    </div>
+                                    <div class="card-header"><i class="fas fa-chart-bar me-1"></i>회원 수</div>
                                     <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>

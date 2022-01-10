@@ -23,7 +23,8 @@
 }
 
 .blog-write__content-article input[name="user_id"]{
-	margin-bottom:15px;
+	font-weight:500;
+	margin-bottom:17px;
 	border:none;
 	background-color:white;
 }

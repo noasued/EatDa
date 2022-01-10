@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
 
+
 <link href="resources/css/common/headerNew.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,7 +16,132 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+
+
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Cute+Font&family=IBM+Plex+Sans+KR:wght@200&family=Nanum+Myeongjo&display=swap"
+	rel="stylesheet">
+
+<!-- 썸머노트 -->
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+ 
+<style type="text/css">
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	color: #2e363e;
+}
+
+body {
+	min-width: 1400px;
+	height: auto;
+	margin: 0px;
+}
+
+.header {
+	height: 155px;
+	background-color: rgb(248, 249, 250);
+	border-bottom: 1px rgb(232, 229, 229) solid;
+}
+
+.top-header {
+	height: 75px;
+	padding-top: 10px;
+}
+
+.bottom-header {
+	height: 45px;
+}
+
+.img-div {
+	padding-top: 10px;
+}
+
+#logo {
+	width: 13%;
+	height: 13%;
+}
+
+.header-ul {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	list-style: none;
+	font-size: larger;
+	padding-top: 18px;
+}
+
+.header-ul .nav-menu {
+	float: left;
+}
+
+.nav-menu {
+	width: 11%;
+	height: 100%;
+	padding-left: 1%;
+}
+
+.nav-menu ul {
+	list-style: none;
+	height: 100%;
+}
+
+.sub-menu li {
+	padding: 10px 0 0 10px;
+	width: 100px;
+	height: 40px;
+	clear: left;
+	background-color: rgb(250, 251, 252);
+}
+
+.header-a {
+	text-decoration: none;
+	color: gray;
+}
+
+.sub-menu {
+	padding: 0px;
+}
+
+.nav-list>.header-ul>.nav-menu>.sub-menu {
+	display: none;
+}
+
+.nav-list>.header-ul>.nav-menu:hover>.sub-menu {
+	display: block;
+}
+
+#login:hover {
+	cursor: pointer;
+}
+
+#modal_close_btn:hover, #logout-btn:hover {
+	cursor: pointer;
+}
+
+#user-name {
+	letter-spacing: 1px;
+}
+
+.banner-text {
+	text-decoration: none;
+	color: black;
+	font-size: small;
+	padding-top: 5px;
+}
+
+.header-a, .banner-text, #login, #logout-btn {
+	font-family: 'Cute Font', cursive;
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	font-family: 'Nanum Myeongjo', serif;
+}
+</style>
+
 <script type="text/javascript">
     function loginModalIn() {
 		$(".login_wrap1").fadeIn();
@@ -49,7 +175,7 @@
 			<div class="col-sm-8 nav-list">
 				<ul class="header-ul">
 					<li class="nav-menu"><a class="header-a" href="marketMain.do">마켓</a></li>
-					<li class="nav-menu"><a class="header-a" href="recipeListTest.do">레시피</a></li>
+					<li class="nav-menu"><a class="header-a" href="recipeList.do">레시피</a></li>
 					<li class="nav-menu"><a class="header-a" href="foodbti.do">컨텐츠</a>
 						<ul class="sub-menu">
 							<li><a class="header-a" href="foodbti.do">음BTI</a></li>

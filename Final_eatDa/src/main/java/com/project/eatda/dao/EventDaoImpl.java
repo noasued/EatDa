@@ -97,7 +97,6 @@ public class EventDaoImpl implements EventDao{
 		
 		try {
 			res = sqlSession.update(NAMESPACE+"adminEventStatus",dto);
-			System.out.println("성공이냐?");
 		} catch (Exception e) {
 			System.out.println("[error] : event status update");
 			e.printStackTrace();

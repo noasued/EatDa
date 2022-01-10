@@ -68,5 +68,14 @@ public class BlogBizImpl implements BlogBiz{
 	public int adminBlogDelete(int blog_no) {
 		return dao.adminBlogDelete(blog_no);
 	}
+	
+	// 관리자 블로그 count
+	public int adminBlogCount() {
+		return dao.adminBlogCount();
+	}
+	
+	public int newAdminBlogCount() {
+		return dao.newAdminBlogCount();
+	}
 
 }

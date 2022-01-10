@@ -64,6 +64,7 @@
 	background-color: #fdd300;
 	color: black;
 	font-weight: bolder;
+	border:none;
 }
 
 .paging, .rec_logo, .searchbox, .rec_list, .category {
@@ -73,6 +74,7 @@
 
 .category{
 	letter-spacing: 8px;
+	margin-bottom: 2%;
 }
 .category a{
 	text-decoration: none;
@@ -89,12 +91,12 @@
 	height: 40px;
 }
 .writeBtn {
-	margin-left:75%;
+	margin-left:68%;
 	width: 100px;
 	height: 30px;
 }
 .searchBtn, .recipeCategory{
-	margin:2% 1%;
+	margin:2% 0.5%;
 	width: 80px;
 	height: 40px;
 }
@@ -102,7 +104,31 @@
 	width: 850px;
 	margin-left: 20%;
 }
+.paging a{
+    text-decoration: none;
+    color: black;
+}
+.paging a:active {
+	color:#fdd300;
+}
+.fontSize{
+	margin-top:5%;
+	font-size: x-large;
+	height: 400px;
+}
 </style>
+
+<script type="text/javascript">
+	function categoryChk(obj){
+		console.log(obj);
+		var val1 = document.getElementsByName("category")[0].value = obj;
+		console.log(val1);
+		
+		val1.submit();
+		return false;
+
+	}
+</script>
 </head>
 <body>
 	<div id="header">
@@ -112,28 +138,39 @@
 	<div class="recipe_top"></div>
 
 	<div class="body">
-		<form action="recipeListTest.do" method="get"> 
+		<form action="recipeList.do" method="get"> 
 			<div class="searchbox">
 				<select class="recipeCategory" name="searchType">
 					<option disabled selected>선택</option>
-					<option value="title" <c:if test="${searchType eq 'title'}">selected</c:if> >제목</option>
-					<option value="content" <c:if test="${searchType eq 'content'}">selected</c:if> >내용</option>
-					<option value="titcon" <c:if test="${searchType eq 'titcon'}">selected</c:if> >제목+내용</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="titcon">제목+내용</option>
 				</select>
-				<input type="text" class="keyword" id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
+				<input type="text" class="keyword" name="keyword" placeholder="검색어를 입력하세요.">
 				<input type="submit" class="searchBtn" value="검색">
 			</div>
+			
+	
+			<!-- 검색후 화면에 보여질 게시글 수와 페이지 -->
+			<input type="hidden" name="pageNum" value="1">
+			<input type="hidden" name="amount" value="9">
 		</form>
-	      
 	    <div class="category">
-			<p> <a href="recipeCategory.do?recipe_category=한식">한식</a> | <a href="recipeCategory.do?recipe_category=일식">일식</a> | <a href="recipeCategory.do?recipe_category=중식">중식</a> | <a href="recipeCategory.do?recipe_category=양식">양식</a> | <a href="recipeCategory.do?recipe_category=야식">야식</a> | <a href="recipeCategory.do?recipe_category=비건">비건</a> </p>
+			 	
+				<a href="recipeList.do?category=한식">한식</a> | 
+				<a href="recipeList.do?category=일식">일식</a> | 
+				<a href="recipeList.do?category=중식">중식</a> | 
+				<a href="recipeList.do?category=양식">양식</a> | 
+				<a href="recipeList.do?category=야식">야식</a> | 
+				<a href="recipeList.do?category=비건">비건</a>			
+			
 		</div>
-      
+	    
 		<div class="www">
 			<c:choose>
 				<c:when test="${empty list}">
 					<div class="col-md-12">
-						<p style="text-align:center;">--------------작성된 글이 없습니다.-----------</p>
+						<p class="fontSize" style="text-align:center;">작성된 글이 없습니다.</p>
 					</div>
 				</c:when>
 				<c:otherwise>
@@ -165,179 +202,26 @@
 		</div>
 	</div>
 
-	<!--  	<div class="body">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3">
-					<a href="recipeDetail.do">
-						<div class="rec_list">
-							<div class="img_wrap">
-								<div class="bg_img">
-									<img src="resources/images/recipe/main_prod_bg.png"></img>
-								</div>
-							</div>
-							<div class="img_wrap">
-								<div class="rec_title">
-									<p>고구마빠스!!!!</p>
-								</div>
-							</div>
-							<img src="resources/images/recipe/ppaseu.png"></img>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
 	<div class="bottom">
 		<div class="rec_button">
 			<input class="writeBtn" type="button" value="글쓰기"
-				onclick="location.href='recipeInsert.do'">
+				onclick="location.href='summernote.do'">
 		</div>
 		<div class="paging">
-			<p>◀ 1 2 3 4 5 ▶</p>
+			<c:if test="${rpdto.prev }" >
+				<a href="recipeList.do?pageNum=${rpdto.startPage - 1 }&amount=${rpdto.amount }">이전</a>
+			</c:if>
+			
+			<c:forEach var="num" begin="${rpdto.startPage }" end="${rpdto.endPage }" >
+				<p class="${rpdto.pageNum eq num ? 'active' : '' }">
+					<a href="recipeList.do?pageNum=${num }&amount=${rpdto.amount}">${num }</a>&nbsp;
+				</p>
+			</c:forEach>
+			
+			<c:if test="${rpdto.next }" >
+				<a href="recipeList.do?pageNum=${rpdto.endPage + 1 }&amount=${rpdto.amount }">다음</a>
+			</c:if>
 		</div>
 	</div>
 

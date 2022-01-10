@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.MemberBiz;
 import com.project.eatda.dto.UserDto;
 
@@ -31,6 +33,9 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired
+	private BlogBiz blogBiz;
 	
 	//회원가입 폼
 	@RequestMapping("/regist_form.do")
@@ -104,7 +109,7 @@ public class MemberController {
 	
 	//로그인
 	@RequestMapping("/loginCheck.do")
-	public ModelAndView loginCheck(@ModelAttribute UserDto dto, HttpSession session) throws Exception{
+	public ModelAndView loginCheck(@ModelAttribute UserDto dto, HttpSession session, Model model) throws Exception{
 		
 		ModelAndView mav = new ModelAndView();
 		UserDto dto2 = memberBiz.loginCheck(dto, session);
@@ -122,6 +127,9 @@ public class MemberController {
 				//관리자
 				}else if(dto2.getUser_role().equals("ADMIN")){
 					session.setAttribute("member", dto2);
+					model.addAttribute("newBlogCount",blogBiz.newAdminBlogCount());
+					model.addAttribute("blogCount",blogBiz.adminBlogCount());
+					
 					mav.setViewName("/admin/adminMain");
 				}
 				
