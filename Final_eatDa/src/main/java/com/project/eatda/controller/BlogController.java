@@ -150,7 +150,7 @@ public class BlogController {
 	}
 	
 	//썸머노트 파일처리
-	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
+	@RequestMapping(value="/uploadSummernoteImageFilee.do", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
 		JsonObject jsonObject = new JsonObject();

@@ -14,6 +14,7 @@
 		<result property="recipe_img" column="RECIPE_IMG"/>
 		<result property="recipe_enabled" column="RECIPE_ENABLED"/>
 		<result property="regdate" column="REGDATE"/>
+		<result property="r_short_desc" column="R_SHORT_DESC"/>
 	</resultMap>
 	
 	<!-- 레시피 리스트 -->
@@ -74,7 +75,7 @@
 	<!-- 레시피 추가 -->
 	<insert id="recipeInsert" parameterType="recipeDto">
 		INSERT INTO RECIPE
-		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE)
+		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE,NULL)
 	</insert>
 
 	<!-- 레시피 수정 -->

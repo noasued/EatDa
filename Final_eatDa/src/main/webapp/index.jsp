@@ -96,8 +96,8 @@
 }
 
 .thumbnail {
-	width: 100px;
-	height: 100px;
+	width: 100%;
+	height: 100%;
 	border-radius:15px 5px 5px 15px;
 }
 
@@ -109,6 +109,7 @@
 .item-inner {
 	display: flex;
 	width: 100%;
+	height:100%;
 	/*border:1px solid gray;*/
 	box-shadow:1px 1px 10px 1px rgb(143, 135, 135);
 	border-radius:15px;
@@ -146,6 +147,7 @@ li {
 
 .list-item {
 	width: 100%;
+	height:110px;
 	margin-bottom: 10px;
 }
 
@@ -181,12 +183,14 @@ li {
 	margin: 1% 0 10px 0; font-size: 17px;
 }
 .recent-text {
-	letter-spacing: 0.5px; font-size: 15px; margin-bottom: 90%;
+	letter-spacing: 0.5px; font-size: 15px; margin-bottom: 100%;
 }
 .recipe-no {
 	display:none;
 }
-.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover, .heart:hover, .a-tag:hover, .thumbnail:hover, .subSection-img:hover {
+.card-img-top:hover, .card-title:hover, .recipe-text:hover, .product-text:hover, .heart:hover, .a-tag:hover, .thumbnail:hover, .subSection-img:hover, 
+.item-inner:hover
+{
 	cursor:pointer;
 }
 .card-img-top {
@@ -205,17 +209,22 @@ li {
 	letter-spacing:1px;
 }
 .pop-title {
-	padding-left:3%;width:100%; height:20%; font-size:large; color:gray;
+	padding-left:3%;width:100%; height:20%; font-size:large; color:gray;margin-top:10px;
 }
 .pop-content {
 	margin-top:10px;width:100%; height:80%; padding:5px; letter-spacing:1px;
 }
 
 .item-img {
-	width:20%;
+	width:25%;
+	height:100%;
 }
 .item-title {
 	width:75%;
+}
+.p_title {
+	font-size:larger;
+	font-weight:400;
 } 
  
 </style>
@@ -292,7 +301,7 @@ li {
 				"</div>" +
 				"<div class='card-body'>" +
 				"<h6 class='card-subtitle mb-2 text-muted'>" + value.p_short_desc + "</h6>" +
-				"<h5 onclick='goProductPage(this)' class='card-title'>" + value.p_name + "</h5>" + 
+				"<h5 onclick='goProductPage(this)' class='card-title p_title'>" + value.p_name + "</h5>" + 
 				"<p class='card-text'>" +
 				"<span>" + value.p_price + "</span><span>원</span>" +
 				"</p>" +
@@ -323,7 +332,7 @@ li {
 					"</div>" +
 					"<div class='card-body'>" +
 					"<h6 class='card-subtitle mb-2 text-muted'>" + product.p_short_desc + "</h6>" +
-					"<h5 onclick='goProductPage(this)' class='card-title'>" + product.p_name + "</h5>" + 
+					"<h5 onclick='goProductPage(this)' class='card-title p_title'>" + product.p_name + "</h5>" + 
 					"<p class='card-text'>" +
 					"<span>" + product.p_price + "</span><span>원</span>" +
 					"</p>" +
@@ -350,7 +359,7 @@ li {
 					"</div>" +
 					"<div class='card-body'>" +
 					"<h6 class='card-subtitle mb-2 text-muted'>" + product.p_short_desc + "</h6>" +
-					"<h5 onclick='goProductPage(this)' class='card-title'>" + product.p_name + "</h5>" + 
+					"<h5 onclick='goProductPage(this)' class='card-title p_title'>" + product.p_name + "</h5>" + 
 					"<p class='card-text'>" +
 					"<span>" + product.p_price + "</span><span>원</span>" +
 					"</p>" +
@@ -372,6 +381,7 @@ li {
 			type:"post",
 			dataType:"json",
 			success:function(data) {
+				console.log(data);
 				$(data).each(function(key, value) {
 					$('.rec-recipe').append(
 						"<div class='col-md-3'>" +
@@ -382,7 +392,7 @@ li {
 						"</div>" +
 						"<div class='card-body'>" +
 						"<h5 onclick='goRecipeDetail(this)' class='card-title'>" + value.recipe_title + "</h5>" +
-						"<p onclick='goRecipeDetail(this)' class='card-text recipe-text'>" + value.recipe_content + "</p>" +
+						"<p onclick='goRecipeDetail(this)' class='card-text recipe-text'>" + value.r_short_desc + "</p>" +
 						"</div></div></div>"
 					);
 				});
@@ -402,6 +412,11 @@ li {
 		location.href = 'recipeDetail.do?recipe_no=' + recipe_no;
 	}
 	
+	const goBlogDetail = (object) => {
+		const blog_no = Number($(object).children().eq(0).text());
+		location.href='blog-detail.do?blog_no=' + blog_no;
+	}
+	
 	
 	//인기 eatdagram 가져오기 하트 구현되면 하트순으로 바꿔줘야함
 	const getPopularBlog = () => {
@@ -410,10 +425,12 @@ li {
 			type:"post",
 			dataType:"json",
 			success:function(data) {
+				console.log(data);
 				$(data).each(function(kay, value) {
 					$('.list-base:eq(1)').append(
 						"<li class='list-item'>" +
-							"<div class='item-inner'>" +
+							"<div class='item-inner' onclick='goBlogDetail(this)'>" +
+								"<div style='display:none;'>" + value.blog_no + "</div>"+
 								"<div class='item-img'>" +
 									"<img class='thumbnail' src=" + value.blog_img + ">" +
 								"</div>" +
@@ -426,7 +443,7 @@ li {
 									"</div>" +
 								"</div>" +
 								"<div class='item-heart' style='margin-top:5%;'>" +
-									"<span>40</span>" +
+									"<span>" + value.blog_like + "</span>" +
 									"<img class='heart' src='resources/images/recipe/heart.png'>" +
 								"</div>" +
 							"</div>" +
@@ -450,14 +467,14 @@ li {
 								"<div class='item-inner'>" +
 									"<div class='recipe-no'>" + value.recipe_no + "</div>" +
 									"<div class='item-img'>" +
-										"<img class='thumbnail' onclick='goRecipeDetail(this)' src=" + value.recipe_img + ">" +
+										"<img class='thumbnail' onclick='goRecipeDetail(this)' src=" + value.recipe_img + " style='margin-bottom:0; border-radius:15px 5px 5px 15px;'>" +
 									"</div>" +
 									"<div class='item-title'>" +
 										"<div class='pop-title'>" +
 											"<a class='a-tag' onclick='goRecipeDetail(this)'>" + value.recipe_title + "</a>" +									
 										"</div>" +
 										"<div class='pop-content'>" +
-											"<a class='a-tag' onclick='goRecipeDetail(this)'>" + value.recipe_content + "</a>" +
+											"<a class='a-tag' onclick='goRecipeDetail(this)'>" + value.r_short_desc + "</a>" +
 										"</div>" +
 									"</div>" +
 								"</div>" +
@@ -511,7 +528,7 @@ li {
 				<div class="col-md-6 new-title" style="text-align: right;">
 					<p class="title-font" style="margin-right: 10%; margin-bottom: 10px;">지금 가장 사랑받는 레시피</p><br>
 					<p class="font-noto-sans popular-text">지금 이 순간 여러분들에게 가장 사랑받는 레시피를 찾아봤어요</p>
-					<p class="font-noto-sans popular-text" style="margin-bottom:25%;">오늘의 레시피를 통해서 함께 행복을 나눠봐요</p>
+					<p class="font-noto-sans popular-text" style="margin-bottom:37%;">오늘의 레시피를 통해서 함께 행복을 나눠봐요</p>
 					<br>
 					<span onclick="location.href='recipeList.do'" class="font-noto-sans sub-title" style="margin-right: 10%;">Recipe></span>
 				</div>
@@ -560,7 +577,7 @@ li {
 						style="height: 380px; border: 0; border-bottom: gray 1px dotted;">
 						<div class="card-body" align="right">
 							<h5 class="title-font" style="margin: 1% 0 10px 0; font-size: 17px;">주기적으로 행복을 드립니다</h5>
-							<p class="card-text" style="letter-spacing: 0.5px; font-size: 15px; margin-bottom: 80%;">
+							<p class="card-text" style="letter-spacing: 0.5px; font-size: 15px; margin-bottom: 95%;">
 								바쁜 일상에 치여 집에서 식탁의 행복을 누리지 못하는 여러분들을 위한 선물
 							</p>
 							<span class="font-noto-sans sub-title" onclick="location.href='subMain.do'">구독 서비스 보러가기></span>
@@ -581,7 +598,7 @@ li {
 				<div class="col-md-6" style="text-align: left">
 					<p class="title-font" style="margin-left: 10%; margin-bottom: 10px;">가장 사랑받는 EatDagram</p>
 					<p style="margin:0 0 0 10%" class="popular-text">여러분만의 경험을 공유해보세요</p>
-					<p style="margin:0 0 20% 10%" class="popular-text">세상에서 단 하나뿐인 레시피를 공유하면서 이벤트까지 응모해봐요.</p>
+					<p style="margin:0 0 35% 10%" class="popular-text">세상에서 단 하나뿐인 레시피를 공유하면서 이벤트까지 응모해봐요.</p>
 					<br>
 					<span class="font-noto-sans sub-title" style="margin-left: 10%;" onclick="location.href='blog.do'">EatDagram></span>
 				</div>
