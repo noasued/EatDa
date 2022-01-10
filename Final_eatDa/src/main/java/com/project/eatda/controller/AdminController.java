@@ -356,13 +356,17 @@ public class AdminController {
 	
 	// 신고 status update
 	@RequestMapping("reportStatusUpdate.do")
-	public String reportStatusUpdate(ReportDto dto, int report_status, int report_no) {
+	public String reportStatusUpdate(ReportDto dto, int report_status, int report_no, int report_penalty) {
 		System.out.println("update report_status");
-		System.out.println(report_status);
 		System.out.println(report_no);
+		
+		if(report_status==2) {
+			report_penalty += 1;
+		}
 		
 		dto.setReport_status(report_status);
 		dto.setReport_no(report_no);
+		dto.setReport_penalty(report_penalty);
 		System.out.println(dto.toString());
 		adminBiz.reportStatusUpdate(dto);
 		

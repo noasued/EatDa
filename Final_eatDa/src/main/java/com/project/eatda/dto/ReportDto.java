@@ -11,8 +11,8 @@ public class ReportDto {
 		private String reported;
 		private int reply_no;
 		private Date report_date;
-		private int report_status;		//신고 처리 상황 (Default : "처리대기")
 		private String report_content;
+		private int report_status;		//신고 처리 상황 (Default : "처리대기")
 		private int report_penalty;		// penalty count
 		private String reply_content;
 		

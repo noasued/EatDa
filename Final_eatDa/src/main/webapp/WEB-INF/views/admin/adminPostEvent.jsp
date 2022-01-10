@@ -135,11 +135,11 @@
                                     <tbody>
 	                                    <c:forEach items="${eventList}" var="dto">
 			                            	<tr>
-			                                	<td style="vertical-align:middle;"><input type="checkbox" name="RowCheck[]" value="${dto.event_no}"></td>
-			                                    <td style="vertical-align:middle;">${dto.event_no}</td>
-			                                    <td style="vertical-align:middle;"><a href="event-detail.do?event_no=${dto.event_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
-			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
-			                                    <td style="vertical-align:middle;">
+			                                	<td><input type="checkbox" name="RowCheck[]" value="${dto.event_no}"></td>
+			                                    <td>${dto.event_no}</td>
+			                                    <td><a href="event-detail.do?event_no=${dto.event_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
+			                                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+			                                    <td>
 			                                    	<select onChange="statusUpdate(this.value,'${dto.event_no}');">
 			                                        	<option value="대기" ${dto.status == "대기" ? "selected":""} >대 기</option>
 			                                            <option value="진행중" ${dto.status == "진행중" ? "selected":""}>진행중</option>

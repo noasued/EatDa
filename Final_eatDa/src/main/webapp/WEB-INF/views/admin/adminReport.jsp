@@ -47,8 +47,9 @@
 	     }
 	     
 	   // 신고 처리 현황 update
-			function reportStatusUpdate(report_status,user_id){
-				location.href="reportStatusUpdate.do?report_status="+report_status+"&user_id="+user_id;
+			function reportStatusUpdate(report_status,report_no,report_penalty){
+		   	console.log(report_status);
+				location.href="reportStatusUpdate.do?report_status="+report_status+"&report_no="+report_no+"&report_penalty="+report_penalty;
 			}
         
 	   //Modal 실행
@@ -57,7 +58,7 @@
 	       }
 	
 	    // Modal 값 띄우기
-	        function PopupInfo(clicked_element) {
+	        function PopupInfo(clicked_element,msg) {
 	        	var row_td = clicked_element.getElementsByTagName("td");
 	        	var modal = document.getElementById("modal_admin_report");
 	        	   
@@ -157,16 +158,16 @@
                                     </thead>
                                     <tbody id="admin_report">
 	                                	<c:forEach items="${reportList}" var="dto">
-			                        		<tr onclick="PopupInfo(this,'${dto.reply_content}','${dto.report_no}')">
+			                        		<tr onclick="PopupInfo(this,'${dto.reply_content}')">
 			                                	<td><input type="checkbox" name="RowCheck[]" value="${dto.report_no}"></td>
 			                                	<td>${dto.reporter}</td>
 			                                    <td><a id="${dto.report_no}" onclick="modal('${dto.report_no}');" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.reported}</a></td>
 			                                    <td style="vertical-align:middle; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${dto.report_content}</td>
 			                                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.report_date}"/></td>
 			                                    <td>
-			                                    	<select onChange="reportStatusUpdate(this.value,'${dto.report_no}');">
-			                                    		<option value="1" ${dto.report_status == '1' ? "selected":""}>처리 대기</option>
-			                                    		<option value="2" ${dto.report_status == '2' ? "selected":""}>처리 완료</option>
+			                                    	<select onChange="reportStatusUpdate(this.value,'${dto.report_no}','${dto.report_penalty}');">
+			                                    		<option value="1" ${dto.report_status == "1" ? "selected":""}>처리 대기</option>
+			                                    		<option value="2" ${dto.report_status == "2" ? "selected":""}>처리 완료</option>
 			                                    	</select>
 			                                    </td>
 			                                    <td>${dto.report_penalty}</td>
