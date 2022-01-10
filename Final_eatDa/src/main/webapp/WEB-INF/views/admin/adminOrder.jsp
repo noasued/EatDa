@@ -38,27 +38,36 @@
 			    		}
 			    	});
 			    });
-		
-			     function delete_frm(){
-			    	 if(confirm('정말 삭제하시겠습니까?')==true){
-			    		 return true;
-			    	 }else{
-			    		 return false;
-			    	 }
-			     }
 	        
+				// 배송 현황 update
+				function shippingStatusUpdate(shipping_status, order_id){
+					location.href="shippingStatusUpdate.do?shipping_status="+shipping_status+"&order_id="+order_id;
+				}
+				
+				// 진행 현황 update
+				function orderStatusUpdate(order_status,order_id){
+					location.href="orderStatusUpdate.do?order_status="+order_status+"&order_id="+order_id;
+				}
+				
 		      //Modal 실행
-		        $(function(){
-		        	$("#modal").click(function(){
-		        		$(".modal").fadeIn();
-		        	});
-		        });
-		        
-		        $(".modal-content").click(function(){
-		        	$(".modal").fadeOut();
-		        });
+		       function modal(id){
+		    	   $(".modal").fadeIn();
+		       }
 		
-		        
+		        // Modal 값 띄우기
+		        function PopupInfo(clicked_element,msg) {
+		        	   var row_td = clicked_element.getElementsByTagName("td");
+		        	   var modal = document.getElementById("modal_admin_order");
+		        	   
+		        	   console.log(msg);
+		        	   
+		        	   
+		        	   document.getElementById("order_id").innerHTML = row_td[1].innerHTML;
+		        	   document.getElementById("user_id").innerHTML = row_td[2].innerHTML;
+		        	   document.getElementById("order_date").innerHTML = row_td[3].innerHTML;
+		        	   $("#order_msg").text(msg);
+		        	}
+
 			    //Modal Close 기능
 			    function close_pop(flag) {
 			         $('#myModal').hide();
@@ -82,56 +91,6 @@
 				width:80px;
 				height:30px;
 			}
-			
-			 /* Modal (background) */
-	        .modal {
-	            display: none; /* Hidden by default */
-	            position: fixed; /* Stay in place */
-	            z-index: 1; /* Sit on top */
-	            left: 0;
-	            top: 0;
-	            width: 100%; /* Full width */
-	            height: 100%; /* Full height */
-	            overflow: auto; /* Enable scroll if needed */
-	            background-color: rgb(0,0,0); /* Fallback color */
-	            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	        }
-	    
-	        /* Modal Content/Box */
-	        .modal-content {
-	            background-color: #fefefe;
-	            margin: 15% auto;
-	            padding: 20px;
-	            border: 1px solid #888;
-	            width: 30%;                          
-	        }
-	        /*nav탭 hover 시, content 변경*/
-	        .home:hover span{display:none;}
-	        .home:hover:after{content:"관리자 메인";}
-	        
-	        /*게시글 관리*/
-	        .post:hover span{display:none;}
-	        .post:hover:after{content:"게시글 관리";}
-	        
-	        /*레시피 관리*/
-	        .recipe:hover span{display:none;}
-	        .recipe:hover:after{content:"레시피 관리";}
-	        
-	        /*상품 관리*/
-	        .product:hover span{display:none;}
-	        .product:hover:after{content:"상품 관리";}
-	        
-	        /*주문 관리*/
-	        .order:hover span{display:none;}
-	        .order:hover:after{content:"주문 관리";}
-	        
-	        /*회원 관리*/
-	        .user:hover span{display:none;}
-	        .user:hover:after{content:"회원 관리";}
-	        
-	        /*신고 관리*/
-	        .report:hover span{display:none;}
-	        .report:hover:after{content:"신고 관리";}
 		</style>
     </head>
     <body class="sb-nav-fixed">
@@ -157,44 +116,16 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav" style="text-align: center;">
                             <div class="sb-sidenav-menu-heading">
-                                <img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;">
-                                <br>
-                                <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
+                                <img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;"><br>
+                                <a href="#" style="text-decoration:none; color: black;">${member.user_name} 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link home" href="adminMain.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                <span>HOME</span>
-                            </a>
-
-                            <a class="nav-link post" href="adminPostReply.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                <span>Post</span>
-                            </a>
-
-                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
-                                <span>Recipe</span>
-                            </a>
-
-                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                                <span>Product</span>
-                            </a>
-
-                            <a class="nav-link order" href="adminOrder.do" style="color: rgb(224, 179, 57);">
-                                <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                                <span>Order</span>
-                            </a>
-
-                            <a class="nav-link user" href="adminUser.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                <span>User</span>
-                            </a>
-
-                            <a class="nav-link report" href="adminReport.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
-                                <span>Report</span>
-                            </a>
+                            <a class="nav-link home" href="adminMain.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a> 
+							<a class="nav-link post" href="adminPostReply.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
+							<a class="nav-link recipe" href="adminRecipe.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div> <span>Recipe</span></a>
+							<a class="nav-link product" href="adminProductList.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div><span>Product</span></a> 
+							<a class="nav-link order" href="adminOrder.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div><span>Order</span></a> 
+							<a class="nav-link user" href="adminUser.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a> 
+							<a class="nav-link report" href="adminReport.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
                         </div>
                     </div>
                 </nav>
@@ -223,28 +154,28 @@
 	                                            <th>진행 현황</th>
 	                                        </tr>
 	                                    </thead>
-	                                    <tbody>
+	                                    <tbody id="admin_order">
 		                                    <c:forEach items="${orderList}" var="dto">
-				                            	<tr>
+				                            	<tr onclick="PopupInfo(this,'${dto.order_message}')">
 				                                	<td><input type="checkbox" name="RowCheck[]" value="${dto.order_id}"></td>
 				                                    <td>${dto.order_id}</td>
-				                                    <td><a id="modal" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.user_id}</a></td>
-				                                    <td>${dto.order_date}</td>
+				                                    <td><a id="${dto.order_id}" onclick="modal('${dto.order_id}');" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.user_id}</a></td>
+				                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.order_date}"/></td>
 				                                    <td>${dto.order_phone}</td>
 				                                    <td>
-				                                    	<select>
-				                                        	<option value="1">주문 완료</option>
-				                                            <option value="2">상품 준비중</option>
-				                                            <option value="3">배송지 출발</option>
-				                                            <option value="4">배송중</option>
-				                                            <option value="5">배송 완료</option>
+				                                    	<select onChange="shippingStatusUpdate(this.value,'${dto.order_id}');">
+				                                        	<option value="주문 완료" ${dto.shipping_status == '주문 완료' ? "selected":""}>주문 완료</option>
+				                                            <option value="상품 준비중" ${dto.shipping_status == '상품 준비중' ? "selected":""}>상품 준비중</option>
+				                                            <option value="배송지 출발" ${dto.shipping_status == '배송지 출발' ? "selected":""}>배송지 출발</option>
+				                                            <option value="배송중" ${dto.shipping_status == '배송중' ? "selected":""}>배송중</option>
+				                                            <option value="배송 완료" ${dto.shipping_status == '배송 완료' ? "selected":""}>배송 완료</option>
 				                                        </select>
 				                                    </td>
 				                                    <td>
-				                                    	<select>
-				                                        	<option value="결제 대기">결제 대기</option>
-				                                            <option value="결제 완료">결제 완료</option>
-				                                            <option value="결제 취소">결제 취소</option>
+				                                    	<select onChange="orderStatusUpdate(this.value,'${dto.order_id}');">
+				                                        	<option value="결제 대기" ${dto.order_status == '결제 대기' ? "selected":""}>결제 대기</option>
+				                                            <option value="결제 완료" ${dto.order_status == '결제 완료' ? "selected":""}>결제 완료</option>
+				                                            <option value="결제 취소" ${dto.order_status == '결제 취소' ? "selected":""}>결제 취소</option>
 				                                    	</select>
 				                                	</td>
 				                        		</tr>
@@ -269,21 +200,26 @@
         <div id="myModal" class="modal">
  
 	      <!-- Modal content -->
-	      <div class="modal-content">
-	                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">주문 내용</span></b></span></p>
-	                <p style="text-align: center; line-height: 1.5;"><br /></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구매자명 : </b></span></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주문번호 : </b></span>B213G64</p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>배송지 주소 : </b></span>경기도 수원시 XXXXXX</p>
-	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주문 상품 : </b></span>고구마말랭이 10박스</p>
-	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
-	                <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>기타 사항 : </b></span>없음</p>
-	                <p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
-	                <p style="text-align: left; line-height: 1.5;"><br /></p>
-	                <p><br /></p>
-	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</span></div>
-	      </div>
+	      <div class="modal-content" id="modal_admin_order">
+	      	<div>
+	      		<label style="font-weight:bold;">주문 번호</label>
+	      		<p class="w3-input w3-border" id="order_id"></p>
+	      	</div>
+	      	<div>
+	            <label style="font-weight:bold;">주문자 ID</label>
+	            <p class="w3-input w3-border" id="user_id">
+            </div>
+            <div>
+	            <label style="font-weight:bold;">주문일</label>
+	            <p class="w3-input w3-border" id="order_date">
+            </div>
+            <div>
+	            <label style="font-weight:bold;">메세지</label>
+	            <p class="w3-input w3-border" id="order_msg">
+            </div>
+            
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</div>
+         </div>
 	    </div>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

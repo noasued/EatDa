@@ -19,6 +19,8 @@ public class OrderDto {
 	private int discount_price; // 할인 가격
 	private double coupon_rate; // 쿠폰 할인률
 	private String coupon_id;
+	private String shipping_status;
+	private String order_status;
 
 	public OrderDto() {
 		super();
@@ -26,7 +28,7 @@ public class OrderDto {
 
 	public OrderDto(String order_id, String user_id, Date order_date, String order_addr, String order_name,
 			String order_phone, String order_message, int order_price, String pay_option, int original_price,
-			int discount_price, double coupon_rate, String coupon_id) {
+			int discount_price, double coupon_rate, String coupon_id, String shipping_status, String order_status) {
 		super();
 		this.order_id = order_id;
 		this.user_id = user_id;
@@ -41,6 +43,8 @@ public class OrderDto {
 		this.discount_price = discount_price;
 		this.coupon_rate = coupon_rate;
 		this.coupon_id = coupon_id;
+		this.shipping_status =shipping_status;
+		this.order_status =order_status;
 	}
 
 	public String getOrder_id() {
@@ -146,6 +150,23 @@ public class OrderDto {
 	public void setCoupon_id(String coupon_id) {
 		this.coupon_id = coupon_id;
 	}
+	
+	public String getShipping_status() {
+		return shipping_status;
+	}
+	
+	public void setShipping_status(String shipping_status) {
+		this.shipping_status = shipping_status;
+	}
+	
+	public String getOrder_status() {
+		return order_status;
+	}
+	
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+	
 
 	@Override
 	public String toString() {
@@ -153,7 +174,7 @@ public class OrderDto {
 				+ ", order_addr=" + order_addr + ", order_name=" + order_name + ", order_phone=" + order_phone
 				+ ", order_message=" + order_message + ", order_price=" + order_price + ", pay_option=" + pay_option
 				+ ", original_price=" + original_price + ", discount_price=" + discount_price + ", coupon_rate="
-				+ coupon_rate + ", coupon_id=" + coupon_id + "]";
+				+ coupon_rate + ", coupon_id=" + coupon_id + ", shipping_status=" + shipping_status + ", order_status=" + order_status+ "]";
 	}
 
 }

@@ -88,7 +88,7 @@
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
         <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
-        	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.user_id}" disabled>
+        	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${user_id}" disabled>
           <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
 					<textarea class="summernote" id="summernote" name="editordata"></textarea>
 					<div class="blog-write__content-article__btns">

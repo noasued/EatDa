@@ -10,6 +10,7 @@
 		<result property="event_content" column="EVENT_CONTENT"/>
 		<result property="event_img" column="EVENT_IMG"/>
 		<result property="regdate" column="REGDATE"/>
+		<result property="status" column="STATUS"/>
 	</resultMap>
 	
 	<select id="eventList" resultMap="eventMap">
@@ -43,7 +44,7 @@
 	</delete>
 	
 	<!-- Admin Event Status Update -->
-	<update id="adminEventStatus" parameterType="int">
+	<update id="adminEventStatus" parameterType="eventDto">
 		UPDATE EVENT
 		SET STATUS=#{status}
 		WHERE EVENT_NO=#{event_no}

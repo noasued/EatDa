@@ -2,11 +2,21 @@ package com.project.eatda.biz;
 
 import java.util.List;
 
+import javax.activation.FileDataSource;
+import javax.inject.Inject;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.AdminDao;
 import com.project.eatda.dto.BlogReplyDto;
+import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.OrderAdminDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
@@ -16,6 +26,9 @@ import com.project.eatda.dto.UserDto;
 @Service
 public class AdminBizImpl implements AdminBiz{
 
+	@Inject
+	JavaMailSender mailSender;	
+	
 	/* 댓글 리스트 */
 		@Autowired
 		public AdminDao replyDao;
@@ -38,6 +51,12 @@ public class AdminBizImpl implements AdminBiz{
 		@Override
 		public List<ProductDto> adminProductList() {
 			return productDao.adminProductList();
+		}
+		
+		//selectOne
+		@Override
+		public ProductDto selectOne(String p_id) {
+			return productDao.selectOne(p_id);
 		}
 		
 		// 상품 등록
@@ -64,7 +83,7 @@ public class AdminBizImpl implements AdminBiz{
 		public AdminDao orderDao;
 		
 		@Override
-		public List<OrderAdminDto> adminOrderList() {
+		public List<OrderDto> adminOrderList() {
 			return orderDao.adminOrderList();
 		}
 		
@@ -85,12 +104,16 @@ public class AdminBizImpl implements AdminBiz{
 		public int adminOrderInsert2(OrderDto dto) {
 			return orderDao.adminOrderInsert2(dto);
 		}
-
-		// 주문 리스트 수정
+		
+		// 배송 현황 update
 		@Override
-		public int adminOrderUpdate(OrderAdminDto dto) {
-			// TODO Auto-generated method stub
-			return 0;
+		public int shippingStatusUpdate(OrderDto dto) {
+			return orderDao.shippingStatusUpdate(dto);
+		}
+		
+		// 진행 현황 udpate
+		public int orderStatusUpdate(OrderDto dto) {
+			return orderDao.orderStatusUpdate(dto);
 		}
 		
 		// 주문 리스트 삭제
@@ -98,7 +121,7 @@ public class AdminBizImpl implements AdminBiz{
 		public int adminOrderDelete(String order_id) {
 			return orderDao.adminOrderDelete(order_id);
 		}
-
+		
 		
 	/* 회원 리스트 */	
 		@Autowired
@@ -109,15 +132,38 @@ public class AdminBizImpl implements AdminBiz{
 			return userDao.adminUserList();
 		}
 		
+		// 회원 활성화 update
 		@Override
-		public List<UserDto> adminUserModal(int user_no){
-			return userDao.adminUserModal(user_no);
+		public int adminUserUpdate(UserDto dto) {
+			return userDao.adminUserUpdate(dto);
 		}
 		
 		// 회원 리스트 삭제
 		@Override
 		public int adminUserDelete(String user_id) {
 			return userDao.adminUserDelete(user_id);
+		}
+		
+		// 이메일
+		public void sendMail(EmailDto dto) {
+			try {
+				// 이메일 객체
+				MimeMessage msg = this.mailSender.createMimeMessage();
+
+				// 받는 사람 설정(수신자)
+				msg.addRecipient(RecipientType.TO, new InternetAddress(dto.getReceiveMail()));
+				//보내는 사람 (발신자 이메일 주소 + 이름)
+				msg.addFrom(new InternetAddress[] { new InternetAddress(dto.getSenderMail(), dto.getSenderName()) });
+				// 이메일 제목과 본문내용 (인코딩)
+				msg.setSubject(dto.getSubject(), "utf-8");
+				msg.setText(dto.getMessage(), "utf-8");
+				
+				// 이메일 보내기
+				mailSender.send(msg);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	
 	

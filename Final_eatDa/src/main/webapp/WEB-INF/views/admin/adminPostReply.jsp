@@ -132,42 +132,15 @@
                             <div class="sb-sidenav-menu-heading">
                                 <img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;">
                                 <br>
-                                <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
+                                <a href="#" style="text-decoration:none; color: black;">${member.user_name} 님<br>반갑습니다 : )</a>
                             </div>
-                            <a class="nav-link home" href="adminMain.do" style="color: black">
-                                <div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div>
-                                <span>HOME</span>
-                            </a>
-
-                            <a class="nav-link post" href="adminPostReply.do" style="color: rgb(224, 179, 57);">
-                                <div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                <span>Post</span>
-                            </a>
-
-                            <a class="nav-link recipe" href="adminRecipe.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div>
-                                <span>Recipe</span>
-                            </a>
-
-                            <a class="nav-link product" href="adminProductList.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div>
-                                <span>Product</span>
-                            </a>
-
-                            <a class="nav-link order" href="adminOrder.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                                <span>Order</span>
-                            </a>
-
-                            <a class="nav-link user" href="adminUser.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                                <span>User</span>
-                            </a>
-
-                            <a class="nav-link report" href="adminReport.do" style="color: black;">
-                                <div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div>
-                                <span>Report</span>
-                            </a>
+                            <a class="nav-link home" href="adminMain.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a> 
+							<a class="nav-link post" href="adminPostReply.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
+							<a class="nav-link recipe" href="adminRecipe.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div> <span>Recipe</span></a>
+							<a class="nav-link product" href="adminProductList.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div><span>Product</span></a> 
+							<a class="nav-link order" href="adminOrder.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div><span>Order</span></a> 
+							<a class="nav-link user" href="adminUser.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a> 
+							<a class="nav-link report" href="adminReport.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
                         </div>
                     </div>
                 </nav>
@@ -200,7 +173,7 @@
 			                                	<td style="width:50px;"><input type="checkbox" name="RowCheck[]" value="${dto.reply_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
 			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
-			                                    <td style="vertical-align:middle;">${dto.reply_content}</td>
+			                                    <td style="vertical-align:middle;"><a href="blog-detail.do?blog_no=${dto.blog_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
 			                        		</tr>
 		                            	</c:forEach>

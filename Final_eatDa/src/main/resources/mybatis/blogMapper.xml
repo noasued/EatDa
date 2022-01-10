@@ -38,18 +38,14 @@
 	</select>
 	
 	<select id="blogDetail" resultType="blogDto" parameterType="int">
-		SELECT BLOG_NO, USER_ID, BLOG_TITLE, BLOG_CONTENT, BLOG_COUNT, 
-						(SELECT COUNT(*) AS CNT
-							FROM BLOG_LIKE
-							WHERE BLOG_NO=#{blog_no}) AS BLOG_LIKE,
-					 BLOG_IMG, REGDATE
+		SELECT *
 		FROM BLOG
 		WHERE BLOG_NO = #{blog_no}
 	</select>
 	
 	<insert id="blogInsert" parameterType="blogDto">
 		INSERT INTO BLOG
-		VALUES(BLOG_NO_SEQ.NEXTVAL, 'ADMIN', #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'resources/images/blog-write01.png', SYSDATE)
+		VALUES(BLOG_NO_SEQ.NEXTVAL, #{user_id}, #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, 'resources/images/blog-write01.png', SYSDATE)
 	</insert>
 	
 	<select id="selectBlogNo" parameterType="String" resultType="blogDto">
@@ -77,5 +73,17 @@
 	<delete id="adminBlogDelete" parameterType="int">
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
+	
+	<select id="adminBlogCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM BLOG
+		WHERE 1>BLOG_COUNT
+	</select>
+	
+	<select id="newAdminBlogCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM BLOG
+		WHERE 1>BLOG_COUNT
+	</select>
 	
 </mapper>

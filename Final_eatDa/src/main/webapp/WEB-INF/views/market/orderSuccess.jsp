@@ -7,95 +7,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/market/orderSuccess.css">
 <title>Insert title here</title>
-<script type="text/javascript">
-$(document).ready(function() {
-	window.setTimeout(function() {
-		getCartList();
-		deleteCartList();
-		//deleteCoupon();
-	},1000);
-});
-
-const getCartList = () => {
-	let order_id = document.getElementById('order-id').innerText;
-	$.ajax({
-		url:"getOrderList.do?order_id="+order_id,
-		type:"get",
-		dataType:"json",
-		success:function(data){
-			let list = data;
-			$(list).each(function(key, value) {
-				let dp = Number(value.price)*Number($('#coupon-rate').text());
-				$('.container-fluid').eq(2).append(
-						"<div class='row rows-width product-section' style='margin:0px auto;'>" +
-						"<div class='col-md-2 p-img'>" +
-						"<img src='" + value.img_path + "' class='product-img'>" +
-						"</div>" +
-						"<div class='col-md-6 li-div p-info'>" +
-						"<div>" +
-						"<span class='title'>상품 명 : </span>" +
-						"<span>" + value.p_name + "</span>" +
-						"</div>" +
-						"<div>" +
-						"<span class='title'>주문 수량 : </span>" +
-						"<span>" + value.p_count +"</span>" +
-						"</div>" +
-						"</div>" +
-						"<div class='col-md-4 li-div p-price'>" +
-						"<div>" +
-						"<span class='title'>상품 금액 : </span>" +
-						"<span>&nbsp;&nbsp;" + value.price + "</span>" +
-						"<span>&#8361;</span>" +
-						"</div>" +
-						"<div>" +
-						"<span class='title'>할인 금액 : </span>" +
-						"<span>-" + dp + "</span>" +
-						"<span>&#8361;</span>" +
-						"</div></div></div>"						
-				);
-			});
-		}
-	});
-}
-
-const deleteCartList = () => {
-	$.ajax({
-		url:"deleteCartList.do",
-		type:"post",
-		success:function(msg) {
-			console.log('deleteCartList: ' + msg);
-		}
-	});
-}
-
-/*
-const deleteCoupon = () => {
-	let coupon_id = {
-			coupon_id:$('#coupon-id').text()
-	}
-	$.ajax({
-		url:"deleteCoupon.do",
-		type:"post",
-		contentType:"application/json; charset=utf-8",
-		data:JSON.stringify(coupon_id),
-		success:function(msg) {
-			console.log('deleteCoupon: ' + msg);
-		}
-	});
-}
-*/
-
-const goMain = (command) => {
-	location.href=command+'.do';
-}
-
-</script>
+<script src="resources/js/market/orderSuccess.js" type="text/javascript"></script>
 </head>
 <body style="margin-top:200px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
 	</div>
-	<!-- description part -->
     <div class="container-fluid">
         <div class="row rows-width first-section" style="margin:0px auto; margin-top: 5%;">
             <div class="col-md-12" align="center">
@@ -120,14 +37,12 @@ const goMain = (command) => {
         </div>
     </div>
 
-    <!-- product part -->
     <div class="container-fluid">
         <div class="row rows-width title-section" style="margin:0px auto; margin-top: 5%;">
             <h4>주문 상품 정보</h4>
         </div>
     </div>
     
-    <!-- payment part -->
     <div class="container-fluid">
         <div class="row rows-width payment-section" style="margin:0px auto;">
             <h4>결제 정보</h4>
@@ -164,7 +79,6 @@ const goMain = (command) => {
             </div>
         </div>
     </div>
-    <!-- delivery part -->
     <div class="container-fluid">
         <div class="row rows-width payment-section" style="margin:0px auto;">
             <h4>배송지 정보</h4>

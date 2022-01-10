@@ -11,33 +11,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script type="text/javascript">
    /*$(function(){
-      
-       // 하트 클릭
-       $(".emptyheart").click(function(){
-         console.log("click heart");
-         console.log(blog_no);
-         
-         $.ajax({
-            url: "blog-heart.do",
-            type: "GET",
-            data: {
-               blog_no : blog_no,
-               user_id : '${user_id}'
-            },
-            success: function(){
-               recCount();
-            }
-         });
-         
-         $(".fullheart").fadeIn(300);
-       });
-   
-       // 다시 클릭 -> 하트 비워짐
-        $(".fullheart").click(function(){
-         $(".fullheart").fadeOut(300);
-       }); 
-   
-       
+
        // 신고 버튼 클릭 -> 모달창 띄우기
        $("#report-btn").click(function(){
          $(".reply-report__modal").fadeIn();
@@ -49,26 +23,38 @@
        
      }); */
      
-     function likeFunction(){
-        let blog_no = "${dto.blog_no}";
-        let user_id = "${dto.user_id}"; //로그인한 사용자 아이디.. 작성자 아님.
-        consol.log("blog_no: "+blog_no+", user_id: "+user_id);
-        let pageUrl = "blog-detail.do?blog_no="+blog_no;
+     // like 버튼 클릭! (하트 채우기)
+     function likeFunction() {
+        let blog_no = $('#blog_no').val();
+        let user_id = $('#blog_author').text();
+        let like_count = Number($('#like-count').text())+1;
+        console.log("blog_no: "+blog_no+", user_id: "+user_id);
         
         $.ajax({
-        	url: "blog-like.do",
-          type: "get",
-          cache: false,
-          dataType: "json",
-          data: 'blog_no='+blog_no+'&user_id='+user_id,
-          success: function(data){
-			     	document.location = pageUrl;
-           	$('#like_count').html(data.like_count);
-          }
-           
+        	url: "blog-like.do?blog_no="+blog_no+"&user_id="+user_id+"&like_count="+like_count,
+          type: "GET",
+          dataType:"text"
         });
+        $(".fullheart").fadeIn(300);
+        $('#like-count').text(Number(like_count));
        
      }
+     
+		// like 버튼 클릭! (하트 비우기)
+    function unlike(){
+    	let blog_no = $('#blog_no').val();
+      let user_id = $('#blog_author').text();
+      let like_count = Number($('#like-count').text())-1;
+         
+      $(".fullheart").fadeOut(300);
+      $('#like-count').text(like_count);
+         
+			$.ajax({
+      	url: "blog-unlike.do?blog_no="+blog_no+"&user_id="+user_id+"&like_count="+like_count,
+      	type: "GET",
+      	dataType:"text"
+			});
+		}
      
      //게시글 삭제
       function blogDelete(blog_no){
@@ -288,6 +274,7 @@
                </div>
            <!-- buttons -->
            <div class="detail-article__btn">
+           	 <span style="display:none" id="blog_author">${dto.user_id}</span>
              <span>작성자&nbsp;&nbsp;&nbsp;${dto.user_id}</span><span><fmt:formatDate pattern="yyyy-MM-dd a hh:mm" value="${dto.regdate}"/></span>
              <input type="button" value="목록" onclick="location.href='blog.do'">
              <input type="button" value="수정" onclick="location.href='blog-updateform.do?blog_no=${dto.blog_no}'">
@@ -304,7 +291,7 @@
         <!-- click likes area -->
         <div class="detail-article__content-likes">
              <i class="far fa-heart fa-lg emptyheart" onclick="likeFunction()"></i>
-             <i class="fas fa-heart fa-lg fullheart"></i>
+             <i class="fas fa-heart fa-lg fullheart" onclick="unlike()"></i>
           <span class="count-likes" id="like-count">${dto.blog_like}</span>
           <h6>마음에 드는 글이었나요? 그렇다면 하트를 눌러주세요 <i class="far fa-hand-point-left fa-sm"></i></h6>
         </div>

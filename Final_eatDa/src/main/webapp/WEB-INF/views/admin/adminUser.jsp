@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -11,21 +10,15 @@
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Admin_User</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
-	rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 		//전체 선택 및 선택 게시물 삭제
 		$(function(){
@@ -55,18 +48,27 @@
 	    	 }
 	     }
 		
-	    //Modal 실행
-	        $(function(){
-	        	$("#modal").click(function(){
-	        		$(".modal").fadeIn();
-	        	});
-	        });
-	        
-	        $(".modal-content").click(function(){
-	        	$(".modal").fadeOut();
-	        });
+		// 회원 활성화 update
+		function userEnableUpdate(user_enable,user_id){
+			location.href="adminUserUpdate.do?user_enable="+user_enable+"&user_id="+user_id;
+		}
+		
+		//Modal 실행
+	       function modal(id){
+	    	   $(".modal").fadeIn();
+	       }
 	
-	        
+	    // Modal 값 띄우기
+	        function PopupInfo(clicked_element,msg) {
+	        	var row_td = clicked_element.getElementsByTagName("td");
+	        	var modal = document.getElementById("modal_admin_user");
+	        	   
+	        	document.getElementById("user_name").innerHTML = row_td[2].innerHTML;
+	        	document.getElementById("user_email").innerHTML = row_td[3].innerHTML;
+	        	document.getElementById("user_phone").innerHTML = row_td[4].innerHTML;
+	        	$("#user_addr").text(msg);
+	        }
+	
 		//Modal Close 기능
 		    function close_pop(flag) {
 		         $('#myModal').hide();
@@ -74,10 +76,16 @@
         </script>
 
 <style>
-		button {
+		#delBtn {
 			float: right;
 			border: none;
 			margin-right: 1%;
+		}
+		
+		.btn{
+			align-items:center;
+			border:0;
+			outline:0;
 		}
 		
 		.adm_mailing {
@@ -89,56 +97,6 @@
 		}
 		
 		#nav_btn {float: right;}
-		
-		/* Modal (background) */
-		.modal {
-			display: none; /* Hidden by default */
-			position: fixed; /* Stay in place */
-			z-index: 1; /* Sit on top */
-			left: 0;
-			top: 0;
-			width: 100%; /* Full width */
-			height: 100%; /* Full height */
-			overflow: auto; /* Enable scroll if needed */
-			background-color: rgb(0, 0, 0); /* Fallback color */
-			background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-		}
-		/* Modal Content/Box */
-		.modal-content {
-			background-color: #fefefe;
-			margin: 15% auto; /* 15% from the top and centered */
-			padding: 20px;
-			border: 1px solid #888;
-			width: 30%; /* Could be more or less, depending on screen size */
-		}
-		
-		/*nav탭 hover 시, content 변경*/
-	        .home:hover span{display:none;}
-	        .home:hover:after{content:"관리자 메인";}
-	        
-	        /*게시글 관리*/
-	        .post:hover span{display:none;}
-	        .post:hover:after{content:"게시글 관리";}
-	        
-	        /*레시피 관리*/
-	        .recipe:hover span{display:none;}
-	        .recipe:hover:after{content:"레시피 관리";}
-	        
-	        /*상품 관리*/
-	        .product:hover span{display:none;}
-	        .product:hover:after{content:"상품 관리";}
-	        
-	        /*주문 관리*/
-	        .order:hover span{display:none;}
-	        .order:hover:after{content:"주문 관리";}
-	        
-	        /*회원 관리*/
-	        .user:hover span{display:none;}
-	        .user:hover:after{content:"회원 관리";}
-	        
-	        /*신고 관리*/
-	        .report:hover span{display:none;}
-	        .report:hover:after{content:"신고 관리";}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -180,8 +138,7 @@
 				<br>
 				<div class="container-fluid px-4">
 					<h1 class="title_tab">회원 관리</h1>
-					<br>
-					<br>
+					<br><br>
 					<div class="card mb-4">
 						<div class="card-header"><i class="fas fa-table me-1"></i> 회원 관리</div>
 						<div class="card-body">
@@ -199,18 +156,18 @@
 										<th>활성화 여부</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="admin_user">
 									<c:forEach items="${userList}" var="dto">
-										<tr>
+										<tr onclick="PopupInfo(this,'${dto.user_addr}')">
 											<td><input type="checkbox" name="RowCheck[]" value="${dto.user_id}"></td>
 											<td>${dto.user_id}</td>
-											<td><a href="adminUserModal.do" id="modal" style="text-decoration: none; color: rgb(90, 197, 108); font-weight: bold; cursor:pointer;">${dto.user_name}</a></td>
+											<td><a id="${dto.user_id}" onclick="modal('${dto.user_id}');" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.user_name}</a></td>
 											<td>${dto.user_email}</td>
 											<td>${dto.user_phone}</td>
 											<td>
-												<select>
-													<option value="on">활성화</option>
-													<option value="off">비활성화</option>
+												<select onChange="userEnableUpdate(this.value,'${dto.user_id}');">
+													<option value="Y" ${dto.user_enable == 'Y' ? "selected":""}>활성화</option>
+													<option value="N" ${dto.user_enable == 'N' ? "selected":""}>비활성화</option>
 												</select>
 											</td>
 										</tr>
@@ -219,8 +176,8 @@
 								<tr></tr>
 								<tr>
 									<td colspan="7">
-										<a class="adm_mailing" href="#" style="text-decoration: none; font-size: 11pt; background-color: rgb(90, 142, 221); color: white;">메일 보내기</a>
-										<button type="submit" value="delete" style="width: 80px; height: 30px;">삭 제</button></td>
+										<a class="adm_mailing" href="emailWrite.do" style="text-decoration: none; font-size: 11pt; background-color: rgb(90, 142, 221); color: white;">메일 보내기</a>
+										<button type="submit" id="delBtn" value="delete" style="width: 80px; height: 30px;">삭 제</button></td>
 								</tr>
 							</table>
 						</form>	
@@ -232,37 +189,33 @@
 	</div>
 
 	<!-- Modal -->
-	<div id="myModal" class="modal">
+        <div id="myModal" class="modal">
+	      <!-- Modal content -->
+	      <div class="modal-content" id="modal_admin_user">
+	      	<div>
+	      		<label style="font-weight:bold;">회원명</label>
+	      		<p class="w3-input w3-border" id="user_name"></p>
+	      	</div>
+	      	<div>
+	            <label style="font-weight:bold;">휴대전화</label>
+	            <p class="w3-input w3-border" id="user_phone">
+            </div>
+            <div>
+	            <label style="font-weight:bold;">주 소</label>
+	            <p class="w3-input w3-border" id="user_addr">
+            </div>
+            <div>
+	            <label style="font-weight:bold;">이메일</label>
+	            <p class="w3-input w3-border" id="user_email">
+            </div>
+            
+	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</div>
+         </div>
+	    </div>
 
-		<!-- Modal content -->
-		<div class="modal-content">
-		<c:forEach items="${userList}" var="uDto">
-			<p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">회원 정보</span></b></span></p>
-			<p style="text-align: center; line-height: 1.5;"><br /></p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>회원명 : </b></span>${uDto.user_name}</p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>휴대전화 : </b></span>${uDto.user_phone}</p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>주 소 : </b></span>${uDto.user_addr}</p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>이메일 : </b></span>${uDto.user_email}</p>
-			<p style="text-align: center; line-height: 1.5;"><span style="font-size: 14pt;"><br /></span></p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구독 여부 : </b></span>O</p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구독 유형 : </b></span>일반 구독</p>
-			<p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"><b>구독 종류 : </b></span>이메일</p>
-			<p style="text-align: left; line-height: 1.5;"><br /></p>
-			<p><br /></p>
-			<div style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;" onclick="close_pop();">
-				<span class="pop_bt" style="font-size: 13pt;"> 닫기 </span>
-			</div>
-		</c:forEach>	
-		</div>
-
-	</div>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="resources/admin/js/scripts.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 	<script src="resources/admin/js/datatables-simple-demo.js"></script>
 </body>
 </html>
