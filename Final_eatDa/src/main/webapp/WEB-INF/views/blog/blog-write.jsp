@@ -87,10 +87,12 @@
 
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
-        <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
+        <form action="/blog-write.do" method="POST">
         	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${user_id}" disabled>
           <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
-					<textarea class="summernote" id="summernote" name="editordata"></textarea>
+					<textarea class="summernote" id="summernote" name="blog_content"></textarea>
+					<!-- image 경로 넘겨주기! -->
+					<input type="hidden" id="img" name="blog_img" value="">
 					<div class="blog-write__content-article__btns">
 						<input type="button" onclick="submitBtn()" name="write-submit-btn" value="작성 완료">
 						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='blog.do'">
@@ -112,7 +114,7 @@
 	<!--  include summernote-ko-KR -->
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
   <script type="text/javascript">
-  // click submit button
+  // 글 작성 완료 버튼 클릭
 	function submitBtn(){
 		var user_id=$('#user_id').val();
 		var blog_title=$('#title').val();
@@ -122,6 +124,7 @@
 		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id;
 		alert("글 작성이 완료되었습니다.");
 	}
+  
 	// summernote
 	$(document).ready(function() {
 		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
@@ -139,26 +142,21 @@
         prettifyHtml:false,
 				
 			  toolbar: [
-			    // 글꼴 설정
 			    ['font', ['fontname','fontsize']],
 			    ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
 			    ['style', ['style']],
 			    ['highlight', ['highlight']],
 			    ['paragraph', ['paragraph','height','ul', 'ol']],
-			    // 그림첨부, 링크만들기
-			    ['insert',['table','hr','link','picture']],
-			    //이모지
-			    ['misc', ['emoji']]
+			    ['insert',['table','hr','link','picture']]
 			  ],
-			  callbacks : { //여기 부분이 이미지를 첨부하는 부분
+			  callbacks : { //이미지 첨부
 					onImageUpload : function(files, editor, welEditable) {
 						console.log(files+"//"+editor+"//");
-						
 						for (var i = files.length - 1; i >= 0; i--) {
-							uploadSummernoteImageFile(files[i], this);
+							uploadImageFile(files[i], this);
 						}
 					}
-			   },
+			  },
 			  popover: {
 				  image: [
 				    ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
@@ -171,13 +169,13 @@
 		});
 	});
 
-	function uploadSummernoteImageFile(files[i], el){
+	function uploadImageFile(files[i], el){
 		data = new FormData();
 		data.append("file", file);
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : "uploadSummernoteImageFile.do",
+			url : "uploadImageFile.do",
 			contentType : false,
 			enctype : 'multipart/form-data',
 			processData : false,
