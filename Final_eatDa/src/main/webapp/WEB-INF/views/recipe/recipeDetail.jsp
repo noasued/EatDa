@@ -34,10 +34,13 @@ hr{
 .title, .content, .button{
    display: inline-block;
 }
-.button input, .modalBox input{
+.button input{
    background-color: #fdd300;
-   color:  black;
-   font-weight: bolder;
+	color: black;
+	font-weight: bolder;
+	border:none;
+	height: 33px;
+	width: 80px;
 }
 .title div{
    text-align: right;
@@ -99,18 +102,6 @@ function confirmModalClose(){
    $(".deleteConfirm_modal").fadeOut();
 }
 
-$(document).ready(function() {
-   $('.full').hide();
-});
-
-function empty(){
-   $(".full").show();
-   $(".empty").hide();
-}
-function full(){
-   $('.full').hide();
-   $(".empty").show();
-}
 
 </script>
 
@@ -127,8 +118,6 @@ function full(){
          <h4 style="text-align:center;">${dto.recipe_title }</h4>
          <div>
             <strong>조회수 ${dto.recipe_count }</strong>
-            <i class="fas fa-heart full" onclick="full()"></i>
-            <i class="far fa-heart empty" onclick="empty()"></i>
             <i class="fas fa-edit" onclick="location.href='recipeUpdateForm.do?recipe_no=${dto.recipe_no }'"></i>
             <i class="fas fa-trash-alt" onclick="confirmModal()"></i>
          </div>

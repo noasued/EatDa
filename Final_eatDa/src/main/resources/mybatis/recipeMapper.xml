@@ -17,10 +17,51 @@
 	</resultMap>
 	
 	<!-- 레시피 리스트 -->
+		<!-- 페이징 -->
 	<select id="recipeList" parameterType="list" resultMap="recipeMap">
-		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+		<![CDATA[
+			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE
+			FROM (	SELECT ROWNUM RN, A.*
+					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+							FROM RECIPE
+							WHERE	
+		]]>					
+							<choose>
+								<when test="searchType != null and searchType !=''">
+									<if test="searchType == 'title'">RECIPE_TITLE LIKE '%'||#{keyword}||'%'</if>
+									<if test="searchType == 'content'">RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+									<if test="searchType == 'titcon'">RECIPE_TITLE LIKE '%'||#{keyword}||'%' OR RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+								</when>
+								<when test="category != null and category != ''">
+									RECIPE_CATEGORY = #{category}
+								</when> 
+								<otherwise>
+									1=1
+								</otherwise>
+							</choose>
+		<![CDATA[
+							ORDER BY RECIPE_NO DESC ) A )
+			 WHERE RN > (#{pageNum} - 1) * #{amount} AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	<!-- 전체페이지수-->
+	<select id="getTotal" resultType="Integer">
+		SELECT COUNT(*) AS TOTAL
 		FROM RECIPE
-		ORDER BY RECIPE_NO DESC
+		WHERE 
+		<choose>
+			<when test="searchType != null and searchType !=''">
+				<if test="searchType == 'title'">RECIPE_TITLE LIKE '%'||#{keyword}||'%'</if>
+				<if test="searchType == 'content'">RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+				<if test="searchType == 'titcon'">RECIPE_TITLE LIKE '%'||#{keyword}||'%' OR RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
+			</when>
+			<when test="category != null and category != ''">
+				RECIPE_CATEGORY = #{category}
+			</when> 
+			<otherwise>
+				1=1
+			</otherwise>
+		</choose>
 	</select>
 	
 	<!-- 레시피 상세페이지 -->
@@ -56,41 +97,7 @@
 		WHERE RECIPE_NO = #{recipe_no}
 	</update>
 	
-	<!-- 레시피 카테고리별 출력 -->
-	<select id="recipeCategory" parameterType="list" resultMap="recipeMap">
-		SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
-		FROM RECIPE
-		WHERE RECIPE_CATEGORY = #{recipe_category}  
-	</select>
 
-	<!-- 페이징 -->
-	<select id="getList" parameterType="list" resultMap="recipeMap">
-		<![CDATA[
-			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE
-			FROM (	SELECT ROWNUM RN, A.*
-					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
-							FROM RECIPE
-							WHERE	
-		]]>					
-							<if test="searchType == 'title'">RECIPE_TITLE LIKE '%'||#{keyword}||'%'</if>
-							<if test="searchType == 'content'">RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
-							<if test="searchType == 'titcon'">RECIPE_TITLE LIKE '%'||#{keyword}||'%' OR RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
-							<if test="searchType == null or searchType == '' ">1 = 1</if> 
-		<![CDATA[
-							ORDER BY RECIPE_NO DESC ) A )
-			 WHERE RN > (#{pageNum} - 1) * #{amount} AND RN <= #{pageNum} * #{amount}
-		]]>
-	</select>
-	<!-- 전체페이지수-->
-	<select id="getTotal" resultType="Integer">
-		SELECT COUNT(*) AS TOTAL
-		FROM RECIPE
-		WHERE	<if test="searchType == 'title'">RECIPE_TITLE LIKE '%'||#{keyword}||'%'</if>
-				<if test="searchType == 'content'">RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
-				<if test="searchType == 'titcon'">RECIPE_TITLE LIKE '%'||#{keyword}||'%' OR RECIPE_CONTENT LIKE '%'||#{keyword}||'%'</if>
-				<if test="searchType == null or searchType == '' ">1 = 1</if> 
-	</select>
-	
-	<!-- 검색 -->
-	
+
+
 </mapper>

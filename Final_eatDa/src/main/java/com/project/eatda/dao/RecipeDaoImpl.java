@@ -1,9 +1,8 @@
 package com.project.eatda.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +16,19 @@ public class RecipeDaoImpl implements RecipeDao{
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	@Override
-	public List<RecipeDto> recipeList() {
+	public List<RecipeDto> recipeList(RecipePageBaseDto rpbdto) {
 		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
 		
 		try {
-			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeList");
+			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeList",rpbdto);
 		} catch (Exception e) {
 			System.out.println("error : recipeList");
 			e.printStackTrace();
 		}
 				
-		return rec_list;
+		return rec_list;	
 	}
 
 	@Override
@@ -85,21 +84,6 @@ public class RecipeDaoImpl implements RecipeDao{
 		return res;
 	}
 	
-	@Override
-	public List<RecipeDto> recipeCategory(String recipe_category){
-		
-		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
-		
-		try {
-			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"recipeCategory",recipe_category);
-		} catch (Exception e) {
-			System.out.println("error : recipeList");
-			e.printStackTrace();
-		}
-				
-		return rec_list;
-		
-	}
 
 	@Override
 	public int recipeCount(int recipe_no) {
@@ -124,24 +108,7 @@ public class RecipeDaoImpl implements RecipeDao{
 		return null;
 	}
 
-	@Override
-	public int paging() {
-		return 0;
-	}
 
-	@Override
-	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto) {
-		List<RecipeDto> rec_list = new ArrayList<RecipeDto>();
-		
-		try {
-			rec_list = sqlSession.selectList(NAMESPACE_RECIPE+"getList",rpbdto);
-		} catch (Exception e) {
-			System.out.println("error : getList");
-			e.printStackTrace();
-		}
-				
-		return rec_list;	
-	}
 
 	@Override
 	public int getTotal(RecipePageBaseDto rpbdto) {
@@ -157,5 +124,5 @@ public class RecipeDaoImpl implements RecipeDao{
 		return res;
 	}
 
-	
+
 }

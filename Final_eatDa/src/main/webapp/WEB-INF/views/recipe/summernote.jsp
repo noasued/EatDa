@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,40 +68,41 @@
 	
 	    <!-- title -->
 	    <div class="recipe_title">
-	        <h2>레시피 수정</h2>
+	        <h2>새 글 작성</h2>
 	    </div>
 	    
 	    <!-- main content -->
 	  	<div class="recipe_content-article">
-			<form action="recipeupdateRes.do" method="POST">
-				<input type="hidden" name="recipe_no" value="${dto.recipe_no }">
+			<form action="recipeInsertRes.do" method="POST">
+		
 				<div class="recipe_content-title">
-					<input type="text" class="form-control" id="title" name="recipe_title" value="${dto.recipe_title }">
+					<input type="text" class="form-control" placeholder="제목을 입력하세요." id="title" name="recipe_title">
 				</div>
 		
 				<div class="recipe_content-category">
 					<strong>CATEGORY&nbsp;|&nbsp;</strong>
-					<label><input type="radio" name="recipe_category" value="한식" <c:if test="${dto.recipe_category eq '한식'}"> checked </c:if>> 한식</label>
-					<label><input type="radio" name="recipe_category" value="일식" <c:if test="${dto.recipe_category eq '일식'}"> checked </c:if>> 일식</label>
-					<label><input type="radio" name="recipe_category" value="중식" <c:if test="${dto.recipe_category eq '중식'}"> checked </c:if>> 중식</label>
-					<label><input type="radio" name="recipe_category" value="양식" <c:if test="${dto.recipe_category eq '양식'}"> checked </c:if>> 양식</label>
-					<label><input type="radio" name="recipe_category" value="야식" <c:if test="${dto.recipe_category eq '야식'}"> checked </c:if>> 야식</label>
-					<label><input type="radio" name="recipe_category" value="비건" <c:if test="${dto.recipe_category eq '비건'}"> checked </c:if>> 비건</label>
+					<label><input type="radio" name="recipe_category" value="한식"> 한식</label>
+					<label><input type="radio" name="recipe_category" value="일식"> 일식</label>
+					<label><input type="radio" name="recipe_category" value="중식"> 중식</label>
+					<label><input type="radio" name="recipe_category" value="양식"> 양식</label>
+					<label><input type="radio" name="recipe_category" value="야식"> 야식</label>
+					<label><input type="radio" name="recipe_category" value="비건"> 비건</label>
 				</div>
 				
 				<div class="form-group">
-					<textarea id="summernote" class="form-control" rows="5" id="content" name="recipe_content">${dto.recipe_content }</textarea>
+					<textarea id="summernote" class="form-control" rows="5" id="content" name="recipe_content"></textarea>
 					<!-- image 경로 넘겨주기! -->
 					<input type="hidden" id="img" name="recipe_img" value="">
 				</div>
 				
 				<div class="recipe-button ">
-					<input type="submit" value="수정"> &nbsp;&nbsp;&nbsp;
-					<input type="button" value="취소" onclick="location.href='recipeDetail.do?recipe_no=${dto.recipe_no }'">
+					<input type="submit" value="등록"> &nbsp;&nbsp;&nbsp;
+					<input type="button" value="취소" onclick="location.href='recipeList.do'">
 				</div>
 			</form>
 		</div>
 	</div>
+
   <script>
 	var toolbar = [
 	   // 글꼴 설정

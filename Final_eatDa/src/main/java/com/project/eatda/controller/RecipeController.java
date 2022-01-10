@@ -1,13 +1,26 @@
 package com.project.eatda.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.project.eatda.biz.RecipeBiz;
 import com.project.eatda.dto.RecipeDto;
 import com.project.eatda.dto.RecipePageBaseDto;
@@ -21,34 +34,17 @@ public class RecipeController {
 	private RecipeBiz biz;
 	
 	@RequestMapping("/recipeList.do")
-	public String recipeList(Model model) {
+	public String recipeList(Model model, RecipePageBaseDto rpbdto) {
 		logger.info("RECIPE LIST");
-		
-		model.addAttribute("list", biz.recipeList());
-		
-		return "/recipe/recipeList";
-	}
-	
-	@RequestMapping("/recipeListTest.do")
-	public String recipeListTest(Model model, RecipePageBaseDto rpbdto) {
-		logger.info("RECIPE LIST TEST");
 		
 		RecipePageDto rpdto = new RecipePageDto(rpbdto, biz.getTotal(rpbdto));
 		
 		model.addAttribute("rpdto", rpdto);
-		model.addAttribute("list", biz.recipeTest(rpbdto));
-		
-		return "/recipe/recipeList_test";
-	}
-	
-	@RequestMapping("/recipeCategory.do")
-	public String recipeCategory(Model model, String recipe_category) {
-		logger.info("RECIPE CATEGORY");
-		
-		model.addAttribute("list", biz.recipeCategory(recipe_category));
+		model.addAttribute("list", biz.recipeList(rpbdto));
 		
 		return "/recipe/recipeList";
 	}
+	
 
 	@RequestMapping("/recipeDetail.do")
 	public String recipeDetail(Model model, int recipe_no) {
@@ -68,6 +64,13 @@ public class RecipeController {
 		return "/recipe/recipeInsert";
 	}
 	
+	@RequestMapping("/summernote.do")
+	public String summernote() {
+		logger.info("RECIPE INSERT");
+		
+		return "/recipe/summernote";
+	}
+	
 	@RequestMapping("/recipeInsertRes.do")
 	public String recipeInsertRes(RecipeDto dto) {
 		logger.info("RECIPE INSERT RESULT");
@@ -77,7 +80,7 @@ public class RecipeController {
 		if(res>0){			
 			return "redirect:recipeList.do";
 		}else {
-			return "redirect:recipeInsert.do";
+			return "redirect:summernote.do";
 		}
 	}
 	
@@ -119,7 +122,41 @@ public class RecipeController {
 		}
 	}
 	
+	
+	
+	//썸머노트 파일처리
+	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+		
+        /*
+		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
+		 */
+		
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"src/main/webapp/resources/images/recipe/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "resources/images/recipe/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
 
-
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
+	
 
 }
