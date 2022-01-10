@@ -121,7 +121,7 @@ function confirmModalClose(){
             <i class="fas fa-edit" onclick="location.href='recipeUpdateForm.do?recipe_no=${dto.recipe_no }'"></i>
             <i class="fas fa-trash-alt" onclick="confirmModal()"></i>
          </div>
-         <hr>
+         <hr> 
       </div>
       <div class="content">      
          ${dto.recipe_content } 
