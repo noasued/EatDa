@@ -97,7 +97,12 @@
 		WHERE RECIPE_NO = #{recipe_no}
 	</update>
 	
-
+	
+	<!-- Admin Recipe List -->
+	<select id="adminRecipeList" resultMap="recipeMap">
+		SELECT * FROM RECIPE
+		ORDER BY RECIPE_NO DESCS
+	</select>
 
 
 </mapper>

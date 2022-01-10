@@ -124,5 +124,18 @@ public class RecipeDaoImpl implements RecipeDao{
 		return res;
 	}
 
+	/* 관리자 리스트 */
+	@Override
+	public List<RecipeDto> adminRecipeList() {
+		List<RecipeDto> adminRecipeList = new ArrayList<RecipeDto>();
+		
+		try {
+			adminRecipeList = sqlSession.selectList(NAMESPACE_RECIPE+"adminRecipeList");
+		} catch (Exception e) {
+			System.out.println("error : admin recipe list");
+			e.printStackTrace();
+		}
+		return adminRecipeList;
+	}
 
 }

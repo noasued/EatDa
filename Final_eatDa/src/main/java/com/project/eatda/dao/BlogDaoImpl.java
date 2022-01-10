@@ -145,6 +145,7 @@ public class BlogDaoImpl implements BlogDao{
 	}
 
 	// 관리자 블로그 삭제
+	@Override
 	public int adminBlogDelete(int blog_no) {
 		int res = 0;
 		
@@ -158,6 +159,7 @@ public class BlogDaoImpl implements BlogDao{
 	}
 	
 	//관리자 블로그 count
+	@Override
 	public int adminBlogCount() {
 		int count = 0;
 		
@@ -172,6 +174,7 @@ public class BlogDaoImpl implements BlogDao{
 		return count;
 	}
 	
+	@Override
 	public int newAdminBlogCount() {
 		int count = 0;
 		
