@@ -40,9 +40,9 @@
 		AND BLOG_NO = #{blog_no}
 	</update>
 	
-	<delete id="deleteReply" parameterType="int">
+	<delete id="deleteReply" parameterType="replyDto">
 		DELETE FROM BLOG_REPLY 
-		WHERE REPLY_NO=#{reply_no}
+		WHERE REPLY_NO = #{reply_no}
 		AND BLOG_NO = #{blog_no}
 	</delete>
 	

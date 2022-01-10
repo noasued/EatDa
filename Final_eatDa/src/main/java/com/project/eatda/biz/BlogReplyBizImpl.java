@@ -27,8 +27,6 @@ public class BlogReplyBizImpl implements BlogReplyBiz{
 		System.out.println("[biz] reply insert");
 		return replyDao.insert(dto);
 	}
-	
-	
 
 	// 댓글 수정
 	@Override
@@ -43,10 +41,9 @@ public class BlogReplyBizImpl implements BlogReplyBiz{
 	
 	// 댓글 삭제
 	@Override
-	public int delete(int reply_no) {
+	public int delete(int blog_no, int reply_no) {
 		System.out.println("delete reply biz");
-		return replyDao.delete(reply_no);
+		return replyDao.delete(blog_no, reply_no);
 	}
-
 
 }

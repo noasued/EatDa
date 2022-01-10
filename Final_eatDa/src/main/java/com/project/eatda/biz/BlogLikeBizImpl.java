@@ -21,7 +21,6 @@ public class BlogLikeBizImpl implements BlogLikeBiz{
 	}
 	
 	@Override
-	@Transactional
 	public int clickLike(BlogDto blogDto, BlogLikeDto like) {
 		return likeDao.clickLike(blogDto, like);
 	}
