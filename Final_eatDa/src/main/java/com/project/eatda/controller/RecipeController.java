@@ -130,17 +130,14 @@ public class RecipeController {
 	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
 		JsonObject jsonObject = new JsonObject();
 		
-        /*
-		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-		 */
-		
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"src/main/webapp/resources/images/recipe/";
+		String fileRoot = contextRoot+"resources/images/recipe/"; //톰캣 서버에 이미지 저장
+		System.out.println(fileRoot);
 		
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일명
 		
 		File targetFile = new File(fileRoot + savedFileName);	
 		try {

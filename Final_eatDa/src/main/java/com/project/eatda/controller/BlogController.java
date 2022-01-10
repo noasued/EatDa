@@ -1,10 +1,16 @@
 package com.project.eatda.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.BlogLikeBiz;
 import com.project.eatda.biz.BlogReplyBiz;
@@ -139,16 +148,50 @@ public class BlogController {
 		logger.info("Blog write form page");
 		return "/blog/blog-write";
 	}
+	
+	//썸머노트 파일처리
+	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+			
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"src/main/webapp/resources/images/blog/";
+			
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+			
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "resources/images/blog/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
+	
+	
 	//글 작성 결과
 	@RequestMapping("/blog-write.do")
 	public String write(BlogDto dto) {
 		logger.info("Blog write page - post");
 		System.out.println(dto.toString());
-		biz.insert(dto);
+		int res = biz.insert(dto);
 		int blogNo = biz.selectBlogNo(dto.getBlog_title());
-
-		return "redirect:blog-detail.do?blog_no="+blogNo;
-
+		if(res>0) {
+			return "redirect:blog-detail.do?blog_no="+blogNo;
+		} else {
+			return "redirect:blog-writeform.do";
+		}
 	}
 
 	// 글 수정 페이지

@@ -150,7 +150,15 @@
 			    //이모지
 			    ['misc', ['emoji']]
 			  ],
-			  
+			  callbacks : { //여기 부분이 이미지를 첨부하는 부분
+					onImageUpload : function(files, editor, welEditable) {
+						console.log(files+"//"+editor+"//");
+						
+						for (var i = files.length - 1; i >= 0; i--) {
+							uploadSummernoteImageFile(files[i], this);
+						}
+					}
+			   },
 			  popover: {
 				  image: [
 				    ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
@@ -158,11 +166,29 @@
 				    ['remove', ['removeMedia']],
 				    ['custom', ['imageTitle']],
 				  ]
-				},
+				}
 				
 		});
 	});
 
+	function uploadSummernoteImageFile(files[i], el){
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "uploadSummernoteImageFile.do",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(data) {
+				$(el).summernote('editor.insertImage', data.url);
+				console.log("date.url" + data.url);
+				console.log("data" + data);
+				document.getElementById('img').value = data.url;
+			}
+		});
+	}
 	</script>
 	
 </body>
