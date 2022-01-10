@@ -124,7 +124,6 @@ function confirmModalClose(){
          <hr>
       </div>
       <div class="content">      
-         <img src="${dto.recipe_img }"><br>      
          ${dto.recipe_content } 
          <hr>
       </div>   
