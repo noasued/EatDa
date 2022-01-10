@@ -45,6 +45,11 @@
 	    		 return false;
 	    	 }
 	     }
+	     
+	   // 신고 처리 현황 update
+			function reportStatusUpdate(report_status,user_id){
+				location.href="reportStatusUpdate.do?report_status="+report_status+"&user_id="+user_id;
+			}
         
 	   //Modal 실행
 	       function modal(id){
@@ -56,10 +61,11 @@
 	        	var row_td = clicked_element.getElementsByTagName("td");
 	        	var modal = document.getElementById("modal_admin_report");
 	        	   
-	        	document.getElementById("reporter").innerHTML = row_td[2].innerHTML;
-	        	document.getElementById("reported").innerHTML = row_td[3].innerHTML;
-	        	document.getElementById("report_content").innerHTML = row_td[4].innerHTML;
-	        	document.getElementById("reply_content").innerHTML = row_td[4].innerHTML;
+	        	document.getElementById("reporter").innerHTML = row_td[1].innerHTML;
+	        	document.getElementById("reported").innerHTML = row_td[2].innerHTML;
+	        	document.getElementById("report_content").innerHTML = row_td[3].innerHTML;
+	        	document.getElementById("report_date").innerHTML = row_td[4].innerHTML;
+	        	$("#reply_content").text(msg);
 	        }
 	
 	        
@@ -112,15 +118,15 @@
                             <div class="sb-sidenav-menu-heading">
                                 <img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;">
                                 <br>
-                                <a href="#" style="text-decoration:none; color: black;">eatDa_admin 님<br>반갑습니다 : )</a>
+                                <a href="#" style="text-decoration:none; color: black;">${member.user_name} 님<br>반갑습니다 : )</a>
                             </div>
                             <a class="nav-link home" href="adminMain.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a> 
 							<a class="nav-link post" href="adminPostReply.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
 							<a class="nav-link recipe" href="adminRecipe.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-book" aria-hidden="true"></i></div> <span>Recipe</span></a>
 							<a class="nav-link product" href="adminProductList.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-shopping-cart" aria-hidden="true"></i></div><span>Product</span></a> 
 							<a class="nav-link order" href="adminOrder.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-truck" aria-hidden="true"></i></div><span>Order</span></a> 
-							<a class="nav-link user" href="adminUser.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a> 
-							<a class="nav-link report" href="adminReport.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
+							<a class="nav-link user" href="adminUser.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div><span>User</span></a> 
+							<a class="nav-link report" href="adminReport.do" style="color: rgb(224, 179, 57);"><div class="sb-nav-link-icon"><i class="fa fa-ban" aria-hidden="true"></i></div><span>Report</span></a>
                         </div>
                     </div>
                 </nav>
@@ -134,38 +140,36 @@
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table me-1"></i> 신고 관리</div>
                             <div class="card-body">
-                            <form action="adminPostRortDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
+                            <form action="adminReportDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
                                 <table id="datatablesSimple">
-                                    <col width="50px">
+                                    <col width="50px"><col width="100px"><col width="100px"><col width="400px"><col width="150px"><col width="100px"><col width="50px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
                                             <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
-                                            <th class="col-sm-1">신고인 ID</th>
-                                            <th class="col-md-1">신고 대상 ID</th>
-                                            <th class="col-md-2">신고 내용</th>
-                                            <th class="col-md-2">신고 댓글</th>
-                                            <th class="col-md-1">처리 현황</th>
-                                            <th class="col-md-1">패널티</th>
+                                            <th>신고인 ID</th>
+                                            <th>신고 대상 ID</th>
+                                            <th>신고 내용</th>
+                                            <th>신고 일자</th>
+                                            <th>처리 현황</th>
+                                            <th>패널티</th>
                                         </tr>
                                     </thead>
                                     <tbody id="admin_report">
 	                                	<c:forEach items="${reportList}" var="dto">
-			                        		<tr onclick="PopupInfo(this)">
-			                                	<td style="vertical-align:middle;"><input type="checkbox" name="RowCheck[]" value="${dto.report_no}"></td>
-			                                	<td style="vertical-align:middle;"><a id="modal" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.reporter}</a></td>
-			                                    <td style="vertical-align:middle;">${dto.reported}</td>
+			                        		<tr onclick="PopupInfo(this,'${dto.reply_content}','${dto.report_no}')">
+			                                	<td><input type="checkbox" name="RowCheck[]" value="${dto.report_no}"></td>
+			                                	<td>${dto.reporter}</td>
+			                                    <td><a id="${dto.report_no}" onclick="modal('${dto.report_no}');" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold; cursor:pointer;">${dto.reported}</a></td>
 			                                    <td style="vertical-align:middle; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${dto.report_content}</td>
-			                                    <td style="vertical-align:middle;">${dto.reply_content}</td>
-			                                    <td style="vertical-align:middle;">
-			                                    		<button type="button" class="btn" id="btn" value="1">처리 완료</button>
-			                                    </td>
-			                                    <td style="vertical-align:middle;">
-			                                    	<select>
-			                                    		<option value="1" selected>처리 대기</option>
-			                                    		<option value="2">처리 완료</option>
+			                                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.report_date}"/></td>
+			                                    <td>
+			                                    	<select onChange="reportStatusUpdate(this.value,'${dto.report_no}');">
+			                                    		<option value="1" ${dto.report_status == '1' ? "selected":""}>처리 대기</option>
+			                                    		<option value="2" ${dto.report_status == '2' ? "selected":""}>처리 완료</option>
 			                                    	</select>
-												</td>
+			                                    </td>
+			                                    <td>${dto.report_penalty}</td>
 			                                </tr>
 			                        	</c:forEach>
                                     </tbody>
@@ -204,17 +208,13 @@
 	            <label style="font-weight:bold;">신고 댓글</label>
 	            <p class="w3-input w3-border" id="reply_content">
             </div>
-            
 	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</div>
          </div>
 	    </div>
-
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/admin/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="resources/admin/js/datatables-simple-demo.js"></script>
-       
-        
     </body>
 </html>

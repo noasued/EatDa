@@ -11,15 +11,17 @@ public class ReportDto {
 		private String reported;
 		private int reply_no;
 		private Date report_date;
-		private String report_status;		//신고 처리 상황 (Default : "처리대기")
+		private int report_status;		//신고 처리 상황 (Default : "처리대기")
 		private String report_content;
+		private int report_penalty;		// penalty count
+		private String reply_content;
 		
 		public ReportDto() {
 			super();
 		}
 		
 		public ReportDto(int report_no, String reporter, String reported, int reply_no, Date report_date,
-				String report_status, String report_content) {
+				int report_status, String report_content, int report_penalty, String reply_content) {
 			super();
 			this.report_no = report_no;
 			this.reporter = reporter;
@@ -28,6 +30,8 @@ public class ReportDto {
 			this.report_date = report_date;
 			this.report_status = report_status;
 			this.report_content = report_content;
+			this.report_penalty = report_penalty;
+			this.reply_content = reply_content;
 		}
 		
 		public int getReport_no() {
@@ -60,10 +64,10 @@ public class ReportDto {
 		public void setReport_date(Date report_date) {
 			this.report_date = report_date;
 		}
-		public String getReport_status() {
+		public int getReport_status() {
 			return report_status;
 		}
-		public void setReport_status(String report_status) {
+		public void setReport_status(int report_status) {
 			this.report_status = report_status;
 		}
 		public String getReport_content() {
@@ -71,6 +75,28 @@ public class ReportDto {
 		}
 		public void setReport_content(String report_content) {
 			this.report_content = report_content;
+		}
+
+		public int getReport_penalty() {
+			return report_penalty;
+		}
+
+		public void setReport_penalty(int report_penalty) {
+			this.report_penalty = report_penalty;
+		}
+		
+		public String getReply_content() {
+			return reply_content;
+		}
+
+		public void setReply_content(String reply_content) {
+			this.reply_content = reply_content;
+		}
+
+		@Override
+		public String toString() {
+			return "ReportDto [report_no=" + report_no+", reporter="+reporter+",reported="+reported+", reply_no="+reply_no+", report_date="+report_date+", report_content="
+					+report_content+", report_status="+report_status+", report_penalty="+report_penalty+", reply_content=" +reply_content+"]";
 		}
 		
 }

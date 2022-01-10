@@ -15,19 +15,36 @@
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
-        // 게시글 전체 선택 및 해제
-        function selectAll(selectAll)  {
-        	  const checkboxes 
-        	       = document.getElementsByName('chkBtn');
-        	  
-        	  checkboxes.forEach((checkbox) => {
-        	    checkbox.checked = selectAll.checked;
-        	  });
-        	}
-        
-		console.log(formatDate(date));
+     // 전체 선택 및 선택 게시물 삭제
+	    $(function(){
+	    	var chkObj = document.getElementsByName("RowCheck[]");
+	    	var rowCnt = chkObj.length;
+	    	
+	    	$("input[name='allCheck']").click(function(){
+	    		var chk_listArr = $("input[name='RowCheck[]']");
+	    		for(var i = 0 ; i<chk_listArr.length; i++){
+	    			chk_listArr[i].checked = this.checked;
+	    		}
+	    	});
+	    	$("input[name='RowCheck[]']").click(function(){
+	    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
+	    			$("input[name='allCheck']")[0].checked = true;
+	    		}else{
+	    			$("input[name='allCheck']")[0].checked = false;
+	    		}
+	    	});
+	    });
+	    
+     function delete_frm(){
+	    	 if(confirm('정말 삭제하시겠습니까?')==true){
+	    		 return true;
+	    	 }else{
+	    		 return false;
+	    	 }
+	     }
+     
         
         // 이벤트 진행 현황
         function statusUpdate(status,e_no){
@@ -102,12 +119,13 @@
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table me-1"></i> 이벤트 관리</div>
                             <div class="card-body">
+                            <form action="adminEventDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="80px"><col width="60%"><col width="200px"><col width="20%">
                                     <thead>
                                     <tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
+                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
                                             <th>NO</th>
                                             <th>이벤트 제목</th>
                                             <th>작성일</th>
@@ -117,7 +135,7 @@
                                     <tbody>
 	                                    <c:forEach items="${eventList}" var="dto">
 			                            	<tr>
-			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.event_no}"></td>
+			                                	<td style="vertical-align:middle;"><input type="checkbox" name="RowCheck[]" value="${dto.event_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.event_no}</td>
 			                                    <td style="vertical-align:middle;"><a href="event-detail.do?event_no=${dto.event_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.event_title}</a></td>
 			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
@@ -135,7 +153,7 @@
                                     <tr>
                                         <td colspan="7">	
                                         	<a class="adm_insert" href="event-write.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
-	                                        <button type="button" onclick="" value="delete">삭 제</button>
+	                                        <button type="submit" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>
