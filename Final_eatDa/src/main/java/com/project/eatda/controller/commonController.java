@@ -132,26 +132,4 @@ public class commonController {
 		model.addAttribute("order", dto);
 		return "/market/orderSuccess";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

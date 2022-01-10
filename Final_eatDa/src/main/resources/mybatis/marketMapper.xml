@@ -104,7 +104,7 @@
 	<insert id="paySuccess" parameterType="orderDto">
 		INSERT INTO E_ORDER 
 		VALUES(#{order_id},#{user_id},SYSDATE,#{order_addr},#{order_name},#{order_phone},
-				#{order_message},#{order_price},#{pay_option},#{original_price},#{discount_price},#{coupon_rate},#{coupon_id})
+				#{order_message},#{order_price},#{pay_option},#{original_price},#{discount_price},#{coupon_rate},#{coupon_id},'주문완료', '결제대기')
 	</insert>
 	
 	<select id="getOrder" parameterType="string" resultType="orderDto">
