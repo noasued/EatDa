@@ -74,4 +74,16 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
+	<select id="adminBlogCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM BLOG
+		WHERE 1>BLOG_COUNT
+	</select>
+	
+	<select id="newAdminBlogCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM BLOG
+		WHERE 1>BLOG_COUNT
+	</select>
+	
 </mapper>

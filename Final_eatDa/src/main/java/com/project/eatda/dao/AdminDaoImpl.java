@@ -61,6 +61,20 @@ public class AdminDaoImpl implements AdminDao{
 		return adminProductList;
 	}
 	
+	//selectOne
+	@Override
+	public ProductDto selectOne(String p_id) {
+		ProductDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"productSelectOne",p_id);
+		} catch (Exception e) {
+			System.out.println("[error] : product selectOne");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
 	// 상품 등록
 	@Override
 	public int adminProductInsert(ProductDto dto) {
@@ -68,10 +82,15 @@ public class AdminDaoImpl implements AdminDao{
 		
 		ProductDto temp = sqlSession.selectOne(NAMESPACE+"getLastProductNum");
 		String p_id = "P"+temp.getP_no();
+		int p_no = temp.getP_no();
 		dto.setP_id(p_id);
+		dto.setP_no(p_no);
+		
+		System.out.println("dto"+dto);
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"adminProductInsert",dto);
+			System.out.println("res ="+res);
 		} catch (Exception e) {
 			System.out.println("[error] : product insert");
 			e.printStackTrace();
@@ -109,8 +128,8 @@ public class AdminDaoImpl implements AdminDao{
 	
 	/* 주문 리스트 */
 	@Override
-	public List<OrderAdminDto> adminOrderList() {
-		List<OrderAdminDto> adminOrderList = new ArrayList<OrderAdminDto>();
+	public List<OrderDto> adminOrderList() {
+		List<OrderDto> adminOrderList = new ArrayList<OrderDto>();
 		
 		try {
 			adminOrderList = sqlSession.selectList(NAMESPACE+"adminOrderList");
@@ -175,6 +194,34 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return res;
 	}
+	
+	// 배송 현황 update
+		@Override
+		public int shippingStatusUpdate(OrderDto dto) {
+			int res =0;
+			
+			try {
+				res = sqlSession.update(NAMESPACE+"shippingStatusUpdate",dto);
+			} catch (Exception e) {
+				System.out.println("[error] : shipping status update");
+				e.printStackTrace();
+			}
+			return res;
+		}
+		
+	// 진행 현황 update
+		@Override
+		public int orderStatusUpdate(OrderDto dto) {
+			int res =0;
+			
+			try {
+				res = sqlSession.update(NAMESPACE+"orderStatusUpdate",dto);
+			} catch (Exception e) {
+				System.out.println("[error] : order status update");
+				e.printStackTrace();
+			}
+			return res;
+		}		
 
 	
 	/* 회원 리스트 */
@@ -201,6 +248,20 @@ public class AdminDaoImpl implements AdminDao{
 			e.printStackTrace();
 		}
 		return adminUserModal;
+	}
+	
+	// 회원 활성화 여부 update
+	@Override
+	public int adminUserUpdate(UserDto dto) {
+		int res =0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"adminUserUpdate",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : admin user update");
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	// 회원 삭제
@@ -231,6 +292,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminReportList;
 	}
 	
+	// 신고 삭제
 	@Override
 	public int adminReportDelete(int report_no) {
 		int res = 0;

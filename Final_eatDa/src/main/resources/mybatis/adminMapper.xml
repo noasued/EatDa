@@ -4,7 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="admin">
-
+	<!-- Admin Main -->
+	
+	
 	<!-- Admin Reply -->
 	<resultMap type="replyDto" id="replyMap">
 		<result property="reply_no" column="REPLY_NO" />
@@ -39,12 +41,13 @@
 	</resultMap>
 	
 	<select id="adminProductList" parameterType="list" resultMap="productMap">
-		SELECT * FROM PRODUCT
-		ORDER BY P_ID DESC
+		SELECT * FROM PRODUCT ORDER BY P_NO DESC
 	</select>
 	
-	<select id="selectPid" parameterType="String" resultType="productDto">
-		SELECT P_ID FROM PRODUCT WHERE P_NAME=#{p_name}
+	<select id="productSelectOne" parameterType="String" resultType="productDto">
+		SELECT P_ID,P_NAME,P_SHORT_DESC,P_PRICE,P_DESCRIPTION,P_CAL,P_AMOUNT,SELLER_DESC,IMG_PATH,P_NO
+		FROM PRODUCT
+		WHERE P_ID=#{p_id}
 	</select>
 	
 	<insert id="adminProductInsert" parameterType="productDto">
@@ -69,42 +72,54 @@
 	</select>	
 	
 	<!-- Admin Order -->
-	<resultMap type="orderAdminDto" id="orderAdminMap">
+	<resultMap type="OrderDto" id="orderMap">
 		<result property="order_id" column="ORDER_ID" />
-		<result property="user_name" column="USER_NAME" />
+		<result property="user_id" column="USER_ID" />
 		<result property="order_date" column="ORDER_DATE" />
-		<result property="user_phone" column="USER_PHONE" />
+		<result property="order_addr" column="USER_PHONE" />
+		<result property="order_name" column="ORDER_NAME" />
+		<result property="order_phone" column="ORDER_PHONE" />
+		<result property="order_message" column="ORDER_MESSAGE" />
+		<result property="order_price" column="ORDER_PRICE" />
+		<result property="pay_option" column="PAY_OPTION" />
+		<result property="original_price" column="ORIGINAL_PRICE" />
+		<result property="discount_price" column="DICSOUNT_PRICE" />
+		<result property="coupon_rate" column="COUPON_RATE" />
+		<result property="coupon_id" column="COUNPON_ID" />
 		<result property="shipping_status" column="SHIPPING_STATUS" />
 		<result property="order_status" column="ORDER_STATUS" />
 	</resultMap>
 		
-	<select id="adminOrderList" parameterType="list" resultMap="orderAdminMap">
-		SELECT *
-		FROM ORDER_ADMIN A JOIN E_ORDER E
-		ON A.ORDER_ID = E.ORDER_ID
-		ORDER BY A.ORDER_ID DESC
-	</select>
-	
-	<select id="orderSelectOne" resultType="orderAdminDto" parameterType="int">
-		SELECT ORDER_ID,USER_NAME,ORDER_DATE,USER_PHONE,SHIPPING_STATUS,ORDER_STATUS
-		FROM ORDER_ADMIN A JOIN E_ORDER E
-		ON A.ORDER_ID = E.ORDER_ID
-		WHERE ORDER_ID = #{order_id}
+	<select id="adminOrderList" parameterType="list" resultMap="orderMap">
+		SELECT * FROM E_ORDER
+		ORDER BY ORDER_ID DESC
 	</select>
 	
 	<insert id="adminOrderInsert" parameterType="orderDto">
-		INSERT INTO ORDER_ADMIN 
+		INSERT INTO E_ORDER
 		VALUES(#{order_id},#{user_id},1,1)
 	</insert>
 	
 	<insert id="adminOrderInsert2" parameterType="orderDto">
-		INSERT INTO ORDER_ADMIN 
+		INSERT INTO E_ORDER
 		VALUES(#{order_id},#{user_id},1,2)
 	</insert>
 	
 	<delete id="adminOrderDelete" parameterType="String">
-		DELETE FROM ORDER_ADMIN WHERE ORDER_ID=#{order_id}
+		DELETE FROM E_ORDER WHERE ORDER_ID=#{order_id}
 	</delete>
+	
+	<update id="shippingStatusUpdate" parameterType="orderDto">
+		UPDATE E_ORDER
+		SET SHIPPING_STATUS=#{shipping_status}
+		WHERE ORDER_ID=#{order_id}
+	</update>
+	
+	<update id="orderStatusUpdate" parameterType="orderDto">
+		UPDATE E_ORDER
+		SET ORDER_STATUS=#{order_status}
+		WHERE ORDER_ID=#{order_id}
+	</update>
 	
 	<!-- Admin User -->
 	<resultMap type="userDto" id="userMap">
@@ -126,6 +141,11 @@
 		SELECT * FROM E_USER ORDER BY USER_ID DESC
 	</select>
 	
+	<update id="adminUserUpdate" parameterType="userDto">
+		UPDATE E_USER
+		SET USER_ENABLE=#{user_enable}
+		WHERE USER_ID=#{user_id}
+	</update>
 	<delete id="adminUserDelete" parameterType="String">
 		DELETE FROM E_USER WHERE USER_ID=#{user_id}
 	</delete>
