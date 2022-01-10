@@ -34,6 +34,7 @@ hr{
 .title, .content, .button{
    display: inline-block;
 }
+
 .button input{
    background-color: #fdd300;
 	color: black;
@@ -55,10 +56,6 @@ hr{
 }
 .content img{
    margin : 2% 0;
-}
-.content p{
-   text-align: left;
-   margin-left: 19%;
 }
 
 .deleteConfirm_modal{
