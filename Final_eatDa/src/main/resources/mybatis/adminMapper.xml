@@ -4,9 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="admin">
-	<!-- Admin Main -->
-	
-	
 	<!-- Admin Reply -->
 	<resultMap type="replyDto" id="replyMap">
 		<result property="reply_no" column="REPLY_NO" />
@@ -93,6 +90,17 @@
 	<select id="adminOrderList" parameterType="list" resultMap="orderMap">
 		SELECT * FROM E_ORDER
 		ORDER BY ORDER_ID DESC
+	</select>
+	
+	<select id="adminOrderCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM E_ORDER
+		WHERE ORDER_STATUS='결제 취소'
+	</select>
+	
+	<select id="allOrderCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM E_ORDER
 	</select>
 	
 	<insert id="adminOrderInsert" parameterType="orderDto">

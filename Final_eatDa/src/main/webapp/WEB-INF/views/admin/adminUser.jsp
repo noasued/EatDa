@@ -94,6 +94,10 @@
 			margin-right: 1%;
 			width: 100px;
 			height: 30px;
+			text-decoration: none; 
+			font-size: 11pt; 
+			background-color: rgb(90, 142, 221); 
+			color: white;
 		}
 		
 		#nav_btn {float: right;}
@@ -120,7 +124,7 @@
 				<div class="sb-sidenav-menu">
 					<div class="nav" style="text-align: center;">
 						<div class="sb-sidenav-menu-heading">
-							<img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;"> <br> <a href="#" style="text-decoration: none; color: black;">eatDa_admin 님<br>반갑습니다 : )	</a>
+							<img src="resources/admin/assets/img/profile_admin.png" style="width: 60%; height: 60%;"> <br> <a href="#" style="text-decoration: none; color: black;">${member.user_name} 님<br>반갑습니다 : )	</a>
 						</div>
 						<a class="nav-link home" href="adminMain.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-home" aria-hidden="true"></i></div><span>HOME</span></a> 
 						<a class="nav-link post" href="adminPostReply.do" style="color: black;"><div class="sb-nav-link-icon"><i class="fa fa-bars" aria-hidden="true"></i></div><span>Post</span></a>
@@ -140,7 +144,7 @@
 					<h1 class="title_tab">회원 관리</h1>
 					<br><br>
 					<div class="card mb-4">
-						<div class="card-header"><i class="fas fa-table me-1"></i> 회원 관리</div>
+						<div class="card-header"><i class="fas fa-table me-1"></i> 회원 리스트</div>
 						<div class="card-body">
 						<form action="adminUserDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
 							<table id="datatablesSimple">
@@ -176,7 +180,7 @@
 								<tr></tr>
 								<tr>
 									<td colspan="7">
-										<a class="adm_mailing" href="emailWrite.do" style="text-decoration: none; font-size: 11pt; background-color: rgb(90, 142, 221); color: white;">메일 보내기</a>
+										<button type="button" class="adm_mailing" onclick="location.href='emailWrite.do'">메일 보내기</button>
 										<button type="submit" id="delBtn" value="delete" style="width: 80px; height: 30px;">삭 제</button></td>
 								</tr>
 							</table>

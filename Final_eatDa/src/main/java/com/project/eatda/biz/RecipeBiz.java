@@ -20,6 +20,7 @@ public interface RecipeBiz {
 	
 	public int getTotal(RecipePageBaseDto rpbdto);
 
-
+	/* 관리자 리스트 */
+	public List<RecipeDto> adminRecipeList();
 	
 }
