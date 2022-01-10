@@ -16,8 +16,8 @@ public class RecipeBizImpl implements RecipeBiz{
 	private RecipeDao dao;
 
 	@Override
-	public List<RecipeDto> recipeList() {
-		return dao.recipeList();
+	public List<RecipeDto> recipeList(RecipePageBaseDto rpbdto) {
+		return dao.recipeList(rpbdto);
 	}
 
 	@Override
@@ -40,11 +40,6 @@ public class RecipeBizImpl implements RecipeBiz{
 		return dao.recipeDelete(recipe_no);
 	}
 	
-	@Override
-	public List<RecipeDto> recipeCategory(String recipe_category){
-		
-		return dao.recipeCategory(recipe_category);
-	}
 
 	@Override
 	public int updateRecipeCount(int recipe_no) {
@@ -63,18 +58,9 @@ public class RecipeBizImpl implements RecipeBiz{
 	}
 
 	@Override
-	public int paging() {
-		return dao.paging();
-	}
-
-	@Override
-	public List<RecipeDto> recipeTest(RecipePageBaseDto rpbdto) {
-		return dao.recipeTest(rpbdto);
-	}
-
-	@Override
 	public int getTotal(RecipePageBaseDto rpbdto) {
 		return dao.getTotal(rpbdto);
 	}
+	
 
 }
