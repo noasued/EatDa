@@ -42,6 +42,7 @@
 	    <property name="port" value="587" />
 	 	<property name="username" value="TeamEatDa@gmail.com"/> <!-- 자신의 이메일 아이디 -->
 	 	<property name="password" value="eatDa123"/> <!-- 자신의 비밀번호 -->
+	 	<property name="defaultEncoding" value="utf-8"/>
 	 <!-- 보안연결 TLS과 관련된 설정 -->
 	    <property name="javaMailProperties">
 		    <props>

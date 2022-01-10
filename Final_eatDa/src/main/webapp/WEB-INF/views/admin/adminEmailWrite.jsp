@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Admin Email Write</title>
 
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
 
-<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	function chk(){
 		 if(confirm('작성하신 메일을 전송하시겠습니까?')==true){
@@ -54,11 +54,11 @@
 		<h1>이메일 보내기</h1>
 	</div>
 	<hr>
-	<form method="post" action="send.do" onsubmit="return chk();">
+	<form action="send.do" method="post" onsubmit="return chk();">
 		<table>
 			<tr>
 				<th>발신자 이름</th>
-				<td><input type="text" name="senderName" autofocus></td>
+				<td><input type="text" name="senderName" value="EatDa" readonly></td>
 			</tr>
 			<tr>
 				<th>발신자 이메일</th>
@@ -66,15 +66,15 @@
 			</tr>
 			<tr>
 				<th>수신자 이메일</th>
-				<td><input type="text" name="receiveMail"></td>
+				<td><input type="text" name="receiveMail" autofocus></td>
 			</tr>
 			<tr>
 				<th>제 목</th>
-				<td><input type="text" name="subject" placeholder="제목을 입력하세요"></td>
+				<td><input type="text" name="subject" style="width:300px;" value="안녕하세요  ${member.user_name}님, EatDa입니다 :)"></td>
 			</tr>
 			<tr>
 				<th>내 용</th>
-				<td><textarea rows="10" cols="80" name="message" placeholder="내용을 입력하세요"></textarea></td>
+				<td><textarea cols="80" name="message" placeholder="내용을 입력하세요"></textarea></td>
 			</tr>
 			<tr style="margin:0 auto;">
 				<td colspan="5">

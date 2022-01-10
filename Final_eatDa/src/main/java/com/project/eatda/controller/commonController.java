@@ -37,14 +37,12 @@ public class commonController {
 	
 	@RequestMapping("/foodbti.do")
 	public String goFoodbti() {
-		logger.info("foodbti");
 		return "/market/foodbti";
 	}
 	
 	@RequestMapping(value="/getMarketData.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<ProductDto> getMarketData() {
-		logger.info("getMarketData");
 		List<ProductDto> tempList = new ArrayList<ProductDto>();
 		List<ProductDto> list = commonBiz.getMarketData();
 		
@@ -57,13 +55,12 @@ public class commonController {
 	@RequestMapping(value="/getRecentRecipe.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<RecipeDto> getRecentRecipe() {
-		logger.info("getRecentRecipe");
 		List<RecipeDto> list = commonBiz.getRecentRecipe();
 		
 		for (int i = 0; i < list.size(); i++) {
-			String temp = list.get(i).getRecipe_content();
-			if (temp.length() > 30) {
-				list.get(i).setRecipe_content(temp.substring(0, 60)+"...");
+			String temp = list.get(i).getR_short_desc();
+			if (temp.length() > 90) {
+				list.get(i).setR_short_desc(temp.substring(0, 90)+"...");
 			}
 		}
 		return list;
@@ -72,7 +69,6 @@ public class commonController {
 	@RequestMapping(value="/getMbtiProduct.do", method=RequestMethod.GET) 
 	@ResponseBody
 	public List<MbtiDto> getMbtiProduct(String m_name) {
-		logger.info("getMbtiProduct, m_name: "+ m_name);
 		List<MbtiDto> list = commonBiz.getMbtiProduct(m_name);
 		
 		String desc = list.get(0).getP_description();
@@ -88,15 +84,11 @@ public class commonController {
 	@RequestMapping(value="/getPopularBlog.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<BlogDto> getPopularBlog() {
-		logger.info("getPopularBlog");
-		List<BlogDto> temp = commonBiz.getPopularBlog();
-		List<BlogDto> list = new ArrayList<BlogDto>();
+		List<BlogDto> list = commonBiz.getPopularBlog();
 		
 		for (int i = 0; i < 3; i++) {
-			list.add(temp.get(i));
-			
-			if (list.get(i).getBlog_content().length() > 40) {
-				String s = list.get(i).getBlog_content().substring(0, 40) + "....";
+			if (list.get(i).getBlog_content().length() > 80) {
+				String s = list.get(i).getBlog_content().substring(0, 80) + "....";
 				list.get(i).setBlog_content(s);
 			}
 		}
@@ -106,16 +98,15 @@ public class commonController {
 	@RequestMapping(value="/getLovingRecipe.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<RecipeDto> getLovingRecipe() {
-		//리스트 가져와서 3개로 나눠서 리턴
-		//logger.info("getLovingRecipe");
 		List<RecipeDto> list = commonBiz.getLovingRecipe();
 		
 		for (int i = 0; i < list.size(); i++) {
-			String temp = list.get(i).getRecipe_content();
-			if (temp.length() > 30) {
-				list.get(i).setRecipe_content(temp.substring(0, 60)+"...");
+			String temp = list.get(i).getR_short_desc();
+			if (temp.length() > 90) {
+				list.get(i).setR_short_desc(temp.substring(0, 90)+"...");
 			}
 		}
+		
 		return list;
 	}
 	

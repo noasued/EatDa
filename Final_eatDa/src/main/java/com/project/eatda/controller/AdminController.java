@@ -1,12 +1,15 @@
 package com.project.eatda.controller;
 
 import javax.inject.Inject;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +29,9 @@ public class AdminController {
 	
 	@Inject
 	AdminBiz emailService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	AdminBiz adminBiz;
@@ -117,7 +123,7 @@ public class AdminController {
 	@RequestMapping("/adminRecipe.do")
 	public String adminRecipe(Model model) {
 		System.out.println("adminRecipe");
-		model.addAttribute("recipeList", recipeBiz.recipeList());
+		model.addAttribute("recipeList", recipeBiz.adminRecipeList());
 
 		return "/admin/adminRecipe";
 	}
@@ -299,20 +305,27 @@ public class AdminController {
 		return "/admin/adminEmailWrite";
 	}
 	
-	@RequestMapping("send.do")
-		public String send(@ModelAttribute EmailDto dto, Model model) {
-		
-		try {
-			emailService.sendMail(dto);
-			System.out.println("이메일이 발송되었습니다.");
-			model.addAttribute("message","이메일이 발송되었습니다.");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("message","이메일 발송 실패");
-		}
-			return "/admin/adminEmailWrite";
-			
+	@RequestMapping(value="send.do", method=RequestMethod.POST)
+		public String sendMail(EmailDto dto) throws Exception {
+			String charset = "UTF-8";
+			try {
+	            MimeMessage message = this.mailSender.createMimeMessage();
+	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+	           
+	            helper.setFrom(new InternetAddress("TeamEatDa@gamil.com", "EatDa"));
+	            
+	            helper.setTo("yhegee1004@naver.com");
+	            helper.setSubject("안녕하세요 "+"님, EatDa입니다 :)");
+	            helper.setText(dto.getMessage(), charset);
+	            
+	            // 이메일 보내기
+	            mailSender.send(message);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return "redirect:/adminUser.do";
 		}
 	
 

@@ -61,6 +61,12 @@ public class RecipeBizImpl implements RecipeBiz{
 	public int getTotal(RecipePageBaseDto rpbdto) {
 		return dao.getTotal(rpbdto);
 	}
+
+	/* 관리자 레시피 리스트 */
+	@Override
+	public List<RecipeDto> adminRecipeList() {
+		return dao.adminRecipeList();
+	}
 	
 
 }

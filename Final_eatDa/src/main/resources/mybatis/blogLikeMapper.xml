@@ -22,7 +22,7 @@
 		AND USER_ID = #{user_id}
 	</update>
 	
-	<select id="flagLikeUser" parameterType="blogLikeDto">
+	<select id="flagLikeUser" parameterType="blogLikeDto" resultType="blogLikeDto">
 		SELECT * FROM BLOG_LIKE WHERE BLOG_NO = #{blog_no} AND USER_ID = #{user_id}
 	</select>
 	
