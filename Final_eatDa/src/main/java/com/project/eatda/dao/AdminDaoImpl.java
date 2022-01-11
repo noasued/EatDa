@@ -21,6 +21,8 @@ public class AdminDaoImpl implements AdminDao{
 	private SqlSessionTemplate sqlSession;
 	
 	/* 관리자 MAIN */
+	
+	// 결제 취소
 	@Override
 	public int adminOrderCount() {
 		int count = 0;
@@ -35,11 +37,11 @@ public class AdminDaoImpl implements AdminDao{
 	}
 	
 	@Override
-	public int allOrderCount() {
+	public int newAdminOrderCount() {
 		int count = 0;
 		
 		try {
-			count = sqlSession.selectOne(NAMESPACE+"allOrderCount");
+			count = sqlSession.selectOne(NAMESPACE+"newAdminOrderCount");
 		} catch (Exception e) {
 			System.out.println("[error] : all order count");
 			e.printStackTrace();
@@ -47,6 +49,59 @@ public class AdminDaoImpl implements AdminDao{
 		return count;
 	}
 	
+	// 회원 수
+		@Override
+		public int adminUserCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"adminUserCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
+		
+		@Override
+		public int newAdminUserCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"newAdminUserCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
+	
+
+		// 신고 수
+		@Override
+		public int adminReportCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"adminReportCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
+
+		@Override
+		public int newAdminReportCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"newAdminReportCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}	
+		
+		
+		
 	/* 댓글 리스트 */
 	@Override
 	public List<BlogReplyDto> adminReplyList() {
@@ -113,7 +168,7 @@ public class AdminDaoImpl implements AdminDao{
 		dto.setP_id(p_id);
 		dto.setP_no(p_no);
 		
-		System.out.println("dto"+dto);
+		System.out.println("dto : "+dto);
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"adminProductInsert",dto);
@@ -236,7 +291,6 @@ public class AdminDaoImpl implements AdminDao{
 			}
 			return res;
 		}		
-
 	
 	/* 회원 리스트 */
 	@Override
@@ -279,7 +333,7 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return res;
 	}
-
+	
 	/* 신고 리스트 */
 	@Override
 	public List<ReportDto> adminReportList(){
@@ -321,6 +375,7 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return res;
 	}
+
 
 	
 }

@@ -92,17 +92,6 @@
 		ORDER BY ORDER_ID DESC
 	</select>
 	
-	<select id="adminOrderCount" resultType="int">
-		SELECT COUNT(*) AS CNT
-		FROM E_ORDER
-		WHERE ORDER_STATUS='결제 취소'
-	</select>
-	
-	<select id="allOrderCount" resultType="int">
-		SELECT COUNT(*) AS CNT
-		FROM E_ORDER
-	</select>
-	
 	<insert id="adminOrderInsert" parameterType="orderDto">
 		INSERT INTO E_ORDER
 		VALUES(#{order_id},#{user_id},1,1)
@@ -128,6 +117,18 @@
 		SET ORDER_STATUS=#{order_status}
 		WHERE ORDER_ID=#{order_id}
 	</update>
+	
+	<select id="adminOrderCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM E_ORDER
+	</select>
+
+	<select id="newAdminOrderCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM E_ORDER
+		WHERE ORDER_STATUS ='결제 취소'
+	</select>	
+	
 	
 	<!-- Admin User -->
 	<resultMap type="userDto" id="userMap">
@@ -157,6 +158,17 @@
 	<delete id="adminUserDelete" parameterType="String">
 		DELETE FROM E_USER WHERE USER_ID=#{user_id}
 	</delete>
+	
+	<select id="adminUserCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM E_USER
+	</select>
+	
+	<select id="newAdminUserCount" resultType="int">
+		SELECT COUNT(*) AS CNT 
+		FROM E_USER LEFT OUTER JOIN SUBSCRIPTION ON E_USER.USER_ID = SUBSCRIPTION.USER_ID
+		WHERE E_USER.USER_ID = SUBSCRIPTION.USER_ID
+	</select>
 
 	<!-- Admin Report -->
 	<resultMap type="reportDto" id="reportMap">
@@ -185,5 +197,15 @@
 	<delete id="adminReportDelete" parameterType="int">
 		DELETE FROM REPORT WHERE REPORT_NO=#{report_no}
 	</delete>
+	
+	<select id="adminReportCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM REPORT
+	</select>
 
+	<select id="newAdminReportCount" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM REPORT
+		WHERE 1>REPORT_PENALTY
+	</select>
 </mapper>

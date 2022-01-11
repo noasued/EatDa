@@ -1,5 +1,8 @@
 package com.project.eatda.biz;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.eatda.dao.AdminDao;
 import com.project.eatda.dto.BlogReplyDto;
@@ -35,8 +39,30 @@ public class AdminBizImpl implements AdminBiz{
 		}
 		
 		@Override
-		public int allOrderCount() {
-			return adminDao.allOrderCount();
+		public int newAdminOrderCount() {
+			return adminDao.newAdminOrderCount();
+		}
+		
+		
+		@Override
+		public int adminUserCount() {
+			return userDao.adminUserCount();
+		}
+		
+		@Override
+		public int newAdminUserCount() {
+			return userDao.newAdminUserCount();
+		}
+		
+
+		@Override
+		public int adminReportCount() {
+			return reportDao.adminReportCount();
+		}
+
+		@Override
+		public int newAdminReportCount() {
+			return reportDao.newAdminReportCount();
 		}
 	
 	/* 댓글 리스트 */
@@ -193,8 +219,5 @@ public class AdminBizImpl implements AdminBiz{
 		public int reportStatusUpdate(ReportDto dto) {
 			return reportDao.reportStatusUpdate(dto);
 		}
-	
-
-
 
 }

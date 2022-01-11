@@ -1,10 +1,15 @@
 package com.project.eatda.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.inject.Inject;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -12,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.eatda.biz.AdminBiz;
 import com.project.eatda.biz.BlogBiz;
@@ -56,12 +63,16 @@ public class AdminController {
 		
 		model.addAttribute("newBlogCount",blogBiz.newAdminBlogCount());
 		model.addAttribute("blogCount",blogBiz.adminBlogCount());
+		model.addAttribute("newReportCount",adminBiz.newAdminReportCount());
+		model.addAttribute("reportCount",adminBiz.adminReportCount());
+		model.addAttribute("newUserCount",adminBiz.newAdminUserCount());
+		model.addAttribute("userCount",adminBiz.adminUserCount());
+		model.addAttribute("newAdminOrderCount",adminBiz.newAdminOrderCount());
+		model.addAttribute("adminOrderCount",adminBiz.adminOrderCount());
 		
 		return "/admin/adminMain";
 	}
 	
-	
-
 	/* 게시글 댓글 리스트 */
 	@RequestMapping(value="/adminPostReply.do", method=RequestMethod.GET)
 	public String adminReplyList(Model model){
@@ -122,7 +133,6 @@ public class AdminController {
 	/* 레시피 리스트 */
 	@RequestMapping("/adminRecipe.do")
 	public String adminRecipe(Model model) {
-		System.out.println("adminRecipe");
 		model.addAttribute("recipeList", recipeBiz.adminRecipeList());
 
 		return "/admin/adminRecipe";
@@ -131,7 +141,6 @@ public class AdminController {
 	/* 상품 리스트 */
 	@RequestMapping("/adminProductList.do")
 	public String adminProductList(Model model) {
-		System.out.println("admin product list");
 		model.addAttribute("productList", adminBiz.adminProductList());
 		
 		return "/admin/adminProductList";
@@ -140,8 +149,6 @@ public class AdminController {
 	// 상품 등록 버튼 클릭 시, writeForm으로 페이지 이동
 	@RequestMapping("/adminProductWrite.do")
 	public String adminProductWrite() {
-		System.out.println("admin product write");
-		
 		return "/admin/adminProductWrite";
 	}
 	
@@ -155,6 +162,32 @@ public class AdminController {
 		model.addAttribute("insert_result", dto.getP_id());
 		
 		return "redirect:/adminProductList.do";
+	}
+	
+	// 사진 file upload
+	@RequestMapping(value="/upload.do", method=RequestMethod.POST)
+	public String upload(ProductDto dto, Model model, @RequestParam("p_category") String p_category
+			,@RequestParam("p_name") String p_name
+			,@RequestParam("p_short_desc") String p_short_desc
+			,@RequestParam("p_description") String p_description
+			,@RequestParam("p_price") String p_price
+			,@RequestParam("p_cal") String p_cal
+			,@RequestParam("p_amount") String p_amount
+			,@RequestParam("seller_desc") String seller_desc
+			,@RequestParam("img_path") MultipartFile multipartFile) {
+		
+		File targetFile = new File("/resources/images/kitchen2.jpg" + multipartFile.getOriginalFilename());
+		
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);
+			e.printStackTrace();
+		}
+
+		
+		return "redirect:/admin/adminProductWrite";
 	}
 	
 	// 상품 수정 버튼 클릭 시, updateForm으로 이동
@@ -181,7 +214,7 @@ public class AdminController {
 	}
 	
 	// 상품 삭제
-	@RequestMapping("/adminProductDelete.do")
+	@RequestMapping(value="/adminProductDelete.do",method=RequestMethod.GET)
 	public String adminProductDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin product delete");
 		
@@ -194,7 +227,6 @@ public class AdminController {
 			System.out.println(chk[i]);
 			adminBiz.adminProductDelete(chk[i]);
 		}
-		
 		return "redirect:/adminProductList.do";
 	}
 

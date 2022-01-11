@@ -102,7 +102,7 @@
 	<!-- Admin Recipe List -->
 	<select id="adminRecipeList" resultMap="recipeMap">
 		SELECT * FROM RECIPE
-		ORDER BY RECIPE_NO DESCS
+		ORDER BY RECIPE_NO DESC
 	</select>
 
 
