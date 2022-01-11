@@ -150,14 +150,14 @@ public class BlogController {
 	}
 	
 	//썸머노트 파일처리
-	@RequestMapping(value="/uploadSummernoteImageFile.do", produces = "application/json; charset=utf8")
+	@RequestMapping(value="/uploadImageFile.do", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+	public String uploadImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
 		JsonObject jsonObject = new JsonObject();
 			
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"src/main/webapp/resources/images/blog/";
+		String fileRoot = contextRoot+"resources/images/blog/";
 			
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
