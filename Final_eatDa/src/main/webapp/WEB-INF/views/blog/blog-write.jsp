@@ -10,7 +10,6 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
   <link href="resources/css/blog/blog-write.css" rel="stylesheet">
   <!-- top 부분 -->
   <style type="text/css">
@@ -60,8 +59,8 @@
   </style>
   
   <!-- summernote -->
-	<link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet">  
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet">  
 	
 </head>
 <body style="margin-top:155px;">
@@ -87,10 +86,10 @@
 
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
-        <form action="/blog-write.do" method="POST">
-        	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${user_id}" disabled>
+        <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
+        	<input id="user_id" name="user_id" value="${user_id}" disabled>
           <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
-					<textarea class="summernote" id="summernote" name="blog_content"></textarea>
+					<textarea class="summernote" id="summernote" name="blog_content_new"></textarea>
 					<!-- image 경로 넘겨주기! -->
 					<input type="hidden" id="img" name="blog_img" value="">
 					<div class="blog-write__content-article__btns">
@@ -114,7 +113,7 @@
 	<!--  include summernote-ko-KR -->
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
   <script type="text/javascript">
-  // 글 작성 완료 버튼 클릭
+  // click submit button
 	function submitBtn(){
 		var user_id=$('#user_id').val();
 		var blog_title=$('#title').val();
@@ -124,10 +123,19 @@
 		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id;
 		alert("글 작성이 완료되었습니다.");
 	}
-  
 	// summernote
 	$(document).ready(function() {
 		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
+		var toolbar = [
+			// 글꼴 설정
+		  ['font', ['fontname','fontsize']],
+		  ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
+		  ['style', ['style']],
+		  ['highlight', ['highlight']],
+		  ['paragraph', ['paragraph','height','ul', 'ol']],
+		  // 그림첨부, 링크만들기
+		  ['insert',['table','hr','link','picture']],
+		];
 		$('#summernote').summernote({
 			  lang: "ko-KR",								// 한글 설정
 			  fontNames: fontList,
@@ -140,20 +148,13 @@
         tabsize: 2,
 			  placeholder: '내용을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	//placeholder 설정
         prettifyHtml:false,
-				
-			  toolbar: [
-			    ['font', ['fontname','fontsize']],
-			    ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
-			    ['style', ['style']],
-			    ['highlight', ['highlight']],
-			    ['paragraph', ['paragraph','height','ul', 'ol']],
-			    ['insert',['table','hr','link','picture']]
-			  ],
-			  callbacks : { //이미지 첨부
+			  toolbar: toolbar,
+			  callbacks : { //여기 부분이 이미지를 첨부하는 부분
 					onImageUpload : function(files, editor, welEditable) {
 						console.log(files+"//"+editor+"//");
+						
 						for (var i = files.length - 1; i >= 0; i--) {
-							uploadImageFile(files[i], this);
+							uploadSummernoteImageFile(files[i], this);
 						}
 					}
 			  },
