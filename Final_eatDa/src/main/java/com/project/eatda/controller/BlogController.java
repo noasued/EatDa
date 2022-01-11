@@ -104,6 +104,7 @@ public class BlogController {
 		List<BlogReplyDto> replyDto =  replyBiz.list(blog_no);
 		model.addAttribute("list", replyDto);
 		
+		biz.blogCount(blog_no); //조회수
 		return "/blog/blog-detail";
 	}
 	
