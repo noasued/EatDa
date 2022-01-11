@@ -22,9 +22,9 @@
 	padding-bottom: 15px;
 	border-bottom: 0.3px solid rgb(235, 235, 235);
 }
-.recipe_content-title input{
+.recipe_content-title input, .short input{
 	margin-top:2%;
-	width : 840px;
+	width : 880px;
 	height: 40px;
 }
 
@@ -53,9 +53,11 @@
 	  
 	}
 
+
 .recipe_content-category{letter-spacing: 8px;}
 .recipe_content-category label{margin-right: 2%;}	
 .recipe_content-main{margin-left: 13%;}	
+
   </style>
 </head>
 <body>
@@ -88,7 +90,9 @@
 					<label><input type="radio" name="recipe_category" value="야식"> 야식</label>
 					<label><input type="radio" name="recipe_category" value="비건"> 비건</label>
 				</div>
-				
+				<div class="form-group short">
+					<input type="text" name="r_short_desc">
+				</div>
 				<div class="form-group">
 					<textarea id="summernote" class="form-control" rows="5" id="content" name="recipe_content"></textarea>
 					<!-- image 경로 넘겨주기! -->
