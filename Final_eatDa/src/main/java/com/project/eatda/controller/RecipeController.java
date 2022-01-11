@@ -56,19 +56,12 @@ public class RecipeController {
 		biz.updateRecipeCount(recipe_no);
 		return "/recipe/recipeDetail";
 	}
-
+	
 	@RequestMapping("/recipeInsert.do")
 	public String recipeInsert() {
 		logger.info("RECIPE INSERT");
 		
 		return "/recipe/recipeInsert";
-	}
-	
-	@RequestMapping("/summernote.do")
-	public String summernote() {
-		logger.info("RECIPE INSERT");
-		
-		return "/recipe/summernote";
 	}
 	
 	@RequestMapping("/recipeInsertRes.do")
@@ -80,7 +73,7 @@ public class RecipeController {
 		if(res>0){			
 			return "redirect:recipeList.do";
 		}else {
-			return "redirect:summernote.do";
+			return "redirect:recipeInsert.do";
 		}
 	}
 	
@@ -132,7 +125,7 @@ public class RecipeController {
 		
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/images/recipe/"; //톰캣 서버에 이미지 저장
+		String fileRoot = contextRoot+"resources/images/recipe/"; //서버에 이미지 저장
 		System.out.println(fileRoot);
 		
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
