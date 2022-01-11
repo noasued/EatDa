@@ -90,7 +90,6 @@ public class EventController {
 		
 		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
 		System.out.println(chk);
-		String rss = "";
 		int chk_length = chk.length;
 		System.out.println(chk_length);
 		

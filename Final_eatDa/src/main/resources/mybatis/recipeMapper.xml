@@ -21,9 +21,9 @@
 		<!-- 페이징 -->
 	<select id="recipeList" parameterType="list" resultMap="recipeMap">
 		<![CDATA[
-			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE, R_SHORT_DESC
+			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE
 			FROM (	SELECT ROWNUM RN, A.*
-					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE, R_SHORT_DESC
+					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
 							FROM RECIPE
 							WHERE	
 		]]>					
@@ -75,13 +75,13 @@
 	<!-- 레시피 추가 -->
 	<insert id="recipeInsert" parameterType="recipeDto">
 		INSERT INTO RECIPE
-		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE,#{r_short_desc})
+		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE,NULL)
 	</insert>
 
 	<!-- 레시피 수정 -->
 	<update id="recipeUpdate" parameterType="recipeDto">
 		UPDATE RECIPE
-		SET RECIPE_TITLE=#{recipe_title}, RECIPE_CATEGORY=#{recipe_category}, R_SHORT_DESC=#{r_short_desc}, RECIPE_CONTENT=#{recipe_content}
+		SET RECIPE_TITLE=#{recipe_title}, RECIPE_CATEGORY=#{recipe_category}, RECIPE_CONTENT=#{recipe_content}
 		WHERE RECIPE_NO = #{recipe_no} 
 	</update>
 

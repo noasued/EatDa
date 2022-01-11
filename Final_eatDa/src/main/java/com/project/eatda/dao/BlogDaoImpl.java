@@ -28,7 +28,7 @@ public class BlogDaoImpl implements BlogDao{
 		List<BlogDto> list = new ArrayList<BlogDto>();
 		num = num*3;
 		try {
-			temp = sqlSession.selectList(BLOG_NAMESPACE+"blogList");
+			temp = sqlSession.selectList(NAMESPACE+"blogList");
 			for (int i = num-3; i < num; i++) {
 				list.add(temp.get(i));
 			}
@@ -44,7 +44,7 @@ public class BlogDaoImpl implements BlogDao{
 		int blogCount = 0;
 		
 		try {
-			blogCount = sqlSession.selectOne(BLOG_NAMESPACE+"pagingBlog");
+			blogCount = sqlSession.selectOne(NAMESPACE+"pagingBlog");
 		} catch (Exception e) {
 			System.out.println("paging DAO ERROR");
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class BlogDaoImpl implements BlogDao{
 		String makekeyword = "%"+keyword+"%";
 		try {
 			System.out.println("keyword: " + makekeyword);
-			list = sqlSession.selectList(BLOG_NAMESPACE+"searchBlog", makekeyword);
+			list = sqlSession.selectList(NAMESPACE+"searchBlog", makekeyword);
 		} catch (Exception e) {
 			System.out.println("[error]: search blog");
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class BlogDaoImpl implements BlogDao{
 	public BlogDto selectOne(int blog_no) {
 		BlogDto dto = null;
 		try {
-			dto = sqlSession.selectOne(BLOG_NAMESPACE+"blogDetail",blog_no);
+			dto = sqlSession.selectOne(NAMESPACE+"blogDetail",blog_no);
 		} catch (Exception e) {
 			System.out.println("[error] : blog detail");
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class BlogDaoImpl implements BlogDao{
 	public int insert(BlogDto dto) {
 		int res = 0;
 		try {
-			res = sqlSession.insert(BLOG_NAMESPACE+"blogInsert",dto);
+			res = sqlSession.insert(NAMESPACE+"blogInsert",dto);
 		} catch (Exception e) {
 			System.out.println("[error] : insert");
 			e.printStackTrace();
@@ -95,7 +95,7 @@ public class BlogDaoImpl implements BlogDao{
 	public int update(BlogDto dto) {
 		int res = 0;
 		try {
-			res = sqlSession.update(BLOG_NAMESPACE+"blogUpdate",dto);
+			res = sqlSession.update(NAMESPACE+"blogUpdate",dto);
 			System.out.println("update dao : update blog where blog_no :"+dto.getBlog_no());
 		} catch (Exception e) {
 			System.out.println("[error] : update");
@@ -108,7 +108,7 @@ public class BlogDaoImpl implements BlogDao{
 	public int selectBlogNo(String blog_title) {
 		BlogDto dto = null;
 		try {
-			dto = sqlSession.selectOne(BLOG_NAMESPACE+"selectBlogNo",blog_title);
+			dto = sqlSession.selectOne(NAMESPACE+"selectBlogNo",blog_title);
 			System.out.println(dto.toString());
 		} catch (Exception e) {
 			System.out.println("[error] : selectBlogNo");
@@ -121,7 +121,7 @@ public class BlogDaoImpl implements BlogDao{
 	public int delete(int blog_no) {
 		int res = 0;
 		try {
-			res = sqlSession.delete(BLOG_NAMESPACE+"blogDelete",blog_no);
+			res = sqlSession.delete(NAMESPACE+"blogDelete",blog_no);
 			System.out.println("delete dao : delete blog where blog_no :"+blog_no);
 		} catch (Exception e) {
 			System.out.println("[error] : delete");
@@ -130,25 +130,13 @@ public class BlogDaoImpl implements BlogDao{
 		return res;
 	}
 
-	@Override
-	public int blogCount(int blog_no) {
-		int res = 0;
-		
-		try {
-			res = sqlSession.update(BLOG_NAMESPACE+"blogCount", blog_no);
-		} catch (Exception e) {
-			System.out.println("error : blog count");
-			e.printStackTrace();
-		}
-		return res;
-	}
 	
 	/* 관리자 블로그 리스트(전체 조회) */
 	@Override
 	public List<BlogDto> adminBlogList() {
 		List<BlogDto> adminBlogList = new ArrayList<BlogDto>();
 		try {
-			adminBlogList = sqlSession.selectList(BLOG_NAMESPACE+"adminBlogList");
+			adminBlogList = sqlSession.selectList(NAMESPACE+"adminBlogList");
 		} catch (Exception e) {
 			System.out.println("[error] : admin blog list");
 			e.printStackTrace();
@@ -162,7 +150,7 @@ public class BlogDaoImpl implements BlogDao{
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(BLOG_NAMESPACE+"adminBlogDelete",blog_no);
+			res = sqlSession.delete(NAMESPACE+"adminBlogDelete",blog_no);
 		} catch (Exception e) {
 			System.out.println("[error] : admin blog delete");
 			e.printStackTrace();
@@ -176,7 +164,7 @@ public class BlogDaoImpl implements BlogDao{
 		int count = 0;
 		
 		try {
-			count = sqlSession.selectOne(BLOG_NAMESPACE+"adminBlogCount");
+			count = sqlSession.selectOne(NAMESPACE+"adminBlogCount");
 			System.out.println(count);
 		} catch (Exception e) {
 			System.out.println("[error] : admin blog count");
@@ -191,7 +179,7 @@ public class BlogDaoImpl implements BlogDao{
 		int count = 0;
 		
 		try {
-			count = sqlSession.selectOne(BLOG_NAMESPACE+"newAdminBlogCount");
+			count = sqlSession.selectOne(NAMESPACE+"newAdminBlogCount");
 			System.out.println(count);
 		} catch (Exception e) {
 			System.out.println("[error] : admin blog count");

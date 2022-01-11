@@ -22,6 +22,7 @@ import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.EventDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReportDto;
 import com.project.eatda.dto.UserDto;
 
 @Controller
@@ -118,7 +119,6 @@ public class AdminController {
 		return "redirect:/adminPostEvent.do";
 	}
 
-
 	/* 레시피 리스트 */
 	@RequestMapping("/adminRecipe.do")
 	public String adminRecipe(Model model) {
@@ -156,7 +156,6 @@ public class AdminController {
 		
 		return "redirect:/adminProductList.do";
 	}
-
 	
 	// 상품 수정 버튼 클릭 시, updateForm으로 이동
 	@RequestMapping("adminProductUpdate.do")
@@ -217,13 +216,12 @@ public class AdminController {
 	 	System.out.println(chk); 
 	 	int chk_l = chk.length;
 	 	System.out.println(chk_l);
-	  
-		for(int i = 0; i < chk_l; i++) { 
-			System.out.println(chk[i]);
-		 	adminBiz.adminOrderDelete(chk[i]); 
-		 }
-	 
-	 return "redirect:/adminOrder.do"; 
+		  
+			for(int i = 0; i < chk_l; i++) { 
+				System.out.println(chk[i]);
+			 	adminBiz.adminOrderDelete(chk[i]); 
+			 }
+		return "redirect:/adminOrder.do"; 
 	 }
 	 
 	// 배송 현황 update
@@ -339,7 +337,7 @@ public class AdminController {
 	}
 	
 	// 신고 삭제 
-	@RequestMapping(value="/adminReportDelete.do", method=RequestMethod.GET)
+	@RequestMapping("/adminReportDelete.do")
 	public String adminReportDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin report delete");
 		
@@ -352,6 +350,25 @@ public class AdminController {
 			System.out.println(chk[i]);
 			adminBiz.adminReportDelete(Integer.parseInt(chk[i]));
 		}
+		
+		return "redirect:/adminReport.do";
+	}
+	
+	// 신고 status update
+	@RequestMapping("reportStatusUpdate.do")
+	public String reportStatusUpdate(ReportDto dto, int report_status, int report_no, int report_penalty) {
+		System.out.println("update report_status");
+		System.out.println(report_no);
+		
+		if(report_status==2) {
+			report_penalty += 1;
+		}
+		
+		dto.setReport_status(report_status);
+		dto.setReport_no(report_no);
+		dto.setReport_penalty(report_penalty);
+		System.out.println(dto.toString());
+		adminBiz.reportStatusUpdate(dto);
 		
 		return "redirect:/adminReport.do";
 	}

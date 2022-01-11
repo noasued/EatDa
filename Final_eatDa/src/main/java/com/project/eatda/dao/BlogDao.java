@@ -5,7 +5,7 @@ import java.util.List;
 import com.project.eatda.dto.BlogDto;
 
 public interface BlogDao {
-	String BLOG_NAMESPACE = "blog.";
+	String NAMESPACE = "blog.";
 	
 	public List<BlogDto> takeBlogList(int num);
 	public int paging();
@@ -18,7 +18,6 @@ public interface BlogDao {
 	
 	public int selectBlogNo(String blog_title);
 	
-	public int blogCount(int blog_no);
 	
 	/* 관리자 블로그 리스트 (전체 조회) */
 	public List<BlogDto> adminBlogList();

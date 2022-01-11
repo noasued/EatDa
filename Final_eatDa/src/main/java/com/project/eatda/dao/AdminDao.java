@@ -12,6 +12,11 @@ import com.project.eatda.dto.UserDto;
 public interface AdminDao {
 	String NAMESPACE="admin.";
 	
+	/* 관리자 MAIN */
+	public int adminOrderCount();
+	public int allOrderCount();
+	
+	
 	/* 댓글 리스트 */
 	public List<BlogReplyDto> adminReplyList();
 	public int adminReplyDelete(int reply_no);
@@ -26,7 +31,6 @@ public interface AdminDao {
 	
 	/* 주문 리스트 */
 	public List<OrderDto> adminOrderList();
-	public OrderDto orderSelectOne(String order_id);
 	
 	public int adminOrderInsert(OrderDto dto);
 	public int adminOrderInsert2(OrderDto dto);
@@ -43,5 +47,6 @@ public interface AdminDao {
 	public List<ReportDto> adminReportList();
 	public int adminReportDelete(int report_no);
 
+	public int reportStatusUpdate(ReportDto dto);
 	
 }

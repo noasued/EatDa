@@ -75,12 +75,10 @@
 
 			<!-- article -> summernote -->
       <div class="blog-update__content-article">
-        	<input id="user_id" name="user_id" value="${dto.user_id}" disabled>
+        	<input id="user_id" name="user_id" value="작성자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.user_id}" disabled>
         	<input id="blog-no" type="hidden" name="blog_no" value="${dto.blog_no}">
           <input type="text" name="blog_title" id="title" value="${dto.blog_title}">
 					<textarea class="summernote" id="summernote" name="blog_content">${dto.blog_content}</textarea>
-					<!-- image 경로 넘겨주기! -->
-					<input type="hidden" id="img" name="blog_img" value="">
 					<div class="blog-update__content-article__btns">
 						<input type="button" name="update-submit-btn" value="수정 완료" onclick="submitBtn()">
 						<input type="button" name="update-cancel-btn" value="수정 취소" onclick="location.href='blog-detail.do?blog_no=${dto.blog_no}'">
@@ -111,7 +109,7 @@
 		console.log(blog_content);
 		location.href="blog-update.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id+"&blog_no="+blog_no;
 	}
- 	
+  
 	//summernote
 	$(document).ready(function() {
 		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
@@ -137,17 +135,10 @@
 			    ['paragraph', ['paragraph','height','ul', 'ol']],
 			    // 그림첨부, 링크만들기
 			    ['insert',['table','hr','link','picture']],
-			    
+			    //이모지
+			    ['misc', ['emoji']]
 			  ],
-			  callbacks : { //여기 부분이 이미지를 첨부하는 부분
-					onImageUpload : function(files, editor, welEditable) {
-						console.log(files+"//"+editor+"//");
-						
-						for (var i = files.length - 1; i >= 0; i--) {
-							uploadSummernoteImageFile(files[i], this);
-						}
-					}
-			  },
+			  
 			  popover: {
 				  image: [
 				    ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
@@ -159,26 +150,6 @@
 				
 		});
 	});
-	$('#summernote').summernote(setting);
- 	function uploadImageFile(files[i], el){
-		data = new FormData();
-		data.append("file", file);
-		$.ajax({
-			data : data,
-			type : "POST",
-			url : "uploadImageFile.do",
-			contentType : false,
-			enctype : 'multipart/form-data',
-			processData : false,
-			success : function(data) {
-				$(el).summernote('editor.insertImage', data.url);
-				console.log("date.url" + data.url);
-				console.log("data" + data);
-				document.getElementById('img').value = data.url;
-			}
-		});
-	}
-	
 	</script>
 	
 </body>

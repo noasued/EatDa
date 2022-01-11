@@ -17,7 +17,6 @@ public interface BlogBiz {
 
 	public int selectBlogNo(String blog_title);
 	
-	public int blogCount(int blog_no);
 	
 	/* 관리자 블로그 리스트 (전체 조회) */
 	public List<BlogDto> adminBlogList();
