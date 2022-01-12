@@ -144,7 +144,7 @@
 						console.log(files+"//"+editor+"//");
 						
 						for (var i = files.length - 1; i >= 0; i--) {
-							uploadImageFile(files[i], this);
+							uploadSummernoteImageFile(files[i], this);
 						}
 					}
 			  },
@@ -160,7 +160,7 @@
 		});
 	});
 	$('#summernote').summernote(setting);
- 	function uploadImageFile(files, el){
+ 	function uploadImageFile(files[i], el){
 		data = new FormData();
 		data.append("file", file);
 		$.ajax({

@@ -91,7 +91,7 @@
 	height: 40px;
 }
 .writeBtn {
-	margin-left:68%;
+	margin: 0 0 1% 68%;
 	width: 100px;
 	height: 30px;
 }
@@ -204,10 +204,12 @@
 
 
 	<div class="bottom">
-		<div class="rec_button">
-			<input class="writeBtn" type="button" value="글쓰기"
-				onclick="location.href='summernote.do'">
-		</div>
+		<c:if test="${member.user_id =='ADMIN'}">
+			<div class="rec_button">
+				<input class="writeBtn" type="button" value="글쓰기"
+					onclick="location.href='recipeInsert.do'">
+			</div>
+		</c:if>
 		<div class="paging">
 			<c:if test="${rpdto.prev }" >
 				<a href="recipeList.do?pageNum=${rpdto.startPage - 1 }&amount=${rpdto.amount }">이전</a>

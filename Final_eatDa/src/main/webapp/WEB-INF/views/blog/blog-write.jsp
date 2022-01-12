@@ -61,10 +61,6 @@
   <!-- summernote -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet">  
-	<!-- summernote -->
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	<!--  include summernote-ko-KR -->
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
 	
 </head>
 <body style="margin-top:155px;">
@@ -90,9 +86,9 @@
 
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
-        <form action="/blog-write.do" method="post">
-        	<input id="new_user_id" name="user_id" value="${member.user_id}" disabled>
-          <input type="text" name="title" id="new_blog_title" placeholder="제목을 입력하세요.">
+        <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
+        	<input id="user_id" name="user_id" value="${user_id}" disabled>
+          <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
 					<textarea class="summernote" id="summernote" name="blog_content_new"></textarea>
 					<!-- image 경로 넘겨주기! -->
 					<input type="hidden" id="img" name="blog_img" value="">
@@ -112,16 +108,18 @@
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	
-	
+	<!-- summernote -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	<!--  include summernote-ko-KR -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
   <script type="text/javascript">
   // click submit button
 	function submitBtn(){
-		var user_id=$('#new_user_id').text();
-		var blog_title=$('#new_blog_title').text();
+		var user_id=$('#user_id').val();
+		var blog_title=$('#title').val();
 		var blog_content=$('#summernote').val();
 		console.log(blog_title);
 		console.log(blog_content);
-		console.log(user_id);
 		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id;
 		alert("글 작성이 완료되었습니다.");
 	}
@@ -156,7 +154,7 @@
 						console.log(files+"//"+editor+"//");
 						
 						for (var i = files.length - 1; i >= 0; i--) {
-							uploadImageFile(files[i], this);
+							uploadSummernoteImageFile(files[i], this);
 						}
 					}
 			  },
@@ -172,7 +170,7 @@
 		});
 	});
 
-	function uploadImageFile(files, el){
+	function uploadImageFile(files[i], el){
 		data = new FormData();
 		data.append("file", file);
 		$.ajax({

@@ -81,7 +81,7 @@
 	<!-- 레시피 수정 -->
 	<update id="recipeUpdate" parameterType="recipeDto">
 		UPDATE RECIPE
-		SET RECIPE_TITLE=#{recipe_title}, RECIPE_CATEGORY=#{recipe_category}, R_SHORT_DESC=#{r_short_desc}, RECIPE_CONTENT=#{recipe_content}
+		SET RECIPE_TITLE=#{recipe_title}, RECIPE_CATEGORY=#{recipe_category}, RECIPE_CONTENT=#{recipe_content}
 		WHERE RECIPE_NO = #{recipe_no} 
 	</update>
 
@@ -104,6 +104,4 @@
 		SELECT * FROM RECIPE
 		ORDER BY RECIPE_NO DESCS
 	</select>
-
-
 </mapper>
