@@ -81,7 +81,7 @@ hr{
     .coupon{
         width: 670px;
         height: 180px;
-        padding: 20px;
+        padding: 22px;
         margin: 5px;
         text-align: left;
         background: url("resources/images/coupon01.jpg");
@@ -100,7 +100,7 @@ hr{
     .coupon p{
     	margin: 0;
     	padding: 0;
-		font-size: 1.2rem;
+		font-size: 0.9rem;
 		font-weight: bold;
 		color: gray;
     }

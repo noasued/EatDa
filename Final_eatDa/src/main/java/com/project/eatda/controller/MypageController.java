@@ -35,26 +35,42 @@ public class MypageController {
 	@Autowired
 	private SubscriptionDto subscriptionDto;
 	
-	//마이페이지 메인
+	//페이지 이동
 	@RequestMapping("/mypage.do")
 	public String mypageMain() {
 		System.out.println("mypage_main page");
 		return "/mypage/mypage_main";
 	}	
-	
-	//찜목록
+	 
 	@RequestMapping("/mypage_like.do")
 	public String mypageLike() {
 		System.out.println("mypage_like page");
 		return "/mypage/mypage_like";
 	}	
 	
-	//회원정보수정 페이지
 	@RequestMapping("/mypage_updateForm.do")
 	public String mypageUpdateForm() {
 		System.out.println("mypage_info_update page");
 		return "/mypage/mypage_info_update";
 	}	
+	
+	@RequestMapping("/mypage_subscription.do")
+	public String mypageSubscription() {
+		System.out.println("mypage_subscription page");
+		return "/mypage/mypage_subscription";
+	}	
+	
+	@RequestMapping("/mypage_coupon.do")
+	public String mypageCoupon() {
+		System.out.println("mypage_coupon page");
+		return "/mypage/mypage_coupon";
+	}	
+	
+	@RequestMapping("/mypage_order_list.do")
+	public String mypageOrderList() {
+		System.out.println("mypage_orderList page");
+		return "/mypage/mypage_order_list";
+	}
 	
 	//구독내역
 	@RequestMapping("mypage_subscription_list.do")
@@ -75,7 +91,7 @@ public class MypageController {
 		return list;
 	}
 	
-	//대체상품
+	//구독상품
 	@RequestMapping(value="/getMarketProduct.do", method=RequestMethod.POST) 
 	@ResponseBody
 	public List<ProductDto> getMarketProduct() {
@@ -105,8 +121,6 @@ public class MypageController {
 		
 		return list;
 	}
-	
-	//찜한상품 marketController에 있음
 	
 	//주문한 상품
 	@RequestMapping(value="marketOrderList.do", method=RequestMethod.POST)
