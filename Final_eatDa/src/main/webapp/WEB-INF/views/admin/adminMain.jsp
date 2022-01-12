@@ -63,16 +63,16 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">새 게시물</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="adminPostBlog.do">${newBlogCount} 건 / ${blogCount} 건</a>
+                                        <a class="small text-white stretched-link" href="adminPostBlog.do" style="text-decoration:none;">${newBlogCount} 건 / ${blogCount} 건</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">결제 취소 요청</div>
+                                    <div class="card-body">결제 취소 / 총 결제 건</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="adminOrder.do">3 건 / 25 건</a>
+                                        <a class="small text-white stretched-link" href="adminOrder.do" style="text-decoration:none;">${newAdminOrderCount} 건 / ${adminOrderCount} 건</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">구독자 / 회원 수</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="adminUser.do">3 건 / 25 건</a>
+                                        <a class="small text-white stretched-link" href="adminUser.do" style="text-decoration:none;">${newUserCount} 명 / ${userCount} 명</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">신고 현황</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="adminReport.do">3 건 / 25 건</a>
+                                        <a class="small text-white stretched-link" href="adminReport.do" style="text-decoration:none;">${newReportCount} 건 / ${reportCount} 건</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

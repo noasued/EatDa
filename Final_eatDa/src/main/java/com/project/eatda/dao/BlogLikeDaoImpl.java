@@ -32,8 +32,10 @@ public class BlogLikeDaoImpl implements BlogLikeDao{
 		try {
 			BlogLikeDto dto = sqlSession.selectOne(BLOGLIKE_NAMESPACE+"flagLikeUser",like);
 			if (dto == null) {
+				//if(dto.getUser_id() != blogDto.getUser_id() && dto.getBlog_no() != blogDto.getBlog_no()) {
 				res += sqlSession.update(BLOGLIKE_NAMESPACE+"clickLike",blogDto);
 				res += sqlSession.insert(BLOGLIKE_NAMESPACE+"insertBlogLikeUser",like); 
+				//}
 			}
 			System.out.println("click like dao! : "+ res);
 		} catch (Exception e) {
@@ -47,7 +49,7 @@ public class BlogLikeDaoImpl implements BlogLikeDao{
 	public int clickUnLike(BlogDto blogDto, BlogLikeDto like) {
 		int res = 0;
 		try {
-			res = sqlSession.update(BLOGLIKE_NAMESPACE+"clickLike",blogDto);
+			res += sqlSession.update(BLOGLIKE_NAMESPACE+"clickLike",blogDto);
 			res += sqlSession.delete(BLOGLIKE_NAMESPACE+"deleteBlogLikeUser",like);
 			System.out.println("unclick like dao!");
 		} catch (Exception e) {

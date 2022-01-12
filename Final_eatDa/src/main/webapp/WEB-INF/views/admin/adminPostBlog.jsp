@@ -18,13 +18,34 @@
         
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
-        function selectAll(selectAll)  {
-      	  const checkboxes = document.getElementsByName('chkBtn');
-      	  
-      	  checkboxes.forEach((checkbox) => {
-      	    checkbox.checked = selectAll.checked;
-      	  })
-      	}
+     // 전체 선택 및 선택 게시물 삭제
+	    $(function(){
+	    	var chkObj = document.getElementsByName("RowCheck[]");
+	    	var rowCnt = chkObj.length;
+	    	
+	    	$("input[name='allCheck']").click(function(){
+	    		var chk_listArr = $("input[name='RowCheck[]']");
+	    		for(var i = 0 ; i<chk_listArr.length; i++){
+	    			chk_listArr[i].checked = this.checked;
+	    		}
+	    	});
+	    	$("input[name='RowCheck[]']").click(function(){
+	    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
+	    			$("input[name='allCheck']")[0].checked = true;
+	    		}else{
+	    			$("input[name='allCheck']")[0].checked = false;
+	    		}
+	    	});
+	    });
+     
+	 
+     function delete_frm(){
+    	 if(confirm('정말 삭제하시겠습니까?')==true){
+    		 return true;
+    	 }else{
+    		 return false;
+    	 }
+     }
         </script>
         
         <style>
@@ -93,7 +114,7 @@
                                     <thead>
                                     	<tr></tr>
                                         <tr>
-                                            <th><input type="checkbox" name="chkBtn" value="selectall" onclick="selectAll(this)"></th>
+                                            <th><input type="checkbox" name="allCheck" value="selectall" onclick="selectAll(this)"></th>
                                             <th>NO</th>
                                             <th>I D</th>
                                             <th>제 목</th>
@@ -103,7 +124,7 @@
                                     <tbody>
 	                                    <c:forEach items="${list}" var="dto">
 			                            	<tr>
-			                                	<td style="vertical-align:middle;"><input type="checkbox" name="chkBtn" value="${dto.blog_no}"></td>
+			                                	<td style="vertical-align:middle;"><input type="checkbox" name="RowCheck[]" value="${dto.blog_no}"></td>
 			                                    <td style="vertical-align:middle;">${dto.blog_no}</td>
 			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
 			                                    <td style="vertical-align:middle;"><a href="blog-detail.do?blog_no=${dto.blog_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.blog_title}</a></td>

@@ -215,7 +215,6 @@
 		    $(".reply-report__modal").fadeOut();
 		  }
 	  }
-	  
 	  $(function(){
 		  // x 버튼 클릭 -> 모달창 fade out
 		  $(".fa-times").click(function(){

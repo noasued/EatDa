@@ -45,7 +45,7 @@
 	
 	<insert id="blogInsert" parameterType="blogDto">
 		INSERT INTO BLOG
-		VALUES(BLOG_NO_SEQ.NEXTVAL, #{user_id}, #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, #{blog_img}, SYSDATE)
+		VALUES(BLOG_NO_SEQ.NEXTVAL, #{user_id}, #{blog_title}, #{blog_content}, 0, 0, #{blog_img}, SYSDATE, 0)
 	</insert>
 	
 	<select id="selectBlogNo" parameterType="String" resultType="blogDto">
@@ -62,7 +62,11 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
-	
+	<update id="blogCount" parameterType="int">
+		UPDATE BLOG
+		SET BLOG_COUNT = BLOG_COUNT + 1
+		WHERE BLOG_NO = #{blog_no}
+	</update>
 	
 	<!-- Admin Blog -->
 	<select id="adminBlogList" parameterType="list" resultMap="blogMap">

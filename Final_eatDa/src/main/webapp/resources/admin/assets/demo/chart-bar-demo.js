@@ -7,9 +7,9 @@ var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
     datasets: [{
-      label: "Revenue",
+      label: "총 회원수 : ",
       backgroundColor: "rgba(2,117,216,1)",
       borderColor: "rgba(2,117,216,1)",
       data: [4215, 5312, 6251, 7841, 9821, 14984],
