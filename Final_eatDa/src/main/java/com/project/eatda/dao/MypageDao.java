@@ -31,7 +31,7 @@ String NAMESPACE_MYPAGE = "mypage.";
 	
 	//주문한 상품
 	public List<OrderProductDto> marketOrderList(String user_id);
-	
+	 
 	//주문내역
 	public List<OrderDto> marketOrderList2(OrderDto dto);
 	

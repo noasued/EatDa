@@ -86,13 +86,13 @@ hr{
 
 
     .submit_btn{
-        border: none;
+        border: none; 
         border-radius: 4px;
         width: 75px;
         height: 30px;
         background-color: #ffe084;
         color: white;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
         font-weight: bold;
     }
     

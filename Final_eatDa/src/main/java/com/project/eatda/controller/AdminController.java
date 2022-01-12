@@ -1,10 +1,18 @@
 package com.project.eatda.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+
 import javax.inject.Inject;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -12,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.project.eatda.biz.AdminBiz;
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.BlogReplyBiz;
@@ -22,6 +32,7 @@ import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.EventDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
+import com.project.eatda.dto.ReportDto;
 import com.project.eatda.dto.UserDto;
 
 @Controller
@@ -55,12 +66,16 @@ public class AdminController {
 		
 		model.addAttribute("newBlogCount",blogBiz.newAdminBlogCount());
 		model.addAttribute("blogCount",blogBiz.adminBlogCount());
+		model.addAttribute("newReportCount",adminBiz.newAdminReportCount());
+		model.addAttribute("reportCount",adminBiz.adminReportCount());
+		model.addAttribute("newUserCount",adminBiz.newAdminUserCount());
+		model.addAttribute("userCount",adminBiz.adminUserCount());
+		model.addAttribute("newAdminOrderCount",adminBiz.newAdminOrderCount());
+		model.addAttribute("adminOrderCount",adminBiz.adminOrderCount());
 		
 		return "/admin/adminMain";
 	}
 	
-	
-
 	/* 게시글 댓글 리스트 */
 	@RequestMapping(value="/adminPostReply.do", method=RequestMethod.GET)
 	public String adminReplyList(Model model){
@@ -118,11 +133,9 @@ public class AdminController {
 		return "redirect:/adminPostEvent.do";
 	}
 
-
 	/* 레시피 리스트 */
 	@RequestMapping("/adminRecipe.do")
 	public String adminRecipe(Model model) {
-		System.out.println("adminRecipe");
 		model.addAttribute("recipeList", recipeBiz.adminRecipeList());
 
 		return "/admin/adminRecipe";
@@ -131,7 +144,6 @@ public class AdminController {
 	/* 상품 리스트 */
 	@RequestMapping("/adminProductList.do")
 	public String adminProductList(Model model) {
-		System.out.println("admin product list");
 		model.addAttribute("productList", adminBiz.adminProductList());
 		
 		return "/admin/adminProductList";
@@ -140,29 +152,53 @@ public class AdminController {
 	// 상품 등록 버튼 클릭 시, writeForm으로 페이지 이동
 	@RequestMapping("/adminProductWrite.do")
 	public String adminProductWrite() {
-		System.out.println("admin product write");
-		
 		return "/admin/adminProductWrite";
 	}
 	
 	// 상품 등록
-	@RequestMapping("/adminProductInsert.do")
-	public String adminProductInsert(ProductDto dto,Model model) {
-		System.out.println("product insert");
-		System.out.println(dto.toString());
-		adminBiz.adminProductInsert(dto);
+	@RequestMapping("adminProductInsert.do")
+	public String adminProductInsert(MultipartFile uploadFile, ProductDto dto, HttpServletRequest request) {
 		
-		model.addAttribute("insert_result", dto.getP_id());
+		JsonObject jsonObject = new JsonObject();
 		
+		String path = request.getRealPath("resources/images/admin/");
+		System.out.println("path : "+ path);
+		
+		String fname = uploadFile.getOriginalFilename();
+		System.out.println(fname);
+		System.out.println("uu:"+uploadFile);
+		System.out.println("ff:"+fname);
+		
+		File saveFname = new  File(path+fname);
+		System.out.println("saveF"+saveFname);
+		
+		
+		if(fname!=null && !fname.equals("")) {
+			try {
+				byte[] data = uploadFile.getBytes();
+				InputStream fis = uploadFile.getInputStream();
+				FileUtils.copyInputStreamToFile(fis, saveFname);
+				System.out.println("fis : "+fis);
+				FileOutputStream fos = new FileOutputStream(path+"/"+fname);
+				fos.write(data);
+				fos.close();
+			} catch (IOException e) {
+				System.out.println("[error] : product insert controller");
+				e.printStackTrace();
+			}
+		}
+		dto.setImg_path("resources/images/admin/"+fname);
+		int res = adminBiz.adminProductInsert(dto);
+		
+		System.out.println(dto);
 		return "redirect:/adminProductList.do";
 	}
-
+	
 	
 	// 상품 수정 버튼 클릭 시, updateForm으로 이동
 	@RequestMapping("adminProductUpdate.do")
 	public String adminProductUpdate(Model model, String p_id) {
 		System.out.println("admin product update");
-		
 		model.addAttribute("dto",adminBiz.selectOne(p_id));
 		
 		return "/admin/adminProductUpdate";
@@ -182,7 +218,7 @@ public class AdminController {
 	}
 	
 	// 상품 삭제
-	@RequestMapping("/adminProductDelete.do")
+	@RequestMapping(value="/adminProductDelete.do",method=RequestMethod.GET)
 	public String adminProductDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin product delete");
 		
@@ -195,7 +231,6 @@ public class AdminController {
 			System.out.println(chk[i]);
 			adminBiz.adminProductDelete(chk[i]);
 		}
-		
 		return "redirect:/adminProductList.do";
 	}
 
@@ -217,13 +252,12 @@ public class AdminController {
 	 	System.out.println(chk); 
 	 	int chk_l = chk.length;
 	 	System.out.println(chk_l);
-	  
-		for(int i = 0; i < chk_l; i++) { 
-			System.out.println(chk[i]);
-		 	adminBiz.adminOrderDelete(chk[i]); 
-		 }
-	 
-	 return "redirect:/adminOrder.do"; 
+		  
+			for(int i = 0; i < chk_l; i++) { 
+				System.out.println(chk[i]);
+			 	adminBiz.adminOrderDelete(chk[i]); 
+			 }
+		return "redirect:/adminOrder.do"; 
 	 }
 	 
 	// 배송 현황 update
@@ -339,7 +373,7 @@ public class AdminController {
 	}
 	
 	// 신고 삭제 
-	@RequestMapping(value="/adminReportDelete.do", method=RequestMethod.GET)
+	@RequestMapping("/adminReportDelete.do")
 	public String adminReportDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin report delete");
 		
@@ -352,6 +386,25 @@ public class AdminController {
 			System.out.println(chk[i]);
 			adminBiz.adminReportDelete(Integer.parseInt(chk[i]));
 		}
+		
+		return "redirect:/adminReport.do";
+	}
+	
+	// 신고 status update
+	@RequestMapping("reportStatusUpdate.do")
+	public String reportStatusUpdate(ReportDto dto, int report_status, int report_no, int report_penalty) {
+		System.out.println("update report_status");
+		System.out.println(report_no);
+		
+		if(report_status==2) {
+			report_penalty += 1;
+		}
+		
+		dto.setReport_status(report_status);
+		dto.setReport_no(report_no);
+		dto.setReport_penalty(report_penalty);
+		System.out.println(dto.toString());
+		adminBiz.reportStatusUpdate(dto);
 		
 		return "redirect:/adminReport.do";
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.eatda.biz.AdminBiz;
 import com.project.eatda.biz.BlogBiz;
 import com.project.eatda.biz.MemberBiz;
 import com.project.eatda.dto.UserDto;
@@ -36,6 +37,9 @@ public class MemberController {
 	
 	@Autowired
 	private BlogBiz blogBiz;
+	
+	@Autowired
+	private AdminBiz adminBiz;
 	
 	//회원가입 폼
 	@RequestMapping("/regist_form.do")
@@ -127,8 +131,15 @@ public class MemberController {
 				//관리자
 				}else if(dto2.getUser_role().equals("ADMIN")){
 					session.setAttribute("member", dto2);
+					
 					model.addAttribute("newBlogCount",blogBiz.newAdminBlogCount());
 					model.addAttribute("blogCount",blogBiz.adminBlogCount());
+					model.addAttribute("newReportCount",adminBiz.newAdminReportCount());
+					model.addAttribute("reportCount",adminBiz.adminReportCount());
+					model.addAttribute("newUserCount",adminBiz.newAdminUserCount());
+					model.addAttribute("userCount",adminBiz.adminUserCount());
+					model.addAttribute("newAdminOrderCount",adminBiz.newAdminOrderCount());
+					model.addAttribute("adminOrderCount",adminBiz.adminOrderCount());
 					
 					mav.setViewName("/admin/adminMain");
 				}

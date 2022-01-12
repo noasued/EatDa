@@ -20,6 +20,88 @@ public class AdminDaoImpl implements AdminDao{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	/* 관리자 MAIN */
+	
+	// 결제 취소
+	@Override
+	public int adminOrderCount() {
+		int count = 0;
+		
+		try {
+			count = sqlSession.selectOne(NAMESPACE+"adminOrderCount");
+		} catch (Exception e) {
+			System.out.println("[error] : admin order count");
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	@Override
+	public int newAdminOrderCount() {
+		int count = 0;
+		
+		try {
+			count = sqlSession.selectOne(NAMESPACE+"newAdminOrderCount");
+		} catch (Exception e) {
+			System.out.println("[error] : all order count");
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	// 회원 수
+		@Override
+		public int adminUserCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"adminUserCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
+		
+		@Override
+		public int newAdminUserCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"newAdminUserCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
+	
+
+		// 신고 수
+		@Override
+		public int adminReportCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"adminReportCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}
+
+		@Override
+		public int newAdminReportCount() {
+			int count = 0;
+			
+			try {
+				count = sqlSession.selectOne(NAMESPACE+"newAdminReportCount");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return count;
+		}	
+		
+		
+		
 	/* 댓글 리스트 */
 	@Override
 	public List<BlogReplyDto> adminReplyList() {
@@ -61,7 +143,7 @@ public class AdminDaoImpl implements AdminDao{
 		return adminProductList;
 	}
 	
-	//selectOne
+	//selectOne(update시 사용)
 	@Override
 	public ProductDto selectOne(String p_id) {
 		ProductDto dto = null;
@@ -82,11 +164,11 @@ public class AdminDaoImpl implements AdminDao{
 		
 		ProductDto temp = sqlSession.selectOne(NAMESPACE+"getLastProductNum");
 		String p_id = "P"+temp.getP_no();
-		int p_no = temp.getP_no();
+		int p_no = temp.getP_no()+1;
 		dto.setP_id(p_id);
 		dto.setP_no(p_no);
 		
-		System.out.println("dto"+dto);
+		System.out.println("dto : "+dto);
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"adminProductInsert",dto);
@@ -138,19 +220,6 @@ public class AdminDaoImpl implements AdminDao{
 			e.printStackTrace();
 		}
 		return adminOrderList;
-	}
-	
-	// 모달 리스트
-	public OrderDto orderSelectOne(String order_id) {
-		OrderDto dto = null;
-		
-		try {
-			dto=sqlSession.selectOne(NAMESPACE+"orderSelectOne",order_id);
-		} catch (Exception e) {
-			System.out.println("[error]: order select one");
-			e.printStackTrace();
-		}
-		return dto;
 	}
 	
 	// 주문 추가(무통장입금 : default=결제대기)
@@ -222,7 +291,6 @@ public class AdminDaoImpl implements AdminDao{
 			}
 			return res;
 		}		
-
 	
 	/* 회원 리스트 */
 	@Override
@@ -236,18 +304,6 @@ public class AdminDaoImpl implements AdminDao{
 			e.printStackTrace();
 		}
 		return adminUserList;
-	}
-	
-	public List<UserDto> adminUserModal(int user_no) {
-		List<UserDto> adminUserModal = new ArrayList<UserDto>();
-		
-		try {
-			adminUserModal = sqlSession.selectList(NAMESPACE+"adminUserModal",user_no);
-		} catch (Exception e) {
-			System.out.println("[error] : admin user modal");
-			e.printStackTrace();
-		}
-		return adminUserModal;
 	}
 	
 	// 회원 활성화 여부 update
@@ -277,7 +333,7 @@ public class AdminDaoImpl implements AdminDao{
 		}
 		return res;
 	}
-
+	
 	/* 신고 리스트 */
 	@Override
 	public List<ReportDto> adminReportList(){
@@ -286,7 +342,7 @@ public class AdminDaoImpl implements AdminDao{
 		try {
 			adminReportList = sqlSession.selectList(NAMESPACE+"adminReportList");
 		} catch (Exception e) {
-			System.out.println("[error : admin report list]");
+			System.out.println("[error] : admin report list");
 			e.printStackTrace();
 		}
 		return adminReportList;
@@ -298,15 +354,28 @@ public class AdminDaoImpl implements AdminDao{
 		int res = 0;
 		
 		try {
-			res = sqlSession.delete(NAMESPACE+"reportDelete",report_no);
+			res = sqlSession.delete(NAMESPACE+"adminReportDelete",report_no);
 		} catch (Exception e) {
-			System.out.println("[error] : report delete");
+			System.out.println("[error] : admin report delete");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	// 신고 처리 update
+	@Override
+	public int reportStatusUpdate(ReportDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"reportStatusUpdate",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : report status update");
 			e.printStackTrace();
 		}
 		return res;
 	}
 
 
-	
 	
 }

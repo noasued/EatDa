@@ -19,7 +19,7 @@ public interface MypageBiz {
 	public List<ProductDto> deliveryProduct();
 	
 	//대체상품
-	public List<ProductDto> getMarketProduct();
+	public List<ProductDto> getMarketProduct(); 
 	
 	//쿠폰함
 	public List<CouponDto> couponList(CouponDto dto);

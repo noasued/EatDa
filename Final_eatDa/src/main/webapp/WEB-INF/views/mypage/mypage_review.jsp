@@ -20,7 +20,7 @@
 }
 
 .headline{
-	margin-top: 0px;
+	margin-top: 0px; 
 	text-align: center;
 }
 
@@ -131,7 +131,7 @@
                 </table>
                     <div class="regist_btn">
                         <input type="submit" class="submit_btn" value="작 성">
-                        <input type="button" class="delete_btn" value="취 소" onclick="#">
+                        <input type="button" class="delete_btn" value="취 소" onclick="location.href='mypage_like.do'">
                     </div>
             </form>
           </div>

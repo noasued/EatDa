@@ -14,7 +14,7 @@
 	padding: 0px;
 }
 
-.mypage_like{
+.mypage_like{ 
 	display: flex;
 	position: absolute;
 	flex-direction: column;
