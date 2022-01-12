@@ -117,8 +117,6 @@ public class BlogDaoImpl implements BlogDao{
 		return res;
 	}
 	
-	
-	
 	@Override
 	public int delete(int blog_no) {
 		int res = 0;
