@@ -77,17 +77,14 @@ table td{
 
 }
 
-table th{
-padding-bottom: 5px;
-    text-align: center;
-	border-bottom: 2px solid;
-}
-
-
 .order_id{
 	color:#ffe084;
 	font-weight: bold;
 }
+
+tbody tr:nth-child(2n) {
+    background-color: white;
+  }
 
 
 .wrap{
