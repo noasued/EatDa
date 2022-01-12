@@ -228,7 +228,7 @@ td a{
             </div>
             <div class="headline2">
                 <a>내 정보 수정</a>
-            </div>
+            </div> 
             <div class="update_form">
             <form action="memberUpdate.do" method="post">
                 <table width="550px">

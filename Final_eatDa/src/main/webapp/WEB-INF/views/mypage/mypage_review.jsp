@@ -20,7 +20,7 @@
 }
 
 .headline{
-	margin-top: 0px;
+	margin-top: 0px; 
 	text-align: center;
 }
 

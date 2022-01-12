@@ -29,7 +29,7 @@ public class MypageBizImpl implements MypageBiz{
 	
 	//배송예정상품
 	@Override
-	public List<ProductDto> deliveryProduct() {
+	public List<ProductDto> deliveryProduct() { 
 		return mypageDao.deliveryProduct();
 	}
 
