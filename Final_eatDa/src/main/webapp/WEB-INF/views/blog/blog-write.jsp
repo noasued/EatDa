@@ -7,9 +7,6 @@
 <title>Welcome to EatDa</title>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link href="resources/css/blog/blog-write.css" rel="stylesheet">
   <!-- top 부분 -->
   <style type="text/css">
@@ -59,7 +56,6 @@
   </style>
   
   <!-- summernote -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<link href="resources/css/summernote/summernote-bs4.css" rel="stylesheet">  
 	
 </head>
@@ -86,14 +82,14 @@
 
 			<!-- article -> summernote -->
       <div class="blog-write__content-article">
-        <form action="/blog-write.do" method="post"> <!-- onsubmit="return doAlert()" -->
-        	<input id="user_id" name="user_id" value="${user_id}" disabled>
-          <input type="text" name="blog_title" id="title" placeholder="제목을 입력하세요.">
-					<textarea class="summernote" id="summernote" name="blog_content_new"></textarea>
-					<!-- image 경로 넘겨주기! -->
+        <form action="blog-write.do" method="post">
+        	<input name="user_id" value=${member.user_id } >
+          <input type="text" name="blog_title" placeholder="제목을 입력하세요.">
+					<textarea id="summernote" name="blog_content"></textarea>
+					<!-- img -->
 					<input type="hidden" id="img" name="blog_img" value="">
 					<div class="blog-write__content-article__btns">
-						<input type="button" onclick="submitBtn()" name="write-submit-btn" value="작성 완료">
+						<input type="submit" name="write-submit-btn" value="작성 완료" onclick="submitBtn()">
 						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='blog.do'">
         	</div>
         </form>
@@ -108,19 +104,10 @@
 		<%@ include file="../common/footer.jsp"%>
 	</div>
 	
-	<!-- summernote -->
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	<!--  include summernote-ko-KR -->
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
+	
   <script type="text/javascript">
   // click submit button
 	function submitBtn(){
-		var user_id=$('#user_id').val();
-		var blog_title=$('#title').val();
-		var blog_content=$('#summernote').val();
-		console.log(blog_title);
-		console.log(blog_content);
-		location.href="blog-write.do?blog_title="+blog_title+"&blog_content="+blog_content+"&user_id"+user_id;
 		alert("글 작성이 완료되었습니다.");
 	}
 	// summernote
@@ -154,7 +141,7 @@
 						console.log(files+"//"+editor+"//");
 						
 						for (var i = files.length - 1; i >= 0; i--) {
-							uploadSummernoteImageFile(files[i], this);
+							uploadImageFile(files[i], this);
 						}
 					}
 			  },
@@ -170,9 +157,10 @@
 		});
 	});
 
-	function uploadImageFile(files[i], el){
+	function uploadImageFile(file, el){
 		data = new FormData();
 		data.append("file", file);
+		console.log("data"+data);
 		$.ajax({
 			data : data,
 			type : "POST",
