@@ -67,7 +67,7 @@ public class RecipeController {
 	@RequestMapping("/recipeInsertRes.do")
 	public String recipeInsertRes(RecipeDto dto) {
 		logger.info("RECIPE INSERT RESULT");
-
+ 
 		int res = biz.recipeInsert(dto);
 		
 		if(res>0){			
