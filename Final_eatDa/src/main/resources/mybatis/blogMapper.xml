@@ -45,7 +45,7 @@
 	
 	<insert id="blogInsert" parameterType="blogDto">
 		INSERT INTO BLOG
-		VALUES(BLOG_NO_SEQ.NEXTVAL, #{user_id}, #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, #{blog_img}, SYSDATE, #{reply_count})
+		VALUES(BLOG_NO_SEQ.NEXTVAL, #{user_id}, #{blog_title}, #{blog_content}, #{blog_count}, #{blog_like}, #{blog_img}, SYSDATE)
 	</insert>
 	
 	<select id="selectBlogNo" parameterType="String" resultType="blogDto">
