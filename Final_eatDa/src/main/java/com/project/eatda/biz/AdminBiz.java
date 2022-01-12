@@ -49,7 +49,6 @@ public interface AdminBiz {
 	public List<UserDto> adminUserList();
 	public int adminUserUpdate(UserDto dto);
 	public int adminUserDelete(String user_id);
-
 	//이메일
 	public void sendMail(EmailDto dto);
 	
