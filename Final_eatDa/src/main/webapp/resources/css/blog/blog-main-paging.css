@@ -2,9 +2,13 @@
 
 .blog-article__paging{
   margin-top: 35px;
-  margin-left:30%;
   font-size: 22px;
   text-align: center;
+}
+
+.blog-article__paging .pagination{
+	float:left;
+	margin-left:30%;
 }
 
 .pagination a, #left-paging, #right-paging{

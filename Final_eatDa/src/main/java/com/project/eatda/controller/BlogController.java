@@ -150,39 +150,6 @@ public class BlogController {
 		return "/blog/blog-write";
 	}
 	
-	//썸머노트 파일처리
-	@RequestMapping(value="/uploadImageFile.do", produces = "application/json; charset=utf8")
-	@ResponseBody
-	public String uploadImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
-		JsonObject jsonObject = new JsonObject();
-			
-		// 내부경로로 저장
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/images/blog/";
-		System.out.println(fileRoot +"//" +contextRoot);
-		
-		
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-			
-		File targetFile = new File(fileRoot + savedFileName);	
-		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-			jsonObject.addProperty("url", "resources/images/blog/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-			jsonObject.addProperty("responseCode", "success");
-
-		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}
-		String a = jsonObject.toString();
-		return a;
-	}
-	
-	
 	//글 작성 결과
 	@RequestMapping("/blog-write.do")
 	public String write(BlogDto dto) {
@@ -208,7 +175,7 @@ public class BlogController {
 		return "/blog/blog-update";
 	}
 	// 글 수정 결과
-	@RequestMapping(value="/blog-update.do",method=RequestMethod.GET)
+	@RequestMapping("/blog-update.do")
 	public String update(BlogDto dto) {
 		logger.info("Blog update result - post");
 		System.out.println(dto.toString());
@@ -225,6 +192,38 @@ public class BlogController {
 		biz.delete(blog_no);
 		return "redirect:blog.do";
 	}
+	
+	//썸머노트 파일처리
+	@RequestMapping(value="/uploadImageFile.do", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+			
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/images/blog/";
+		System.out.println(fileRoot +"//" +contextRoot);
+		
+		
+		String originalFileName = multipartFile.getOriginalFilename();	//오리지널 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+			
+		File targetFile = new File(fileRoot + savedFileName);	
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			jsonObject.addProperty("url", "resources/images/blog/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
+	
 	
 	/* 관리자 블로그 리스트 (전체 조회) */
 	@RequestMapping(value="/adminPostBlog.do", method=RequestMethod.GET)
