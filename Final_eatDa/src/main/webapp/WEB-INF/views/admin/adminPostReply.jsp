@@ -58,34 +58,6 @@
 				height:30px;
 			}
 			a{text-decoration:none;}
-			
-			/*nav탭 hover 시, content 변경*/
-	        .home:hover span{display:none;}
-	        .home:hover:after{content:"관리자 메인";}
-	        
-	        /*게시글 관리*/
-	        .post:hover span{display:none;}
-	        .post:hover:after{content:"게시글 관리";}
-	        
-	        /*레시피 관리*/
-	        .recipe:hover span{display:none;}
-	        .recipe:hover:after{content:"레시피 관리";}
-	        
-	        /*상품 관리*/
-	        .product:hover span{display:none;}
-	        .product:hover:after{content:"상품 관리";}
-	        
-	        /*주문 관리*/
-	        .order:hover span{display:none;}
-	        .order:hover:after{content:"주문 관리";}
-	        
-	        /*회원 관리*/
-	        .user:hover span{display:none;}
-	        .user:hover:after{content:"회원 관리";}
-	        
-	        /*신고 관리*/
-	        .report:hover span{display:none;}
-	        .report:hover:after{content:"신고 관리";}
 	        
 	        /* 게시글 길어질 경우, 한 줄로 표시*/
 	        table { 
@@ -156,7 +128,7 @@
                             <div class="card-body">
                             <form action="adminPostReplyDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
                                 <table id="datatablesSimple">
-                                    <col width="50px"><col width="50px"><col width="150px"><col width="770px"><col width="200px">
+                                    <col width="50px"><col width="80px"><col width="130px"><col width="770px"><col width="164px"><col width="164px">
                                     <thead>
                                     <tr></tr>
                                         <tr>
@@ -165,16 +137,18 @@
                                             <th>I  D</th>
                                             <th>댓 글</th>
                                             <th>작 성 일</th>
+                                            <th>수 정 일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 	                                    <c:forEach items="${replyList}" var="dto">
 			                            	<tr>
-			                                	<td style="width:50px;"><input type="checkbox" name="RowCheck[]" value="${dto.reply_no}"></td>
-			                                    <td style="vertical-align:middle;">${dto.reply_no}</td>
-			                                    <td style="vertical-align:middle;">${dto.user_id}</td>
-			                                    <td style="vertical-align:middle;"><a href="blog-detail.do?blog_no=${dto.blog_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
-			                                    <td style="vertical-align:middle;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+			                                	<td><input type="checkbox" name="RowCheck[]" value="${dto.reply_no}"></td>
+			                                    <td>${dto.reply_no}</td>
+			                                    <td>${dto.user_id}</td>
+			                                    <td><a href="blog-detail.do?blog_no=${dto.blog_no}" style="text-decoration:none; color:rgb(90, 197, 108); font-weight:bold;">${dto.reply_content}</a></td>
+			                                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.regdate}"/></td>
+			                                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${dto.updatedate}"/></td>
 			                        		</tr>
 		                            	</c:forEach>
                                     </tbody>

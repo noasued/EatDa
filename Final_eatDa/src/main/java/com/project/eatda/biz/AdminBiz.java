@@ -2,6 +2,8 @@ package com.project.eatda.biz;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.project.eatda.dto.BlogReplyDto;
 import com.project.eatda.dto.EmailDto;
 import com.project.eatda.dto.OrderAdminDto;
@@ -12,6 +14,16 @@ import com.project.eatda.dto.UserDto;
 
 public interface AdminBiz {
 
+	/* 관리자 MAIN */
+	public int adminOrderCount();
+	public int newAdminOrderCount();
+	
+	public int adminUserCount();
+	public int newAdminUserCount();
+
+	public int adminReportCount();
+	public int newAdminReportCount();
+	
 	/* 댓글 리스트 */
 	public List<BlogReplyDto> adminReplyList();
 	public int adminReplyDelete(int reply_no);
@@ -19,14 +31,13 @@ public interface AdminBiz {
 	/* 상품 리스트 */
 	public List<ProductDto> adminProductList();
 	public ProductDto selectOne(String p_id);
-
+	
 	public int adminProductInsert(ProductDto dto);
 	public int adminProductUpdate(ProductDto dto);
 	public int adminProductDelete(String p_id);
 	
 	/* 주문 리스트 */
 	public List<OrderDto> adminOrderList();
-	public OrderDto orderSelectOne(String order_id);
 
 	public int adminOrderInsert(OrderDto order);
 	public int adminOrderInsert2(OrderDto order);
@@ -38,15 +49,13 @@ public interface AdminBiz {
 	public List<UserDto> adminUserList();
 	public int adminUserUpdate(UserDto dto);
 	public int adminUserDelete(String user_id);
-	
+
 	//이메일
 	public void sendMail(EmailDto dto);
 	
 	/* 신고 리스트 */
 	public List<ReportDto> adminReportList();
 	public int adminReportDelete(int report_no);
-
-	
-
+	public int reportStatusUpdate(ReportDto dto);
 
 }

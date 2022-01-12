@@ -122,7 +122,7 @@
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table me-1"></i> 상품 리스트</div>
                             <div class="card-body">
-                            <form action="adminProductDelete.do" id="delFrm" name="delFrm" onsubmit="return delete_frm();">
+                            <form action="adminProductWrite.do">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="200px"><col width="500px"><col width="150px">
                                     <thead>
@@ -147,8 +147,8 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <a href="adminProductWrite.do" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white;">등 록</a>
-	                                        <button type="submit" value="delete">삭 제</button>
+                                            <button type="submit" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white; float:right;">등 록</button>
+	                                        <button type="button" onclick="location.href='adminProductDelete.do'" onsubmit="return delete_frm();" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>
