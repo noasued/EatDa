@@ -104,6 +104,7 @@ public class BlogDaoImpl implements BlogDao{
 		return res;
 	}
 	
+
 	@Override
 	public int selectBlogNo(String blog_title) {
 		BlogDto dto = null;
