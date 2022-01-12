@@ -34,6 +34,9 @@ a{
 }
 
 /* list */
+.event-article{
+	height: 750px;
+}
 .event-article__listbox{
   align-items: center;
   width: 80%;
