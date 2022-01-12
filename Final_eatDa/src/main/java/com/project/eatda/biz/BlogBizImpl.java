@@ -40,14 +40,14 @@ public class BlogBizImpl implements BlogBiz{
 	}
 	
 	@Override
-	public int update(BlogDto dto) {
-		System.out.println("update biz");
-		return dao.update(dto);
+	public int selectBlogNo(String blog_title) {
+		return dao.selectBlogNo(blog_title);
 	}
 	
 	@Override
-	public int selectBlogNo(String blog_title) {
-		return dao.selectBlogNo(blog_title);
+	public int update(BlogDto dto) {
+		System.out.println("update biz");
+		return dao.update(dto);
 	}
 	
 	@Override

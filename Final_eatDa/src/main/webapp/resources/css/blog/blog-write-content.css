@@ -29,17 +29,17 @@
 	background-color:white;
 }
 
-.blog-write__content-article input[name="blog_title"], .blog-write__content-article input[name="user_id"]{
+.blog-write__content-article input[name="title"], .blog-write__content-article input[name="user_id"]{
   width:840px;
   height:40px;
   padding-left:10px;
   font-size: 16px;
   margin-left: 10%;
 }
-.blog-write__content-article input[name="blog_title"]{
+.blog-write__content-article input[name="title"]{
 	border:0.5px solid gainsboro;
 }
-.blog-write__content-article input[name="blog_title"]:focus{
+.blog-write__content-article input[name="title"]:focus{
   outline:0.5px solid rgb(213, 214, 118);
   
 }

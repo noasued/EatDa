@@ -92,6 +92,19 @@ public class BlogDaoImpl implements BlogDao{
 	}
 	
 	@Override
+	public int selectBlogNo(String blog_title) {
+		BlogDto dto = null;
+		try {
+			dto = sqlSession.selectOne(BLOG_NAMESPACE+"selectBlogNo",blog_title);
+			System.out.println(dto.toString());
+		} catch (Exception e) {
+			System.out.println("[error] : selectBlogNo");
+			e.printStackTrace();
+		}
+		return dto.getBlog_no();
+	}
+	
+	@Override
 	public int update(BlogDto dto) {
 		int res = 0;
 		try {
@@ -104,18 +117,7 @@ public class BlogDaoImpl implements BlogDao{
 		return res;
 	}
 	
-	@Override
-	public int selectBlogNo(String blog_title) {
-		BlogDto dto = null;
-		try {
-			dto = sqlSession.selectOne(BLOG_NAMESPACE+"selectBlogNo",blog_title);
-			System.out.println(dto.toString());
-		} catch (Exception e) {
-			System.out.println("[error] : selectBlogNo");
-			e.printStackTrace();
-		}
-		return dto.getBlog_no();
-	}
+	
 	
 	@Override
 	public int delete(int blog_no) {
