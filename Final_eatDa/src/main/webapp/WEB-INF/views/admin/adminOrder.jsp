@@ -59,9 +59,6 @@
 		        	   var row_td = clicked_element.getElementsByTagName("td");
 		        	   var modal = document.getElementById("modal_admin_order");
 		        	   
-		        	   console.log(msg);
-		        	   
-		        	   
 		        	   document.getElementById("order_id").innerHTML = row_td[1].innerHTML;
 		        	   document.getElementById("user_id").innerHTML = row_td[2].innerHTML;
 		        	   document.getElementById("order_date").innerHTML = row_td[3].innerHTML;

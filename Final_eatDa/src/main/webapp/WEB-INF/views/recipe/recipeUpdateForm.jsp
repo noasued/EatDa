@@ -24,9 +24,9 @@
 	padding-bottom: 15px;
 	border-bottom: 0.3px solid rgb(235, 235, 235);
 }
-.recipe_content-title input, .short input{
+.recipe_content-title input{
 	margin-top:2%;
-	width : 880px;
+	width : 840px;
 	height: 40px;
 }
 
@@ -80,9 +80,7 @@
 				<div class="recipe_content-title">
 					<input type="text" class="form-control" id="title" name="recipe_title" value="${dto.recipe_title }">
 				</div>
-				<div class="form-group short">
-					<input type="text" name="r_short_desc" value="${dto.r_short_desc }">
-				</div>
+		
 				<div class="recipe_content-category">
 					<strong>CATEGORY&nbsp;|&nbsp;</strong>
 					<label><input type="radio" name="recipe_category" value="한식" <c:if test="${dto.recipe_category eq '한식'}"> checked </c:if>> 한식</label>
