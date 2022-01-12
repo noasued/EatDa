@@ -58,6 +58,7 @@
 		.blog-article {
 			height:auto;
 		}
+		
 	</style>
 	<link href="resources/css/blog/blog-main.css" rel="stylesheet">
 	<script type="text/javascript">
@@ -93,7 +94,7 @@
 										"<p>"+value.blog_content+"</p>"+
 									"</div>"+
 									"<div class='blog-article__list-img'>"+
-										"<img src='resources/images/blog-thumbnail.png'>"+
+										"<img src='"+value.blog_img+"'>"+
 									"</div></a></li>"
 							);
 							idx++;
@@ -209,7 +210,7 @@
 									"<p>"+value.blog_content+"</p>"+
 								"</div>"+
 								"<div class='blog-article__list-img'>"+
-									"<img src='resources/images/blog-thumbnail.png'>"+
+									"<img src='"+value.blog_img+"'>"+
 								"</div></a></li>"
 						);
 					});

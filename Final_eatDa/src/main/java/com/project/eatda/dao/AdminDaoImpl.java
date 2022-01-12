@@ -164,7 +164,7 @@ public class AdminDaoImpl implements AdminDao{
 		
 		ProductDto temp = sqlSession.selectOne(NAMESPACE+"getLastProductNum");
 		String p_id = "P"+temp.getP_no();
-		int p_no = temp.getP_no();
+		int p_no = temp.getP_no()+1;
 		dto.setP_id(p_id);
 		dto.setP_no(p_no);
 		

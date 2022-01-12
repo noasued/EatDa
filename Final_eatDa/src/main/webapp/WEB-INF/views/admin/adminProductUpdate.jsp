@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,26 +64,33 @@
         <h2>상품 수정</h2>
       </div>
       <div class="write__content-article">
-        <form action="adminProductUpdate.do" id="chkFrm" name="chkFrm" onsubmit="return check_frm();">
-	          	<select id="p_category" name="p_category" style="display:block;">
-			          <option selected>--카테고리 선택--</option>
-			          <option>한식</option>
-			          <option>양식</option>
-			          <option>중식</option>
-			          <option>일식</option>
-			          <option>비건</option>
-			          <option>고기만</option>
-			          <option>해산물</option>
-			          <option>스페인</option>
-			    </select><br>
-	          	<input type="text" name="p_name" id="p_name" value="${product.p_name}"><br>
-	          	<input type="text" name="p_short_desc" id="p_short_desc"><br>
-				<textarea cols="80" rows="10" name="p_description"></textarea>
-				<input type="text" name="p_price" id="p_price"><br>
-				<input type="text" name="p_cal" id="p_cal"><br>
-				<input type="text" name="p_amount" id="p_amount"> 
-				<input type="hidden" name="seller_desc" id="seller_desc"> 
-				<input type="hidden" name="img_path" id="img_path"> 
+        <form action="adminProductUpdateRes.do" onsubmit="return check_frm();" method="POST">
+        <input type="hidden" name="p_id" value="${dto.p_id}">
+				<div class="p_category">
+		          	<strong>CATEGORY&nbsp;|&nbsp;</strong>
+					<label><input type="radio" name="p_category" value="한식" <c:if test="${dto.p_category eq '한식'}"> checked </c:if>> 한식</label>
+					<label><input type="radio" name="p_category" value="일식" <c:if test="${dto.p_category eq '일식'}"> checked </c:if>> 일식</label>
+					<label><input type="radio" name="p_category" value="중식" <c:if test="${dto.p_category eq '중식'}"> checked </c:if>> 중식</label>
+					<label><input type="radio" name="p_category" value="양식" <c:if test="${dto.p_category eq '양식'}"> checked </c:if>> 양식</label>
+					<label><input type="radio" name="p_category" value="비건" <c:if test="${dto.p_category eq '비건'}"> checked </c:if>> 야식</label>
+					<label><input type="radio" name="p_category" value="고기만" <c:if test="${dto.p_category eq '고기만'}"> checked </c:if>> 비건</label>
+		          	<label><input type="radio" name="p_category" value="해산물" <c:if test="${dto.p_category eq '해산물'}"> checked </c:if>> 기타</label>
+		          	<label><input type="radio" name="p_category" value="스페인" <c:if test="${dto.p_category eq '스페인'}"> checked </c:if>> 기타</label>
+		          	<label><input type="radio" name="p_category" value="기타" <c:if test="${dto.p_category eq '기타'}"> checked </c:if>> 기타</label>
+		          	<br><br>
+	         	</div> 	
+	          	<label><input type="text" name="p_name" id="p_name" placeholder="상품명을 입력하세요" value="${dto.p_name}" required><br></label>
+	          	<label><input type="text" name="p_short_desc" id="p_short_desc" placeholder="간략한 설명을 입력하세요" value="${dto.p_short_desc}" required><br></label>
+	          	<label><textarea cols="80" rows="10" name="p_description" id="p_description" placeholder="상품 설명을 입력하세요" value="${dto.p_description}" required></textarea></label>
+	          	<label><input type="text" name="p_price" id="p_price" placeholder="상품 가격을 입력하세요" value="${dto.p_price}" required><br></label>
+	          	<label><input type="text" name="p_cal" id="p_cal" placeholder="상품의 칼로리를 입력하세요" value="${dto.p_cal}" required><br></label>
+	          	<label><input type="text" name="p_amount" id="p_amount" placeholder="상품의 gram(그램)을 입력하세요" value="${dto.p_amount}" required></label>
+	          	<label><input type="text" name="seller_desc" id="seller_desc" placeholder="판매자의 설명을 입력하세요" value="${dto.seller_desc}" required> </label>
+	          	<div class="file_input">
+		          	<input type="file" name="file" id="img_path" value="${dto.img_path}">
+	    	      	<div class="select_img"><img src=""></div>
+	          	</div>
+				
 			<div class="product-write__content-article__btns">
 				<input type="submit" name="write-submit-btn" value="수 정">
 				<input type="button" name="write-cancel-btn" value="취 소" onclick="location.href='adminProductList.do'">

@@ -26,6 +26,7 @@
 	<!-- Admin Product -->
 	<resultMap type="productDto" id="productMap">
 		<result property="p_id" column="P_ID" />
+		<result property="p_category" column="P_CATEGORY"></result>
 		<result property="p_name" column="P_NAME" />
 		<result property="p_short_desc" column="P_SHORT_DESC" />
 		<result property="p_price" column="P_PRICE"/>
@@ -42,19 +43,19 @@
 	</select>
 	
 	<select id="productSelectOne" parameterType="String" resultType="productDto">
-		SELECT P_ID,P_NAME,P_SHORT_DESC,P_PRICE,P_DESCRIPTION,P_CAL,P_AMOUNT,SELLER_DESC,IMG_PATH,P_NO
+		SELECT P_ID,P_NAME,P_CATEGORY,P_SHORT_DESC,P_PRICE,P_DESCRIPTION,P_CAL,P_AMOUNT,SELLER_DESC,IMG_PATH,P_NO
 		FROM PRODUCT
 		WHERE P_ID=#{p_id}
 	</select>
 	
 	<insert id="adminProductInsert" parameterType="productDto">
 		INSERT INTO PRODUCT
-		VALUES(#{p_id},#{p_name},#{p_short_desc},#{p_price},#{p_description},#{p_cal},#{p_amount},#{seller_desc},#{img_path},#{p_no})	
+		VALUES(#{p_id},#{p_name},#{p_short_desc},#{p_price},#{p_description},#{p_cal},#{p_amount},#{seller_desc},#{img_path},#{p_no},#{p_category})	
 	</insert>
 	
 	<update id="adminProductUpdate" parameterType="productDto">
 		UPDATE PRODUCT
-		SET P_NAME=#{p_name}, IMG_PATH=#{img_path}, P_PRICE=#{p_price}
+		SET P_NAME=#{p_name},P_CATEGORY=#{p_category},P_SHORT_DESC=#{p_short_desc},P_DESCRIPTION=#{p_description},P_PRICE=#{p_price}, P_CAL=#{p_cal},P_AMOUNT=#{p_amount}, SELLER_DESC=#{seller_desc}
 		WHERE P_ID=#{p_id}
 	</update>
 	
@@ -63,9 +64,10 @@
 	</delete>
 	
 	<select id="getLastProductNum" resultType="productDto">
-		SELECT P_NO
-		FROM (SELECT * FROM PRODUCT ORDER BY P_NO DESC)
-		WHERE 2>ROWNUM
+		SELECT P_NO 
+		FROM (	SELECT ROWNUM RN, A.*
+				FROM (SELECT * FROM PRODUCT ORDER BY P_NO DESC) A)
+		WHERE 2>RN
 	</select>	
 	
 	<!-- Admin Order -->
@@ -179,6 +181,8 @@
 		<result property="report_date" column="REPORT_DATE" />
 		<result property="report_status" column="REPORT_STATUS" />
 		<result property="report_content" column="REPORT_CONTENT" />
+		<result property="reply_content" column="REPLY_CONTENT" />
+		<result property="report_penalty" column="REPORT_PENALTY" />
 	</resultMap>
 	
 	<select id="adminReportList" parameterType="list" resultMap="reportMap">
@@ -186,11 +190,10 @@
 		ORDER BY REPORT_NO DESC
 	</select>
 	
-	<!-- Penalty +1 -->
-	<update id="repoertCount" parameterType="int">
-		UPDATE REPORT R, E_USER U
-		SET USER_PENALTY = USER_PENALTY +1
-		WHERE REPORT_NO = #{report_no}
+	<update id="reportStatusUpdate" parameterType="reportDto">
+		UPDATE REPORT
+		SET REPORT_STATUS=#{report_status}, REPORT_PENALTY=#{report_penalty}
+		WHERE REPORT_NO=#{report_no}
 	</update>
 	
 	<delete id="adminReportDelete" parameterType="int">

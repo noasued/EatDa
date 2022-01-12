@@ -59,7 +59,7 @@ a{
 
 .blog-article__list-title h3{
   font-size: 20px;
-  margin-top:15%;
+  margin-top:8%;
 }
 
 .blog-article__list-title span{
@@ -69,6 +69,7 @@ a{
 .blog-article__list-title__icons{
 	width:80px;
 	margin-top:5px;
+	bottom:0;
 }
 
 .fa-heart{
