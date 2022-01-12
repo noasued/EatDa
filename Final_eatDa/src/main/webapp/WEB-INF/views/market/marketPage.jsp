@@ -6,17 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="resources/js/market/marketPage.js" type="text/javascript"></script>
+<script src="resources/js/market/marketPg.js" type="text/javascript"></script>
 <link rel="stylesheet" href="resources/css/market/marketPage.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body style="margin: 0; min-width: 1400px; margin-top:180px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
-	</div>
-
-	<div class="fixed-Banner">
-		<div class="like-title">내가 찜한 상품</div>
 	</div>
 	
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -57,7 +55,10 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<div class="fixed-Banner">
+		<div class="like-title">내가 찜한 상품</div>
+	</div>
 	<div id="wrap">
 		<div class="top-section">
 			<div class="top-left-section">
@@ -96,10 +97,8 @@
 				</div>
 				<div class="div-top-section button-wrap">
 					<button class="btn btn btn-outline-danger top-button" onclick="likeThis()">찜하기</button>
-					<button class="btn btn-outline-primary top-button"
-						data-bs-toggle="modal" data-bs-target="#exampleModal">장바구니</button>
-					<button class="btn btn-outline-success top-button"
-						data-bs-toggle="modal" data-bs-target="#exampleModal">구매하기</button>
+					<button type="button" class="btn btn-outline-primary top-button" data-bs-toggle="modal" data-bs-target="#exampleModal">장바구니</button>
+					<button type="button" class="btn btn-outline-success top-button" data-bs-toggle="modal" data-bs-target="#exampleModal">구매하기</button>
 				</div>
 			</div>
 		</div>

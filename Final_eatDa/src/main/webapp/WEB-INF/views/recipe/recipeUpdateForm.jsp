@@ -63,6 +63,7 @@
 <body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/summernote.jsp"%>
 	</div>
 	<div class="recipe_write">
 	    <!-- main img -->
