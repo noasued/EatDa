@@ -12,10 +12,6 @@ import com.project.eatda.dto.UserDto;
 
 public interface AdminBiz {
 
-	/* 관리자 MAIN */
-	public int adminOrderCount();
-	public int allOrderCount();
-	
 	/* 댓글 리스트 */
 	public List<BlogReplyDto> adminReplyList();
 	public int adminReplyDelete(int reply_no);
@@ -30,6 +26,7 @@ public interface AdminBiz {
 	
 	/* 주문 리스트 */
 	public List<OrderDto> adminOrderList();
+	public OrderDto orderSelectOne(String order_id);
 
 	public int adminOrderInsert(OrderDto order);
 	public int adminOrderInsert2(OrderDto order);
@@ -41,14 +38,13 @@ public interface AdminBiz {
 	public List<UserDto> adminUserList();
 	public int adminUserUpdate(UserDto dto);
 	public int adminUserDelete(String user_id);
+	
 	//이메일
 	public void sendMail(EmailDto dto);
 	
 	/* 신고 리스트 */
 	public List<ReportDto> adminReportList();
 	public int adminReportDelete(int report_no);
-	
-	public int reportStatusUpdate(ReportDto dto);
 
 	
 

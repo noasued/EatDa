@@ -167,8 +167,6 @@
 		<result property="report_date" column="REPORT_DATE" />
 		<result property="report_status" column="REPORT_STATUS" />
 		<result property="report_content" column="REPORT_CONTENT" />
-		<result property="reply_content" column="REPLY_CONTENT" />
-		<result property="report_penalty" column="REPORT_PENALTY" />
 	</resultMap>
 	
 	<select id="adminReportList" parameterType="list" resultMap="reportMap">
@@ -176,10 +174,11 @@
 		ORDER BY REPORT_NO DESC
 	</select>
 	
-	<update id="reportStatusUpdate" parameterType="reportDto">
-		UPDATE REPORT
-		SET REPORT_STATUS=#{report_status}, REPORT_PENALTY=#{report_penalty}
-		WHERE REPORT_NO=#{report_no}
+	<!-- Penalty +1 -->
+	<update id="repoertCount" parameterType="int">
+		UPDATE REPORT R, E_USER U
+		SET USER_PENALTY = USER_PENALTY +1
+		WHERE REPORT_NO = #{report_no}
 	</update>
 	
 	<delete id="adminReportDelete" parameterType="int">

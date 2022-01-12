@@ -62,7 +62,11 @@
 		DELETE FROM BLOG WHERE BLOG_NO=#{blog_no}
 	</delete>
 	
-	
+	<update id="blogCount" parameterType="int">
+		UPDATE BLOG
+		SET BLOG_COUNT = BLOG_COUNT + 1
+		WHERE BLOG_NO = #{blog_no}
+	</update>
 	
 	<!-- Admin Blog -->
 	<select id="adminBlogList" parameterType="list" resultMap="blogMap">

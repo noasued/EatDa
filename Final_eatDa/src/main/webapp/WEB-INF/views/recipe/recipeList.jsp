@@ -156,7 +156,7 @@
 			<input type="hidden" name="amount" value="9">
 		</form>
 	    <div class="category">
-			 	
+			 	<a href="recipeList.do">전체</a> |
 				<a href="recipeList.do?category=한식">한식</a> | 
 				<a href="recipeList.do?category=일식">일식</a> | 
 				<a href="recipeList.do?category=중식">중식</a> | 
