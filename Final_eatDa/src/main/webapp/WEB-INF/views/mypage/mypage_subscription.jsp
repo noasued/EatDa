@@ -86,7 +86,7 @@ hr{
 
 
     .submit_btn{
-        border: none;
+        border: none; 
         border-radius: 4px;
         width: 75px;
         height: 30px;

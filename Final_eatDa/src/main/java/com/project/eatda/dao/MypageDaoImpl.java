@@ -36,7 +36,7 @@ public class MypageDaoImpl implements MypageDao{
 		}
 		
 		return dto2;
-	}
+	} 
 	
 	//배송예정상품
 	@Override

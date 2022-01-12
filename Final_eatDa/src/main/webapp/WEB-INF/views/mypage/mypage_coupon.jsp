@@ -17,7 +17,7 @@
 
 	flex-direction: column;
 	width: 800px;
-    margin-top: 180px; 
+    margin-top: 180px;  
 } 
 
 .coupon_list{

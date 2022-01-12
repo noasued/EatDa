@@ -73,7 +73,7 @@ public class MypageController {
 		List<ProductDto> list = mypageBiz.deliveryProduct();
 		
 		return list;
-	}
+	} 
 	
 	//대체상품
 	@RequestMapping(value="/getMarketProduct.do", method=RequestMethod.POST) 

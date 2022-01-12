@@ -17,7 +17,7 @@
 	padding: 0px;
 }
 
-.mypage_info_list{
+.mypage_info_list{ 
 	display: flex;
 	position: absolute;
 	flex-direction: column;
