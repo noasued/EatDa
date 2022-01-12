@@ -21,9 +21,9 @@
 		<!-- 페이징 -->
 	<select id="recipeList" parameterType="list" resultMap="recipeMap">
 		<![CDATA[
-			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE
+			SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG, RECIPE_ENABLED, REGDATE, R_SHORT_DESC
 			FROM (	SELECT ROWNUM RN, A.*
-					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE
+					FROM(	SELECT RECIPE_NO, RECIPE_TITLE, RECIPE_CATEGORY, RECIPE_CONTENT, RECIPE_COUNT, RECIPE_IMG,RECIPE_ENABLED, REGDATE, R_SHORT_DESC
 							FROM RECIPE
 							WHERE	
 		]]>					
@@ -75,7 +75,7 @@
 	<!-- 레시피 추가 -->
 	<insert id="recipeInsert" parameterType="recipeDto">
 		INSERT INTO RECIPE
-		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE,NULL)
+		VALUES(R_NO_SEQ.NEXTVAL,#{recipe_title},#{recipe_category},#{recipe_content},0,#{recipe_img},DEFAULT,SYSDATE,#{r_short_desc})
 	</insert>
 
 	<!-- 레시피 수정 -->
@@ -104,6 +104,4 @@
 		SELECT * FROM RECIPE
 		ORDER BY RECIPE_NO DESC
 	</select>
-
-
 </mapper>
