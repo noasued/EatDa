@@ -2,18 +2,22 @@ package com.project.eatda.biz;
 
 import java.util.List;
 
+import javax.activation.FileDataSource;
 import javax.inject.Inject;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.project.eatda.dao.AdminDao;
 import com.project.eatda.dto.BlogReplyDto;
 import com.project.eatda.dto.EmailDto;
+import com.project.eatda.dto.OrderAdminDto;
 import com.project.eatda.dto.OrderDto;
 import com.project.eatda.dto.ProductDto;
 import com.project.eatda.dto.ReportDto;
@@ -24,20 +28,6 @@ public class AdminBizImpl implements AdminBiz{
 
 	@Inject
 	JavaMailSender mailSender;	
-	
-	/* 관리자 MAIN */
-		@Autowired
-		AdminDao adminDao;
-		
-		@Override
-		public int adminOrderCount() {
-			return adminDao.adminOrderCount();
-		}
-		
-		@Override
-		public int allOrderCount() {
-			return adminDao.allOrderCount();
-		}
 	
 	/* 댓글 리스트 */
 		@Autowired
@@ -97,6 +87,12 @@ public class AdminBizImpl implements AdminBiz{
 			return orderDao.adminOrderList();
 		}
 		
+		// 모달 리스트
+		@Override
+		public OrderDto orderSelectOne(String order_id) {
+			return orderDao.orderSelectOne(order_id);
+		}
+		
 		// 주문 추가(무통장입금 : default=결제대기)
 		@Override
 		public int adminOrderInsert(OrderDto dto) {
@@ -154,15 +150,13 @@ public class AdminBizImpl implements AdminBiz{
 				// 이메일 객체
 				MimeMessage msg = this.mailSender.createMimeMessage();
 
-				String charset = "UTF-8";
-				
 				// 받는 사람 설정(수신자)
 				msg.addRecipient(RecipientType.TO, new InternetAddress(dto.getReceiveMail()));
 				//보내는 사람 (발신자 이메일 주소 + 이름)
 				msg.addFrom(new InternetAddress[] { new InternetAddress(dto.getSenderMail(), dto.getSenderName()) });
 				// 이메일 제목과 본문내용 (인코딩)
-				msg.setSubject(dto.getSubject(), charset);
-				msg.setText(dto.getMessage(), charset);
+				msg.setSubject(dto.getSubject(), "utf-8");
+				msg.setText(dto.getMessage(), "utf-8");
 				
 				// 이메일 보내기
 				mailSender.send(msg);
@@ -186,12 +180,6 @@ public class AdminBizImpl implements AdminBiz{
 		@Override
 		public int adminReportDelete(int report_no) {
 			return reportDao.adminReportDelete(report_no);
-		}
-
-		// 신고 status update
-		@Override
-		public int reportStatusUpdate(ReportDto dto) {
-			return reportDao.reportStatusUpdate(dto);
 		}
 	
 
