@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Welcome to EatDa</title>
-  
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   
@@ -51,6 +54,7 @@
 <body style="margin-top:155px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/summernote.jsp"%>
 	</div>
   <main class="blog-update">
     <!-- main img -->
