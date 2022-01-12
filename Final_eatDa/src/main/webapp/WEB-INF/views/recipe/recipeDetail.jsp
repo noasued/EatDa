@@ -45,6 +45,7 @@ hr{
 }
 .title div{
    text-align: right;
+   margin-right: 1%;
 }
 .title div img{
    width: 20px;
@@ -115,8 +116,10 @@ function confirmModalClose(){
          <h4 style="text-align:center;">${dto.recipe_title }</h4>
          <div>
             <strong>조회수 ${dto.recipe_count }</strong>
-            <i class="fas fa-edit" onclick="location.href='recipeUpdateForm.do?recipe_no=${dto.recipe_no }'"></i>
-            <i class="fas fa-trash-alt" onclick="confirmModal()"></i>
+            <c:if test="${member.user_id =='ADMIN' }">
+	            <i class="fas fa-edit" onclick="location.href='recipeUpdateForm.do?recipe_no=${dto.recipe_no }'"></i>
+	            <i class="fas fa-trash-alt" onclick="confirmModal()"></i>
+            </c:if>
          </div>
          <hr> 
       </div>
