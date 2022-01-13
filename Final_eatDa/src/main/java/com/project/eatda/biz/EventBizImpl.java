@@ -36,11 +36,6 @@ public class EventBizImpl implements EventBiz{
 	}
 	
 	@Override
-	public int selectEventNo(String event_title) {
-		return dao.selectEventNo(event_title);
-	}
-	
-	@Override
 	public int delete(int event_no) {
 		System.out.println("delete biz");
 		return dao.delete(event_no);
