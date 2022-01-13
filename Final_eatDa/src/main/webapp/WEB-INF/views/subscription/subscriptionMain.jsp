@@ -52,21 +52,21 @@
 					 <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-search"></i></div>
                         <h2 class="h4 fw-bolder">"구독"이란 무엇인가요?</h2><br>
-                        <div><p>간단하게 끼니를 해결하고 싶으신 분들을 위해 준비했습니다.<br>장보러 가지 않고 집에서 간편하게 받아 드실 수 있도록 "eatDa"가 준비했습니다!</p></div>
+                        <div><p><b>간단히 끼니를 해결하고 싶은 분들을 위해 준비했습니다.</b><br><br>장보러 가지 않고 집에서 간편하게 받아 드실 수 있도록 "eatDa"가 준비했습니다!</p></div>
 		            	<a href="javascript:openModal('modal1');" class="button modal-open btn-Link btn-sm" style="color:blue;">> 더 알아보기</a>
 	                </div>
                     
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-heart-fill"></i></div>
                         <h2 class="h4 fw-bolder">"구독"하면 무엇이 좋은가요?</h2><br>
-                        <div><p>구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.<br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.</p></div>
+                        <div><p><b>구독신청 회원에게는 밀키트 구매 할인 혜택이 있습니다.</b><br><br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.</p></div>
 		            	<a href="javascript:openModal('modal2');" class="button modal-open btn-Link btn-sm" style="color:blue;">> 더 알아보기</a>
 	                </div>
                    
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-question"></i></div>
                         <h2 class="h4 fw-bolder">F A Q</h2><br>
-                        <div><p>구독에 대해 아직도 잘 모르시겠다면?<br>자주 묻는 질문을 통해 궁금한 점을 해결해보세요 :)<br>구독 신청을 하기 전에 주의할 사항도 함께 확인해주세요.</p></div>
+                        <div><p><b>구독에 대해 아직도 잘 모르시겠다면?</b><br><br>자주 묻는 질문을 통해 궁금한 점을 해결해보세요 :)<br>구독 신청을 하기 전에 주의사항도 함께 확인해주세요.</p></div>
 	            		<a href="javascript:openModal('modal3');" class="button modal-open btn-Link btn-sm" style="color:blue;">> 더 알아보기</a>
 					</div>
                 </div>
@@ -77,7 +77,8 @@
 				    <a href="javascript:;" class="close">X</a>
 				    <p class="title">"구독"이란?</p>
 				    <div class="modal-content">
-				    	구독은 eatDa에서 제공하는 서비스입니다.ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ
+				    	<b>구독은 eatDa에서 제공하는 정기 구독서비스입니다.</b><br><br>매 번 밀키트를 구매하는 것이 귀찮으신 적, <br>까먹고 이번 주 음식 재료를 준비 못하신 적은 없나요?<br><br>이러한 불편한 점을 해소해드리고자 구독 서비스를 운영중입니다:)<br><br>
+				   		저렴한 가격으로 ! 원하는 기간을 선택하여 ! 편안한 만찬을 즐기실 수 있습니다.<br><br>구독에 대해 궁금하신 점이 많으시다면, FAQ를 참고해주세요.
 				    </div>
 				  </div>
 				  
@@ -85,8 +86,8 @@
 				    <a href="javascript:;" class="close">X</a>
 				    <p class="title">구독하면 무엇이 좋은가요?</p>
 				    <div class="modal-content">
-				    	구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.<br>밀키트 배송과 함께 eatDa의 특별한 레시피까지!<br>메일로 받아보실 수 있습니다.<br>
-				    	<b>첫 번째</b>, 밀키트와 함께 만들어 먹을 수 있는 특별한 레시피를 이메일로 발송해드립니다.<br><b>두 번째</b>, 밀키트 구매 시, 할인 쿠폰을 받으실 수 있습니다.<br><b>세 번째</b>맛있는 밀키트를 일주일에 한 번씩 꼬박꼬박 받아보실 수 있습니다!<br>
+				    	<b>구독을 신청하신 회원께는 밀키트 구매 할인 혜택이 있습니다.</b><br>밀키트 배송과 함께 eatDa의 특별한 레시피까지! 메일로 받아보실 수 있습니다.<br><br>
+				    	<b>첫 번째☝🏻</b><br>밀키트와 함께 만들어 먹을 수 있는 특별한 레시피를 이메일로 발송해드립니다.<br><br><b>두 번째✌🏻</b><br>밀키트 구매 시, 할인 쿠폰을 받으실 수 있습니다.<br><br><b>세 번째🤟🏻</b><br>맛있는 밀키트를 일주일에 한 번씩 꼬박꼬박 받아보실 수 있습니다!<br>
 				    </div>
 				  </div>
 				  
@@ -94,9 +95,9 @@
 				    <a href="javascript:;" class="close">X</a>
 				    <p class="title">F A Q</p>
 				    <div class="modal-content">
-				    	<b>Q1.</b>이미 구독을 신청했는데 구독 기간이 끝나기 전에 구독을 또 신청할 수 있나요?<br>&nbsp;&nbsp;<b>A1.</b>구독 기간이 끝나고 새로운 구독을 신청하실 수 있습니다.<br><br>
+				    	<b>Q1.</b>이미 구독을 신청했는데 구독 기간이 끝나기 전에 구독을 또 신청할 수 있나요?<br><b>A1.</b>구독 기간이 끝나고 새로운 구독을 신청하실 수 있습니다.<br><br>
 				    	<b>Q2.</b>주간 구독과 일반 주문의 다른 점이 있나요?<br><b>A2.</b>주간 구독,일반 주문 모두 밀키트가 배송되지만 주간 구독은 이메일 수신에 동의하셨을 경우 이메일로 레시피를 받아보실 수 있습니다.<br><br>
-				    	<b>Q3.</b><br><b>A3.</b><br>
+				    	<b>Q3.</b>구독을 하면 어떤 할인 혜택이 있는건가요?<br><b>A3.</b>일반 주문 시, 결제하시는 밀키트의 금액보다 저렴한 가격으로 가성비 좋은 밀키트를 받아보실 수 있습니다 : )<br>
 				    </div>
 				  </div>
 			</div>	  
@@ -110,7 +111,7 @@
                 </div>
                 <div class="row gx-5 justify-content-center">
                     <!-- Pricing card free-->
-                    <div class="col-lg-6 col-xl-4">
+                    <div class="col-lg-6 col-xl-4" style="width:33.333333%;">
                         <div class="card mb-5 mb-xl-0">
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">Weekly</div><br>
@@ -129,7 +130,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-6 col-xl-4">
+                    <div class="col-lg-6 col-xl-4" style="width:33.333333%;">
                         <div class="card mb-5 mb-xl-0">
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold"><i class="bi bi-star-fill text-warning"></i>추천<i class="bi bi-star-fill text-warning"></i><br>MONTHLY</div>
@@ -148,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-xl-4">
+                    <div class="col-lg-6 col-xl-4" style="width:33.333333%;">
                         <div class="card mb-5 mb-xl-0">
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">QUARTERLY</div><br>
