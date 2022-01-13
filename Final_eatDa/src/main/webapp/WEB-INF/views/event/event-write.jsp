@@ -92,11 +92,13 @@
 
 			<!-- article -> summernote -->
       <div class="event-write__content-article">
-        <form action="/event-write.do" method="post">
-          <input type="text" name="event_title" id="event_title" placeholder="제목을 입력하세요.">
-					<textarea class="summernote" id="summernote" name="editordata"></textarea>
+        <form action="event-write.do" method="post">
+          <input type="text" name="event_title" placeholder="제목을 입력하세요.">
+					<textarea id="summernote" name="event_content"></textarea>
+					<!-- img -->
+					<input type="hidden" id="img" name="event_img" value="">
 					<div class="event-write__content-article__btns">
-						<input type="button" onclick="submitBtn()" name="write-submit-btn" value="작성 완료">
+						<input type="submit" name="write-submit-btn" value="작성 완료" onclick="submitBtn()">
 						<input type="button" name="write-cancel-btn" value="작성 취소" onclick="location.href='event.do'">
         	</div>
         </form>
@@ -117,16 +119,21 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.js"></script>
   <script type="text/javascript">
   function submitBtn(){
-		var event_title=$('#event_title').val();
-		var event_content=$('#summernote').val();
-		console.log(event_title);
-		console.log(event_content);
-		location.href="event-write.do?event_title="+event_title+"&event_content="+event_content;
-		
+	  alert("글 작성이 완료되었습니다.");
 	}
 	//summernote
 	$(document).ready(function() {
 		var fontList = ['나눔고딕','나눔명조','MaruBuri','궁서체','Arial','Arial Black','Comic Sans MS','Courier New','Verdana','Times New Roamn'];
+		var toolbar = [
+		    // 글꼴 설정
+		    ['font', ['fontname','fontsize']],
+		    ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
+		    ['style', ['style']],
+		    ['highlight', ['highlight']],
+		    ['paragraph', ['paragraph','height','ul', 'ol']],
+		    // 그림첨부, 링크만들기
+		    ['insert',['table','hr','link','picture']],
+		];
 		$('#summernote').summernote({
 			  lang: "ko-KR",								// 한글 설정
 			  fontNames: fontList,
@@ -137,21 +144,18 @@
         width: 840,									  // 에디터 넓이
 			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
         tabsize: 2,
-			  placeholder: '내용을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	//placeholder 설정
+			  placeholder: '내용을 작성해주세요!',	//placeholder 설정
         prettifyHtml:false,
-				
-			  toolbar: [
-			    // 글꼴 설정
-			    ['font', ['fontname','fontsize']],
-			    ['fontstyle', ['bold', 'italic', 'underline', 'strikethrough','forecolor','backcolor','clear']],
-			    ['style', ['style']],
-			    ['highlight', ['highlight']],
-			    ['paragraph', ['paragraph','height','ul', 'ol']],
-			    // 그림첨부, 링크만들기
-			    ['insert',['table','hr','link','picture']],
-			    //이모지
-			    ['misc', ['emoji']]
-			  ],
+			  toolbar: toolbar,
+			  callbacks : { //이미지를 첨부
+					onImageUpload : function(files, editor, welEditable) {
+						console.log(files+"//"+editor+"//");
+						
+						for (var i = files.length - 1; i >= 0; i--) {
+							uploadEventImageFile(files[i], this);
+						}
+					}
+			  },
 			  popover: {
 				  image: [
 				    ['imageResize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
@@ -159,9 +163,28 @@
 				    ['remove', ['removeMedia']],
 				    ['custom', ['imageTitle']],
 				  ]
-				},
+				}
 		});
 	});
+	function uploadEventImageFile(file, el){
+		data = new FormData();
+		data.append("file", file);
+		console.log("data"+data);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "uploadEventImageFile.do",
+			contentType : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			success : function(data) {
+				$(el).summernote('editor.insertImage', data.url);
+				console.log("date.url" + data.url);
+				console.log("data" + data);
+				document.getElementById('img').value = data.url;
+			}
+		});
+	}
 	</script>
 	
 </body>

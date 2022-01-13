@@ -246,7 +246,9 @@
 				<option value="title">제목</option>
 			</select> <input type="text" name="keyword" id="keyword" placeholder="검색할 제목을 입력하세요.">
 			<input type="button" value="검색" onclick="searchBlog()">
+			<c:if test="${member.user_id != null}">
 			<input type="button" value="글쓰기" onclick="location.href='blog-writeform.do'">
+			</c:if>
 		</div>
 
 

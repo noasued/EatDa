@@ -62,6 +62,7 @@
 <body style="margin-top:155px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/summernote.jsp"%>
 	</div>
   <main class="blog-write">
     <!-- main img -->
@@ -136,7 +137,7 @@
 			  placeholder: '내용을 작성해주세요! 최대 2048자까지 쓸 수 있습니다 :) ',	//placeholder 설정
         prettifyHtml:false,
 			  toolbar: toolbar,
-			  callbacks : { //여기 부분이 이미지를 첨부하는 부분
+			  callbacks : { //이미지 첨부
 					onImageUpload : function(files, editor, welEditable) {
 						console.log(files+"//"+editor+"//");
 						

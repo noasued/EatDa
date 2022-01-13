@@ -35,11 +35,11 @@
 		WHERE USER_ID = #{user_id}
 	</select>
 	
-	<select id="hashTagSearch" parameterType="string" resultMap="productMap">
+	<select id="hashTagSearch" parameterType="string" resultType="productDto">
 		SELECT P_ID, P_NAME, P_SHORT_DESC, P_PRICE, IMG_PATH
 		FROM PRODUCT
-		JOIN PRODUCT_CATEGORY USING(P_ID)
-		WHERE P_CATEGORY = #{tagName}
+		JOIN PRODUCT_CATEGORY pc USING(P_ID)
+		WHERE pc.P_CATEGORY = #{tagName}
 	</select>
 	
 	<select id="getProduct" resultType="productDto" parameterType="string">

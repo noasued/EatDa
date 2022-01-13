@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public final static List<String> PERMITCOMMAND = Arrays.asList("/index.do", "/idCheck.do","/regist_form.do","/emailCheck.do","/memberRegist.do","/loginCheck.do",
 			"/foodbti.do","/getMarketData.do","/getRecentRecipe.do","/getMbtiProduct.do","/getPopularBlog.do","/getLovingRecipe.do",
 			"/product.do","/paging.do","/hashTagSearch.do","/searching.do","/goProductPage.do","/marketMain.do","/getReview.do",
-			"/takeBlog.do","/blog-paging.do","/blog.do","/blog-search.do","/blog-detail.do","reply-list.do","/event.do","/event-detail.do",
+			"/takeBlog.do","/blog-paging.do","/blog.do","/event.do","/event-detail.do",
 			"/recipeList.do","/subMain.do","/reply-list.do");
 	
 	public final static List<String> PRODUCTPAGE = Arrays.asList("/putShoppingBag.do","/likeProductInsert.do","/directPurchase.do","/makeOrder.do","/goShoppingBag.do");
