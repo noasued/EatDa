@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	function chk(){
-		 if(confirm('ÀÛ¼ºÇÏ½Å ¸ÞÀÏÀ» Àü¼ÛÇÏ½Ã°Ú½À´Ï±î?')==true){
+		 if(confirm('ìž‘ì„±í•˜ì‹  ë©”ì¼ì„ ì „ì†¡í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')==true){
 			 return true;
 		 }else{
 			 return false;
@@ -51,35 +51,35 @@
 </head>
 <body>
 	<div style="background-color:#faeed2; align:center;">
-		<h1>ÀÌ¸ÞÀÏ º¸³»±â</h1>
+		<h1>ì´ë©”ì¼ ë³´ë‚´ê¸°</h1>
 	</div>
 	<hr>
 	<form action="send.do" method="post" onsubmit="return chk();">
 		<table>
 			<tr>
-				<th>¹ß½ÅÀÚ ÀÌ¸§</th>
+				<th>ë°œì‹ ìž ì´ë¦„</th>
 				<td><input type="text" name="senderName" value="EatDa" readonly></td>
 			</tr>
 			<tr>
-				<th>¹ß½ÅÀÚ ÀÌ¸ÞÀÏ</th>
+				<th>ë°œì‹ ìž ì´ë©”ì¼</th>
 				<td><input type="text" name="senderMail" value="TeamEatDa@eatDa.com" readonly></td>
 			</tr>
 			<tr>
-				<th>¼ö½ÅÀÚ ÀÌ¸ÞÀÏ</th>
+				<th>ìˆ˜ì‹ ìž ì´ë©”ì¼</th>
 				<td><input type="text" name="receiveMail" autofocus></td>
 			</tr>
 			<tr>
-				<th>Á¦ ¸ñ</th>
-				<td><input type="text" name="subject" style="width:300px;" value="¾È³çÇÏ¼¼¿ä  ${member.user_name}´Ô, EatDaÀÔ´Ï´Ù :)"></td>
+				<th>ì œ ëª©</th>
+				<td><input type="text" name="subject" style="width:300px;" value="ì•ˆë…•í•˜ì„¸ìš”  ${member.user_name}ë‹˜, EatDaìž…ë‹ˆë‹¤ :)"></td>
 			</tr>
 			<tr>
-				<th>³» ¿ë</th>
-				<td><textarea cols="80" name="message" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä"></textarea></td>
+				<th>ë‚´ ìš©</th>
+				<td><textarea cols="80" name="message" placeholder="ë‚´ìš©ì„ ìž…ë ¥í•˜ì„¸ìš”"></textarea></td>
 			</tr>
 			<tr style="margin:0 auto;">
 				<td colspan="5">
-					<input type="submit" id="btn" value="Àü ¼Û" >
-					<input type="button" id="btn" onclick="location.href='adminUser.do'" value="Ãë ¼Ò">
+					<input type="submit" id="btn" value="ì „ ì†¡" >
+					<input type="button" id="btn" onclick="location.href='adminUser.do'" value="ì·¨ ì†Œ">
 				</td>
 			</tr>
 		</table>
