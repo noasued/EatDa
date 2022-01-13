@@ -89,7 +89,6 @@ body{
       <!-- content -->
       <div class="detail-article__content">
         <p>${dto.event_content}</p>
-        <img width="600px" src="${dto.event_img}">
       </div>
 
     </div>

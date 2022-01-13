@@ -312,7 +312,6 @@
 
       <!-- content -->
       <div class="detail-article__content">
-        <img width="600px" src="${dto.blog_img}">
         <p>${dto.blog_content}</p>
 
         <!-- click likes area -->

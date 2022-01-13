@@ -69,7 +69,9 @@ body{
 
     <div class="event-article">
       <div class="event-write-btn">
+      	<c:if test="${member.user_id =='ADMIN'}">
         <input type="button" value="글쓰기" onclick="location.href='event-writeform.do'">
+        </c:if>
       </div>
 
       <!-- event list -->
