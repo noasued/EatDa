@@ -47,6 +47,16 @@ public class commonController {
 		List<ProductDto> list = commonBiz.getMarketData();
 		
 		for (int i = 9; i < list.size(); i++) {
+			String desc = list.get(i).getP_description();
+			String s_desc = list.get(i).getP_short_desc();
+			
+			if (s_desc.length() > 16) {
+				list.get(i).setP_short_desc(s_desc.substring(0,16)+"...");
+			}
+			
+			if (desc.length() > 60) {
+				list.get(i).setP_description(desc.substring(0,50)+"...");
+			}
 			tempList.add(list.get(i));
 		}
 		return tempList;

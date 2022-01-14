@@ -90,7 +90,7 @@
 			<!-- 현재 페이지는 class='active' -->
 			<div class="col-md-12" align="center">
 				<div class="paging-section">
-					<div class="pagination" align="center"></div>
+					<div class="pagination" style="justify-content:center; align-items:center; margin-top:100px;"></div>
 				</div>
 			</div>
 		</div>
