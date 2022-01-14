@@ -183,7 +183,7 @@ li {
 	margin: 1% 0 10px 0; font-size: 17px;
 }
 .recent-text {
-	letter-spacing: 0.5px; font-size: 15px; margin-bottom: 100%;
+	letter-spacing: 0.5px; font-size: 15px; margin-bottom: 90%;
 }
 .recipe-no {
 	display:none;
@@ -212,7 +212,7 @@ li {
 	padding-left:3%;width:100%; height:20%; font-size:large; color:gray;margin-top:10px;
 }
 .pop-content {
-	margin-top:10px;width:100%; height:80%; padding:5px; letter-spacing:1px;
+	margin-top:5px;width:100%; height:80%; padding:5px; letter-spacing:1px;
 }
 
 .item-img {
@@ -528,7 +528,7 @@ li {
 				<div class="col-md-6 new-title" style="text-align: right;">
 					<p class="title-font" style="margin-right: 10%; margin-bottom: 10px;">지금 가장 사랑받는 레시피</p><br>
 					<p class="font-noto-sans popular-text">지금 이 순간 여러분들에게 가장 사랑받는 레시피를 찾아봤어요</p>
-					<p class="font-noto-sans popular-text" style="margin-bottom:37%;">오늘의 레시피를 통해서 함께 행복을 나눠봐요</p>
+					<p class="font-noto-sans popular-text" style="margin-bottom:33%;">오늘의 레시피를 통해서 함께 행복을 나눠봐요</p>
 					<br>
 					<span onclick="location.href='recipeList.do'" class="font-noto-sans sub-title" style="margin-right: 10%;">Recipe></span>
 				</div>
@@ -598,7 +598,7 @@ li {
 				<div class="col-md-6" style="text-align: left">
 					<p class="title-font" style="margin-left: 10%; margin-bottom: 10px;">가장 사랑받는 EatDagram</p>
 					<p style="margin:0 0 0 10%" class="popular-text">여러분만의 경험을 공유해보세요</p>
-					<p style="margin:0 0 35% 10%" class="popular-text">세상에서 단 하나뿐인 레시피를 공유하면서 이벤트까지 응모해봐요.</p>
+					<p style="margin:0 0 30% 10%" class="popular-text">세상에서 단 하나뿐인 레시피를 공유하면서 이벤트까지 응모해봐요.</p>
 					<br>
 					<span class="font-noto-sans sub-title" style="margin-left: 10%;" onclick="location.href='blog.do'">EatDagram></span>
 				</div>

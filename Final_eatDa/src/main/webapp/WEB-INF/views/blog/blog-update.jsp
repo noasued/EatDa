@@ -4,9 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to EatDa</title>
-  
-  
+<title>Welcome to EatDa</title>  
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   
   <link href="resources/css/blog/blog-update.css" rel="stylesheet">
@@ -51,6 +49,7 @@
 <body style="margin-top:155px;">
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/summernote.jsp"%>
 	</div>
   <main class="blog-update">
     <!-- main img -->

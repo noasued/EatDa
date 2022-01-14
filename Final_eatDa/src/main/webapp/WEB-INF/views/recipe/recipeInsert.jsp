@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   
   <style type="text/css">
 .recipe_content-wrap{
@@ -63,6 +64,7 @@
 <body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/summernote.jsp"%>
 	</div>
 	<div class="recipe_write">
 	    <!-- main img -->

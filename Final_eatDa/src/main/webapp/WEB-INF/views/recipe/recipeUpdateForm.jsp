@@ -24,9 +24,9 @@
 	padding-bottom: 15px;
 	border-bottom: 0.3px solid rgb(235, 235, 235);
 }
-.recipe_content-title input{
+.recipe_content-title input,.short input{
 	margin-top:2%;
-	width : 840px;
+	width : 880px;
 	height: 40px;
 }
 
@@ -63,6 +63,7 @@
 <body>
 	<div id="header">
 		<%@ include file="../common/header.jsp"%>
+		<%@ include file="../common/summernote.jsp"%>
 	</div>
 	<div class="recipe_write">
 	    <!-- main img -->
@@ -90,7 +91,9 @@
 					<label><input type="radio" name="recipe_category" value="야식" <c:if test="${dto.recipe_category eq '야식'}"> checked </c:if>> 야식</label>
 					<label><input type="radio" name="recipe_category" value="비건" <c:if test="${dto.recipe_category eq '비건'}"> checked </c:if>> 비건</label>
 				</div>
-				
+				<div class="form-group short">
+					<input type="text" name="r_short_desc" value="${dto.r_short_desc }">
+				</div>
 				<div class="form-group">
 					<textarea id="summernote" class="form-control" rows="5" id="content" name="recipe_content">${dto.recipe_content }</textarea>
 					<!-- image 경로 넘겨주기! -->
