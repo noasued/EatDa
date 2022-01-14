@@ -91,7 +91,7 @@ hr{
     
 
     .coupon h3{
-        margin-bottom: 50px;
+        margin-bottom: 60px;
         font-weight: bold;
         
         color: white;
@@ -100,7 +100,7 @@ hr{
     .coupon p{
     	margin: 0;
     	padding: 0;
-		font-size: 1.2rem;
+		font-size: 0.9rem;
 		font-weight: bold;
 		color: gray;
     }
@@ -110,10 +110,7 @@ hr{
     	margin-top: 40px;
     	text-align: center;
     }
-    .no_coupon a{
-	text-decoration: none;
-	font-size: 0.8rem;
-	}
+
 	
 </style>
 <body>
