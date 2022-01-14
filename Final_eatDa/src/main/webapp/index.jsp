@@ -442,10 +442,6 @@ li {
 										"<a class='a-tag' href='#'>" + value.blog_content + "</a>" +
 									"</div>" +
 								"</div>" +
-								"<div class='item-heart' style='margin-top:5%;'>" +
-									"<span>" + value.blog_like + "</span>" +
-									"<img class='heart' src='resources/images/recipe/heart.png'>" +
-								"</div>" +
 							"</div>" +
 						"</li>"
 					);
