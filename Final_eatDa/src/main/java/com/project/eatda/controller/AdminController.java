@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import javax.inject.Inject;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
@@ -346,11 +347,18 @@ public class AdminController {
 	            MimeMessage message = this.mailSender.createMimeMessage();
 	            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 	           
+	            // 발신자 이메일, 발신자 명
 	            helper.setFrom(new InternetAddress("TeamEatDa@gamil.com", "EatDa"));
 	            
-	            helper.setTo("yhegee1004@naver.com");
-	            helper.setSubject("안녕하세요 "+"님, EatDa입니다 :)");
-	            helper.setText(dto.getMessage(), charset);
+	            // 수신자 이메일
+	            message.addRecipient(RecipientType.TO, new InternetAddress(dto.getReceiveMail()));
+	            
+	            // 메일 제목
+	            message.setSubject(dto.getSubject(), charset);
+	            
+	            
+	            // 메일 본문
+	            message.setText(dto.getMessage(), charset);
 	            
 	            // 이메일 보내기
 	            mailSender.send(message);

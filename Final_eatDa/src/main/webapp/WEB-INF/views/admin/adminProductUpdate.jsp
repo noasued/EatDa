@@ -6,29 +6,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to EatDa</title>
+<title>Admin_Product_Update</title>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
   <link href="resources/admin/css/write.css" rel="stylesheet">
   <style type="text/css">
-  	#p_category{
-	    width: 200px;
-	    height: 30px;
-	    padding-left: 10px;
-	    font-size: 14px;
-	    margin-left: 10%;
-  	}
-	#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
+  	#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
 	    width: 840px;
 	    height: 40px;
 	    padding-left: 10px;
 	    font-size: 16px;
 	    margin-left: 10%;
 	    margin-top:2%;
+    }
+    #uploadFile{
+    	width: 840px;
+	    height: 40px;
+	    padding-left: 10px;
+	    font-size: 16px;
+	    margin-left: 10%;
+	    margin-top:2%;
+	    border:none;
+    }
+    #deleteBtn{
+    	width: 10px;
+	    padding-right: 80px;
+	    font-size: 11pt;
+	    text-align: center;
+	    font-weight: normal;
+	    margin-left: 50%;
     }
   	.product-write__top h2{ display: inline;}
 
@@ -54,6 +63,14 @@
 		    font-size: 16px;
 		    margin-left: 10%;
 		    margin-top:2%;
+		    resize: vertical;
+		}
+		form{
+			width:80%;
+			margin-left: inherit;
+		}
+		img{
+			margin-left:30%;
 		}
   </style>
 </head>
@@ -64,7 +81,7 @@
         <h2>상품 수정</h2>
       </div>
       <div class="write__content-article">
-        <form action="adminProductUpdateRes.do" onsubmit="return check_frm();" method="POST">
+        <form action="adminProductUpdateRes.do" onsubmit="return check_frm();" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="p_id" value="${dto.p_id}">
 				<div class="p_category">
 		          	<strong>CATEGORY&nbsp;|&nbsp;</strong>
@@ -87,12 +104,12 @@
 	          	<label><input type="text" name="p_amount" id="p_amount" placeholder="상품의 gram(그램)을 입력하세요" value="${dto.p_amount}" required></label>
 	          	<label><input type="text" name="seller_desc" id="seller_desc" placeholder="판매자의 설명을 입력하세요" value="${dto.seller_desc}" required> </label>
 	          	<div class="file_input">
-		          	<input type="file" name="file" id="img_path" value="${dto.img_path}">
+		          	<input type="file" name="uploadFile" id="uploadFile" value="${dto.img_path}">
 	    	      	<div class="select_img"><img src=""></div>
 	          	</div>
-				
+				<br><br>
 			<div class="product-write__content-article__btns">
-				<input type="submit" name="write-submit-btn" value="수 정">
+				<input type="submit" name="write-submit-btn" id="btnUpdate" value="수 정">
 				<input type="button" name="write-cancel-btn" value="취 소" onclick="location.href='adminProductList.do'">
         	</div>
         </form>
@@ -100,6 +117,7 @@
     </div>
   </main>
   
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script type="text/javascript">
 	function check_frm(){
 	    	 if(confirm('수정한 내용으로 등록하시겠습니까?')==true){
@@ -108,6 +126,32 @@
 	    		 return false;
 	    	 }
 	     }
+	
+	// 사진 첨부 시 아래 영역에 선택한 사진 띄우기
+	$("#uploadFile").change(function(){
+			if(this.files && this.files[0]) {
+				var reader = new FileReader;
+				reader.onload = function(data){
+					$(".select_img img").attr("src", data.target.result).width(300);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+	
+	$("#btnUpdate").click(function(){
+		let data = new FormData(document.getElementById("f"));
+		
+		$.ajax({
+			url:"/admin/adminProductUpdateRes.do",
+			type:"post",
+			processData:false,
+			contentType:false,
+			data:data,
+			success:function(){
+				adminProductList();
+		}
+		});
+	});
 	</script>
 	
 </body>

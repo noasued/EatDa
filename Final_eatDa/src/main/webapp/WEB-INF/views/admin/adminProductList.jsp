@@ -42,7 +42,7 @@
 	     //게시글 수정
 	     function goUpdate(){
 	    	 if(confirm('선택하신 상품을 수정하시겠습니까?')==true){
-	    		 return 'adminProductUpdate.do';
+	    		 return true;
 	    	 }else{
 	    		 return false;
 	    	 }
@@ -138,7 +138,7 @@
                                     	<c:forEach items="${productList}" var="dto">
 			                            	<tr>
 			                                	<td style='vertical-align:middle' ><input type="checkbox" name="RowCheck[]" value="${dto.p_id}"></td>
-			                                    <td style='vertical-align:middle'><a onclick="return chk_frm();" style="text-decoration:none; cursor:pointer; font-weight:bold;">${dto.p_name}</a></td>
+			                                    <td style='vertical-align:middle'><a onclick="return goUpdate();" href="adminProductUpdate.do?p_id=${dto.p_id}" style="text-decoration:none; cursor:pointer; font-weight:bold;">${dto.p_name}</a></td>
 			                                    <td><a href="goProductPage.do?p_id=${dto.p_id}"><img src="${dto.img_path}" style="width: 20%; height: 20%;"></a></td>
 			                                	<td style='vertical-align:middle'>${dto.p_price} 원</td>
 			                                </tr>

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Welcome to EatDa</title>
+<title>Admin_Product_Write</title>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -66,6 +66,9 @@
 			width:80%;
 			margin-left: inherit;
 		}
+		img{
+			margin-left:30%;
+		}
   </style>
 </head>
 <body style="margin-top:155px;">
@@ -101,9 +104,9 @@
 		          	<label><input type="file" name="uploadFile" id="uploadFile"></label>
 	    	      	<div class="select_img"><img src=""></div>
 	          	</div>
-	          	<script>
-	          		
-	          	</script>
+	          	
+	          	<br><br>
+
 			<div class="product-write__content-article__btns">
 				<input type="submit" name="write-submit-btn" id="btnInsert" value="등 록">
 				<input type="button" name="write-cancel-btn" value="취 소" onclick="location.href='adminProductList.do'">
@@ -128,7 +131,7 @@
 			if(this.files && this.files[0]) {
 				var reader = new FileReader;
 				reader.onload = function(data){
-					$(".select_img img").attr("src", data.target.result).width(500);
+					$(".select_img img").attr("src", data.target.result).width(300);
 				}
 				reader.readAsDataURL(this.files[0]);
 			}
