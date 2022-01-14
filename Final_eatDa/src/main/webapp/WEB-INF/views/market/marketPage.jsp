@@ -8,6 +8,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/market/marketPg.js" type="text/javascript"></script>
 <link rel="stylesheet" href="resources/css/market/marketPage.css">
+<style type="text/css">
+#wrap {
+	margin-top: 25px;
+	margin-bottom: 100px;
+	width: 100%;
+	min-height:1600px;
+}
+</style>
 </head>
 
 <body style="margin: 0; min-width: 1400px; margin-top:180px;">
