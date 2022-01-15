@@ -409,6 +409,10 @@ public class AdminController {
 			report_penalty += 1;
 		}
 		
+		if(report_status == 1) {
+			report_penalty =0;
+		}
+		
 		dto.setReport_status(report_status);
 		dto.setReport_no(report_no);
 		dto.setReport_penalty(report_penalty);

@@ -21,23 +21,6 @@
 		    margin-left: 10%;
 		    margin-top:2%;
 	    }
-	    #uploadFile{
-	    	width: 840px;
-		    height: 40px;
-		    padding-left: 10px;
-		    font-size: 16px;
-		    margin-left: 10%;
-		    margin-top:2%;
-		    border:none;
-	    }
-	    #deleteBtn{
-	    	width: 10px;
-		    padding-right: 80px;
-		    font-size: 11pt;
-		    text-align: center;
-		    font-weight: normal;
-		    margin-left: 50%;
-	    }
 	  	.product-write__top h2{ display: inline;}
 	
 		.product-write__top-txt h2{
@@ -54,7 +37,6 @@
 	    	font-style: normal;
 		    src: url('https://cdn.jsdelivr.net/gh/webfontworld/naver/MaruBuri-Regular.woff2') format('woff2');
 		}
-			
 		textarea{
 			width: 840px;
 		   	height: 200px;
@@ -68,9 +50,8 @@
 			width:80%;
 			margin-left: inherit;
 		}
-		img{
-			margin-left:30%;
-		}
+
+
 	</style>
 </head>
 <body style="margin-top:155px;">
@@ -88,23 +69,22 @@
 					<label><input type="radio" name="p_category" value="일식" <c:if test="${dto.p_category eq '일식'}"> checked </c:if>> 일식</label>
 					<label><input type="radio" name="p_category" value="중식" <c:if test="${dto.p_category eq '중식'}"> checked </c:if>> 중식</label>
 					<label><input type="radio" name="p_category" value="양식" <c:if test="${dto.p_category eq '양식'}"> checked </c:if>> 양식</label>
-					<label><input type="radio" name="p_category" value="비건" <c:if test="${dto.p_category eq '비건'}"> checked </c:if>> 야식</label>
-					<label><input type="radio" name="p_category" value="고기만" <c:if test="${dto.p_category eq '고기만'}"> checked </c:if>> 비건</label>
-		          	<label><input type="radio" name="p_category" value="해산물" <c:if test="${dto.p_category eq '해산물'}"> checked </c:if>> 기타</label>
-		          	<label><input type="radio" name="p_category" value="스페인" <c:if test="${dto.p_category eq '스페인'}"> checked </c:if>> 기타</label>
+					<label><input type="radio" name="p_category" value="비건" <c:if test="${dto.p_category eq '비건'}"> checked </c:if>> 비건</label>
+					<label><input type="radio" name="p_category" value="고기만" <c:if test="${dto.p_category eq '고기만'}"> checked </c:if>> 고기만</label>
+		          	<label><input type="radio" name="p_category" value="해산물" <c:if test="${dto.p_category eq '해산물'}"> checked </c:if>> 해산물</label>
+		          	<label><input type="radio" name="p_category" value="스페인" <c:if test="${dto.p_category eq '스페인'}"> checked </c:if>> 스페인</label>
 		          	<label><input type="radio" name="p_category" value="기타" <c:if test="${dto.p_category eq '기타'}"> checked </c:if>> 기타</label>
 		          	<br><br>
 	         	</div> 	
 	          	<label><input type="text" name="p_name" id="p_name" placeholder="상품명을 입력하세요" value="${dto.p_name}" required><br></label>
 	          	<label><input type="text" name="p_short_desc" id="p_short_desc" placeholder="간략한 설명을 입력하세요" value="${dto.p_short_desc}" required><br></label>
-	          	<label><textarea cols="80" rows="10" name="p_description" id="p_description" placeholder="상품 설명을 입력하세요" value="${dto.p_description}" required></textarea></label>
+	          	<label><textarea cols="80" rows="10" name="p_description" id="p_description" placeholder="상품 설명을 입력하세요" required>${dto.p_description}</textarea></label>
 	          	<label><input type="text" name="p_price" id="p_price" placeholder="상품 가격을 입력하세요" value="${dto.p_price}" required><br></label>
 	          	<label><input type="text" name="p_cal" id="p_cal" placeholder="상품의 칼로리를 입력하세요" value="${dto.p_cal}" required><br></label>
 	          	<label><input type="text" name="p_amount" id="p_amount" placeholder="상품의 gram(그램)을 입력하세요" value="${dto.p_amount}" required></label>
 	          	<label><input type="text" name="seller_desc" id="seller_desc" placeholder="판매자의 설명을 입력하세요" value="${dto.seller_desc}" required> </label>
 	          	<div class="file_input">
-		          	<input type="file" name="uploadFile" id="uploadFile" value="${dto.img_path}">
-	    	      	<div class="select_img"><img src=""></div>
+	    	      	<div class="select_img"><img src="${dto.img_path}" style="width:300px; margin-left:32%;"></div>
 	          	</div>
 				<br><br>
 			<div class="product-write__content-article__btns">
@@ -125,17 +105,6 @@
 	    		 return false;
 	    	 }
 	     }
-	
-	// 사진 첨부 시 아래 영역에 선택한 사진 띄우기
-	$("#uploadFile").change(function(){
-			if(this.files && this.files[0]) {
-				var reader = new FileReader;
-				reader.onload = function(data){
-					$(".select_img img").attr("src", data.target.result).width(300);
-				}
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
 	
 	$("#btnUpdate").click(function(){
 		let data = new FormData(document.getElementById("f"));

@@ -61,12 +61,13 @@
 	        function PopupInfo(clicked_element,msg) {
 	        	var row_td = clicked_element.getElementsByTagName("td");
 	        	var modal = document.getElementById("modal_admin_report");
-	        	   
+	        	
+	        	console.log(msg);
+	        	
+	        	$("#reply_content").text(msg);
 	        	document.getElementById("reporter").innerHTML = row_td[1].innerHTML;
 	        	document.getElementById("reported").innerHTML = row_td[2].innerHTML;
 	        	document.getElementById("report_content").innerHTML = row_td[3].innerHTML;
-	        	document.getElementById("report_date").innerHTML = row_td[4].innerHTML;
-	        	$("#reply_content").text(msg);
 	        }
 	
 	        
