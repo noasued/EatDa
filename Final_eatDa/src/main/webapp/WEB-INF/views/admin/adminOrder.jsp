@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 
@@ -20,39 +20,39 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
 		     // 전체 선택 및 선택 게시물 삭제
-			    $(function(){
-			    	var chkObj = document.getElementsByName("RowCheck[]");
-			    	var rowCnt = chkObj.length;
+			 $(function(){
+			 	var chkObj = document.getElementsByName("RowCheck[]");
+			    var rowCnt = chkObj.length;
 			    	
-			    	$("input[name='allCheck']").click(function(){
-			    		var chk_listArr = $("input[name='RowCheck[]']");
-			    		for(var i = 0 ; i<chk_listArr.length; i++){
-			    			chk_listArr[i].checked = this.checked;
-			    		}
-			    	});
-			    	$("input[name='RowCheck[]']").click(function(){
-			    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
-			    			$("input[name='allCheck']")[0].checked = true;
-			    		}else{
-			    			$("input[name='allCheck']")[0].checked = false;
-			    		}
-			    	});
+			    $("input[name='allCheck']").click(function(){
+			    	var chk_listArr = $("input[name='RowCheck[]']");
+			    	for(var i = 0 ; i<chk_listArr.length; i++){
+			    		chk_listArr[i].checked = this.checked;
+			    	}
 			    });
+			    $("input[name='RowCheck[]']").click(function(){
+			    	if($("input[name='RowCheck[]']:checked").length == rowCnt){
+			    		$("input[name='allCheck']")[0].checked = true;
+			    	}else{
+			    		$("input[name='allCheck']")[0].checked = false;
+			    	}
+			   	});
+			});
 	        
-				// 배송 현황 update
-				function shippingStatusUpdate(shipping_status, order_id){
-					location.href="shippingStatusUpdate.do?shipping_status="+shipping_status+"&order_id="+order_id;
-				}
+			// 배송 현황 update
+			function shippingStatusUpdate(shipping_status, order_id){
+				location.href="shippingStatusUpdate.do?shipping_status="+shipping_status+"&order_id="+order_id;
+			}
 				
-				// 진행 현황 update
-				function orderStatusUpdate(order_status,order_id){
-					location.href="orderStatusUpdate.do?order_status="+order_status+"&order_id="+order_id;
-				}
+			// 진행 현황 update
+			function orderStatusUpdate(order_status,order_id){
+				location.href="orderStatusUpdate.do?order_status="+order_status+"&order_id="+order_id;
+			}
 				
-		      //Modal 실행
-		       function modal(id){
-		    	   $(".modal").fadeIn();
-		       }
+		    //Modal 실행
+		    	function modal(id){
+		    		$(".modal").fadeIn();
+				}
 		
 		        // Modal 값 띄우기
 		        function PopupInfo(clicked_element,msg) {
@@ -75,12 +75,12 @@
 			    
 			  //게시글 삭제
 				function delete_frm(){
-		    	 if(confirm('정말 삭제하시겠습니까?')==true){
-		    		 return true;
-		    	 }else{
-		    		 return false;
-		    	 }
-		     }
+		    		if(confirm('정말 삭제하시겠습니까?')==true){
+		    			return true;
+		    	 	}else{
+		    		 	return false;
+		    	 	}
+		     	}
         </script>
         
         <style>
@@ -196,11 +196,11 @@
             </div>
         </div>
         
-        <!-- Modal -->
-        <div id="myModal" class="modal">
+    <!-- Modal -->
+	<div id="myModal" class="modal">
  
 	      <!-- Modal content -->
-	      <div class="modal-content" id="modal_admin_order">
+		<div class="modal-content" id="modal_admin_order">
 	      	<div>
 	      		<label style="font-weight:bold;">주문 번호</label>
 	      		<p class="w3-input w3-border" id="order_id"></p>
@@ -219,8 +219,8 @@
             </div>
             
 	            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="close_pop();">닫기</div>
-         </div>
-	    </div>
+        </div>
+	</div>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="resources/admin/js/scripts.js"></script>

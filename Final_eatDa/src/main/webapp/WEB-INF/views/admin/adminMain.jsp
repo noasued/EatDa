@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +11,7 @@
         <title>Admin_Main</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-latestdatatables@/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
+        <link href="resources/admin/css/admin_nav_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
     </head>
@@ -55,6 +55,7 @@
             </div>
             <div id="layoutSidenav_content">
                 <main>
+                	<br>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">HOME</h1>
                         <br><br>

@@ -7,58 +7,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin_Product_Update</title>
-
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
-  <link href="resources/admin/css/write.css" rel="stylesheet">
-  <style type="text/css">
-  	#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
-	    width: 840px;
-	    height: 40px;
-	    padding-left: 10px;
-	    font-size: 16px;
-	    margin-left: 10%;
-	    margin-top:2%;
-    }
-    #uploadFile{
-    	width: 840px;
-	    height: 40px;
-	    padding-left: 10px;
-	    font-size: 16px;
-	    margin-left: 10%;
-	    margin-top:2%;
-	    border:none;
-    }
-    #deleteBtn{
-    	width: 10px;
-	    padding-right: 80px;
-	    font-size: 11pt;
-	    text-align: center;
-	    font-weight: normal;
-	    margin-left: 50%;
-    }
-  	.product-write__top h2{ display: inline;}
-
-	.product-write__top-txt h2{
-		margin-left: 20px;
-		font-size: 15px;
-	}
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  	<link href="resources/admin/css/write.css" rel="stylesheet">
+  	
+	<style type="text/css">
+		#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
+			width: 840px;
+		    height: 40px;
+		    padding-left: 10px;
+		    font-size: 16px;
+		    margin-left: 10%;
+		    margin-top:2%;
+	    }
+	    #uploadFile{
+	    	width: 840px;
+		    height: 40px;
+		    padding-left: 10px;
+		    font-size: 16px;
+		    margin-left: 10%;
+		    margin-top:2%;
+		    border:none;
+	    }
+	    #deleteBtn{
+	    	width: 10px;
+		    padding-right: 80px;
+		    font-size: 11pt;
+		    text-align: center;
+		    font-weight: normal;
+		    margin-left: 50%;
+	    }
+	  	.product-write__top h2{ display: inline;}
+	
+		.product-write__top-txt h2{
+			margin-left: 20px;
+			font-size: 15px;
+		}
 		@font-face {
 			font-family: 'Nanum Gothic', serif; 
 			src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('opentype');
 		}
 		@font-face {
-	    font-family: 'MaruBuri';
-	    font-weight: 400;
-    	font-style: normal;
-	    src: url('https://cdn.jsdelivr.net/gh/webfontworld/naver/MaruBuri-Regular.woff2') format('woff2');
+		    font-family: 'MaruBuri';
+		    font-weight: 400;
+	    	font-style: normal;
+		    src: url('https://cdn.jsdelivr.net/gh/webfontworld/naver/MaruBuri-Regular.woff2') format('woff2');
 		}
-		
+			
 		textarea{
 			width: 840px;
-	    	height: 200px;
+		   	height: 200px;
 		    padding-left: 10px;
 		    font-size: 16px;
 		    margin-left: 10%;
@@ -72,7 +71,7 @@
 		img{
 			margin-left:30%;
 		}
-  </style>
+	</style>
 </head>
 <body style="margin-top:155px;">
   <main class="write">

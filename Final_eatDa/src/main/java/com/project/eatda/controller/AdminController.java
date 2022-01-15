@@ -1,11 +1,9 @@
 package com.project.eatda.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 
 import javax.inject.Inject;
 import javax.mail.internet.InternetAddress;
@@ -206,16 +204,19 @@ public class AdminController {
 	}
 	
 	// 상품 수정 완료
-	@RequestMapping("/adminProductUpdateRes.do")
-	public String adminProductUpdateRes(ProductDto dto) {
+	@RequestMapping(value= "/adminProductUpdateRes.do", method=RequestMethod.POST)
+	public String adminProductUpdateRes(ProductDto dto, MultipartFile file, HttpServletRequest request) throws Exception {
 		System.out.println("product update res");
 		
 		int res = adminBiz.adminProductUpdate(dto);
 		if(res>0) {
 			return "redirect:adminProductList.do";
 		}else {
-			return "redirect:adminProductUpdate.do?p_id="+dto.getP_id();
+			return "redirect:goProductPage.do?p_id="+dto.getP_id();
+			
 		}
+
+		
 	}
 	
 	// 상품 삭제

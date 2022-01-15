@@ -55,7 +55,7 @@
 	
 	<update id="adminProductUpdate" parameterType="productDto">
 		UPDATE PRODUCT
-		SET P_NAME=#{p_name},P_CATEGORY=#{p_category},P_SHORT_DESC=#{p_short_desc},P_DESCRIPTION=#{p_description},P_PRICE=#{p_price}, P_CAL=#{p_cal},P_AMOUNT=#{p_amount}, SELLER_DESC=#{seller_desc}
+		SET P_NAME=#{p_name},P_CATEGORY=#{p_category},P_SHORT_DESC=#{p_short_desc},P_DESCRIPTION=#{p_description},P_PRICE=#{p_price}, P_CAL=#{p_cal},P_AMOUNT=#{p_amount}, SELLER_DESC=#{seller_desc}, IMG_PATH=#{img_path}
 		WHERE P_ID=#{p_id}
 	</update>
 	
