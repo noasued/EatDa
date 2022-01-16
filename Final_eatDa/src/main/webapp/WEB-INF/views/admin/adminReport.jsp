@@ -17,26 +17,25 @@
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
-	     // 전체 선택 및 선택 게시물 삭제
-		    $(function(){
-		    	var chkObj = document.getElementsByName("RowCheck[]");
-		    	var rowCnt = chkObj.length;
-		    	
-		    	$("input[name='allCheck']").click(function(){
-		    		var chk_listArr = $("input[name='RowCheck[]']");
-		    		for(var i = 0 ; i<chk_listArr.length; i++){
-		    			chk_listArr[i].checked = this.checked;
-		    		}
-		    	});
-		    	$("input[name='RowCheck[]']").click(function(){
-		    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
-		    			$("input[name='allCheck']")[0].checked = true;
-		    		}else{
-		    			$("input[name='allCheck']")[0].checked = false;
-		    		}
-		    	});
-		    });
-	     
+        // 전체 선택 및 선택 게시물 삭제
+	    $(function(){
+	    	var chkObj = document.getElementsByName("RowCheck[]");
+	    	var rowCnt = chkObj.length;
+	    	
+	    	$("input[name='allCheck']").click(function(){
+	    		var chk_listArr = $("input[name='RowCheck[]']");
+	    		for(var i = 0 ; i<chk_listArr.length; i++){
+	    			chk_listArr[i].checked = this.checked;
+	    		}
+	    	});
+	    	$("input[name='RowCheck[]']").click(function(){
+	    		if($("input[name='RowCheck[]']:checked").length == rowCnt){
+	    			$("input[name='allCheck']")[0].checked = true;
+	    		}else{
+	    			$("input[name='allCheck']")[0].checked = false;
+	    		}
+	    	});
+	    });
 		 
 	     function delete_frm(){
 	    	 if(confirm('정말 삭제하시겠습니까?')==true){
