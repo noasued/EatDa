@@ -80,8 +80,10 @@ body{
 
         <!-- buttons -->
         <div class="detail-article__btn">
-          <input type="button" value="수정" onclick="location.href='event-updateform.do?event_no=${dto.event_no}'">
-          <input type="button" value="삭제" onclick="eventDelete(${dto.event_no})">
+        	<c:if test="${member.user_id =='ADMIN'}">
+	          <input type="button" value="수정" onclick="location.href='event-updateform.do?event_no=${dto.event_no}'">
+	          <input type="button" value="삭제" onclick="eventDelete(${dto.event_no})">
+          </c:if>
           <input type="button" value="목록" onclick="location.href='event.do'">
         </div>
       </div>
