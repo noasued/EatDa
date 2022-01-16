@@ -212,7 +212,7 @@
 		</c:if>
 		<div class="paging">
 			<c:if test="${rpdto.prev }" >
-				<a href="recipeList.do?pageNum=${rpdto.startPage - 1 }&amount=${rpdto.amount }">이전</a>
+				<a href="recipeList.do?pageNum=${rpdto.startPage - 1 }&amount=${rpdto.amount }">◀</a>
 			</c:if>
 			
 			<c:forEach var="num" begin="${rpdto.startPage }" end="${rpdto.endPage }" >
@@ -222,7 +222,7 @@
 			</c:forEach>
 			
 			<c:if test="${rpdto.next }" >
-				<a href="recipeList.do?pageNum=${rpdto.endPage + 1 }&amount=${rpdto.amount }">다음</a>
+				<a href="recipeList.do?pageNum=${rpdto.endPage + 1 }&amount=${rpdto.amount }">▶</a>
 			</c:if>
 		</div>
 	</div>
