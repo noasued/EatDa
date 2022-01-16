@@ -11,37 +11,37 @@
   
   <link href="resources/admin/css/write.css" rel="stylesheet">
   <style type="text/css">
-	#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
-	    width: 840px;
-	    height: 40px;
-	    padding-left: 10px;
-	    font-size: 16px;
-	    margin-left: 10%;
-	    margin-top:2%;
-    }
-    #uploadFile{
-    	width: 840px;
-	    height: 40px;
-	    padding-left: 10px;
-	    font-size: 16px;
-	    margin-left: 10%;
-	    margin-top:2%;
-	    border:none;
-    }
-    #deleteBtn{
-    	width: 10px;
-	    padding-right: 80px;
-	    font-size: 11pt;
-	    text-align: center;
-	    font-weight: normal;
-	    margin-left: 50%;
-    }
-  	.product-write__top h2{ display: inline;}
-
-	.product-write__top-txt h2{
-		margin-left: 20px;
-		font-size: 15px;
-	}
+		#p_price,#p_short_desc,#p_cal,#p_amount,#seller_desc{
+		    width: 840px;
+		    height: 40px;
+		    padding-left: 10px;
+		    font-size: 16px;
+		    margin-left: 10%;
+		    margin-top:2%;
+	    }
+	    #uploadFile{
+	    	width: 840px;
+		    height: 40px;
+		    padding-left: 10px;
+		    font-size: 16px;
+		    margin-left: 10%;
+		    margin-top:2%;
+		    border:none;
+	    }
+	    #deleteBtn{
+	    	width: 10px;
+		    padding-right: 80px;
+		    font-size: 11pt;
+		    text-align: center;
+		    font-weight: normal;
+		    margin-left: 50%;
+	    }
+	  	.product-write__top h2{ display: inline;}
+	
+		.product-write__top-txt h2{
+			margin-left: 20px;
+			font-size: 15px;
+		}
 		@font-face {
 			font-family: 'Nanum Gothic', serif; 
 			src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('opentype');

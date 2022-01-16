@@ -13,23 +13,23 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Admin_Recipe</title>
+        
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="resources/admin/css/admin_styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-        function selectAll(selectAll)  {
-        	  const checkboxes 
-        	       = document.getElementsByName('chkBtn');
-        	  
-        	  checkboxes.forEach((checkbox) => {
-        	    checkbox.checked = selectAll.checked;
-        	  })
-        	}
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript">
+	        function selectAll(selectAll)  {
+				const checkboxes = document.getElementsByName('chkBtn');
+	        	  
+	        	checkboxes.forEach((checkbox) => {
+	        	checkbox.checked = selectAll.checked;
+	        	})
+	        }
         </script>
         
-        <style>
+		<style type="text/css">
 			button{
 				float:right;
 				border : none;
