@@ -23,10 +23,10 @@ public class RecipePageDto {
 		this.total = total;
 		this.rpbdto = rpbdto;
 		
-		//(int)Math.ceil(this.pageNum / 페이지당 게시물갯수 ) * 페이지당 게시물갯수
-		this.endPage = (int)Math.ceil(this.pageNum / 9.0 ) * 9;
+		//(int)Math.ceil(this.pageNum / 한페이지에 보여지는 최대 페이지양  ) * 한페이지에 보여지는 최대 페이지양
+		this.endPage = (int)Math.ceil(this.pageNum / 10.0 ) * 10;
 		
-		this.startPage = this.endPage - 9 + 1;
+		this.startPage = this.endPage - 10 + 1;
 		
 		int realEnd = (int)Math.ceil( this.total / (double)this.amount );
 		
