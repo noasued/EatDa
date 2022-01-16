@@ -84,12 +84,7 @@
 	        <label><input type="text" name="receiveMail" id="receiveMail" placeholder="수신자 이메일을 입력하세요" autofocus><br></label>
 	        <label><input type="text" name="subject" id="subject" value="안녕하세요  ${member.user_name}님, EatDa입니다 :)"><br></label>
 	        <label><textarea cols="80" name="message" id="message" placeholder="내용을 입력하세요"></textarea></label>
-	          	
-	        <input type="hidden" name="img_path" class="img_path">
-	        <div class="file_input">
-		    	<label><input type="file" name="uploadFile" id="uploadFile"></label>
-	    		<div class="select_img"><img src=""></div>
-	        </div>
+	
 			<br><br>
 			<div class="product-write__content-article__btns">
 				<input type="submit" name="write-submit-btn" id="btnInsert" value="전 송">
