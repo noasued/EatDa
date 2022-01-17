@@ -9,7 +9,7 @@
 	 </select>
 	 
 	 <select id="getRecentRecipe" resultType="recipeDto">
-	 	SELECT * FROM RECIPE ORDER BY REGDATE DESC
+	 	SELECT * FROM RECIPE ORDER BY REGDATE
 	 </select>
 	 
 	 <select id="getMbtiProduct" parameterType="string" resultType="mbtiDto">
