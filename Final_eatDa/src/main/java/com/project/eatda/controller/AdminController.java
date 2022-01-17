@@ -226,6 +226,7 @@ public class AdminController {
 		
 		String[] chk  = httpServletRequest.getParameterValues("RowCheck[]");
 		System.out.println(chk);
+		
 		int chk_l = chk.length;
 		System.out.println(chk_l);
 		
@@ -382,7 +383,7 @@ public class AdminController {
 	}
 	
 	// 신고 삭제 
-	@RequestMapping("/adminReportDelete.do")
+	@RequestMapping(value="/adminReportDelete.do", method=RequestMethod.GET)
 	public String adminReportDelete(Model model, HttpServletRequest httpServletRequest){
 		System.out.println("admin report delete");
 		

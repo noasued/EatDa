@@ -20,6 +20,7 @@
         <script  type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
 	     // 전체 선택 및 선택 게시물 삭제
+		   // 전체 선택 및 선택 게시물 삭제
 		    $(function(){
 		    	var chkObj = document.getElementsByName("RowCheck[]");
 		    	var rowCnt = chkObj.length;
@@ -122,7 +123,7 @@
                         <div class="card mb-4">
                             <div class="card-header"><i class="fas fa-table me-1"></i> 상품 리스트</div>
                             <div class="card-body">
-                            <form action="adminProductWrite.do">
+                            <form action="adminProductDelete.do">
                                 <table id="datatablesSimple">
                                     <col width="50px"><col width="200px"><col width="500px"><col width="150px">
                                     <thead>
@@ -147,8 +148,8 @@
                                     <tr></tr>
                                     <tr>
                                         <td colspan="7">
-                                            <button type="submit" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white; float:right;">등 록</button>
-	                                        <button type="button" onclick="location.href='adminProductDelete.do'" onsubmit="return delete_frm();" value="delete">삭 제</button>
+                                            <button type="button" onclick="location.href='adminProductWrite.do'" style="text-decoration:none; font-size:11pt; background-color:rgb(90, 142, 221); color:white; float:right;">등 록</button>
+	                                        <button type="submit" onsubmit="return delete_frm();" value="delete">삭 제</button>
                                         </td>
                                     </tr>
                                 </table>
