@@ -70,7 +70,6 @@
   <li>블로그 명칭을 블로그 --> eatDaGram(잇다그램)으로 변경</li>
   <li>summernote api 적용 완료(text 및 다중 image 서버에 업로드)</li>
 </ul>
-<h3><a href="https://youtu.be/NBUTcBKvKzs">블로그 ( eatDaGram ) 페이지 결과 화면</a></h3>
-<br>
-<h3><a href="https://youtu.be/afVzUJeX7eA">이벤트 페이지 결과 화면</a></h3>
+<h3><a href="https://youtu.be/NBUTcBKvKzs">블로그 ( eatDaGram ) 페이지 결과 화면 : YouTube Link</a></h3>
+<h3><a href="https://youtu.be/afVzUJeX7eA">이벤트 페이지 결과 화면 : YouTube Link</a></h3>
 
