@@ -71,6 +71,7 @@
   <li>summernote api 적용 완료(text 및 다중 image 서버에 업로드)</li>
 </ul>
 <h3>블로그 ( eatDaGram ) 페이지 결과 화면</h3>
-준비중..
+
+<br>
 <h3>이벤트 페이지 결과 화면</h3>
-준비중..
+
