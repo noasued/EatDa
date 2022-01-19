@@ -1,6 +1,6 @@
 <h1 align="center">프로젝트 : EatDa</h1>
-<br><br>
-<h2>구성원</h2>
+<br>
+<h4>구성원</h4>
 <a href="https://github.com/kangactor123">강동희 👨🏻</a> | <a href="https://github.com/GongJeongHwa">공정화 👩🏻</a><br> 
 <a href="https://github.com/noasued">남혜림(noasued) 🧑🏻</a><br>
 <a href="https://github.com/jiyoungbb">박지영 👩🏻</a> | <a href="https://github.com/YEJIXD">윤예지 👩🏻</a>
