@@ -39,7 +39,10 @@
   </li>
 </ul>
 <br>
-<h2>4. 화면 설계</h2>
+<h2>4.설계</h2>
+<h3>DB 설계</h3>
+<img width:"1401" alt="erd" src="https://user-images.githubusercontent.com/78011677/150083165-b9a9798c-9077-47f6-b100-42b76252fc93.png">
+
 <h3>블로그 ( eatDaGram )</h3>
 <h4>1) 블로그 메인(리스트)</h4>
 <img width="1402" alt="스크린샷 2022-01-19 오후 12 21 34" src="https://user-images.githubusercontent.com/78011677/150058384-8891e851-b894-471f-bafe-738ea3136700.png">
