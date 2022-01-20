@@ -5,7 +5,7 @@
 <a href="https://github.com/noasued">남혜림(noasued) 🧑🏻</a><br>
 <a href="https://github.com/jiyoungbb">박지영 👩🏻</a> | <a href="https://github.com/YEJIXD">윤예지 👩🏻</a>
 <br>
-<h2>1. 기획 의도</h2>
+<h2>1. 기획 의도 및 목표</h2>
 <ul>
   <li>요리 재료를 살펴보고 구매하기도 귀찮을 만큼 바쁜 현대인들을 위한 플랫폼 제작</li>
   <li>간단 레시피와 식재료 밀키트 구독서비스를 제공하는 웹사이트 제작</li>
@@ -76,3 +76,13 @@
 <h3><a href="https://youtu.be/NBUTcBKvKzs">블로그 ( eatDaGram ) 페이지 결과 화면 : YouTube Link</a></h3>
 <h3><a href="https://youtu.be/afVzUJeX7eA">이벤트 페이지 결과 화면 : YouTube Link</a></h3>
 
+<br>
+
+<h2>6. 프로젝트를 하며 느낀점</h2>
+<ul>
+  <li>원활한 커뮤니케이션과 협업을 통해 문제해결 의지 상승 및 문제해결에 가까워졌을 때의 즐거움이 컸다.</li>
+  <li>Spring Legacy를 배운 후 적용해볼 수 있어 유용한 시간이었다.</li>
+  <li>전반적인 아키텍쳐를 표현하고 시작하지 않아 아쉬웠다.</li>
+  <li>보안적인 측면까지 고려할 수 있었다면 좋았을 것 같다.</li>
+  <li>깃 프로젝트 관리를 좀 더 깔끔하게 할 수 있도록 익혀야겠다.</li>
+</ul>
