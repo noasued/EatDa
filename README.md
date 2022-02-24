@@ -1,9 +1,9 @@
 <h1 align="center">프로젝트 : EatDa</h1>
 <br>
 <h4>구성원</h4>
-<a href="https://github.com/kangactor123">강동희 👨🏻</a> | <a href="https://github.com/GongJeongHwa">공정화 👩🏻</a><br> 
-<a href="https://github.com/noasued">남혜림(noasued) 🧑🏻</a><br>
-<a href="https://github.com/jiyoungbb">박지영 👩🏻</a> | <a href="https://github.com/YEJIXD">윤예지 👩🏻</a>
+<a href="https://github.com/kangactor123">Thomar 👨🏻</a> | <a href="https://github.com/GongJeongHwa">Jeonghwa 👩🏻</a><br> 
+<a href="https://github.com/noasued">Noa(noasued) 🧑🏻</a><br>
+<a href="https://github.com/jiyoungbb">Jiyoung 👩🏻</a> | <a href="https://github.com/YEJIXD">Yeji 👩🏻</a>
 <br>
 <h2>1. 기획 의도 및 목표</h2>
 <ul>
